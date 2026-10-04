@@ -1,0 +1,49 @@
+kind,protocol,loss,tx_overhead_pct,violation_pct,flagged_pct,unflagged_viol
+RIDGE-D,confirmed (2 retries),0.0,0.0,0.0,0.0,0
+RIDGE-D,confirmed (2 retries),0.005,0.56,0.0,0.0,0
+RIDGE-D,confirmed (2 retries),0.01,1.03,0.0,0.0,0
+RIDGE-D,confirmed (2 retries),0.05,5.23,0.0,0.0,23
+RIDGE-D,"unconfirmed, heartbeat 24 h",0.0,4.2,0.0,0.0,0
+RIDGE-D,"unconfirmed, heartbeat 24 h",0.005,4.2,0.56,5.97,0
+RIDGE-D,"unconfirmed, heartbeat 24 h",0.01,4.2,1.05,10.46,0
+RIDGE-D,"unconfirmed, heartbeat 24 h",0.05,4.2,5.09,38.66,0
+RIDGE-D,"unconfirmed, heartbeat 6 h",0.0,17.64,0.0,0.0,0
+RIDGE-D,"unconfirmed, heartbeat 6 h",0.005,17.64,0.42,2.19,0
+RIDGE-D,"unconfirmed, heartbeat 6 h",0.01,17.64,0.81,4.11,0
+RIDGE-D,"unconfirmed, heartbeat 6 h",0.05,17.64,4.13,18.5,0
+RLS-D,confirmed (2 retries),0.0,0.0,0.0,0.0,0
+RLS-D,confirmed (2 retries),0.005,0.56,0.0,0.0,0
+RLS-D,confirmed (2 retries),0.01,1.01,0.0,0.0,0
+RLS-D,confirmed (2 retries),0.05,5.38,0.0,0.0,21
+RLS-D,"unconfirmed, heartbeat 24 h",0.0,15.32,0.0,0.0,0
+RLS-D,"unconfirmed, heartbeat 24 h",0.005,15.32,0.91,6.27,0
+RLS-D,"unconfirmed, heartbeat 24 h",0.01,15.32,1.68,10.5,0
+RLS-D,"unconfirmed, heartbeat 24 h",0.05,15.32,7.52,40.03,0
+RLS-D,"unconfirmed, heartbeat 6 h",0.0,29.79,0.0,0.0,0
+RLS-D,"unconfirmed, heartbeat 6 h",0.005,29.79,0.52,2.15,0
+RLS-D,"unconfirmed, heartbeat 6 h",0.01,29.79,0.93,3.8,0
+RLS-D,"unconfirmed, heartbeat 6 h",0.05,29.79,4.6,18.12,0
+RLS-T,confirmed (2 retries),0.0,0.0,0.0,0.0,0
+RLS-T,confirmed (2 retries),0.005,0.56,0.0,0.0,0
+RLS-T,confirmed (2 retries),0.01,1.04,0.0,0.0,0
+RLS-T,confirmed (2 retries),0.05,5.41,0.0,0.0,21
+RLS-T,"unconfirmed, heartbeat 24 h",0.0,79.25,0.0,0.0,0
+RLS-T,"unconfirmed, heartbeat 24 h",0.005,79.25,2.72,8.46,0
+RLS-T,"unconfirmed, heartbeat 24 h",0.01,79.25,5.24,16.03,0
+RLS-T,"unconfirmed, heartbeat 24 h",0.05,79.25,21.09,53.49,0
+RLS-T,"unconfirmed, heartbeat 6 h",0.0,71.43,0.0,0.0,0
+RLS-T,"unconfirmed, heartbeat 6 h",0.005,71.43,0.92,2.39,0
+RLS-T,"unconfirmed, heartbeat 6 h",0.01,71.43,1.58,4.67,0
+RLS-T,"unconfirmed, heartbeat 6 h",0.05,71.43,7.8,21.37,0
+SOD,confirmed (2 retries),0.0,0.0,0.0,0.0,0
+SOD,confirmed (2 retries),0.005,0.55,0.0,0.0,0
+SOD,confirmed (2 retries),0.01,1.04,0.0,0.0,0
+SOD,confirmed (2 retries),0.05,5.27,0.0,0.0,18
+SOD,"unconfirmed, heartbeat 24 h",0.0,2.05,0.0,0.0,0
+SOD,"unconfirmed, heartbeat 24 h",0.005,2.05,0.41,0.93,0
+SOD,"unconfirmed, heartbeat 24 h",0.01,2.05,0.77,1.64,0
+SOD,"unconfirmed, heartbeat 24 h",0.05,2.05,3.9,8.19,0
+SOD,"unconfirmed, heartbeat 6 h",0.0,8.28,0.0,0.0,0
+SOD,"unconfirmed, heartbeat 6 h",0.005,8.28,0.33,0.92,0
+SOD,"unconfirmed, heartbeat 6 h",0.01,8.28,0.69,1.7,0
+SOD,"unconfirmed, heartbeat 6 h",0.05,8.28,3.31,8.19,0

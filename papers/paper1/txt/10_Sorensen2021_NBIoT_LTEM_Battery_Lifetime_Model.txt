@@ -1,0 +1,1941 @@
+1
+Modelling and Experimental Validation for Battery
+Lifetime Estimation in NB-IoT and LTE-M
+Andr´e Sørensen∗, Hua Wang∗‡, Maxime J ´erˆome Remy∗, Nicolaj Kjettrup∗, Ren ´e Brandborg Sørensen†,
+Jimmy Jessen Nielsen†, Petar Popovski†, Germ ´an Corrales Madue ˜no∗†
+∗Keysight Technologies Denmark Aps, Aalborg, Denmark
+∗{andre.soerensen,maxime.remy,nicolaj.kjettrup,german.madueno}@keysight.com
+†Department of Electronic Systems, Aalborg University, Aalborg, Denmark
+†{jjn, petarp}@es.aau.dk
+‡Zhejiang Lab, Hangzhou, China
+‡hua.wang@zhejianglab.com
+Abstract—Internet of Things (IoT) is one of the main features
+in 5G. Low-power wide-area networking (LPW AN) has attracted
+enormous research interests to enable large scale deployment of
+IoT, with the design objectives of low cost, wide coverage area,
+as well as low power consumption. In particular, long battery
+lifetime is essential since many of the IoT devices will be deployed
+in hard-to-access locations. Prediction of the battery lifetime
+depends on the accurate modelling of energy consumption. This
+paper presents a comprehensive power consumption model for
+battery lifetime estimation, which is based on User Equipment
+(UE) states and procedures, for two cellular IoT technologies:
+Narrowband Internet of Things (NB-IoT) and Long Term Evo-
+lution for Machines (LTE-M). A measurement testbed has been
+setup and the proposed model has been tested and validated
+via extensive measurements under various trafﬁc patterns and
+network scenarios, achieving the modelling inaccuracy within
+5%. The measurement results show that the battery lifetime of
+an IoT device can reach up to 10 years as required by 3GPP, with
+proper conﬁguration of the trafﬁc proﬁle, the coverage scenario,
+as well as the network conﬁguration parameters.
+Index Terms—IoT, NB-IoT, LTE-M, Power consumption mod-
+els, Battery lifetime estimation
+I. I NTRODUCTION
+The number of IoT connections has increased exponentially
+worldwide since 2015, reaching over 1 billion in 2020, and is
+predicted to keep growing to roughly 5 billion by 2025 [1].
+Early IoT deployments have been used for smart metering,
+asset monitoring and smart logistics, industrial automation,
+trafﬁc monitoring, ﬂeet tracking, smart home appliances, etc.
+The IoT applications are designed to support massive de-
+ployment, e.g., more than 100,000 per cell. Replacing the
+batteries for such a large number of devices would not only
+be costly and cumbersome, but also sometimes impractical,
+since devices may be deployed in locations where it is hard
+for human to access, for example in basement where the
+water meters are placed. It often ends up that the battery
+lifetime determines the lifetime of the IoT device. Therefore,
+massive connectivity, low cost, wide coverage, and low power
+consumption are the key requirements for the IoT devices.
+To address the requirements imposed by IoT applications,
+3rd Generation Partnership Project (3GPP) has introduced two
+standards for Cellular Internet of Things (CIoT): LTE-M and
+NB-IoT, both of which are developed based on 4G Long
+Term Evolution (LTE), but are targeted for LPW AN solutions.
+The main advantages of 3GPP standardized technologies as
+compared to other proprietary solutions are the reuse of
+existing infrastructure and the use of a licensed spectrum,
+allowing for more stable and predictable performance.
+Energy efﬁciency is certainly a major concern for typical
+IoT deployment, especially for battery-powered IoT devices,
+which are normally affected by a vast number of network
+conﬁgurations as well as implementation parameters. 3GPP
+requires a battery lifetime of more than 10 years with a
+battery capacity of 5 Wh for an IoT device operating with
+a predeﬁned trafﬁc proﬁle in certain deployment scenarios
+[2]. Therefore, accurate modelling of the energy consumption
+for an IoT device is of great importance, as the application
+developers as well as the network operators need to predict
+and plan which IoT technology or device should be chosen
+and how the network parameters should be conﬁgured based
+on the performance requirements and the expected battery
+lifetime for a given use case. The model should be general
+enough so that it can be applied to different devices running
+on same or different IoT technologies. The model should also
+be ﬂexible enough with different conﬁgurations of network and
+application parameters, for example various trafﬁc proﬁle and
+network scenarios, and should be able to analyze the impact
+of different conﬁgurations on the device performance.
+Early studies on the modelling of power consumption and
+the empirical performance characterization with respect to
+NB-IoT are discussed in details in Section II. A preliminary
+study on the power consumption model speciﬁcally for NB-
+IoT was presented in our earlier work [3]. Comparatively, this
+paper improves the power consumption model proposed in [3]
+and adapts the analysis to also include LTE-M. Additionally,
+the proposed model has been validated via empirical power
+consumption measurements and the impact of network and
+application conﬁguration parameters on the device’s battery
+lifetime has been analyzed. Speciﬁcally, the main contributions
+of this paper are summarized below:
+1) We extend the power consumption model to include
+LTE-M. The proposed model can be generalized to
+estimate the energy consumption and the battery life-
+arXiv:2106.13286v3  [cs.NI]  27 Feb 2022
+2
+time of any devices running either NB-IoT or LTE-M,
+with ﬂexible conﬁgurations of trafﬁc proﬁle, coverage
+scenario, as well as network parameters.
+2) The accuracy of the model has been improved based
+on PHY-level measurements and detailed modelling of
+each UE state and procedure. By composing different
+components of UE states and procedures, the power
+consumption of any UE behaviour can be modelled.
+Extensive measurements have been performed using two
+commercial IoT devices with the latest NB-IoT/LTE-M
+features to validate the proposed model under various
+trafﬁc proﬁle and network conﬁgurations. The empiri-
+cal results show that the proposed power consumption
+model can achieve an estimation error within 5%, which
+is the lowest to the best of the author’s knowledge.
+3) We deﬁned three coverage scenarios for NB-IoT and
+LTE-M based on the coupling loss with the aim to
+compare the two technologies fairly. We also analyzed
+the impact of trafﬁc proﬁle, coverage scenario, and
+network conﬁguration parameters on the device’s battery
+lifetime based on the proposed model, shedding some
+light on how the IoT application developers as well
+as the network operators should carefully conﬁgure the
+parameters to best tradeoff between the performance and
+device lifetime of their use case.
+The rest of the paper is structured as follows. A review of
+the latest literature on the power consumption of IoT devices
+is presented in Section II. Section III introduces the UE states
+and procedures, followed by the energy consumption of those
+states and procedures in Section IV and V , respectively. The
+considered coverage scenario, trafﬁc proﬁle, and the battery
+lifetime estimation model are presented in Section VI. The
+testbed setup and the measurement results are presented and
+discussed in Section VII. Conclusions are drawn in Sec-
+tion VIII. The main acronyms used in this paper are listed
+in Table I.
+II. R ELATED WORK
+The power consumption model for regular broadband LTE
+network has been addressed widely in the literature, as dis-
+cussed in [4] and the references therein. In recent years,
+various works have been published focusing on the power con-
+sumption analysis of IoT devices via simulations, analytical
+modelling, or experimental measurements.
+El Soussi et al . [5] evaluated the performance of NB-IoT
+and LTE-M in the context of smart city use case, by using
+NS-3 simulation in an urban cell. It was found that an 8-year
+battery lifetime is achievable for both both technologies in a
+poor coverage scenario with a reporting interval of one day.
+The network coverage and capacity of various IoT technolo-
+gies, including NB-IoT and LTE-M, have been evaluated in
+[6], [7] through both simulation and empirical measurements.
+It was found that NB-IoT provides better coverage, especially
+for indoor cases, at the cost of lower capacity in terms of the
+total number of supported devices. The authors also showed
+the results of the average power consumption for the two tech-
+nologies in various propagation scenarios. In addition to their
+Acronym Description
+cDRX Connected mode Discontinuous Reception
+CE Coverage Enhancement
+CIoT Cellular Internet of Things
+CP Control Plane optimization
+DCI Downlink Control Information
+DL Downlink
+DRX Discontinuous Reception
+DUT Device Under Test
+ECM EPS Connection Management
+eDRX Extended Discontinuous Reception
+EMM EPS Mobility Management
+EPS Evolved Packet System
+iDRX Idle mode Discontinuous Reception
+IoT Internet of Things
+LPW AN Low Power Wide Area Network
+LTE Long Term Evolution
+LTE-M Long Term Evolution for Machines
+MCL Maximum Coupling Loss
+MCS Modulation and Coding Scheme
+NAS Non-Access Stratrum
+NB-IoT Narrowband Internet of Things
+NPDCCH Narrowband Physical Downlink Control Channel
+NPRACH Narrowband Physical Random Access Channel
+NPUCCH Narrowband Physical Uplink Control Channel
+NPUSCH Narrowband Physical Uplink Shared Channel
+OFDM Orthogonal Frequency-Division Multiplexing
+OFDMA Orthogonal Frequency-Division Multiple Access
+PDCCH Physical Downlink Control Channel
+PRACH Physical Random Access Channel
+PRB Physical Resource Block
+PSM Power Saving Mode
+PTW Paging Time Window
+PUCCH Physical Uplink Control Channel
+PUSCH Physical Uplink Shared Channel
+RA Random Access
+RAP Random Access Preamble
+RAR Random Access Response
+RRC Radio Resource Control
+RU Resource Unit
+SC-FDMA Single-Carrier Frequency-Division Multiple Access
+SF Subframe
+SR Scheduling Request
+TAP Test Automation Platform
+TAU Tracking Area Update
+TBS Transport Block Size
+UE User Equipment
+UL Uplink
+USS UE speciﬁc Search Space
+TABLE I: List of Acronyms
+previous work, the power consumption and a battery lifetime
+estimation model of two NB-IoT devices were proposed in [8]
+using experimental measurements. However, the abstraction
+level of the power consumption model is relatively high, which
+reduces the complexity of the model, but also introduces
+inaccuracies and obfuscates energy trade-offs at lower-level
+mechanisms. An energy consumption model for NB-IoT de-
+vices considering Power Saving Mode (PSM) and Extended
+Discontinuous Reception (eDRX) with different timer parame-
+ters was proposed in [9]. The analysis is compared to the NS-3
+simulation results, showing an average inaccuracy of around
+11.8 %. A tractable theoretical model of energy consumption
+in NB-IoT was presented in [10], providing some insights in
+the tradeoff between energy efﬁciency, latency and coverage.
+Andres-Maldonado et al. [11], [12] proposed a Markov chain
+based analytical model to estimate the energy consumption and
+delay of a NB-IoT device sending periodic uplink reports using
+the control plane procedure. The model has been validated
+3
+using two commercial NB-IoT device and three test cases,
+obtaining a maximum relative error of the battery lifetime
+estimation of 21%. It is noted that the periodic Tracking Area
+Update (TAU) procedure is not considered in [11].
+Hertlein et al . [13] compared the power consumption of
+several cellular standards via measurements. It is conﬁrmed
+that NB-IoT can reduce the power consumption as compared
+to other cellular standards. Experimental assessment of the
+expected lifetime of an NB-IoT device is presented in [14],
+based on measurements from both a commercial and a private
+network in the context of aviation use case. It is found that the
+battery lifetime can be extended signiﬁcantly by using PSM
+in the idle state. Although the results obtained in [14] have
+high credibility in terms of realism, it is not straightforward
+to extrapolate those results to different network scenarios,
+trafﬁc patterns, and transmission parameter conﬁgurations. An
+End-to-End (E2E) integration study of an experimental NB-
+IoT trial network was perform in [15] by Telekom Malaysia.
+The assessment results showed that a careful setup of the
+NB-IoT device’s ﬁrmware is critical to prolong the battery
+lifetime, e.g., avoiding unnecessary network attach and detach
+procedures, and proper conﬁguration of the T3324 timer
+and T3412 timer to best match the tradeoff between delay
+and energy efﬁciency, etc. Martinez et al . [16] empirically
+investigated the performance boundaries of NB-IoT in terms of
+energy consumption, reliability, and delays. The measurements
+were performed over a commercial NB-IoT network in Spain
+with two commercial NB-IoT devices, using different device
+and network conﬁgurations. It is found that some of the timers
+associated with the power saving mechanisms have an obvious
+effect on the device energy consumption. Abbas et al . [17]
+proposed guidelines on how to conﬁgure both tunable and
+non-tunable parameters with the target to conserve the energy
+consumption by means of simulations. A more comprehensive
+measurement study of the energy consumption is conducted in
+[18] with two popular NB-IoT devices in two major western
+European operators under different parameter conﬁgurations,
+with the aim to identify the key parameters for enhancing the
+battery lifetime. Its ﬁndings indicate that careful conﬁgurations
+are required to improve the energy efﬁciency. For higher level
+IoT applications, Lin et al. [19] developed a service platform
+for fast development of NB-IoT applications, which is used in
+a smart parking application as an example.
+The main issue we observed in the current state of the
+art work on analytical energy consumption modelling of
+IoT devices is the lack of accuracy and ﬂexibility. Besides,
+although quite much work has been done trying to ﬁne tune the
+parameters to lower the energy consumption, those results are
+mainly obtained from extensive experimental measurements.
+The main objective of this work is to ﬁrst propose a highly
+accurate framework for modelling the power consumption
+of NB-IoT and LTE-M, consisting of detailed modelling of
+UE states and procedures. The model is ﬂexible for different
+conﬁgurations of trafﬁc proﬁle, transmission and network
+parameters. Based on the proposed model, we also attempt to
+identify the parameters that mostly impact the battery lifetime.
+Our ﬁndings are in line with the observations obtained from
+the measurements as mentioned in the previous literature.
+III. UE S TATES AND PROCEDURES
+Our framework for the power consumption modelling is
+based on the states of the UE and the transition among
+the states which is triggered by the procedures. The main
+differences between NB-IoT and LTE-M will be described
+ﬁrst, followed by a general description of the UE states and
+procedures.
+A. Differences between NB-IoT and LTE-M
+Both LTE-M and NB-IoT are developed based on LTE with
+the aim to offer better coverage and lower energy consumption.
+Although these two technologies share a lot of similarities,
+they are targeted for different use cases and therefore have
+some differences. Comparatively, LTE-M supports higher data
+rate, lower latency, and higher mobility, while NB-IoT is
+focused on enhanced coverage, longer battery life, and lower
+device complexity [20].
+LTE-M has deﬁned two Coverage Enhancement (CE)
+Modes: Mode A and Mode B, targeting for different coverage
+levels [21]. This paper only considers CE Mode A, as this is a
+mandatory feature for LTE-M while Mode B is optional. Some
+of the main differences between the two technologies are sum-
+marized in Table II. Speciﬁcally, the transmission bandwidth
+of NB-IoT is reduced from 1.08 MHz to 180 kHz, resulting
+in a lower data rate as compared to LTE-M. In downlink, both
+LTE-M and NB-IoT support multi-tone transmissions based on
+Orthogonal Frequency-Division Multiple Access (OFDMA)
+with 12 subcarriers and 15 kHz subcarrier spacing. In up-
+link, LTE-M only supports multi-tone transmissions based
+on Single-Carrier Frequency-Division Multiple Access (SC-
+FDMA) while NB-IoT supports both single-tone and multi-
+tone transmissions. The minimum resource allocation unit in
+both uplink and downlink for LTE-M is a Physical Resource
+Block (PRB), consisting of 12 subcarriers and 1 slot (7 OFDM
+symbols). The minimum resource allocation unit in downlink
+for NB-IoT is also a PRB, while in uplink the minimum unit
+is a Resource Unit (RU), of which the number of subcarriers
+and slots within a RU depend on the transmission option (i.e.,
+single-tone or multi-tone) [22]. The number of repetitions
+in NB-IoT has increased up to 128 in uplink and 2048 in
+downlink to further extend the coverage level. By trading off
+data rate and latency, i.e., reducing the transmission bandwidth
+and/or increasing the number of retransmissions, the coverage
+in terms of Maximum Coupling Loss (MCL) is extended to
+164 dB in NB-IoT (20 dB deeper than LTE).
+As previously stated, the physical layer channels and signals
+of both LTE-M and NB-IoT are mostly inherited from LTE,
+but are optimized to meet the constraints and requirements of
+IoT modules. There is not much difference for the downlink
+channels between LTE-M and NB-IoT. However in the uplink,
+NB-IoT transmits the data and control information both in
+Narrowband Physical Uplink Shared Channel (NPUSCH) with
+different formats [22], while LTE-M transmits data in Physical
+Uplink Shared Channel (PUSCH) and control information in
+Physical Uplink Control Channel (PUCCH).
+4
+Attribute LTE-M NB-IoT
+Deployment In-band In-band, Guard-band,
+Stand-alone
+Coverage 155.7 dB MCL 164 dB MCL
+Bandwidth 1.08 MHz 180 kHz
+Downlink
+Transmission
+OFDMA, multi-tone with
+12 subcarriers, 15 kHz
+tone spacing
+OFDMA, multi-tone with
+12 subcarriers, 15 kHz
+tone spacing
+Uplink
+Transmission
+SC-FDMA, multi-tone
+with 12 subcarriers, 15
+kHz tone spacing
+Multi-tone with 3, 6 or 12
+subcarriers (SC-FDMA),
+15 kHz tone spacing
+Single-tone, 3.75 kHz &
+15 kHz tone spacing
+Resource PRB in DL PRB in DL
+Allocation PRB in UL RU in UL
+Max number 32 in UL (CE mode A) 128 in UL
+of repetitions 32 in DL (CE mode A) 2048 in DL
+Peak rate 1 Mbps for DL and UL DL: 250 Kbps
+UL: 250 Kbps(multi-tone)
+UL: 20 Kbps (single-tone)
+Uplink Chan-
+nel
+PUCCH: Transmission of
+control information
+NPUSCH format 2: Trans-
+mission of control info
+PUSCH: Transmission of
+data
+NPUSCH format 1: Trans-
+mission of data
+PRACH: Transmission of
+preambles
+NPRACH: Transmission
+of preambles with a new
+waveform
+TABLE II: Differences between NB-IoT and LTE-M.
+B. UE Procedures
+To be able to establish a connection to the network and
+start data transmission, the UE has to perform a series of
+actions with speciﬁc purposes and functions, such as frequency
+and time synchronization, performing Random Access (RA),
+sending service request, etc. These actions can be referred to
+as procedures. Some of the main procedures performed in NB-
+IoT and LTE-M are listed below:
+• Synchronization: When the UE is switched on or wakes
+up, it has to synchronize with the network both in
+time and frequency domains by decoding synchroniza-
+tion signals, namely Primary Synchronization Signal and
+Secondary Synchronization Signal. After the completion
+of synchronization and cell search, the UE can perform
+the RA procedure.
+• Attach: If the UE has the intention to communicate with
+the network but has not been registered in the network
+yet, i.e., in EMM DEREGISTERED state, it performs the
+attach procedure after being synchronized to the network.
+The attach procedure is used to create the Evolved Packet
+System (EPS) bear between the UE and the Packet data
+network Gateway in order to be able to send and receive
+data.
+• Service Request: The service request procedure is simi-
+lar to the attach procedure, but with fewer steps. It is used
+to activate a user plane connection for data transmission
+when the UE has already been registered in the network,
+i.e., in EMM REGISTERED state. It will bring the UE
+from ECM IDLE state into ECM CONNECTED state.
+• Connection Resume: The Radio Resource Control
+(RRC) connection resume procedure is initiated by the
+UE when upper layers requests the resume of a suspended
+RRC connection. It is used as a replacement of the service
+request procedure if the connection has been suspended
+instead of released. The UE should have valid and up
+to date essential system information before initiating the
+connection resume procedure.
+• Connection Release: The release procedure is used to
+release an RRC connection. If the UE does not have
+any activity in the network but still would like to be
+registered in the network, the network initiates the RRC
+connection release procedure to the UE. The UE can still
+be contacted via paging after the release procedure. If
+the UE has data to transmit, it has to perform a service
+request procedure.
+• TAU: A UE in ECM IDLE state sends a TAU message
+to the Mobility Management Entity periodically to notify
+to the network that it is still alive and is able to receive
+data. Otherwise, the network would assume the UE is not
+reachable and will not perform paging even when there
+is data trafﬁc for it.
+The power consumption modelling of the aforementioned
+procedures will be described in Section V .
+C. UE States
+The UE states can be deﬁned in several aspects: from a
+device perspective and from a network perspective.
+From a network perspective, the network status of the UE
+indicates how reachable the UE is and what are the available
+resources for the UE. It is the EPS Mobility Management
+(EMM) and EPS Connection Management (ECM) protocols
+that determine the network status of the UE. An example of UE
+procedures and the corresponding network status is illustrated
+in Fig. 1.
+UE	Procedure	 Off	 Attach	 Service	
+Request	
+Connection	
+Release	
+Connection	
+Resume	 TAU	 Detach	
+EMM	Status	 DEREGISTERED	 REGISTERED	 DEREGISTERED	
+ECM	Status	 IDLE	 CONNECTED	 IDLE	 CONNECTED	 IDLE	
+Fig. 1: Example of UE procedures and the corresponding
+EMM/ECM network status.
+The EMM protocol indicates whether the UE is registered
+in the network or not. After the UE is switched on, it
+performs the synchronization and cell search procedure before
+entering the Synchronized state. At this moment, the UE
+is in EMM DEREGISTERED state. The EMM state of the
+UE is changed to EMM REGISTERED after the UE has
+performed a network attach procedure, i.e., RRC Connec-
+tion setup including the RA procedure, Non-Access Stratrum
+(NAS) authentication and NAS security. The EMM state of the
+UE is changed back to EMM DEREGISTERED when either
+the TAU timer has expired or a detach procedure is performed.
+The ECM protocol indicates whether the UE has estab-
+lished signalling to the Evolved Packet Core or not. In
+the ECM CONNECTED state, the UE has an active RRC
+connection with the network and is semi-actively monitoring
+the network in order to preserve energy. In the ECM IDLE
+state, there is no active RRC connection and the UE will
+only be reachable in certain time intervals according to the
+selected power saving technique, which can be for example
+Discontinuous Reception (DRX) and PSM. There are two
+5
+RX
+TX
+Idle
+Sync 
+or 
+paging 
+occasion
+Service 
+request
+RRC 
+Release 
+or 
+RRC 
+Resume
+Off
+On
+Power 
+on
+Power 
+off
+Synchronized
+Sync
+Power 
+off
+Connected
+Attach
+Detach
+UL 
+TX
+No 
+Msg
+DL 
+Msg 
+or 
+DCI
+UL 
+Msg
+No 
+Msg
+Paging
+UL/DL 
+Data
+iDRX
+Idle
+PSM
+Wait
+cDRX
+Connected
+Wait
+Procedural
+Message 
+exchange
+Fig. 2: The UE state machine used for LTE-M and NB-IoT
+[3].
+types of DRX. When the UE is in ECM CONNECTED state
+it is named as Connected Mode Discontinuous Reception
+(cDRX) and when the UE is in ECM IDLE state it is named as
+Idle Mode Discontinuous Reception (iDRX). The UE changes
+from ECM IDLE to ECM CONNECTED state by performing
+either a service request, an attach, or a connection resume
+procedure. To change back from ECM CONNECTED to
+ECM IDLE, the UE performs either a detach, a connection
+suspend, or a release procedure.
+From a device perspective, the UE can be in different
+states such as Reception (RX), Transmission (TX), idle,
+etc. The state diagram for the UE is depicted in Fig. 2
+together with the procedures required to move from one
+state to another. The grey area indicates the UE is in
+EMM DEREGISTERED while the white area indicates the
+UE is in EMM REGISTERED.
+There is a power cost associated with UE state transitions
+in addition to the power cost of staying in a speciﬁc UE state.
+By characterising the power consumption of each UE state
+and the associated procedure(s), the power consumption of
+any UE behaviour can be modelled by composing different
+components of the states and procedures illustrated in Fig. 2.
+The modelling of power consumption for different UE states
+and procedures will be presented in the following sections.
+IV. E NERGY CONSUMPTION OF UE S TATES
+In this section, the energy consumption models for different
+UE states are presented. For brevity, the details of the per-
+formed power measurements in each UE state are not included
+in this paper, but are available in [3].
+A. TX State
+In TX state, the UE is transmitting data in the uplink. The
+energy consumption in the TX state is determined by the UE’s
+power level as well as the length of the transmission. The UE’s
+required transmission power is controlled by the uplink power
+control speciﬁed in [23]. From measurements, it is observed
+that the UE’s uplink transmission power is independent of the
+selection of Modulation and Coding Scheme (MCS).
+1) Uplink Packet: The uplink data packets are transmitted
+in PUSCH and NPUSCH with format 1 for LTE-M and NB-
+IoT, respectively. During uplink transmission, a mandatory
+gap of 40 milliseconds after 256 milliseconds of continuous
+transmission is introduced to allow the low-quality oscillators
+to resynchronize with the network [24], [25]. The power
+consumption is much lower during these transmission gaps as
+compared to the power consumption during data transmission.
+The estimated energy consumption for the TX state with an
+uplink packet of payload size k can be calculated as:
+ETX(k) = tTX(k)·PTX +tgaps
+TX (tTX)·P gaps
+TX (1)
+where tTX(k) is the time spent in data transmission with k
+bits, PTX is the power consumption during data transmission,
+tgaps
+TX (tTX) is the time spent in transmission gaps, and P gaps
+TX is
+the power consumption during transmission gaps.
+The transmission time tTX(k) for a packet with payload
+size k in bits depends on the selection of MCS, the number
+of allocated RUs or Subframe (SF)s, and the number of
+repetitions. For NB-IoT and LTE-M, the transmission time
+can be calculated as:.
+tNB-IoT
+TX (k) = tRU·ρRU· NNB-IoT
+pkt ·lNB-IoT(k) (2)
+lNB-IoT(k) =
+⌈ k
+TBS (MCS,ρ RU)−hNB-IoT
+⌉
+(3)
+tLTE-M
+TX (k) = tSF·ρSF· NLTE-M
+pkt ·lLTE-M(k) (4)
+lLTE-M(k) =
+⌈ k
+TBS (MCS,ρ SF)−hLTE-M
+⌉
+(5)
+where tRU is the duration of a RU, ρRU is the number of
+allocated RUs, tSF is the duration of a SF, ρSF is the number
+of allocated SFs, lNB-IoT(k) and lLTE-M(k) are the number of
+segments, N NB-IoT
+pkt and N LTE-M
+pkt are the number of repetitions,
+TBS is the transport block size determined by the selected
+MCS and the number of allocated resources in terms of RU(s)
+for NB-IoT and SF(s) for LTE-M, hNB-IoT and hLTE-M are the
+header size, and ⌈⌉ is the ceil function. The length of a SF
+(tSF) is always 1 ms, while the length of a RU ( tRU) can range
+from 1 ms to 32 ms, depending on the conﬁgured uplink
+transmission option, e.g., subcarrier spacing, the number of
+conﬁgured subcarriers and slots. The available transmission
+options of one RU can be referred to [22]. It should be noted
+that Eq. (4) does not hold if frequency hopping is enabled for
+LTE-M. In that case, PRBs are scheduled over multiple SFs.
+The time spent in transmission gaps depends on tTX, and
+can be calculated as:
+tgaps
+TX (tTX) =
+⌊ tTX
+tTXmax
+⌋
+·tgap
+TX (6)
+where tTXmax is the maximum continuous transmission time
+allowed, tgap
+TX is the duration of a gap, and ⌊⌋ is the ﬂoor
+function. According to [24], tTXmax and tgap
+TX for NB-IoT are
+256 ms and 40 ms, respectively.
+6
+2) Uplink Control: Uplink control information (e.g.,
+ACK/NACK) is transmitted in PUCCH for LTE-M and in
+NPUSCH with format 2 for NB-IoT, respectively. It should be
+noted that using NPUSCH format 2, the RU is always conﬁg-
+ured with one subcarrier and 4 slots. The energy consumption
+for transmitting uplink control information can be calculated
+similarly as for uplink data packet:
+ETX(ack) =tTX(ack)·PTX +tgaps
+TX(ack)·P gaps
+TX (7)
+tNB-IoT
+TX(ack) =tRU(ack)· NNB-IoT
+ack (8)
+tLTE-M
+TX(ack) =tSF· NLTE-M
+ack (9)
+tgaps
+TX(ack) =
+⌊tTX(ack)
+tTXmax
+⌋
+·tgap
+TX (10)
+3) Random Access: The transmission of preamble is per-
+formed in PRACH for LTE-M and in NPRACH for NB-
+IoT, respectively. There is no transmission gap during the
+transmission in Random Access Preamble (RAP). So the
+energy consumption for transmitting the preamble can be
+calculated as:
+ERAP
+TX =tRAP·PTX (11)
+where tRAP is the duration of the RAP, and can be calculated
+as:
+tNB-IoT
+RAP =
+(
+tformat
+CP + 5·tRASym
+)
+· 4· NRAP
+tLTE-M
+RAP =tformat
+RAP · NRAP (12)
+where tformat
+CP is the duration of the cyclic preﬁx, tRASym is the
+symbol duration in NB-IoT NPRACH, tformat
+RAP is the duration
+of the RAP for LTE-M, and N RAP is the number of repetitions
+for RAP. For NPRACH in NB-IoT, tRASym is equal to 266.7
+µs (3.75 kHz subcarrier spacing), tformat
+CP is equal to 66.7 µs
+for format 0 and 266.7 µs for format 1. The speciﬁc value of
+tformat
+RAP can be referred to Table 5.7.1-1 in [24], e.g., 0.903 ms
+for format 1.
+B. RX State
+In RX state, the UE is receiving data in the downlink.
+From the measurement, it is observed that the RX state is
+characterized by periods of reception interleaved by reception
+gaps. LTE-M and NB-IoT have a similar downlink channel,
+and can be modelled in a similar way. The estimated energy
+consumption of the RX state with a downlink packet of size
+k in bits can be calculated as:
+ERX(k) = PRX·tRX(k) +P gaps
+RX ·tgaps
+RX (tRX) (13)
+tRX(k) = tSF·ρSF· NSF·l(k) (14)
+l(k) =
+⌈ k
+TBS (MCS,ρ SF)−h
+⌉
+(15)
+where tRX and PRX indicate the time spent and the power
+consumption in data reception respectively, tgaps
+RX and P gaps
+RX
+indicate the time spent and the power consumption in reception
+gaps respectively, tSF is the length of a subframe which is 1
+ms in both NB-IoT and LTE-M,ρSF is the number of allocated
+SFs, N SF is the number of repetitions, l is the number of
+segments, and h is the header size.
+Reception gaps are introduced in the downlink channel
+because of the reception of System Information Block (SIB)
+and other control signalling [23], [24]. Similar to the TX state,
+the power consumption is much lower during the reception
+gaps as compared to the power consumption during data
+reception. Also the power consumption in RX state is MCS
+independent. Different from the TX model where the trans-
+mission gaps follow a clear pattern, it is not straightforward
+to accurately model the reception gaps in RX state because
+they are dependent on the length of the reception as well as its
+starting position. Instead, the number of reception gaps during
+a data reception is estimated. The time spent in reception gaps
+is dependent on tRX and can be calculated as:
+tgaps
+RX (tRX) =
+⌈
+tRX·
+( 1
+Mav
+SF
+− 1
+)⌉
+(16)
+where M av
+SF is the fraction of subframes available for data
+reception. To simplify the model, only the most recurring
+gaps such as Narrowband Primary Synchronization Signal,
+Narrowband Secondary Synchronization Signal, Master In-
+formation Block, and SIB1 are taken into account when
+modelling the RX state, resulting in roughly 14 subframes
+out of 20 subframes are available for downlink data reception
+(Mav
+SF = 14/20) [24], [25].
+C. ECM Connected State
+A UE that is not transmitting or receiving data in the
+ECM CONNECTED state must monitor the network for
+paging or uplink scheduling grants in the form of Downlink
+Control Information (DCI). This can happen in default or
+cDRX mode, as described in the following.
+1) Default mode: By default the UE monitors the UE
+speciﬁc Search Space (USS) in Physical Downlink Control
+Channel (PDCCH) for LTE-M or in Narrowband Physical
+Downlink Control Channel (NPDCCH) for NB-IoT contin-
+uously for relevant DCI, i.e., paging and uplink grants. The
+USS must be monitored periodically and the UE will go into
+sleep for the rest of the time. The time duration for the USS
+monitoring in each cycle is given by:
+tmonitoring
+USS = MUSS·tSF· NUSS (17)
+where M USS is the number of subframes that the UE has to
+monitor in PDCCH or NPDCCH, and N USS is the number of
+repetitions for USS.
+The estimated energy spent in each cycle using default USS
+monitoring in the ECM CONNECTED state can be calculated
+as:
+Ecycle
+ECMC =Emonitoring
+USS +P sleep
+USS ·tsleep
+USS (18)
+where Emonitoring
+USS is the energy consumption for USS moni-
+toring which can be obtained using Eqs. (13) and (16) with
+tmonitoring
+USS as input.
+2) cDRX: DRX allows the UE to monitor the relevant
+USS discontinuously to improve the energy efﬁciency. While
+iDRX operates in the ECM IDLE state, cDRX operates in the
+ECM CONNECTED state. In connected state the UE does not
+perform paging, but rather monitors the PDCCH or NPDCCH.
+7
+cDRX essentially provides a way for the network and the
+UE to synchronize the timing of potential downlink data. It
+narrows down the USS window, which enables the UE to sleep
+for much longer periods. The UE notiﬁes the network of its
+non-mandatory DRX capabilities through RRC messaging and
+the network transmits the DRX conﬁguration as part of the
+RRC conﬁguration.
+The synchronization between the network and UE in DRX
+mode is controlled by the LongDRX-cyle and the OnDuration
+timer [25]. The OnDuration timer sets the number of consec-
+utive PDCCH subframes that the UE has to monitor for DCI.
+The value of the OnDuration timer can be set up to 200 ms.
+The time that the UE has to monitor for DCI in the OnDuration
+is given by:
+tonDur
+cDRX = MonDur·tSF (19)
+Assuming that the OnDuration timer stays constant during the
+UE’s lifetime, the energy consumption of the cDRX can be
+calculated as:
+EcDRX =EonDur +P sleep
+cDRX·tsleep
+cDRX (20)
+tsleep
+cDRX = (Mcycle
+LongDRX− MonDur)·tSF (21)
+where M cycle
+LongDRX and M onDur are the number of subframes of
+a cDRX LongDRX-cyle and the number of subframes the UE
+has to monitor for DCI in the OnDuration respectively, P sleep
+cDRX
+is the power consumption when the UE is in cDRX sleep
+mode, andEonDur is the energy consumption in the OnDuration
+which can be calculated using Eqs. (13) and (16) with tonDur
+cDRX
+as input. It is worth mentioning that the inactivity timer which
+triggers the UE to enter into the cDRX state is neglected here,
+because in most cases the UE is not expected to frequently
+alternate between RX and cDRX as it is taxing for the battery.
+D. ECM Idle State
+A UE in the ECM IDLE state must monitor the network
+for paging for relevant DCI. Several energy saving modes are
+available.
+1) Default mode: By default the UE monitors the USS in
+PDCCH or NPDCCH continuously for paging. The energy
+consumption in the ECM IDLE state operating in default
+mode is similar to the approach described in Section IV-C1.
+2) iDRX: DRX was introduced in release 8 to save the
+energy consumption of a device by introducing the DRX cycle,
+during which the UE alternates between active monitoring
+of the paging and sleep [26]. During the active period, the
+UE ﬁrst gets synchronized with the network, then it monitors
+the paging. The number of paging occurrences the UE has to
+monitor is indicated by the paging repetitions [25]. When the
+UE has ﬁnished listening to the paging, it goes into sleep. The
+duration of a DRX cycle is given by the network parameter
+defaultPagingCycle in number of radio frames.
+The energy consumption of the iDRX can be calculated as:
+Ecycle
+iDRX =Esync
+iDRX +Epaging· Npaging +P sleep
+iDRX·tsleep
+iDRX (22)
+tsleep
+iDRX =tcycle
+iDRX− (tonDur
+iDRX +tsync
+iDRX) (23)
+where tsync
+iDRX and Esync
+iDRX are the measured time and energy
+consumption for the synchronization in an iDRX cycle, tsleep
+iDRX
+andP sleep
+iDRX are the time and power consumption in iDRX sleep
+state, Epaging is the energy spent on a single paging occasion,
+Npaging is the number of paging repetitions in an iDRX cycle,
+tonDur
+iDRX is the time spent on monitoring the paging in an iDRX
+cycle, and tcycle
+iDRX is the length of an iDRX cycle.
+3) eDRX: eDRX is an extension of the DRX with the ob-
+jective to further reduce the energy consumption. It is mainly
+used in IoT applications operating with energy saving mode.
+The basic principle of eDRX is to extend DRX cycle length
+to allow a device to remain in sleep mode for longer period of
+time, thus reducing the energy consumption. Furthermore, the
+length of an eDRX cycle can be set by the device rather than
+the network, which provides the application developers with
+more ﬂexibility to better balance the device’s reachability and
+its energy consumption. An eDRX cycle can be decomposed
+into two parts: the Paging Time Window (PTW) period and
+the sleep period. During the PTW period, the UE behaves
+similarly as being in iDRX state with several iDRX cycles.
+The number of iDRX cycles is determined by the PTW length
+and the iDRX cycle length. The UE remains dormant during
+the sleep period, the duration of which can be calculated based
+on the PTW length and the eDRX cycle length.
+The energy consumption of the eDRX can be calculated as:
+Ecycle
+eDRX =
+⌈TPTW
+tcycle
+iDRX
+⌉
+·Ecycle
+iDRX +tsleep
+eDRX·P sleep
+eDRX (24)
+tsleep
+eDRX =tcycle
+eDRX−TPTW (25)
+where tsleep
+eDRX and P sleep
+eDRX are the time and power consumption
+during the eDRX sleep period respectively, TPTW is the PTW
+length,tcycle
+eDRX is the length of a eDRX cycle, and Ecycle
+iDRX is the
+energy spent in an iDRX cycle.
+4) PSM: PSM is another power saving feature for NB-
+IoT and LTE-M. In PSM the UE alternates between a deep
+sleep state and a period when the UE is reachable by the
+network. There are two main timers associated with PSM:
+T3324 and T3412. The T3324 timer determines the period when
+the UE is reachable, during which the UE can be operating
+either with iDRX or eDRX. The energy consumption model
+of iDRX and eDRX derived above can be reused within the
+period of T3324. The UE will shut down all Access Stratrum
+functions and go into deep sleep upon the expiration of the
+T3324 timer. The UE remains in deep sleep until theT3412 timer
+expires, after which the UE will perform a TAU procedure. It
+is observed from measurements that the TAU procedure can
+be energy expensive. From an energy consumption point of
+view, it is better to conﬁgure the TAU periodicity (i.e., T3412)
+long enough to reduce the number of TAU occurrences, while
+still meeting the service requirements of its use case.
+The energy consumption of PSM with iDRX can be calcu-
+lated as:
+Ecycle
+PSM =
+⌈T3324
+tcycle
+iDRX
+⌉
+·Ecycle
+iDRX +tsleep
+PSM·P sleep
+PSM (26)
+tsleep
+PSM =T3412−T3324 (27)
+where P sleep
+PSM is the power consumption during sleep period.
+When using eDRX the terms Ecycle
+iDRX and tcycle
+iDRX should be
+8
+replaced with the eDRX equivalent. The TAU procedure is not
+included here, but will be modelled separately in Section V .
+It is observed from the measurements that the power con-
+sumption during sleep period in PSM is lower than DRX or
+eDRX, as the device turns off the radio. The disadvantage is
+that the device has to reconnect to the network when wakes
+up, which is energy expensive. Therefore for IoT applications
+not requiring frequent transmit, PSM is more energy efﬁcient.
+E. Key Parameters of States
+From the previous subsections, it is noticed that the calcu-
+lation of the energy consumption in each UE state for LTE-
+M and NB-IoT is similar to each other, as both technologies
+are developed based on LTE and share a lot of similarities.
+The main differences in the calculation of energy consumption
+are in the TX and RX states. Speciﬁcally, for TX state the
+uplink resources in LTE-M are allocated in terms of PRBs
+with 1 ms time resolution (subframe length). While in NB-
+IoT the uplink resources are allocated in terms of RUs with
+different lengths depending on the transmission option. For
+RX state, the downlink resources are allocated in terms of
+PRBs with 1 ms time resolution for both LTE-M and NB-
+IoT. But NB-IoT only supports 1 PRB resource allocation in
+downlink, while the default resource allocation for LTE-M is
+6 PRBs in downlink. Besides, different number of repetitions
+are supported in LTE-M and NB-IoT. These differences in the
+resource allocation and the number of repetitions effectively
+affect the required TX and RX time, resulting in different
+data rates and energy consumption between the two technolo-
+gies. The key parameters for the calculation of the energy
+consumption in each UE state are summarized in Table III,
+including physical layer transmission parameters and network
+conﬁguration parameters.
+UE States Key Parameters
+TX Payload size, TX power, MCS, Repetitions,
+allocated RUs (NB-IoT), allocated PRBs (LTE-M),
+RU length (NB-IoT), Subframe length (LTE-M)
+RX Payload size, MCS, allocated PRBs, Repetitions,
+Subframe length
+iDRX iDRX Cycle, OnDurationTimer, Paging Repetitions
+cDRX cDRX Cycle, OnDurationTimer
+eDRX eDRX Cycle, Paging Time Window
+PSM T3324, T3412
+TABLE III: Key parameters for the calculation of energy
+consumption in each UE state
+It is of great importance to properly conﬁgure these pa-
+rameters not only to ensure a good link performance such as
+radio coverage and throughput, but also to save UE energy
+consumption while satisfying the service requirements. The
+general guideline on how to conﬁgure the physical transmis-
+sion parameters in the TX state, which is the most energy
+consuming state, is detailed in Section VI-A. The analysis
+of some of the important network conﬁguration parameters
+which impact the UE’s batter lifetime effectively, such as TAU
+periodicity (T3412 timer), is discussed in Section VII.
+V. E NERGY CONSUMPTION OF UE P ROCEDURES
+The transition among the UE states is dictated by higher
+layer protocol procedures. The main procedures in NB-IoT
+Messages NB-IoT LTE-M Direction
+Random Access Preamble RAP RAP uplink
+Random Access Response 104 bit 56 bit downlink
+RRC Connection Request 88 bit 72 bit uplink
+RRC Connection Setup 144 bit 336 bit downlink
+RRC Connection Complete 424 bit 656 bit uplink
+Attach Request 256 bit 768 bit uplink
+Identity Request 96 bit 40 bit downlink
+Identity Response 176 bit 128 bit uplink
+Authentication Request 432 bit 312 bit downlink
+Authentication Response 264 bit 112 bit uplink
+Security Command 328 bit 232 bit downlink
+Security Complete 240 bit 176 bit uplink
+Attach Accepted 1080 bit 792 bit downlink
+UE Enquiry 208 bit downlink
+UE Cabability 128 bit 256 bit uplink
+Attach Complete 240 bit 256 bit uplink
+EMM Info 488 bit 408 bit downlink
+Total Uplink 1816 bit 2424 bit
+Total Downlink 2672 bit 2384 bit
+TABLE IV: Message exchange in the Attach procedure,
+measured from N211 (NB-IoT) and R410M (LTE-M).
+and LTE-M are similar to each other and have been introduced
+in Section III-B. Each procedure can be decomposed into
+a sequence of uplink and downlink message exchanges. By
+combining the associated TX (uplink transmission) and RX
+(downlink reception) state model together with the correspond-
+ing message size, the energy consumption in each procedure
+can be calculated.
+A. Message Exchange in Different Procedures
+The synchronization procedure is not explicitly modeled
+in this paper because it varies from device to device and is
+heavily dependent on the implementation. Instead, the energy
+and time consumption for the synchronization of a speciﬁc
+device is obtained from measurement. The measurement starts
+from the beginning of synchronization and ends before the
+occurrence of the ﬁrst PRACH.
+The measured message exchanges and the corresponding
+message size for the Attach, Service Request, RRC Re-
+lease/Resume, and TAU procedures are listed in Tables IV
+to VII, recorded from a speciﬁc NB-IoT device N211 and
+an LTE-M device R410M. These two devices are the ones
+considered for measurements and the validation. A general
+description of these two devices are given in Section VII.
+The measured message sequence is in accordance with the
+protocol speciﬁcations deﬁned in [25]. From the measurements
+it is observed that the size of the message might be device
+and network dependent, as the implementation of the protocol
+is device speciﬁc and some messages are dependent on the
+conﬁguration of the network. It is also worth mentioning that
+the user data can be transmitted within the services request
+by using the CIoT EPS Optimization, thereby reducing the
+signalling overhead by skipping the EPS bearers establish-
+ment [12].
+There are delays during the communication between the
+eNB and the UE for postprocessing of the received information
+and preparation for the next transmission. These delays should
+also be taken into consideration in the calculation of the energy
+9
+Messages NB-IoT LTE-M Direction
+Random Access Preamble RAP RAP uplink
+Random Access Response 104 bit 56 bit downlink
+RRC Connection Request 88 bit 72 bit uplink
+RRC Connection Setup 144 bit 336 bit downlink
+RRC Connection Complete 424 bit 656 bit uplink
+Service request + UL data 56 bit +
+data
+N/A uplink
+Service Accept 176 bit N/A downlink
+Service Accept ACK 32 bit N/A uplink
+RRC Reconﬁg 72 bit N/A downlink
+RRC Reconﬁg Complete 16 bit N/A uplink
+Total Uplink 616 bit +
+data
+728 bit
+Total Downlink 496 bit 392 bit
+TABLE V: Message exchange in the Service Request proce-
+dure, measured from N211 (NB-IoT) and R410M (LTE-M).
+Messages NB-IoT LTE-M Direction
+RRC Release 72 bit 96 bit downlink
+RRC Resume 72 bit 96 bit downlink
+ACK 32 bit 32 bit uplink
+TABLE VI: Message exchange in the RRC Release/Resume
+procedure, measured from N211 (NB-IoT) and R410M (LTE-
+M).
+consumption in each procedure. Table VIII summarizes the
+measured delays between different message exchanges.
+B. Energy Consumption in the Procedure
+For each procedure, the number of exchanged messages and
+the corresponding message size are required to calculate the
+energy consumption. That information can be obtained for
+example from measurements as listed in Tables IV to VII.
+The energy consumption in each procedure can be calculated
+as the sum of the energy cost of the exchanged messages and
+the energy cost of the delays between the message exchange,
+given as:
+EProced =
+I∑
+i=1
+(
+Ei
+Msg(di) +Ei
+DCI
+)
++Pdelay·
+I−1∑
+i=1
+ti
+delay (28)
+where I is the total number of exchanged messages in the
+procedure excluding DCIs, Ei
+Msg(di) is the energy cost of
+transmitting (uplink) or receiving (downlink) message i with
+payload size di in bits, Ei
+DCI the energy cost of receiving the
+ith DCI,Pdelay is the power consumption during the delay, and
+ti
+delay is the delay between message i and i + 1.
+Ei
+Msg(di) can be calculated based on the message type (e.g.,
+uplink or downlink) by using the corresponding TX and RX
+state model described in Section IV .ti
+delay can be obtained from
+Table VIII. From the measurements it is observed that Pdelay is
+device and technology dependent. Speciﬁcally, it is equivalent
+to the RX state in R410M (LTE-M), while it is equivalent to
+the cDRX idle state in N211 (NB-IoT).
+In NB-IoT the energy consumption of signalling overhead
+is negligible as it is much smaller compared to data transmis-
+sions. In LTE-M, the energy consumption in the waiting time
+between the signalling messages can be costly, for example the
+delay between the two Scheduling Request (SR) in LTE-M is
+observed with 40 ms interval.
+Messages NB-IoT LTE-M Direction
+Random Access Preamble RAP RAP uplink
+Random Access Response 104 bit 56 bit downlink
+RRC Connection Request 88 bit 72 bit uplink
+RRC Connection Setup 144 bit 336 bit downlink
+RRC Connection Complete 424 bit 656 bit uplink
+TAU Request 144 bit 224 bit uplink
+TAU Accept 448 bit 512 bit downlink
+TAU Complete 80 bit 112 bit uplink
+RRC Release 72 bit 96 bit downlink
+ACK 32 bit 32 bit uplink
+Total Uplink 768 bit 1096 bit
+Total Downlink 768 bit 1000 bit
+TABLE VII: Message exchange in the TAU procedure, mea-
+sured from N211 (NB-IoT) and R410M (LTE-M).
+Delay Type N211 R410M
+RAP (TX)→ DCI (RX) 3 [ ms] 1 [ ms]
+DCI (RX)→ RAR (RX) 4 [ ms] 1 [ ms]
+RAR (RX)→ RRC Request (TX) 8 [ ms] 1 [ ms]
+RRC Request (TX) → DCI (RX) 3 [ ms] 1 [ ms]
+DCI (RX)→ RRC Setup (RX) 4 [ ms] 1 [ ms]
+RRC Setup (RX) → DCI (RX) 12 [ ms] 1 [ ms]
+DCI (RX)→ RRC Setup Complete (TX) 8 [ ms] 1 [ ms]
+RRC Setup Complete (TX) → DCI (RX) 3 [ ms] 1 [ ms]
+DCI (RX)→ Service Accept (TX) 4 [ ms] 1 [ ms]
+Service Accept (TX) → DCI (RX) 12 [ ms] 1 [ ms]
+DCI (RX)→ Data (RX) 4 [ ms] 3 [ ms]
+DCI (RX)→ Data (TX) 8 [ ms] 3 [ ms]
+Data (RX)→ DCI (RX) 12 [ ms] 3 [ ms]
+Data (TX)→ DCI (RX) 3 [ ms] 1 [ ms]
+DCI (RX)→ S1-Release 4 [ ms] 1 [ ms]
+SR→ SR N/A 40 [ ms]
+SR→ DCI (RX) N/A 3 [ ms]
+TABLE VIII: The delays between different message ex-
+changes, measured from N211 (NB-IoT) and R410M (LTE-
+M).
+VI. B ATTERY LIFETIME ESTIMATION
+The calculation of the energy consumption of each UE state
+and procedure is derived in Section IV and V , respectively.
+By combining different components of UE states and proce-
+dures, the energy consumption of any UE behaviour can be
+calculated. The other two prerequisites required to estimate
+the battery lifetime of an IoT device are the coverage scenario
+which determines the physical transmission parameters, and
+the trafﬁc proﬁle which deﬁnes the trafﬁc characteristics of an
+IoT application.
+A. Coverage Scenario
+The actual calculation of the proposed power consumption
+model is tightly associated with the conﬁguration of physical
+layer transmission parameters such as MCS, the number of
+allocated RUs/PRBs, and the number of repetitions, which
+further depends on the coverage level of the UE.
+To allow the UE to be served in different coverage con-
+ditions characterized by different path loss, 3GPP Release 13
+has deﬁned three CE levels: CE level 0 (normal coverage with
+MCL≈144 dB), CE level 1 (robust coverage with MCL ≈154
+dB), and CE level 2 (extreme coverage with MCL ≈164 dB).
+The CE level is selected based on the channel conditions, and
+determines the physical layer transmission parameters.
+10
+In our measurement, three coverage scenarios, namely
+”Good”, ”Bad”, and ”Extreme”, have been deﬁned correspond-
+ing to a coupling loss of 140 dB, 150 dB, and 160 dB,
+respectively. Those values are derived based on the link budget
+calculations with conﬁgured uplink transmission parameters.
+Speciﬁcally, the allocated bandwidth in uplink is restricted to
+a single PRB for LTE-M and a single subcarrier of 15 kHz for
+NB-IoT. The receiver noise ﬁgure is assumed to be 5 dB and
+the thermal noise density is 174 dBm/Hz. The UE’s maximum
+transmission power is 23 dBm. Based on these assumptions,
+the estimated Signal to Noise Ratio (SNR) without using
+repetitions for the good, bad, and extreme coverage scenarios
+are 10.24 dB, 0.24 dB and -9.76 dB for NB-IoT, and -0.55
+dB, -10.55 dB and -20.55 dB for LTE-M [21]. When blind
+repetition with chase combining is used in Hybrid Automatic
+Repeat Request, the effective received SNR in linear scale
+after combining assuming inﬁnite Transport Block Size can
+be calculated as [27]:
+SNRcombined =N· SNRRX (29)
+where N is the number of repetitions. The number of rep-
+etitions in uplink can reach up to 128 for NB-IoT. In our
+analysis, the maximum number of repetitions is limited to 32
+for realistic scenarios.
+Once the received SNR is calculated for each coverage
+scenario, the physical layer transmission parameters such as
+MCS is selected for a target Block Error Rate (BLER). For
+LTE systems, the target BLER is set to be 10% for data
+channels. The mapping between SNR and MCS for a target
+BLER can be found either from link level performance curves
+or from analytical approximations.
+Based on the link budget analysis mentioned above, the
+considered uplink physical layer transmission conﬁgurations
+for the three coverage scenarios for NB-IoT and LTE-M
+are listed in Table IX. In order to make a fair comparison
+between NB-IoT and LTE-M, the physical layer transmission
+parameters are conﬁgured for each technology targeted for
+a similar coupling loss. The conﬁguration for LTE-M in the
+extreme scenario is left blank as it can not reach the area with
+160 dB coupling loss.
+NB-IoT LTE-M
+Parameters Good Bad Extreme Good Bad Extreme
+MCL [dB] 140 150 160 140 150 160
+MCS 10 2 0 5 0 -
+Repetitions 1 8 32 2 16 -
+TABLE IX: Considered uplink transmission conﬁgurations for
+NB-IoT and LTE-M in different coverage scenarios.
+B. Trafﬁc Proﬁle
+The trafﬁc proﬁle deﬁnes how often the UE trans-
+mits/receives data and how big the transmitted/received data
+is. It has a big impact on the battery lifetime of a device.
+The IoT use cases and trafﬁc patterns associated with some
+of the verticals have been deﬁned in [28], which indicates
+that most of the IoT trafﬁc is uplink dominated with periodic
+trafﬁc pattern. Therefore in this study, a deterministic uplink
+trafﬁc model is used, assuming that the UE transmits B Bytes
+Release
+PSM 
+/ 
+eDRX
+cDRX
+Idle
+7 
+ms
+DRX
+Service 
+Request 
++ 
+TX 
+(data)
+PSM 
+/ 
+eDRX
+Sync
+Fig. 3: Illustration of a transmit cycle for CIoT.
+of uplink payload towards the eNB periodically at an average
+rate of λ transmissions per hour.
+A transmit cycle is deﬁned as the time interval between the
+start of a data transmission to the time instance right before
+the start of the next data transmission. The UE will go through
+certain procedures in a transmit cycle to establish and release
+a connection. An example of uplink UE transmit cycle that
+starts and ends in a power saving state is illustrated in Fig. 3.
+Upon waking up from PSM, the UE ﬁrst synchronizes to
+the network, then performs a service request together with
+uplink data transmission. After that the UE stays in the
+cDRX state for certain time until the release procedure is
+initiated by the network. Then the UE enters the power saving
+mode until the next uplink transmission is initiated or paging
+indicates a downlink transmission. In Fig. 3 it is assumed
+that the UE is in EMM REGISTERED state. If the UE is
+in EMM DEREGISTERED state, e.g., the UE is powered up
+for the ﬁrst time, the attach procedure is initiated instead of
+the service request procedure.
+C. Battery Lifetime Modelling
+Once the energy consumption for each UE state and pro-
+cedure has been determined, the physical layer transmission
+parameters have been set according to certain coverage sce-
+nario, and the trafﬁc proﬁle has been deﬁned, the energy
+consumption of an IoT device can be calculated and the
+corresponding battery lifetime can be estimated.
+The energy consumption of the modem during a transmit
+cycle depicted in Fig. 3 with a payload size of B Bytes can
+be calculated as:
+Ecycle(B) = ESync +ESR(B) +EcDRX +ERelease +Ecycle
+PSM/eDRX
+(30)
+where ESync, ESR, and ERelease are the energy consumption
+in the synchronization, service request, and RRC release
+procedures respectively, which can be obtained using Eq. (28).
+EcDRX and Ecycle
+PSM/eDRX are the energy consumption when the
+UE is in cDRX state and iDRX state using either PSM
+or eDRX respectively, which can be obtained following the
+energy consumption approach described in Section IV-C and
+Section IV-D.
+Let λ denote the average transmission rate per hour. The
+average energy consumption of the modem during one hour
+can be calculated as:
+Ehour(λ,B ) = Ecycle(B)·λ (31)
+11
+Fig. 4: Testbed setup.
+The estimated battery lifetime (in hours) of an IoT device
+can be calculated as:
+L(λ,B ) = Cbat· SFbat
+Ehour(λ,B ) +Edevice
+(32)
+whereCbat is the battery capacity in [Wh], SF bat is the battery
+safety factor accounting for self-discharge effect, and Edevice
+is the sensor circuitry average energy consumption per hour,
+i.e. the energy consumption besides the modem.
+VII. M EASUREMENTS AND VALIDATION
+A testbed has been developed to validate the proposed power
+consumption model as well as to estimate the battery lifetime
+of an IoT device.
+A. Measurement Setup
+The power consumption of two commercial device-under-
+test (DUT)s have been measured, namely U-Blox EVK-N211
+and U-Blox EVK-R410M. The N211 is an NB-IoT device,
+while R410M can be connected to both NB-IoT and LTE-M
+networks.
+The measurement setup is depicted in Fig. 4. The DUT’s
+antenna port is connected via cables to a Keysight E7515A
+UXM Wireless Test Set, which is a standard-compliant base
+station emulator supporting both Release 14 NB-IoT and
+LTE-M features with debugging capabilities. The DUT is
+also connected to a Keysight N6705B DC Power Analyzer
+which acts as both a power supply and a sensor for battery
+drain measurements. The measurement setup is controlled by
+Keysight’s Test Automation Platform (TAP), which provides
+interfaces to both the measurement equipments and the DUT,
+and orchestrates the behaviour of different components by
+using TAP test plans. The measurement setup is capable
+of synchronizing the network logs and power consumption
+measurements with≤ 1 ms accuracy. This allows for in-depth
+analysis of measurements to quantify the power consumption.
+State Symbol N211 R410M
+NB-IoT NB-IoT LTE-M
+TX (23 dBm) PTX [mW] 742.858 1421.391 1322.157
+P gaps
+TX [mW] 153.6 168.800 N/A
+RX PRX [mW] 222.134 174.427 335.607
+P gaps
+RX [mW] 177.422 174.097 N/A
+cDRX
+P sleep
+cDRX [mW] 21.337 34.476 34.458
+EonDur [mJ] 0.885 1.847 0.319
+tonDur [ms] 7.926 9.518 0.998
+eDRX
+P sleep
+eDRX [mW] 0.0122 3.686 3.654
+EonDur [mJ] 0.326 0.180 0.241
+tonDur [ms] 1.445 1.104 1.02
+PSM P sleep
+PSM [µW] 9.5 46 46
+Sync Esync [mJ] 160 362 1095
+tsync [ms] 2200 1361 4740
+TABLE X: The measured power consumption of N211 and
+R410M in different states.
+B. Characterization of the Modem
+The analytical energy consumption model for each UE state
+described in Section IV depends on the inputs of the modem
+characterization information such as the UE power level in
+different states, e.g., PTX, P gaps
+TX , PRX, P gaps
+RX , P sleep
+cDRX, P sleep
+PSM ,
+etc. Therefore it is important to accurately characterize the
+power consumption of the modem so that the derived energy
+consumption model can work correctly. A test case has been
+executed for each UE state. From each measurement, only the
+power or energy consumption related to the target UE state
+is extracted and averaged over certain period. The measured
+power or energy consumption of N211 and R410M in different
+states are summarized in Table X, which serves as inputs to the
+equations in Section IV . Typically this modem characterization
+information is available from the vendors.
+It is observed from the measurements that the power
+or energy consumption of R410M is higher than N211 in
+most of the states, regardless of whether it is operating in
+NB-IoT or LTE-M mode, which is not surprising as the
+power consumption of a device is implementation speciﬁc.
+In particular, the measured power consumption of the two
+devices in the TX state as a function of uplink transmission
+power is plotted in Fig. 5. It can be seen that the power
+consumption curve can be split into two parts. The ﬁrst part is
+when the power ampliﬁer is not required, resulting in almost
+linear increase of the power consumption. The second part
+is when the power ampliﬁer is used. In this case, the power
+consumption increases exponentially, which is due to the fact
+that the efﬁciency of the power ampliﬁer decreases with the
+increase of the output power. Similar trend is observed for
+both devices, but the power consumption of R410M is higher
+than N211 when the uplink transmission power is larger than
+-8 dBm. This difference is much more visible when the uplink
+transmission power becomes higher.
+C. Model Validation
+To validate the accuracy of the proposed power consumption
+model, extensive measurement campaigns have been executed
+on both NB-IoT device N211 and LTE-M device R410M with
+different conﬁgurations. Both short (with periodic transmit
+cycle of 1 hour) and long (with periodic transmit cycle of
+12
+-30 -20 -10 0 10 20
+Transmission power [dBm]
+200
+400
+600
+800
+1000
+1200
+1400Power consumption [mW]
+N211 - NB-IoT
+R410M - NB-IoT
+R410M - LTE-M
+Fig. 5: The measured power consumption of N211 and R410M
+in the TX state as a function of uplink transmission power.
+24 hours) measurements have been performed with a ﬁxed
+payload size of 100 Bytes. The T3324 and T3412 timers are
+used in PSM, which is applied due to its relatively low power
+consumption during the sleep period as compared to eDRX.
+The setting of the T3324 timer has a tradeoff between low
+energy consumption and low response time to the application
+server. It is recommended by GSM Association (GSMA) that
+the T3324 timer should best ﬁt the IoT use case, and the
+ratio between T3324 Active Timer and T3412 Extended Timer,
+calculated as (T3412−T3324)/T3412, should be > 90% in order
+to achieve optimum battery savings [29]. In our measurement,
+the T3324 timer is set to be 60 seconds, and the T3412 timer
+for the TAU periodicity is conﬁgured to be 2 hours which
+indicates that the TAU procedure is not included in the short
+measurement, but is included in the long measurement. The
+battery capacity is set to be 5 Wh, assuming an ideal case
+without the self-discharge effect. Since the focus of this work
+is on the power consumption modelling of the modem, the
+power consumption of the sensor circuitry is not taken into
+account, which means that all of the available battery capacity
+is allocated to the modem. The available MCS index ranges
+from 0 to 10, and the number of repetitions for data channels
+ranges from 1 to 16, with different combinations between the
+two parameters. An example of the conﬁgured MCS index and
+repetition number for different scenarios are listed in Table IX.
+All measurements are performed in LTE band 20 ( ∼ 806
+MHz). For NB-IoT, a single tone with 15 kHz spacing is
+allocated in uplink and a single PRB is allocated in downlink.
+For LTE-M, a single PRB is allocated in uplink and 6 PRBs are
+allocated in downlink. The number of allocated RU/SF is set to
+be 5 for both NB-IoT and LTE-M. The measurement settings
+used for model validation and battery lifetime estimations are
+summarized in Table XI.
+Fig. 6 shows the measured and estimated energy con-
+sumption per transmit cycle (i.e. 1 hour and 24 hours) for
+both NB-IoT device N211 and LTE-M device R410M with
+different conﬁgurations. If we compare the energy consump-
+tion between the two devices, it is shown clearly that the
+R410M consumes more energy as compared to N211, due
+N211 and R410, cycle=1h, no TAU
+MCS=0,rep=8 MCS=2,rep=1 MCS=2,rep=2 MCS=2,rep=4 MCS=2,rep=8 MCS=10,rep=1
+0
+2000
+4000
+6000Energy per cycle [mJ]
+N211(NB-IoT): measured
+N211(NB-IoT): estimated
+R410(LTE-M): measured
+R410(LTE-M): estimated
+N211 and R410, cycle=24h, TAU=2h
+MCS=0,rep=8 MCS=2,rep=1 MCS=2,rep=2 MCS=2,rep=4 MCS=2,rep=8 MCS=10,rep=1
+0
+2
+4
+6
+8
+10Energy per cycle [mJ]
+104
+N211(NB-IoT): measured
+N211(NB-IoT): estimated
+R410(LTE-M): measured
+R410(LTE-M): estimated
+Fig. 6: The measured and estimated energy consumption per
+transmit cycle (1 hour and 24 hours) for NB-IoT device N211
+and LTE-M device R410M with different conﬁgurations.
+Parameter Setting
+Carrier frequency LTE band 20
+UE transmit cycle 1 to 24 hour(s)
+Payload size 100 Bytes
+Battery capacity 5 Wh
+Battery safety factor 1
+Uplink resource for NB-IoT single-tone with 15 kHz, 5 RUs
+Downlink resource for NB-IoT 1 PRB, 5 SFs
+Uplink resource for LTE-M 1 PRB, 5 SFs
+Downlink resource for LTE-M 6 PRBs, 5 SFs
+MCS Index for data channels {0, 2, 5, 10}
+MCS Index for signalling messages {0, 2}
+Repetitions for data channels {1, 2, 4, 8, 16}
+Repetitions for signalling messages {Repetitions for data} x 2
+Power saving technique PSM
+T3324 timer 60 seconds
+T3412 timer (TAU periodicity) 2 hours
+TABLE XI: Measurement settings used for model validation
+and battery lifetime estimation.
+to the reason that the energy consumption in each state is
+higher in R410M than in N211 as shown in Table X. If
+we compare the energy consumption of the same device but
+with different conﬁgurations, it can be seen that the energy
+consumption decreases as the MCS index increases. Though
+not shown in the paper, it is found from the measurements that
+the average power consumption is independent of MCS for
+both uplink and downlink. However, for a ﬁxed payload size
+and TX bandwidth, the selection of MCS affects the number
+of allocated RUs/subframes (i.e., transmission time), which
+means that for lower MCS the UE has to stay in the TX state
+for longer time, resulting in higher energy consumption. Also
+it is shown clearly that increasing the number of repetitions
+would increase the total energy consumption as expected.
+Fig. 6 clearly demonstrates that the proposed power con-
+sumption model matches very well with the measurement
+results for the selected two devices, regardless of different
+conﬁgurations of transit cycles and transmission parameters.
+The measured estimation error is within 5% in all cases.
+13
+0 5 10 15 20 25
+Transmit periodicity [Hour]
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10Battery life time [Year]
+NB-IoT (N211), scenario good
+NB-IoT (N211), scenario bad
+NB-IoT (N211), scenario extreme
+LTE-M (R410M), scenario good
+LTE-M (R410M), scenario bad
+Fig. 7: Estimated battery lifetime for NB-IoT device N211
+with different payloads, coverage scenarios, and T3412 timer,
+assuming the transmit cycle to be every 12 hours
+D. Battery Lifetime Estimation
+Next we apply Eqn. (32) to estimate the battery lifetime with
+different conﬁgurations of trafﬁc proﬁles, coverage scenarios
+(i.e., good, bad, and extreme deﬁned in Table IX), and network
+parameters. The same parameter settings listed in Table XI are
+used for the battery lifetime estimation.
+Fig. 7 and Fig. 8 show the estimated battery lifetime for NB-
+IoT device N211 versus different payload size and transmit
+cycles with different coverage scenarios and T3412 timer set-
+tings, respectively. Reduce the payload size and/or increase the
+transmit cycle length would result in a longer battery lifetime
+in all scenarios as expected. Also it is clearly shown that the
+coverage scenario, which determines the PHY transmission
+parameters, has a great impact on the battery lifetime. Note
+that in Fig. 8, there is a turning point when the transmit cycle
+equals theT3412 timer. This is because when the transmit cycle
+is longer than the T3412 timer (i.e. TAU periodicity), the TAU
+procedure will occur which consumes additional energy. When
+the transmit cycle is much longer than the TAU periodicity,
+the performing of the TAU procedure can be energy expensive
+and will dominate the total energy consumption. That explains
+why in the extreme scenario in Fig. 8, the battery lifetime does
+not increase very much with the increase of the transmit cycle.
+Increasing the TAU periodicity will decrease the total energy
+consumption within one transmit cycle, as the occurrence of
+TAU decreases, resulting in an increase of the battery lifetime
+as shown in Fig. 7 and Fig. 8.
+The estimated battery lifetime for LTE-M device R410M
+versus different payloads and transmit cycles with different
+coverage scenarios andT3412 timers is plotted in Fig. 9. Similar
+behaviour has been observed in R410M as compared to N211.
+Fig. 10 shows the energy consumption in different proce-
+dures and states during one transmit cycle (12 hours) for NB-
+IoT device N211 under different scenarios and T3412 timer
+settings, assuming the payload size to be 100 Bytes. Using
+lower MCS index and higher number of repetitions (e.g.
+0 5 10 15 20 25
+Transmit periodicity [Hour]
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10Battery life time [Year]
+scenario good, t3412=2h
+scenario bad, t3412=2h
+scenario extreme, t3412=2h
+scenario good, t3412=4h
+scenario bad, t3412=4h
+scenario extreme, t3412=4h
+scenario good, t3412=8h
+scenario bad, t3412=8h
+scenario extreme, t3412=8h
+Fig. 8: Estimated battery lifetime for NB-IoT device N211
+with different transmit cycles, coverage scenarios, and T3412
+timer, assuming the payload size to be 100 Bytes
+the bad scenario) will cause higher energy consumption as
+compared to the good scenario, because of the increase in
+the uplink transmission time. It is shown in the ﬁgure that
+the T3412 timer has no effect on the energy consumption on
+the service request, uplink data transmission, RRC inactivity
+and release procedures, but has big impact on the TAU and
+PSM. Increasing the T3412 timer would not only decrease the
+energy consumption in the TAU procedure, but also in the PSM
+procedure, because theT3412 timer determines the period when
+the device is in sleep mode.
+A comparison between the proposed energy consumption
+model and the model proposed in [11] is depicted in Fig. 11
+with different transmit cycles and T3412 timer, assuming in
+scenario good and a payload size of 100 Bytes. There are
+similarities between the two models in modelling the energy
+consumption of the UE states and behaviors, e.g., transmit-
+ting/receiving packets or signaling. The difference is that the
+calculation of the total energy consumption in our proposed
+model is based on the composition of the associated UE
+procedures according to the desired UE behavior, while the
+calculation in [11] relies on the Markov chain analysis. The
+other main difference between the two models is that the TAU
+procedure is included in our model while it is not considered in
+[11]. It can be seen from Fig. 11 that the two models matches
+quite well when there is no TAU. However, the difference is
+much obvious when the TAU procedure occurred. From the
+measurement it is observed that the occurrence of the TAU
+procedure can be energy expensive and therefore should be
+carefully conﬁgured (i.e., T3412 timer) by the network operator.
+Fig. 12 shows the estimated battery lifetime for both the
+NB-IoT device N211 and the LTE-M device R410M under
+different transmit cycles and coverage scenarios, assuming the
+payload size to be 100 Bytes andT3412 timer to be 4 hours. The
+curve for the LTE-M device R410M in the extreme scenario is
+missing as LTE-M can not reach the area with 160 dB coupling
+loss. The estimated battery lifetime of N211 is longer than
+14
+0 5 10 15 20 25
+Transmit periodicity [Hour]
+0
+2
+4
+6
+8Battery life time [Year]
+Payload=100Bytes
+scenario good, t3412=2h
+scenario bad, t3412=2h
+scenario good, t3412=4h
+scenario bad, t3412=4h
+scenario good, t3412=8h
+scenario bad, t3412=8h
+0 1 2 3 4 5 6 7 8 9 10
+Uplink payload size [MB]
+0
+2
+4
+6
+8Battery life time [Year]
+cycle=12h
+scenario good, t3412=2h
+scenario bad, t3412=2h
+scenario good, t3412=4h
+scenario bad, t3412=4h
+scenario good, t3412=8h
+scenario bad, t3412=8h
+Fig. 9: Estimated battery lifetime for LTE-M device R410M
+with different payloads, transmit cycles, coverage scenarios,
+and T3412 timer
+Scenario good
+Service Request
+Uplink data RRC Inactivity RRC Release
+TAU PSM
+0
+1000
+2000
+3000
+4000Energy consumption [mJ]
+t3412=2h
+t3412=4h
+t3412=8h
+Scenario bad
+Service Request
+Uplink data RRC Inactivity RRC Release
+TAU PSM
+0
+1000
+2000
+3000
+4000Energy consumption [mJ]
+t3412=2h
+t3412=4h
+t3412=8h
+Fig. 10: Energy consumption in different procedures and states
+during one transmit cycle (12 hours) for NB-IoT device N211,
+assuming the payload size to be 100 Bytes
+R410M, due to the lower energy or power cost of N211 in
+each state as compared to R410M. When the transmit cycle is
+≥ 24 hours, the battery lifetime for NB-IoT device N211 can
+reach up to 10 years, satisfying the 10-year battery lifetime
+requirement speciﬁed by 3GPP.
+E. Discussions and Future Work
+It should be noted that the battery lifetime comparison
+shown in Fig. 12 is only based on the two speciﬁc NB-IoT and
+LTE-M devices. The comparison between those two devices
+can not be generalized to a conclusion that the NB-IoT device
+can last for longer time than the LTE-M device, as the energy
+footprint of a device is implementation speciﬁc. However, the
+proposed energy consumption model and the battery lifetime
+estimation method can be generalized to all devices operating
+with either NB-IoT or LTE-M. In order to apply the proposed
+0 5 10 15 20 25
+Transmit periodicity [Hour]
+1500
+2000
+2500
+3000
+3500
+4000Energy consumption [mJ]
+proposed model, T3412=4h
+proposed model, T3412=8h
+proposed model, T3412=12h
+Andres-Maldonado model (no TAU)
+Fig. 11: Comparisons of the energy consumption model pro-
+posed in [11] with different transmit cycles and T3412 timer,
+assuming in scenario good and a payload size of 100 Bytes
+0 5 10 15 20 25
+Transmit periodicity [Hour]
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10Battery life time [Year]
+NB-IoT (N211), scenario good
+NB-IoT (N211), scenario bad
+NB-IoT (N211), scenario extreme
+LTE-M (R410M), scenario good
+LTE-M (R410M), scenario bad
+Fig. 12: Estimated battery lifetime for both the NB-IoT device
+N211 and the LTE-M device R410M under different transmit
+cycles and coverage scenarios, assuming the payload size to
+be 100 Bytes and T3412 timer to be 4 hours
+model for a new NB-IoT or LTE-M device, one has to measure
+and characterize the power consumption in each state of that
+speciﬁc device, as listed in Table X. Typically this modem
+characterization information is provided by the vendors.
+From Fig. 7 and Fig. 8, it is shown that the battery lifetime
+of a device not only depends on the power consumption of the
+device in each state, but also depends on the trafﬁc proﬁle,
+the coverage scenario, as well as the network conﬁguration
+parameters. While an IoT application developer can adjust the
+frequency and size of the payload data to be sent towards
+the server, the coverage and network conﬁguration parameters
+including power saving parameters are normally set by the
+network operators. It is found during the study that some
+of the network conﬁguration parameters, such as the T3412
+timer which determines the TAU periodicity, have a great
+15
+impact on the energy efﬁciency. Increasing the T3412 timer
+can decrease the energy consumption due to fewer occurrence
+of the TAU procedure and the increased sleep time, at the
+expense of longer response time. A minimum setting of 240
+minutes for the T3412 timer is recommended by GSMA [29].
+As a general guideline, it is of crucial importance not only
+for the IoT application developer to carefully select the trafﬁc
+parameters that best tradeoff between energy efﬁciency and
+performance metric, but also for the network operators to ﬁne
+tune the coverage and the network parameters to ensure a long
+battery lifetime. With proper conﬁguration of these parameters,
+the battery lifetime of an IoT device can last for 10 years as
+required by 3GPP.
+This paper only considers the energy consumption model
+for NB-IoT and LTE-M. Other LPW AN technologies such
+as Sigfox and LoRa could also be interesting to model and
+compare with NB-IoT and LTE-M. In addition, only the power
+consumption model for the modem is considered in this paper.
+Other hardware such as the sensors, the actuators and the
+processor also need to be taken into account when estimating
+the battery lifetime. For the trafﬁc model, only deterministic
+trafﬁc with periodic transmission is assumed. Other trafﬁc
+models such as non-deterministic trafﬁc are also of interest.
+Furthermore, for accurate estimation of the battery lifetime,
+the capacity leakage of the battery should also be taken into
+account instead of assuming an ideal battery without capacity
+leakage. Those could be the future work for modelling the
+energy consumption of LPW AN IoT devices.
+VIII. C ONCLUSION
+This paper presented a comprehensive energy consumption
+model for IoT device battery lifetime estimation, focusing on
+3GPP standardized LPW AN technologies NB-IoT and LTE-M.
+We start with the introduction of the UE states and procedures,
+followed by the detailed energy consumption modelling for
+each UE state and the main procedures. By composing the
+associated UE states and procedures, the energy consumption
+of any UE behaviour can be calculated. Besides, a trafﬁc
+proﬁle which resembles the uplink trafﬁc of most IoT ap-
+plications and three coverage scenarios which determine the
+physical layer transmission parameters with respect to different
+coverage levels have also been presented. Once the modem
+energy consumption model, the trafﬁc proﬁle, and the coverage
+scenario have been determined, the energy consumption of
+an IoT device within a transmit cycle can be calculated
+and the corresponding battery lifetime can be estimated. A
+measurement testbed has been set up to validate the proposed
+energy consumption model with two commercial NB-IoT and
+LTE-M devices, namely U-Blox EVK-N211 and U-Blox EVK-
+R410M. The results show that the proposed energy consump-
+tion model matches very well with the measurement results in
+different conﬁgurations, with the estimation error within 5%.
+The impact of the trafﬁc proﬁle, the coverage scenario, as
+well as the network conﬁguration parameters on the device’s
+battery lifetime has also been analyzed, showing that both the
+application speciﬁc and the network speciﬁc parameters are of
+crucial importance to ensure a long battery lifetime.
+REFERENCES
+[1] Ericsson, “Ericsson Mobility Report,” https://www.ericsson.com/
+4adc87/assets/local/mobility-report/documents/2020/november-2020-
+ericsson-mobility-report.pdf, 2020.
+[2] 3GPP, “Cellular System Support for Ultra Low Complexity and Low
+Throughput Internet of Things; (Release 13),” 3rd Generation Partner-
+ship Project (3GPP), Technical Report (TR) 45.820, Version 2.0.0.
+[3] H. Wang, A. Sørensen, M. Remy, N. Kjettrup, J. J. Nielsen, and G. M.
+Madue˜no, Wireless Networks and Industrial IoT . Springer, 2021, ch.
+Power Measurement Framework for LPW AN IoT, pp. 105–129.
+[4] M. Lauridsen, “Studies on Mobile Terminal Energy Consumption for
+LTE and Future 5G,” PhD thesis, Aalborg University , Jan. 2015.
+[5] M. El Soussi, P. Zand, F. Pasveer, and G. Dolmans, “Evaluating the
+performance of emtc and nb-iot for smart city applications,” in IEEE
+International Conference on Communications (ICC) , May 2018, pp. 1–
+7.
+[6] M. Lauridsen, I. Z. Kovacs, P. Mogensen, M. Sorensen, and S. Holst,
+“Coverage and capacity analysis of lte-m and nb-iot in a rural area,”
+in 2016 IEEE 84th Vehicular Technology Conference (VTC-Fall) , Sep.
+2016, pp. 1–5.
+[7] B. Vejlgaard, M. Lauridsen, H. Nguyen, I. Z. Kovacs, P. Mogensen, and
+M. Sorensen, “Coverage and capacity analysis of sigfox, lora, gprs, and
+nb-iot,” in IEEE 85th Vehicular Technology Conference (VTC Spring) ,
+June 2017, pp. 1–5.
+[8] M. Lauridsen, R. Krigslund, M. Rohr, and G. Madueno, “An empirical
+nb-iot power consumption model for battery lifetime estimation,” in
+2018 IEEE 87th Vehicular Technology Conference (VTC-Spring) , June
+2018, pp. 1–5.
+[9] A. K. Sultania, P. Zand, C. Blondia, and J. Famaey, “Energy modeling
+and evaluation of nb-iot with psm and edrx,” in 2018 IEEE Globecom
+Workshops (GC Wkshps), Dec 2018, pp. 1–7.
+[10] A. Azari, C. Stefanovi ´c, P. Popovski, and C. Cavdar, “On the latency-
+energy performance of nb-iot systems in providing wide-area iot connec-
+tivity,” IEEE Transactions on Green Communications and Networking ,
+vol. 4, no. 1, pp. 57–68, Oct. 2020.
+[11] P. Andres-Maldonado, M. Lauridsen, P. Ameigeiras, and J. M. Lopez-
+Soler, “Analytical modeling and experimental validation of nb-iot device
+energy consumption,” IEEE Internet of Things Journal, vol. 6, no. 3, pp.
+5691–5701, June 2019.
+[12] P. Andres-Maldonado, P. Ameigeiras, J. Prados-Garzon, J. Navarro-
+Ortiz, and J. M. Lopez-Soler, “Narrowband iot data transmission pro-
+cedures for massive machine-type communications,” IEEE Network ,
+vol. 31, no. 6, pp. 8–15, November 2017.
+[13] M. Hertlein, S. Breun, G. Cappel, A. Schwarzmeier, F. Lurz, R. Weigel,
+and G. Fischer, “Evaluation of cellular standards for low data rate
+applications regarding power consumption and timing parameters,” in
+IEEE Radio and Wireless Symposium (RWS) , Jan. 2018, pp. 1–3.
+[14] S. Duhovnikov, A. Baltaci, D. Gera, and D. A. Schupke, “Power
+consumption analysis of nb-iot technology for low-power aircraft ap-
+plications,” in IEEE 5th World Forum Internet Things (WF-IoT) , April
+2019, pp. 719–723.
+[15] C. Y . Yeoh, A. B. Man, Q. M. Ashraf, and A. K. Samingan, “Experi-
+mental assessment of battery lifetime for commercial off-the-shelf nb-iot
+module,” in IEEE International Conference on Advanced Communica-
+tion Technology (ICACT), Feb. 2018, pp. 223–228.
+[16] B. Martinez, F. Adelantado, A. Bartoli, and X. Vilajosana, “Exploring
+the performance boundaries of nb-iot,” IEEE Internet of Things Journal,
+vol. 6, no. 3, pp. 5702–5712, June 2019.
+[17] M. T. Abbas, J. Eklund, K. J. Grinnemo, A. Brunstrom, S. Alfredsson,
+O. Alay, S. Katona, G. Seres, and B. Rathonyi, “Guidelines for an energy
+efﬁcient tuning of the nb-iot stack,” in IEEE 45th LCN Symposium on
+Emerging Topics in Networking (LCN Symposium), Nov. 2020, pp. 1–10.
+[18] F. Michelinakis, A. S. Al-Selwi, M. Capuzzo, A. Zanella, K. Mahmood,
+and A. Elmokashﬁ, “Dissecting energy consumption of nb-iot devices
+empirically,” IEEE Internet of Things Journal , vol. 8, no. 2, pp. 1224–
+1242, Aug. 2020.
+[19] Y . B. Lin, H. C. Tseng, Y . W. Lin, and L. J. Chen, “Nb-iottalk: A service
+platform for fast development of nb-iot applications,” IEEE Internet of
+Things Journal, vol. 6, no. 1, pp. 928–939, Feb. 2019.
+[20] N. Mangalvedhe, R. Ratasuk, and A. Ghosh, “Nb-iot deployment study
+for low power wide area cellular iot,” in IEEE 27th Annual International
+Symposium on Personal, Indoor, and Mobile Radio Communications
+(PIMRC), Sep. 2016, pp. 1–5.
+[21] G. V os, J. Bergman, Y . Bitran, M. Beale, M. Cannon, R. Holden, Y .S.
+Chan, R. Toledano, R. Bras, T. Wakayama, R. Ratasuk, N. Okubo, K.
+16
+Park, Y . Akimoto, T.H. Siregar and S. Lee, “Coverage Analysis for LTE-
+M CAT-M1 Devices ,”Sierra Wireless White Paper, 2017, (Accessed on
+03/18/2019).
+[22] M. Kanj, V . Savaux, and M. L. Guen, “A tutorial on nb-iot physical layer
+design,” IEEE Communications Surveys & Tutorials , vol. 22, no. 4, pp.
+2408–2446, Sep. 2020.
+[23] 3GPP, “LTE; Evolved Universal Terrestrial Radio Access (E-UTRA);
+Physical layer procedures,” 3rd Generation Partnership Project (3GPP),
+Technical Speciﬁcation (TS) 36.213, Version 13.8.0.
+[24] 3GPP, “LTE; Evolved Universal Terrestrial Radio Access (E-UTRA);
+Physical channels and modulation,” 3rd Generation Partnership Project
+(3GPP), Technical Speciﬁcation (TS) 36.211, Version 13.9.0.
+[25] 3GPP, “LTE; Evolved Universal Terrestrial Radio Access (E-UTRA);
+Radio Resource Control (RRC); Protocol speciﬁcation,” 3rd Generation
+Partnership Project (3GPP), Technical Speciﬁcation (TS) 36.331, Ver-
+sion 13.8.1.
+[26] H. Holma and A. Toskala, LTE for UMTS: Evolution to LTE-Advanced .
+Wiley, 2012, no. ISBN: 978-0-470-66000-3.
+[27] A.S. Pag `es, “Link Level Performance Evaluation and Link Abstraction
+for LTE/LTE-Advanced Downlink,” 2015.
+[28] J. Mocnej, A. Pekar, W. K. Seah, and I. Zolotova, “Network Trafﬁc
+Characteristics of the IoT Application Use Cases,” Technical Report
+Series, 2018.
+[29] GSMA, “LTE-M Deployment Guide to Basic Feature Set
+Requirements,” https://www.gsma.com/iot/wp-content/uploads/2019/08/
+201906-GSMA-LTE-M-Deployment-Guide-v3.pdf, 2019.

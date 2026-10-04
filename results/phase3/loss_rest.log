@@ -1,0 +1,39 @@
+70 runs
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\WSN\src\sim\run_loss.py", line 41, in job
+    o = run_dps_lossy(ds.X, ds.seg_start, factory(ds, kind, delta, choice), delta, p, proto,
+                      retries=2, hb_steps=hb, seed=seed)
+  File "C:\Users\User\Desktop\WSN\src\sim\engine.py", line 161, in run_dps_lossy
+    nodeP = make_predictors()                         # node rebuilds when sending
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase3.py", line 86, in make
+    elif kind == "RLS-T": out.append(rls())
+                                     ~~~^^
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase3.py", line 84, in <lambda>
+    rls = lambda j=j: RLS(w=24, train=tr[j], gamma=0.999)
+                      ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\WSN\src\sim\predictors.py", line 223, in __init__
+    super().__init__(w=w, lam=lam, train=train)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\WSN\src\sim\predictors.py", line 180, in __init__
+    X, y = np.vstack(Xs), np.concatenate(ys)
+           ~~~~~~~~~^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\shape_base.py", line 292, in vstack
+    return _nx.concatenate(arrs, 0, dtype=dtype, casting=casting)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.28 MiB for an array with shape (6984, 24) and data type float64
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\WSN\src\sim\run_loss.py", line 66, in <module>
+    for i, r in enumerate(pool.imap_unordered(job, S), 1):
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\pool.py", line 873, in next
+    raise value
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.28 MiB for an array with shape (6984, 24) and data type float64

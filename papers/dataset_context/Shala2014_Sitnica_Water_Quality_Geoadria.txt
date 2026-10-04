@@ -1,0 +1,804 @@
+13
+THE EFFECTS OF INDUSTRIAL AND AGRICULTURAL ACTIVITY 
+ON THE WATER QUALITY OF THE SITNICA RIVER (KOSOVO)
+UTJECAJ INDUSTRIJE I POLJOPRIVREDE NA KVALITETU VODE 
+RIJEKE SITNICE (KOSOVO)
+ALBONA SHALA1, FATBARDH SALLAKU2, AGRON SHALA3, SHKËLZIM UKAJ1
+1University of Prishtina, Faculty of Agriculture and Veterinary, Prishtina, Kosovo
+2Agricultural University of Tirana, Tirana, Albania
+3Hydrometeorological Institute of Kosovo
+	
+ UDK: 504.453.054:543.3>(497.115 Sitnica)=111
+Primljeno / Received: 2014-9-4	 	
+	
+ Izvorni znanstveni rad
+Original scientific paper
+An important issue in Kosovo is water pollution. The use of polluted water has a direct impact on human 
+health and cause long-term consequences. The longest and most polluted river in Kosovo is the Sitnica, a 90 
+km long river with its source located near the village of Sazli. The river flows into the Ibar River in Northern 
+Kosovo. Agriculture is prevailing activity in the basin of Sitnica which is why agricultural as well as industrial 
+waste are the biggest water pollutants. The purpose of this study was to evaluate water quality of the river and 
+analyse the pollution level along the Sitnica River caused by agricultural activities and industrial discharges. In 
+order to assess the impact of pollutants on this river, a measurements were carried out in four (five) monitoring 
+stations: the first station represents the reference station which has not undergone or has not been affected by 
+polluting pressures, two stations in water areas affected by the irrigation of farming land and two monitoring 
+stations in water areas affected by industrial wastewater discharge. Some of the parameters of water quality 
+analysed are temperature, turbidity, electrical conductivity, pH, DO, COD, BOD, P total, nitrates, sulfates, and 
+heavy metals iron, manganese, zinc, nickel. Compared to the reference station the results obtained from the 
+Gracka and Pestova monitoring stations prove that the dominant form of pollution is that from agricultural 
+lands irrigation, while the Plemetin and Mitrovica stations show that the Sitnica River is affected by wastewater 
+discharge which contains significant concentrations of heavy metals, as well as metal ions selected in this paper. 
+It can be concluded that the irrigation of agricultural lands and discharges from mining significantly affect water 
+quality of the Sitnica River.
+Keywords: Water pollution, water quality, land use, Sitnica River, Kosovo 
+Onečišćenje voda predstavlja veliki problem u Kosovu. Uporaba onečišćene vode ima izravan utjecaj na 
+ljudsko zdravlje te može imati dugotrajne posljedice. Najduža i najonečišćenija rijeka u Kosovu je Sitnica, 90 km 
+duga rijeka čiji se izvor nalazi u blizini sela Sazli, a ulijeva se u rijeku Ibar u sjevernom Kosovu. Poljoprivreda je 
+najzastupljenija djelatnost u slivu Sitnice zbog čega poljoprivredni, ali i industrijski otpad predstavljaju najveće 
+onečišćivače voda. Cilj ovog istraživanja je ocijeniti kvalitetu vode rijeke i analizirati razinu onečišćenja duž 
+rijeke Sitnice koja je posljedica poljoprivredne djelatnosti i industrijskog onečišćenja. Da bi se ocijenio učinak 
+onečišćivča, provedena su mjerenja u četiri (pet) mjerne stanice. Prva stanica predstavlja referentnu stanicu koja 
+nije bila pod izravnim ili neizravnim utjecajem tereta onečišćenja, dvije stanice u području rijeke zahvaćene 
+su navodnjavanjem poljoprivrednog zemljišta, a druge dvije u području rijeke zahvaćene su ispuštanjem 
+industrijskih otpadnih voda. Neki od analiziranih parametara kvalitete vode su temperatura, zamućenost, 
+električna provodljivost, pH, DO, COD, BOD, ukupni P, nitrati, sulfati i teški metali željezo, mangan, cink i 
+nikal. U usporedbi s referentnom stanicom rezultati dobiveni u mjernim stanicama Gracka i Pestova dokazuju da 
+prevladava onečišćenje koje dolazi od navodnjavanja poljoprivrednog zemljišta, dok stanice Plemetin i Mitrova 
+pokazuju da je rijeka Sitnica izložena ispuštanju otpadnih voda koje sadrže značajne koncentracije teških metala 
+kao i metalnih iona odabranih u ovom radu. Može se zaključiti da navodnjavanje poljoprivrednog zemljišta i 
+ispuštanje otpadnih voda rudarstva značajno smanjuju kvalitetu vode rijeke Sitnice.
+Ključne riječi: onečišćenje vode, kvaliteta vode, uporaba zemljišta, rijeka Sitnica, Kosovo 
+
+14
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+Introduction
+Water is one of life’s basic needs. With an 
+increasing population, the need for water has 
+increased, too. However, pollution reduces the 
+amount of water available for use. Water is assumed 
+to be polluted when there are changes in its quality 
+that constitute a threat to living organisms or 
+make it unusable because of its physical, chemical 
+and biological changes (Manastirliu, 2013). 
+Water pollution is a threat to ecosystem itself and 
+also to the health of people. This is a problem 
+of a great importance and calls for solution 
+especially considering the developing countries, 
+where practices of environmental administration 
+stay behind the economic development (Agusto, 
+Bamigbola, 2007; Bushati, 2013). 
+Increasingly, 
+the 
+urban 
+way 
+of 
+life, 
+industrialization, 
+modern 
+agriculture 
+and 
+agricultural technology is using an ever-greater 
+number of major raw materials and agents. After 
+their use in various production processes, they 
+pollute the environment through their preliminary 
+inflow in water streams (rivers) or large masses 
+of water (lakes and seas). Contemporary water 
+pollution is mainly associated with various 
+industrial processes, in which case large amounts 
+of water are used (Rozhaja, Jablanoviq, 1983).
+In addition to industrial wastewater, waters 
+are being polluted from the use of agricultural 
+preparations (pesticides) in agricultural lands. If 
+these polluted waters are not treated before being 
+discharged into the environment, they present 
+a risk to the flora and fauna that live in those 
+waters. A very dangerous effect is caused due to 
+the increase of “necessary biological oxygen” in 
+these environments (Korça, 2003).
+Although water is a renewable source, abuse 
+and mismanagement of the water system can cause 
+problems in the quality and provision of drinking 
+water. Water can get polluted in many ways, for 
+example chemically and biologically and may 
+become unclean for drinking and cannot be used 
+for other purposes (Raja et al., 2008). Rivers 
+and their flows are of heterogeneous composition 
+in the spatial aspect and also in the aspect of the 
+importance they have regarding earth; therefore 
+many scientists have documented this heterogeneity 
+focusing on the physical-chemical dynamics of the 
+rivers (Singh et al., 2010).
+Therefore, one of the most important and 
+at same time contaminated resourses not only 
+in Kosovo, but in other countries, too is water, 
+without which life would be impossible. Based 
+on research available the Sitnica River, starting 
+from Ferizaj to Mitrovica, is the most polluted 
+river in Kosovo. Suspensions are present in 
+it and exceed the maximal allowed values 
+(main findings are given by the Authority for 
+Surface Waters Quality, MESP, the Ministry of 
+Environment and Spatial Planning, Department 
+of Water, see Morina, 2014).
+Historically, the Sitnica River has been 
+surrounded by many residential areas and has 
+been an important factor of regional development. 
+Until recently, this river’s water was an important 
+source for the neighbouring settlements and was 
+used for different purposes, such as water supply, 
+irrigation, fishing, and recreation. In recent 
+times, the Sitnica River has been converted into 
+a natural recipient of wastewaters, like those 
+coming from Kosovo power plants in Obiliq, 
+waters from bigger and smaller central urban 
+sewage systems and those which have increased 
+the contamination of the water due to waste 
+water discharges (Arbneshi, 2008).
+The flow of the Sitnica is subjoined by small 
+rivers like Graçanka, Drenica, Llapi and Prishtevka, 
+which are also recipients of wastewaters of 
+different urban and industrial centres (Korça et 
+al., 2002). The Sitnica River passes through a large 
+number of cities in Kosovo (Fig. 1) that still have 
+no wastewater treatment plants and sewage what 
+so ever. Industrial and agricultural wastewaters are 
+deposited directly into the river. These processes 
+have contributed to a considerable increase of 
+this river’s pollution. The non-management of 
+wastewater discharge of urban residential areas, 
+industrial discharges, the use of pesticides and 
+insecticides in agriculture, livestock excrement 
+and lack of proper treatment and reuse of waste 
+led to a reduced quality of surface water bodies, 
+but also of the earth surface itself (Faeth, 2000; 
+Gundogdu, Guney, 2007; Bode, 2012).
+In this sense, the assessment of surface water 
+quality and determining the main pollutants 
+discharged therein are important. The final 
+goal is the protection and/or rehabilitation of 
+the environment and creation of a database for 
+integral and sustainable management of water 
+resources (Kuchment, 2003; Bode, 2012). To 
+achieve the research objectives, water samples 
+were taken at five monitoring stations along the 
+flow of the Sitnica River and physical and chemical 
+parameters and heavy metals have been analysed at 
+the Hydrometeorological Laboratory of Kosovo.
+
+15
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+Materials and methods
+The aim of the experimental part of this 
+research was to determine the presence of 
+contaminants caused by anthropogenic activity 
+in the Sitnica River through defining the values 
+of selected parameters for monitoring. The 
+survey was carried out in 2014 in three periods 
+(spring, summer and autumn) in order to see the 
+impact of climate (seasonal) changes while the 
+parameters were analysed in the Laboratory of 
+the Hydro-Meteorological Institute of Kosovo. 
+Sampling was carried out based on standard ISO 
+5667-6: 2014 which sets out the principles to be 
+applied to the design of sampling programmes, 
+sampling techniques, and the handling of water 
+samples from rivers and streams for physical 
+and chemical assessment (URL 1). To reflect the 
+impact of industrial discharges and agricultural 
+water quality in the Sitnica River, sampling 
+points included three types of aquatic areas, as 
+follows (Fig. 1):
+1.	 water area unaffected by the pressures of 
+anthropogenic pollution (reference station: 
+Devetak).
+2.	 Aquatic 
+areas 
+affected 
+by 
+agricultural 
+wastewater discharges (stations: Gracka and 
+Pestova).
+3.	 Aquatic areas affected by industrial wastewater 
+discharges (stations: Plemetin and Mitrovica).
+The first monitoring station Devetak is located 
+in the spring of the Sitnica River, the station Gracka 
+belongs to the upstream, Plemetin station is located 
+in the middle flow while the last two stations 
+Pestova and Mitrovica belong to downstream 
+of the river. Water samples were taken in glass 
+bottle for organic parameters and in polyethylene 
+bottles for inorganic parameters. Sample bottles 
+were labelled including time, date and source of 
+sampling. They were preserved in the refrigerator 
+at 4 °C and transported according to respective 
+procedure. For determination of heavy metals, 
+samples were taken in a polyethylene bottle, and 
+Figure 1 Map of Kosovo and monitoring stations of the Sitnica River
+
+16
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+0.5 ml / nitric acid (HNO3) (cc/100ml) sample was 
+added immediately for preservation.
+Some of the parameters were measured directly 
+in the ground (mainly physical parameters). At each 
+sampling point, the following parameters were 
+measured: temperature, electrical conductivity, 
+pH, dissolved oxygen, while chemical analyses 
+were carried out in the analytical laboratory of 
+Hydrometeorological Institute of Kosovo.
+Analysis of physical and chemical parameters 
+of water samples taken from the Sitnica River 
+was conducted using the following tools: Multi 
+340i thermometer – used to measure temperature; 
+turbidity was measured with Turbid meter 
+AQUALITIC / PC COMPACT – ISO 7027 
+(photometry); electrical conductivity was measured 
+using conduct meter WTW 315i; pH values ​were 
+measured using the HI 98130 pH meter (DIN 38404 
+– C5); levels of dissolved oxygen were determined 
+by the HI 9146 – ISO 5814 (Electrochemical); 
+BOD – ISO 5815-2 and COD – ISO 15705; 
+P-total – ISO 15681-2, SO4
+2- – ISO 15923, NO3
+- 
+– ISO 7890/1 with SECOMAN PRIM-LIGHT 
+UV – VIS Spectrophotometer, while the quantity 
+of certain heavy metals was determined by the 
+atomic absorption spectrophotometer – ISO 8288 
+(Perkin Elmer type Analyst 400). Calibration and 
+evaluation of analytical methods and estimation 
+of performance characteristics, Part 2: Calibration 
+strategy for non-linear second-order calibration 
+functions – ISO 8466-2.
+Results and discussion
+Results for the analysed parameters are 
+presented in Table 1 and 2 with sampling 
+stations are represented by codes, parameters of 
+monitoring, their measuring units, values recorded 
+in three monitoring periods (spring, summer 
+and autumn) for each analysed parameter. The 
+comparison between the three periods is reflected 
+in the diagrams presented in Figures 2 to 11.
+Temperature had variations in three monitoring 
+periods. During spring variations were from 6.4 
+(S1) to 13.2 °C (S3), in summer from 14.9 (S1) 
+to 22.2 °C (S5), whereas in autumn it water 
+temperature varied from 10.2 (S1) to 15.5 °C (S3). 
+The biggest change of temperatures was between 
+seasons of spring and summer reaching about 9.5 
+oC, while between autumn and summer changes 
+were smaller and reach up to 7 oC. The rising of the 
+temperatures was influenced by air temperatures 
+which increase in summer and especially during 
+midday, in addition to that, urban discharges also 
+contributed to the increase of temperatures. 
+Table 1 Results of physical and chemical parameters
+Parameters
+Units
+Station
+Devetak (S1)
+Gracka (S2)
+Plemetin (S3)
+Pestova (S4)
+Mitrovica (S5)
+Sp
+Su
+A
+Sp
+Su
+A
+Sp
+Su
+A
+Sp
+Su
+A
+Sp
+Su
+A
+Temperature
+°C
+6.4
+14.9
+10.2
+12.7
+21.2
+14.7
+13.2
+19.9
+15.5
+12.4
+21.6
+14.6
+12.6
+22.2
+15.0
+Turbidity
+NTU
+9.5
+61
+9.2
+3.3
+14.4
+9.7
+7.7
+17.2
+9.1
+3.5
+5.2
+16.5
+4.0
+5.4
+17.0
+Conductivity
+μScm-1
+262
+280
+270
+645
+560
+680
+831
+660
+610
+612
+680
+570
+616
+640
+610
+pH
+0-14
+7.99
+7.85
+8.20
+7.75
+7.25 7.514
+7.80
+8.27
+7.58
+7.78
+7.66
+7.76
+7.76
+7.48
+7.56
+Dissolved 
+oxygen
+mg/L
+10.51
+7.40
+9.37
+5.48
+1.60
+3.03
+0.53
+2.40
+2.84
+4.82
+1.70
+3.21
+6.76
+3.50
+4.17
+Chemical 
+oxygen 
+demand 
+(COD)
+mg/L
+18.0
+4.2
+nd
+30.0
+57.0
+65.5
+26.4
+56.0
+58.2
+11.3
+72.5
+76.9
+12.8
+93.0 105.4
+Bio-chemical 
+oxygen 
+demand 
+(BOD)
+mg/L
+8.5
+1.9
+<0.1
+17.0
+34.5
+22.6
+13.9
+31.0
+24.3
+5.40
+29.4
+32.9
+5.5
+43.6
+42.3
+Total 
+phosphor
+mg/L
+nd 0.053
+<0.1 0.580 0.799 0.465 0.770 0.504 0.369 0.330 0.657 0.435 0.410 0.441 0.542
+Nitrates
+mg/L
+nd
+nd
+nd
+4.3
+nd
+0.3
+nd
+2.4
+nd
+6.5
+5.9
+6.3
+6.7
+9.9
+11.2
+Sulphate ion
+mg/L
+9.103
+39.8
+18.6 27.29 26.06 39.88 98.15 70.45 92.86 40.82 72.78 59.92 54.51 70.73 72.90
+Sp – Spring; Su – Summer; A – Autumn; nd – below the threshold of detection of used method
+
+17
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+Turbidity was present throughout the course 
+of the three monitoring periods, the highest values 
+were recorded when it had rained shortly before 
+measurements took place, as it happened in the 
+summer season in the sampling point S1 where 
+turbidity reached the value in 61 NTU, while at 
+other stations the turbidity had lower values, 
+because while doing the sampling there was no rain, 
+and turbidity was caused by consecutive polluting 
+pressures, at S3 we have the case of a slight increase 
+by 2.8 NTU which was caused by the Pristina 
+River, known as collector of all wastewaters of 
+the capital Prishtina which permanently has high 
+turbulence (from the data of KHMI – 31 NTU as 
+VMV – 2014). 
+From the presentation of data on Table 1 and 
+Figure 3, it can be seen that the electrical conductivity 
+at sampling site S1 in three cases was lower (below 
+300 μScm-1) that leads to the conclusion that 
+water had high purity and was without polluting 
+pressures. From the station S2 and on, we may 
+note an increase of electrical conductivity along the 
+whole river flow down to S3 where the maximum 
+value reached (831 μScm-1), then the EC value 
+starts to decrease as a result of the intervention of 
+other waters thus causing dilution. 
+In the water samples that we analyzed, the pH 
+figures recorded do not present a high variability, 
+not more than 1 measurement unit. All pH values 
+are noted to be higher than 7, they range from 
+7.75-7.99 during the spring season, 7.25-8.27 
+during the summer and 7.54-8.2 in autumn, 
+slightly alkaline and are generally stable in the 
+region of stable values for all seasons. 
+Our measurements showed that the values of 
+dissolved oxygen in the monitored stations were 
+different. Highest values during the three periods 
+were at S1 station (reference station), whereas the 
+lowest from the performed measurements was 0.53 
+mg/L in S3 in spring, S2 with 1.6 mg/L in summer 
+and in S4 with 2.84 mg/L in autumn. It is clear 
+from the diagram that at all stations the quantity of 
+DO is very small and especially during the summer 
+season was significantly lower which confirms the 
+impact of temperature on this parameter. 
+Figure 2 Water temperature according to monitoring 
+stations and seasonal variations
+Figure 3 Turbidity for every station and the values by 
+seasonal variation
+Figure 4 Electrical conductivity according to 
+monitoring stations and seasonal variations
+Figure 5 pH according to monitoring stations and 
+seasonal variations
+
+18
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+Chemical oxygen demand values during the 
+spring vary from 11.3 (S4) to 30.0 (S2) mg/L, in 
+summer from 4.2 (S1) to 93.0 (S5) mg/L, while 
+during autumn they vary from 0.1 (S1) to 105.4 
+(S5) mg/L. This leads to the conclusion that during 
+all the seasons the Sitnica River is subjected to 
+all pollution types from organic materials in 
+considerable amount where the values are above 
+100 mg/L. 
+In the analysed water samples of the Sitnica 
+River, the values of bio–chemical oxygen demand 
+during spring varied from 5.4 (S4) to 17.0 (S2) 
+Figure 6 O2 according to monitoring stations and 
+seasonal variations
+Figure 7 The performance of the values of COD for 
+each station according to seasonal variations
+Figure 8 The performance of the values of BOD for 
+each station according to seasonal variations
+Figure 9 Total phosphorus (mg/l) according to sampling 
+stations and seasonal variations
+Figure 10 Concentration of nitrates (mg/l) for each 
+station and seasonal variation
+Figure 11 The performance of sulphate ion values 
+according to seasonal variations
+
+19
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+mg/L, in summer from 1.9 (S1) to 43.6 (S5) 
+mg/L and during monitoring in autumn to 42.3 
+(S5) mg/L. So it is noted that the quantities were 
+considerably higher during summer and autumn 
+because the river’s volume was smaller, while the 
+impact of discharge of water in terms of pollution 
+is higher.
+Lowest values of total phosphorus during three 
+periods were recorded in S1, while its highest 
+values were recorded in spring 0.77 mg/L in S3 
+station, in summer 0.779 (S2) mg/L and in autumn 
+with 0.542 mg/L (S5).
+Highest values of nitrates during the three 
+monitoring periods were recorded in the last 
+station, namely S5, in spring with 6.7 mg/L, in 
+summer with 9.9 mg/L and higher in autumn with 
+11.5 mg/L. The lowest values of nitrates during 
+three periods were recorded in S1 that had values 
+below the threshold of detection of analytical 
+method referred to above. We think that the 
+nitrates in the water of rivers are mainly of urban 
+origin and from agricultural drainage that end in 
+the waters of the river. 
+Sulphate ions were present in all three stations 
+and during the three monitoring seasons which 
+according to the findings during analysis shows 
+that a smaller quantity was in S1 – 9.103 mg/L and 
+higher quantities in S3 – 98.15 mg/L. This increase 
+comes as a result of the impact from Graqanka 
+River which contains a high quantity of sulphates 
+(KHMI-VMV 300mg/L SO4
+2) a river which flows 
+into the Sitnica River between stations S2 and S3.
+Nickel is one of the metal ions which were 
+detected in all analysed samples. In spring, the level 
+of its concentration was 0.027 mg/L in S1 and its 
+value amounted to 0.055 mg/L in S3 and S5, in the 
+monitoring of the summer season the values varied 
+from 0.013 mg/L in S2 up to 0.026 mg/L in S5 and 
+in the autumn season from 0.017 mg/L in S3 up to 
+0.033 mg/L in S1. Compared to the EU standards 
+for the allowed values of Ni in surface waters (0.02 
+mg/L, EU 1998), all the analysed samples taken as 
+a whole during the three seasons have exceeded 
+maximum allowed values. 
+Values of Zn ions in the samples analysed for 
+this paper, in spring varied from 0.012 mg/L (S1) 
+up to 0.421 mg/L (S5), in summer 0.021 mg/L 
+(S1) up to 3.115 mg/L (S5) and in autumn from 
+0.042 mg/L (S1) up to 7.772 mg/L (S5) that leads 
+to the conclusion that the Zn ion values in the 
+monitoring station S5 in two seasons, summer and 
+autumn exceeded the values allowed according to 
+the EU standard (3 mg/L, EU 1998).
+Mn ions in the samples analysed for this paper 
+had lower values at the station S1, compared by 
+seasons it was noticed that during the summer 
+season the results indicate a higher concentration 
+of Mn. Values ranged from 0.031 (S1) to 0.321 
+mg/L (S5) in spring, in the summer season from 
+0.204 (S1) up to 0.550 mg/L (S2) and in autumn 
+from 0.131 (S1) up to 0.214 mg/L (S5). With 
+the exception of the sample of the S1 station of 
+the spring season. Values of Mn are higher than 
+the reference value according to the EU standard 
+(0.05 mg/L).
+Iron ions, similarly to ions of other metals, are 
+present all the samples analysed for this paper. If 
+assessing by season, then we may say that in spring 
+these values were from 0.106 (S1) up to 0.369 
+mg/L (S5), in the summer season it was 0.110 
+(S5) and at S2 there it was as high as 0.373 mg/L, 
+whereas in autumn the values were from 0.098 
+(S1) up to 0.446 mg/L (S2). Compared to reference 
+EU standards (0.2 mg/L, EU 1998) the majority 
+were exceeding the allowed values.
+Table 2 Concentration of heavy metals
+Monitoring stations
+Fe
+Mn
+Zn
+Ni
+Sp
+Su
+A
+Sp
+Su
+A
+Sp
+Su
+A
+Sp
+Su
+A
+Devetak (S1)
+0.106
+0.347
+0.098
+0.031
+0.204
+0.133
+0.012
+0.021
+0.042
+0.027
+0.015
+0.033
+Gracka (S2)
+0.322
+0.373
+0.446
+0.223
+0.550
+0.169
+<0.01
+<0.01
+<0.01
+0.040
+0.013
+0.026
+Plemetin (S3)
+0.290
+0.161
+0.229
+0.282
+0.495
+0.159
+<0.01
+0.028
+0.033
+0.055
+0.021
+0.021
+Pestova (S4)
+0.279
+0.172
+0.386
+0.228
+0.455
+0.131
+<0.01
+0.051
+0.013
+0.038
+0.025
+0.025
+Mitrovica (S5)
+0.369
+0.110
+0.414
+0.321
+0.450
+0.214
+0.421
+3.115
+7.772
+0.055
+0.026
+0.026
+EU standards 198 (mg/L)
+0.20
+0.05
+3.00
+0.02
+Sp – Spring; Su – Summer; A – Autumn
+
+20
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+BIBLIOGRAPHY AND SOURCES
+Agusto, F. B., Bamigbola O. M. (2007): Numerical Treatment of the Mathematical Models for Water 
+Pollution, Journal of Mathematics and Statistics, 3/7, 172-180. 
+Arbneshi, T., Rugova, M., Berisha, L. (2008): The level concentration of lead, cadmium, copper, zinc 
+and phenols in the water river of Sitnica, Journal of International Environmental Application & Science, 
+3/2, 66-73.
+Bode, A. (2012): Environmental impact of anthropogenic factors in Tirana basin, Doctoral dissertation, 
+Tirana, pp. 205. 
+Bushati, N. (2013): Evaluation of water quality of Shkoder Lake and rivers Buna and Drini through 
+microbiological analysis and physic chemical (Albanian part), Doctoral dissertation, Department of 
+Biology, University of Tirana, pp. 112.
+Faeth, P. (2000): Fertile Ground: Nutrient Trading’s Potential to Cost-Effectively Improve Water Quality, 
+World Resources Institute, Washington, pp. 51. 
+Gundogdu, K. S., Guney, I. (2007): Spatial analyses of groundwater levels using universal kriging, Journal 
+Earth System Science, 116/1, 49-55. 
+Korça, B. (2003): Water Chemical Analysis, Course Development Program, Prishtina, pp. 160.
+Conclusions
+The analysed physical and chemical parameters 
+of the Sitnica River water showed that with the 
+increase of the distance from the source of the 
+river (reference point) to its end (Mitrovica) a 
+deterioration of the water quality is evident. 
+Samples were taken during three periods at 4 
+monitored stations (Gracka, Plemetin, Pestova 
+and Mitrovica) on the Sitnica River and it can 
+be concluded that the river is very polluted. This 
+confirms the impact of various polluting pressures 
+that come as a result of discharge of waters from a 
+large number of towns and villages that lie on this 
+river and as a result of these impacts, the amount 
+of diluted oxygen is reduced. Results from analyses 
+that were made for determining the amount of 
+heavy metals during three monitoring periods 
+show that their highest concentration was found: 
+in the station S2 for Fe ions in the autumn season, 
+in S2 for Mn ions in the summer season, in S5 for 
+the Zn ions in the summer season and in S2 and S5 
+for Ni ions in the spring season. 
+Compared to the EU standards for the allowed 
+values of heavy metals in surface waters, it can be 
+noted that their concentration level in the Sitnica 
+River water was high and exceeded the maximum 
+allowed values. High levels of metal ions content 
+in the Sitnica River water appear as a result of 
+confluence of Graqanka River, where Kizhnica 
+mine waters are pumped into and from the impact 
+of water discharges by Feronickeli corporate in 
+Drenica River which also flows into Sitnica ahead 
+of S3 station, whose waters contain considerable 
+quantities of metal ions (database of KHMI).
+Results of this study indicate that given the 
+level of water pollution, measures must be taken 
+as quickly as possible to construct urban and 
+industrial water treatment plants and to apply best 
+and environment friendly practices.
+Acknowledgement
+We are very grateful for the time and assistance 
+in reviewing and evaluating the submitted 
+manuscript “The Effects of Industrial and 
+Agricultural Activity on the water quality of the 
+Sitnica River (Kosovo)”.
+So, we would like to thank the reviewers for 
+their valuable contribution to the evaluation of the 
+paper. Their contribution was not only a valuable 
+assistance in assessing its merits, but careful 
+analysis, criticism and specific recommendations 
+have greatly increased the value and the quality of 
+this work.
+We are sincerely grateful.
+
+21
+Al. Shala, F. Sallaku, Ag. Shala, S. Ukaj
+Geoadria 20/1 (2015) 13-21
+Korça, B., Jusufi, S., Shehdula, M., Bacaj, M. (2002): Surface Water Pollution in Kosovo, Scientific 
+Conference: Technical-Technological Sustainable Development and Environment, Proceeding Book, 
+Macedonian Ecological Society, Skopje, 43-49.
+Kuchment, L. S. (2004): The Hydrological Cycle and Human Impact on it, in: Water resources management, 
+(ed. Hoekstra, A. Y., Savenije, H. H. G.), Eolss Publishers, Oxford, no pagination.
+Manastirliu, O. (2013): Comparison of environmental monitoring in the landfill of Sharre, before 
+and after the intervention as well as environmental impacts, Doctoral dissertation, University of Tirana, 
+Department of Chemistry, Tirana, pp. 89. 
+Morina, V. (2014): Ecophysiological study of the effects of pollution biot in the river Sitnica – Kosovo. 
+Doctoral dissertation, University of Tirana, Department of Biology, Tirana, pp 93.
+Raja P., Muhindhar Amarnath, A., Elangovan R. Palanivel M. (2008): Evaluation of physical 
+and chemical parameters of river Kaveri, Tiruchirappalli, Tamil Nadu, India, Journal of Environmental 
+Biology, 29/5, 765-768.
+Rozhaja, D., Jablanoviq, M. (1983): Pollution and Environment Protection, Entity of textbooks and 
+teaching aids of Socialist Autonomous Province of Kosovo, Prishtina, pp. 302. 
+Singh, M. R., Gupta, A., Beeteswari, K. H. (2010): Physico-chemical Properties of Water Samples from 
+Manipur River System, India, Journal of Applied Sciences & Environmental Management, 14/4, 85-89.
+URL 1: ISO 5667-6 (2014): Water quality – Sampling-Part 6: Guidance on sampling of rivers and streams, 
+http://www.iso.org/iso/catalogue_detail.htm?csnumber=55451, 13 July 2015.
+

@@ -1,0 +1,57 @@
+dataset,param,days,events_per_30d,glitches_per_30d,event_median_dur_h,coherent_share
+InWaterSense n1,T,249,1.44,0.24,6.1,0.5
+InWaterSense n1,EC,249,0.96,0.72,2.1,0.25
+InWaterSense n1,DO,249,6.86,4.33,2.4,0.12
+InWaterSense n1,pH,249,3.73,1.93,2.5,0.13
+01458500 Delaware River at French,T,365,0.25,0.0,1.5,0.0
+01458500 Delaware River at French,EC,365,3.45,0.08,4.4,0.0
+01458500 Delaware River at French,DO,365,0.16,0.08,2.6,0.0
+01458500 Delaware River at French,pH,365,0.0,0.0,,
+01438500 Delaware River at Montag,T,365,0.16,0.0,5.2,0.5
+01438500 Delaware River at Montag,EC,365,1.56,0.0,1.5,0.05
+01438500 Delaware River at Montag,DO,365,0.16,0.0,2.8,0.0
+01438500 Delaware River at Montag,pH,365,0.41,0.0,1.5,0.0
+05420400 Mississippi River at Dam,T,359,0.67,0.0,1.9,0.12
+05420400 Mississippi River at Dam,EC,359,0.33,0.17,2.5,0.0
+05420400 Mississippi River at Dam,DO,359,0.33,0.08,1.8,0.25
+05420400 Mississippi River at Dam,pH,359,0.0,0.0,,
+05586300 Illinois River at Floren,T,313,0.0,0.0,,
+05586300 Illinois River at Floren,EC,313,11.29,4.02,2.8,0.04
+05586300 Illinois River at Floren,DO,313,1.91,2.78,1.6,0.3
+05586300 Illinois River at Floren,pH,313,0.0,0.0,,
+01473500 Schuylkill River at Norr,T,282,1.38,0.74,2.0,0.23
+01473500 Schuylkill River at Norr,EC,282,15.01,3.62,3.0,0.04
+01473500 Schuylkill River at Norr,DO,282,0.85,0.32,2.0,0.25
+01473500 Schuylkill River at Norr,pH,282,0.0,0.0,,
+01400500 Raritan River at Manvill,T,365,0.74,0.16,4.8,0.67
+01400500 Raritan River at Manvill,EC,365,9.78,0.66,4.0,0.06
+01400500 Raritan River at Manvill,DO,365,0.74,0.08,2.0,0.22
+01400500 Raritan River at Manvill,pH,365,0.0,0.0,,
+01402000 Millstone River at Black,T,230,1.44,0.0,3.2,0.64
+01402000 Millstone River at Black,EC,230,4.83,0.13,5.2,0.22
+01402000 Millstone River at Black,DO,230,3.13,0.13,4.5,0.08
+01402000 Millstone River at Black,pH,230,0.0,0.0,,
+01388000 Ramapo River at Pompton ,T,365,1.64,0.33,3.6,0.3
+01388000 Ramapo River at Pompton ,EC,365,6.49,0.33,3.8,0.06
+01388000 Ramapo River at Pompton ,DO,365,0.74,0.0,5.8,0.44
+01388000 Ramapo River at Pompton ,pH,365,0.25,0.08,2.5,0.67
+01467087 Frankford Creek at Casto,T,365,1.32,0.08,3.2,0.81
+01467087 Frankford Creek at Casto,EC,365,8.22,0.25,7.1,0.3
+01467087 Frankford Creek at Casto,DO,365,3.53,0.49,2.2,0.72
+01467087 Frankford Creek at Casto,pH,365,0.0,0.0,,
+01475530 Cobbs Creek at US Hwy 1 ,T,262,0.34,0.23,2.2,0.67
+01475530 Cobbs Creek at US Hwy 1 ,EC,262,12.93,0.8,5.2,0.14
+01475530 Cobbs Creek at US Hwy 1 ,DO,262,5.26,0.57,4.2,0.3
+01475530 Cobbs Creek at US Hwy 1 ,pH,262,0.11,0.11,2.0,1.0
+01465798 Poquessing Creek at Gran,T,279,1.08,0.32,1.4,0.7
+01465798 Poquessing Creek at Gran,EC,279,20.11,3.44,5.2,0.12
+01465798 Poquessing Creek at Gran,DO,279,3.01,0.54,3.9,0.43
+01465798 Poquessing Creek at Gran,pH,279,6.24,0.43,2.8,0.4
+01473900 Wissahickon Creek at For,T,72,0.83,0.0,1.8,0.0
+01473900 Wissahickon Creek at For,EC,72,5.84,0.0,3.8,0.0
+01473900 Wissahickon Creek at For,DO,72,6.25,0.0,2.5,0.2
+01473900 Wissahickon Creek at For,pH,72,1.25,0.0,2.0,1.0
+11510700 Klamath River below John,T,365,6.33,0.33,3.2,0.08
+11510700 Klamath River below John,EC,365,5.1,0.16,5.0,0.08
+11510700 Klamath River below John,DO,365,1.23,0.41,1.8,0.0
+11510700 Klamath River below John,pH,365,0.0,0.0,,

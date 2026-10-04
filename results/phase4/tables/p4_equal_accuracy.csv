@@ -1,0 +1,13 @@
+family,lab,err,life
+Periodic (30-240 min),120 min,10.533,4.88
+Periodic (30-240 min),240 min,15.072,5.216
+Periodic (30-240 min),30 min,5.123,3.517
+Periodic (30-240 min),60 min,7.803,4.322
+RLS-D (L1-L4),L1,0.5,3.842
+RLS-D (L1-L4),L2,1.0,4.623
+RLS-D (L1-L4),L3,2.374,5.158
+RLS-D (L1-L4),L4,4.991,5.392
+Send-on-delta (L1-L4),L1,0.359,3.709
+Send-on-delta (L1-L4),L2,0.984,4.265
+Send-on-delta (L1-L4),L3,2.36,5.084
+Send-on-delta (L1-L4),L4,4.94,5.354

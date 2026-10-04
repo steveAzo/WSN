@@ -1,0 +1,11 @@
+radio,host_awake_during_report,gain_RLS-D_L2
+NB-IoT N211 RAI,True,1.72
+NB-IoT N211 RAI,False,1.47
+NB-IoT BC95 RAI,True,1.49
+NB-IoT BC95 RAI,False,1.19
+LoRaWAN SF7,True,1.41
+LoRaWAN SF7,False,1.2
+LoRaWAN SF12,True,2.05
+LoRaWAN SF12,False,1.84
+NB-IoT N211 default,True,2.88
+NB-IoT N211 default,False,2.3

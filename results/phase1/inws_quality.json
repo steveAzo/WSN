@@ -1,0 +1,76 @@
+{
+  "raw_rows": 105453,
+  "exact_duplicates_removed": 0,
+  "nodes": {
+    "1": {
+      "cycles": 19090,
+      "start": "2015-05-01 17:10:38",
+      "end": "2016-01-05 21:05:16",
+      "T": {
+        "missing_in_cycle": 4,
+        "range_fail": 1,
+        "plaus_fail": 0,
+        "spike_flag": 465
+      },
+      "EC": {
+        "missing_in_cycle": 3,
+        "range_fail": 101,
+        "plaus_fail": 0,
+        "spike_flag": 620
+      },
+      "pH": {
+        "missing_in_cycle": 6,
+        "range_fail": 39,
+        "plaus_fail": 4815,
+        "spike_flag": 194
+      },
+      "DO": {
+        "missing_in_cycle": 4,
+        "range_fail": 0,
+        "plaus_fail": 0,
+        "spike_flag": 472
+      },
+      "complete_cycles": 14129,
+      "segments": 333,
+      "segments_ge_1day": 29,
+      "cycles_in_segments_ge_1day": 13450,
+      "median_cycle_interval_s": 611.0,
+      "cycles_with_duplicate_param": 172
+    },
+    "2": {
+      "cycles": 6713,
+      "start": "2015-05-01 17:17:54",
+      "end": "2015-12-16 08:18:57",
+      "T": {
+        "missing_in_cycle": 0,
+        "range_fail": 811,
+        "plaus_fail": 0,
+        "spike_flag": 255
+      },
+      "EC": {
+        "missing_in_cycle": 0,
+        "range_fail": 1589,
+        "plaus_fail": 0,
+        "spike_flag": 216
+      },
+      "pH": {
+        "missing_in_cycle": 0,
+        "range_fail": 2129,
+        "plaus_fail": 91,
+        "spike_flag": 142
+      },
+      "DO": {
+        "missing_in_cycle": 0,
+        "range_fail": 0,
+        "plaus_fail": 0,
+        "spike_flag": 305
+      },
+      "complete_cycles": 4446,
+      "segments": 65,
+      "segments_ge_1day": 8,
+      "cycles_in_segments_ge_1day": 5742,
+      "median_cycle_interval_s": 611.0,
+      "cycles_with_duplicate_param": 23
+    }
+  }
+}

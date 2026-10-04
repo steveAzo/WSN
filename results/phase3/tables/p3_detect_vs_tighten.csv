@@ -1,0 +1,5 @@
+config,reports,step,ramp,checkB
+RLS-D L3 (tighten),7.81,0.87,0.88,0.81
+RLS-D L4,2.4,0.62,0.53,0.62
+RLS-D+DET1 L4,2.71,0.88,0.61,0.62
+RLS-D+DET2 L4,3.13,0.97,0.87,0.72

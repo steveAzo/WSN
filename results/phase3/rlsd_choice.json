@@ -1,0 +1,13 @@
+{
+ "phi": 0.97,
+ "rule": "min median gap to min(SOD, RLS-T) over tuning sites x L1-L4",
+ "tuning_sites": [
+  "USGS 01388000",
+  "USGS 01402000",
+  "USGS 01458500",
+  "USGS 01467087",
+  "USGS 01473900",
+  "USGS 05420400",
+  "USGS 11510700"
+ ]
+}

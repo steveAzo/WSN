@@ -1,0 +1,544 @@
+2016 runs on 14 datasets with 6 workers
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 38, in <module>
+    from pandas.compat import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\compat\__init__.py", line 28, in <module>
+    from pandas.compat.numpy import is_numpy_dev
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\compat\numpy\__init__.py", line 6, in <module>
+    from pandas.util.version import Version
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\util\version\__init__.py", line 336, in <module>
+    class Version(_BaseVersion):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\util\version\__init__.py", line 337, in Version
+    _regex = re.compile(r"^\s*" + VERSION_PATTERN + r"\s*$", re.VERBOSE | re.IGNORECASE)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\__init__.py", line 289, in compile
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=648)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 38, in <module>
+    from pandas.compat import (
+        is_numpy_dev as _is_numpy_dev,  # pyright: ignore[reportUnusedImport] # noqa: F401
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\compat\__init__.py", line 27, in <module>
+    import pandas.compat.compressors
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\compat\compressors.py", line 19, in <module>
+    import lzma
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1118, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1217, in get_data
+MemoryError
+    return _compile(pattern, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\__init__.py", line 350, in _compile
+    p = _compiler.compile(pattern, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 752, in compile
+    code = _code(p, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 585, in _code
+    _compile(code, p.data, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 117, in _compile
+    _compile(code, av[2], flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 126, in _compile
+    _compile(code, p, _combine_flags(flags, add_flags, del_flags))
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 109, in _compile
+    _compile(code, av[2], flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 86, in _compile
+    charset, hascased = _optimize_charset(av, iscased, tolower, fixes)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 285, in _optimize_charset
+    charmap += b'\0' * 0xff00
+object address  : 00000205628AD180
+object refcount : 3
+object type     : 00007FF922BBA6C0
+object type name: MemoryError
+object repr     : MemoryError()
+lost sys.stderr
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=704)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 38, in <module>
+    from pandas.compat import (
+        is_numpy_dev as _is_numpy_dev,  # pyright: ignore[reportUnusedImport] # noqa: F401
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\compat\__init__.py", line 28, in <module>
+    from pandas.compat.numpy import is_numpy_dev
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\compat\numpy\__init__.py", line 6, in <module>
+    from pandas.util.version import Version
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\util\version\__init__.py", line 336, in <module>
+    class Version(_BaseVersion):
+    ...<130 lines>...
+            return self.release[2] if len(self.release) >= 3 else 0
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\util\version\__init__.py", line 337, in Version
+    _regex = re.compile(r"^\s*" + VERSION_PATTERN + r"\s*$", re.VERBOSE | re.IGNORECASE)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\__init__.py", line 289, in compile
+    return _compile(pattern, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\__init__.py", line 350, in _compile
+    p = _compiler.compile(pattern, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 752, in compile
+    code = _code(p, flags)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 585, in _code
+    _compile(code, p.data, flags)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 117, in _compile
+    _compile(code, av[2], flags)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 126, in _compile
+    _compile(code, p, _combine_flags(flags, add_flags, del_flags))
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 109, in _compile
+    _compile(code, av[2], flags)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 86, in _compile
+    charset, hascased = _optimize_charset(av, iscased, tolower, fixes)
+                        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\re\_compiler.py", line 285, in _optimize_charset
+    charmap += b'\0' * 0xff00
+MemoryError
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=692)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 49, in <module>
+    from pandas._config import (
+    ...<6 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_config\__init__.py", line 20, in <module>
+    from pandas._config import config
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_config\config.py", line 72, in <module>
+    from pandas.util._exceptions import find_stack_level
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\util\_exceptions.py", line 4, in <module>
+    import inspect
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\inspect.py", line 1299, in <module>
+    Arguments = namedtuple('Arguments', 'args, varargs, varkw')
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\collections\__init__.py", line 444, in namedtuple
+    __new__ = eval(code, namespace)
+SystemError: error return without exception set
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=652)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 49, in <module>
+    from pandas._config import (
+    ...<6 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_config\__init__.py", line 20, in <module>
+    from pandas._config import config
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_config\config.py", line 68, in <module>
+    from pandas._typing import (
+    ...<2 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_typing.py", line 198, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\__init__.py", line 734, in __getattr__
+    import numpy.random as random
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\random\__init__.py", line 180, in <module>
+    from . import _bounded_integers, _common, _pickle
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\random\_pickle.py", line 1, in <module>
+    from ._generator import Generator
+  File "numpy/random/_generator.pyx", line 25, in init numpy.random._generator
+ImportError: DLL load failed while importing _mt19937: The paging file is too small for this operation to complete.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 23, in <module>
+    from pandas.core.algorithms import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\algorithms.py", line 36, in <module>
+    from pandas.core.dtypes.cast import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\dtypes\cast.py", line 5, in <module>
+    from __future__ import annotations
+object address  : 00000210B8A6D120
+object refcount : 3
+object type     : 00007FF922BBA6C0
+object type name: MemoryError
+object repr     : MemoryError()
+lost sys.stderr
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 28, in <module>
+Traceback (most recent call last):
+    from pandas.core.arrays import Categorical
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\arrays\__init__.py", line 1, in <module>
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 1, in <module>
+    from pandas._libs import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_libs\__init__.py", line 18, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+  File "pandas/_libs/hashtable.pyx", line 1, in init pandas._libs.hashtable
+  File "pandas/_libs/missing.pyx", line 1, in init pandas._libs.missing
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_libs\tslibs\__init__.py", line 80, in <module>
+    from pandas._libs.tslibs.vectorized import (
+ImportError: DLL load failed while importing vectorized: The paging file is too small for this operation to complete.
+    from pandas.core.arrays.arrow import ArrowExtensionArray
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\arrays\arrow\__init__.py", line 5, in <module>
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\arrays\arrow\array.py", line 67, in <module>
+    prepare(preparation_data)
+    prepare(preparation_data)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    _fixup_main_from_path(data['init_main_from_path'])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 47, in <module>
+    from pandas.core.groupby import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\groupby\__init__.py", line 1, in <module>
+    main_content = runpy.run_path(main_path,
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 16, in <module>
+    from pandas.core.dtypes.missing import (
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1118, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+object address  : 000001BF03B5D180
+object refcount : 3
+object type     : 00007FF922BBA6C0
+object type name: MemoryError
+object repr     : MemoryError()
+lost sys.stderr
+    from pandas.core.groupby.generic import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\groupby\generic.py", line 68, in <module>
+    from pandas.core.arrays.masked import BaseMaskedArray
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\arrays\masked.py", line 90, in <module>
+    from pandas.core.frame import DataFrame
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\frame.py", line 153, in <module>
+    from pandas.core.util.hashing import hash_array
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\util\hashing.py", line 11, in <module>
+    from pandas._libs.hashing import hash_object_array
+ImportError: DLL load failed while importing hashing: The paging file is too small for this operation to complete.
+    from pandas.core.generic import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\generic.py", line 155, in <module>
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=704)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+    ...<62 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 47, in <module>
+    from pandas.core.groupby import (
+    ...<2 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\groupby\__init__.py", line 1, in <module>
+    from pandas.core.groupby.generic import (
+    ...<3 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\groupby\generic.py", line 68, in <module>
+    from pandas.core.frame import DataFrame
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\frame.py", line 153, in <module>
+    from pandas.core.generic import (
+    ...<2 lines>...
+    )
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1118, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+MemoryError
+    from pandas.core import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\indexing.py", line 80, in <module>
+    from pandas.core.indexes.api import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\indexes\api.py", line 20, in <module>
+    from pandas.core.indexes.base import (
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\indexes\base.py", line 190, in <module>
+    from pandas.core.strings.accessor import StringMethods
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\strings\accessor.py", line 160, in <module>
+    class StringMethods(NoNewAttributesMixin):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\strings\accessor.py", line 3415, in StringMethods
+    "isdigit", docstring=_shared_docs["ismethods"] % _doc_args["isdigit"]
+object address  : 00000166C453D180
+object refcount : 3
+object type     : 00007FF922BBA6C0
+object type name: MemoryError
+object repr     : MemoryError()
+lost sys.stderr
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=692)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 61, in <module>
+    from pandas.core.api import (
+    ...<62 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\core\api.py", line 1, in <module>
+    from pandas._libs import (
+    ...<4 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_libs\__init__.py", line 18, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+  File "pandas/_libs/hashtable.pyx", line 1, in init pandas._libs.hashtable
+  File "pandas/_libs/missing.pyx", line 1, in init pandas._libs.missing
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_libs\tslibs\__init__.py", line 40, in <module>
+    from pandas._libs.tslibs.conversion import localize_pydatetime
+  File "pandas/_libs/tslibs/conversion.pyx", line 1, in init pandas._libs.tslibs.conversion
+  File "pandas/_libs/tslibs/offsets.pyx", line 1, in init pandas._libs.tslibs.offsets
+  File "pandas/_libs/tslibs/timestamps.pyx", line 1, in init pandas._libs.tslibs.timestamps
+  File "pandas/_libs/tslibs/timedeltas.pyx", line 86, in init pandas._libs.tslibs.timedeltas
+ImportError: DLL load failed while importing fields: The paging file is too small for this operation to complete.
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=10268, pipe_handle=704)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 30, in <module>
+    import pandas as pd
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\__init__.py", line 49, in <module>
+    from pandas._config import (
+    ...<6 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_config\__init__.py", line 20, in <module>
+    from pandas._config import config
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_config\config.py", line 68, in <module>
+    from pandas._typing import (
+    ...<2 lines>...
+    )
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\_typing.py", line 198, in <module>
+    np.random.Generator,
+    ^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\__init__.py", line 734, in __getattr__
+    import numpy.random as random
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\random\__init__.py", line 180, in <module>
+    from . import _bounded_integers, _common, _pickle
+  File "numpy/random/_bounded_integers.pyx", line 1, in init numpy.random._bounded_integers
+ImportError: DLL load failed while importing bit_generator: The paging file is too small for this operation to complete.
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 82, in job
+    ds = get(name)
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 49, in get
+    return D.load_inws() if name.startswith("InWaterSense") else D.load_usgs(name.split()[1])
+           ~~~~~~~~~~~^^
+  File "C:\Users\User\Desktop\WSN\src\sim\data.py", line 68, in load_inws
+    c = pd.read_csv("data/clean/inws_cycles.csv", parse_dates=["t"])
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+                   ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "pandas/_libs/parsers.pyx", line 574, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 663, in pandas._libs.parsers.TextReader._get_header
+  File "pandas/_libs/parsers.pyx", line 874, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2053, in pandas._libs.parsers.raise_parser_error
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\WSN\src\sim\run_phase2.py", line 129, in <module>
+    for i, r in enumerate(pool.imap_unordered(job, S), 1):
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\pool.py", line 873, in next
+    raise value
+MemoryError

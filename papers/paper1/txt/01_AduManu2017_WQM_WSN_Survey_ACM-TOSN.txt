@@ -1,0 +1,2443 @@
+000
+Water Quality Monitoring Using Wireless Sensor Networks: Current
+Trends and Future Research Directions
+Koﬁ Sarpong Adu-Manu, Cristiano Tapparello, Wendi Heinzelman, University of Rochester
+Ferdinand Apietu Katsriku, Jamal-Deen Abdulai, University of Ghana
+Water is essential for human survival. While approximately 71% of the world is covered in water, only 2.5% of this is fresh
+water; hence fresh water is a valuable resource that must be carefully monitored and maintained. In developing countries,
+80% of people are without access to potable water. Cholera is still reported in over 50 countries. In Africa, 75% of the
+drinking water comes from underground sources that makes water monitoring an issue of key concern, as water monitoring
+can be used to track water quality changes over time, to identify existing or emerging problems and to design effective
+intervention programs to remedy water pollution. It is important to have detailed knowledge of potable water quality to
+enable proper treatment and also prevent contamination. In this paper, we review methods for WQM from traditional manual
+methods to more technologically advanced methods employing Wireless Sensor Networks (WSNs) for in-situ WQM. In
+particular, we highlight recent developments in the sensor devices, data acquisition procedures, communication and network
+architectures, and power management schemes to maintain a long-lived operational WQM system. Finally, we discuss open
+issues that need to be addressed to further advance automatic WQM using WSNs.
+CCS Concepts: rGeneral and reference → Surveys and overviews; rComputer systems organization → Sensor net-
+works; Sensors and actuators;
+Additional Key Words and Phrases: Wireless sensor networks, environmental monitoring, water quality.
+ACM Reference Format:
+K. S. Adu-Manu, C. Tapparello, W. Heinzelman, F. A. Katsriku and J.-D. Abdulai, 2016. Water Quality Monitoring Using
+Wireless Sensor Networks: Current Trends and Future Research Directions. ACM Trans. Sensor Netw. 00, 00, Article 000 (
+2016), 37 pages.
+DOI: 0000001.0000001
+1. INTRODUCTION
+The increase in human activity over the last century is having a devastating impact on our environ-
+ment, directly resulting in a cost to human health [Panayiotou et al. 2005]. Particularly in developing
+countries, the growth in slum cities, lack of sanitation facilities, and activities of mining companies
+all contribute to negative impacts on the environment. To ensure environmental sustainability, it is
+critical to have effective monitoring systems. Environmental monitoring systems have been devel-
+oped for monitoring air quality [Cordova-Lopez et al. 2007; Khedo et al. 2010; Bhattacharya et al.
+2012], water quality [Sanders 1983; Chapman 1996; Farrell-Poe 2005; Strobl and Robillard 2008],
+animal tracking [Szewczyk et al. 2004; Pereira et al. 2008; Amundson and Koutsoukos 2009], and
+earthquake monitoring [Estrin et al. 2002; Akyildiz and Stuntebeck 2006].
+Of particular importance in environmental monitoring is water quality monitoring. Every living
+creature needs water to survive [WHO 2011]. About 71% of the earth’s surface is covered by water,
+while the remaining 29% is made up of land mass [Alkandari et al. 2011; Universe Today 2015].
+Although water is abundant on earth, only 2.5% of the available water is fresh water [USGS 2015],
+and approximately 20% of the world’s population does not have access to safe drinking water [Yue
+This work was funded in part by the National Science Foundation under research grant CNS-1239423.
+Author’s addresses: K. S. Adu-Manu and C. Tapparello and W. Heinzelman, Department of Electrical and Computer Engi-
+neering, University of Rochester, Rochester, NY 14627. F. A. Katsriku and J.-D. Abdulai, Department of Computer Science,
+University of Ghana, Legon, Accra, Ghana.
+Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee
+provided that copies are not made or distributed for proﬁt or commercial advantage and that copies bear this notice and
+the full citation on the ﬁrst page. Copyrights for components of this work owned by others than ACM must be honored.
+Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires
+prior speciﬁc permission and/or a fee. Request permissions from permissions@acm.org.
+c© 2016 ACM. 1550-4859/2016/-ART000 $15.00
+DOI: 0000001.0000001
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:2 K. S. Adu-Manu et al.
+and Ying 2011]. Currently, modernization in major areas in the world and urban cities with con-
+centrated human activity are responsible for severe water pollution, which is considered one of the
+major problems affecting the environment [Derbew and Libsie 2014]. As a result, observing and
+detecting pollutants in water is vital.
+Water quality describes the general composition of water with reference to its chemical, physi-
+cal and biological properties. Water Quality Monitoring (WQM) can be described as a method for
+periodically sampling and analyzing water conditions and characteristics [Farrell-Poe 2005]. WQM
+typically involves monitoring fresh water sources such as rivers, streams, lakes, ponds, springs,
+reservoirs, shallow or deep groundwaters, cave water, ﬂood plains, wells, and wetlands in order
+to ensure that the water source is providing safe water for drinking and other human and animal
+activities [Jiang et al. 2009; Zhu et al. 2010; Nasirudin et al. 2011]. The WHO has determined dif-
+ferent water quality targets that specify the safe amounts of certain chemicals that may be found
+in water [WHO 2011], and different WQM systems aim to test the water regularly to be sure that
+the concentrations of these chemicals remain within safe limits and to raise alarms should they fall
+outside of the safe limits. WQM is also used in reference to monitoring water for industrial utiliza-
+tion [Zhou et al. 2012b]. WQM projects focus on applications such as monitoring drinking water,
+waste water treatment, and aquaculture administration [Jadhav et al. 2016]. The main difference
+among the various types of water monitoring is seen through the nature of the fresh water body
+(i.e., moving or static) and the depth to which the monitoring is performed (i.e., surface or deep, for
+example wells and underground water).
+Beginning from the 1960’s to 2000, WQM mainly relied on a manual approach for water sam-
+pling and analysis, where a human user would travel to a water source, take one or more samples of
+the water, and transport these samples to a laboratory for subsequent analysis. During this period,
+the focus of the research on WQM was related to the general framework, including identiﬁcation
+of the objectives and strategies and speciﬁc techniques to be used for water analysis, as well as on
+the network design, including selecting the water quality variables to be measured, the sampling
+sites, and the sample frequencies [Sanders 1983]. Some researchers have emphasized on the need
+to create ﬁxed sampling stations for easy access to the water body and consistency of the sample
+collection [Strobl and Robillard 2008]. Other works, instead, focused on how to efﬁciently utilize
+the generated data, considering, for example, techniques for conversion of the data into a format that
+facilitates decision making [Sanders 1983; WHO 2011; Strobl and Robillard 2008; Chapman 1996].
+These traditional WQM systems have several limitations due to the high spatiotemporal variability
+of the water physiochemical and/or microbial parameters [Katsriku et al. 2015]. Additionally, there
+are several sources of errors that can affect this traditional manual water monitoring approach. These
+include human errors during the sample collection (such as sample cross-contamination or misiden-
+tiﬁcation) as well as during the subsequent analysis and data recording, errors introduced by the
+sample collection and transportation apparatus (e.g., the type of container used for sample collec-
+tion and transportation, the presence of reagents and other environmental contaminants, and other
+variables like the temperature), and error introduced by the laboratory equipment (e.g., instrument
+malfunction and mis-calibration). Additional errors can also be introduced during the data manip-
+ulation and reporting stages due to, for example, statistical errors, round-off errors or omission of
+values [van Niekerk 2004].
+Starting from the late 2000’s, new technologies were introduced to address some of these limita-
+tions. In particular, new sensors were developed that utilize ﬁber optics, laser technology, biosensors,
+optical sensors and Microelectronic Mechanical Systems (MEMS) in order to detect different water
+quality parameters in-situ [Bhardwaj et al. 2015; Sawaya et al. 2003], while computing and teleme-
+try technologies were introduced to support the data acquisition and monitoring processes. More-
+over, new methodologies like satellite image acquisition to remotely estimate some water quality
+parameters [Sawaya et al. 2003], as well as architectures for visualizing the water quality parame-
+ters through the Internet were introduced to monitor lakes, rivers, and other water bodies [Hall et al.
+2007]. The purpose of these systems was to further improve upon the manual water sample collec-
+tion from ﬁxed sampling stations by introducing automatic monitoring points where water samples
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:3
+could be continuously or periodically captured and analyzed [Glasgow et al. 2004; Bourgeois et al.
+2001; Noble and Weisberg 2005; Sawaya et al. 2003].
+A further improvement for WQM systems came with the advent of wireless sensor networks
+(WSNs), which began to be used for water quality monitoring in early 2000 but have gained in-
+creasing attention in recent years as the devices and communication techniques have improved.
+WSNs have proven to be very effective in supporting the capture, analysis and transmission of en-
+vironmental data. The use of WSNs for WQM is particularly appealing due to the low cost of the
+sensor nodes and hence the cost-effectiveness of this solution, the ability to acquire and process data
+at a number of distributed sampling points, and the ability to communicate the data using low-power
+wireless communication techniques, which enables decision makers to receive data from multiple
+remote sensor devices in a timely manner.
+In the last 10 years, several researchers have proposed and deployed WSNs for WQM (e.g., [Zen-
+naro et al. 2009; Wang et al. 2009; Yang and Pan 2010; Alkandari et al. 2011]). The use of online
+platforms for the purposes of automatically analyzing the water quality data to detect water qual-
+ity problems has also gained popularity [Bourgeois et al. 2001; Hall et al. 2007; U.S. EPA 2015a].
+Moreover, several researchers have shown that using WSNs for water quality monitoring can over-
+come some of the pitfalls of the traditional WQM techniques that have been used throughout the
+years. These include the ability to replace expensive laboratory equipment that may be old (if not
+obsolete) with the lower cost distributed sensor nodes, and the ability to perform the analysis on site,
+thus removing the need to transport the samples from the monitoring sites to the laboratory for anal-
+ysis, saving large amounts of human time and cost. Additionally, using WSNs for WQM has been
+shown to reduce the time and costs required to train staff for the collection and transportation of the
+samples, as well as for the laboratory analysis and the data recording, as required by the traditional
+manual approach for sampling water [Wang et al. 2009; Wang et al. 2010; Silva et al. 2011; Adamo
+et al. 2015]. In order to design and deploy WSNs to monitor fresh water sources, different factors
+are considered, including the sensing capabilities of the sensor nodes, the type of communication
+(radio or acoustic), signal processing, and network topology. WSN systems are employed to monitor
+fresh water sources and to measure water quality parameters such as temperature, pH, turbidity, and
+dissolved oxygen [Rasin and Abdullah 2009; Chaamwe 2010; Nasser et al. 2013]. In WQM, sen-
+sor nodes communicate using radio communication technologies for surface water monitoring and
+acoustic communication for underwater monitoring, either locally or remotely. Examples of WQM
+systems include SmartCoast, a multi sensor system for WQM [O’Flyrm et al. 2007], and LakeNet,
+an embedded WSN deployed at St. Mary’s Lake on the Notre Dame campus [Seders et al. 2007].
+In this paper, we provide an in-depth survey of WSN-based WQM systems for fresh water sources
+(e.g., rivers, lakes, ponds or wells). There have been a few literature reviews on the use of WSNs
+for marine environment monitoring and sensing [Albaladejo et al. 2010; Xu et al. 2014], water
+level sensing [Loizou and Koutroulis 2016], water pipeline monitoring [BenSaleh et al. 2013], ﬁsh
+farming monitoring [Carroll et al. 2003], and residential water management [Carboni et al. 2016].
+The attributes/factors that differentiate the different water monitoring applications relate mainly
+to the objective of the monitoring system and the size of the water source. These translate into
+the adoption of different network topologies and node densities, adoption of different devices and
+sensors for monitoring different parameters, and the inclusion of specialized treatment technologies.
+To the best of our knowledge, there is currently no survey in the literature that presents the current
+state of the art on WSN-based systems for WQM of fresh water sources.
+The rest of the paper is organized as follows. In Section 2, we overview the evolution of water
+quality monitoring systems, from the manual, lab-based approaches to current state-of-the-art wire-
+less sensor networks based WQM systems. In Section 3, we describe the general water monitoring
+framework used prior to the introduction of WSNs, as these traditional systems form the basis for
+current WSN-based WQM systems. In Section 4, we present current water quality parameters that
+are typically measured and the in-situ sensor devices that are capable of sensing these parameters.
+Building on the availability of these sensor devices, wireless sensor networks for potable water
+quality monitoring are presented in Section 5. In particular, we develop a general framework for
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:4 K. S. Adu-Manu et al.
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+0
+01
+02
+03
+04
+05
+06
+07
+01 02 03 04 05 06 07
+(a) Traditional Manual Lab-Based (TMLB) WQM approach
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+0
+01
+02
+03
+04
+05
+06
+07
+01 02 03 04 05 06 07
+(b) Traditional Manual In-Situ (TMIS) WQM approach
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+0
+01
+02
+03
+04
+05
+06
+07
+01 02 03 04 05 06 07
+(c) Wireless Sensor Network-based WQM approach
+Fig. 1. Evolution of Water Quality Monitoring systems.
+WSN-based water quality monitoring, and we describe the various network and communication
+techniques, energy management schemes, and data processing techniques presented in the literature
+for ensuring long lifetime WSN-based water quality monitoring systems. In Section 6, we present
+a comprehensive review of the current state of the art in WQM using WSNs, highlighting the key
+design choices that characterize the different implementations. In Section 7 we discuss the current
+open issues and future research directions to enhance existing WSN-based WQM systems. Finally,
+Section 8 concludes the paper.
+2. EVOLUTION OF WATER QUALITY MONITORING SYSTEMS
+In this section, we describe how WQM systems evolved from the Traditional Manual Lab-Based
+(TMLB) monitoring approach to the Traditional Manual In-Situ (TMIS) monitoring approach, and
+ﬁnally to more recent Wireless Sensor Network (WSN)-based solutions.
+For many years, the procedure for testing the quality of water followed a simple work ﬂow that
+involved manually collecting samples of the water and then transporting these samples to a labo-
+ratory for analysis in order to detect chemicals and microbial contaminants [Sanders 1983; Strobl
+and Robillard 2008; Bhardwaj et al. 2015]. While this Traditional Manual Lab-Based (TMLB) ap-
+proach, illustrated in Figure 1(a), was able to provide adequate WQM and has been used for many
+years, it also presents several limitations: 1) it requires the use of specialized apparatus and trained
+personnel for the quality assessment of the samples collected from the water source; 2) quality con-
+trol measures may be lost and this approach is time consuming due to the dependence on human
+interactions and the need for transportation of the samples from the water source to the laboratory
+for analysis; 3) the sample analysis is, oftentimes, based on out-dated or obsolete equipment [van
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:5
+Niekerk 2004; Bhardwaj et al. 2015]; 4) this approach has a high cost in terms of time, effort and
+resource investment in the design and implementation of these systems as well as the cost of build-
+ing the ﬁxed platforms for data collection, the cost of the lab-based sensor hardware, and the cost
+of the subsequent system maintenance [United Nations 2005]; 5) there is an inability to conduct
+trend analysis based on historic data, since data may not be sampled frequently enough for some
+analyses, and additionally data can be lost at any given time due to the manual processes involved
+in data collection and recording; and 6) it is very difﬁcult to determine changes in the water con-
+ditions over time because the samples cannot be collected and tested within short intervals [Strobl
+and Robillard 2008]. These limitations led to a shift towards a more reliable approach for capturing
+water parameters to measure the water quality.
+In particular, in order to address some of the limitations of the TMLB WQM approach, new in-
+situ sensors were developed to measure water quality parameters in the ﬁeld and in real-time, thus
+leading to the development of the Traditional Manual In-Situ (TMIS) WQM approach. In this pro-
+cess, illustrated in Figure 1(b), human users bring the in-situ sensors to the water source to measure
+certain parameters on site. More recent techniques adapting TMIS have considered different forms
+of remote water sensing, such as the use of aircraft or satellites to capture images for analysis,
+optical sensors for monitoring the aquatic environment in-situ [Murphy et al. 2015], and micro-
+electronic mechanical systems (MEMS) sensors for capturing water quality parameters at the water
+site [Bhardwaj et al. 2015]. While these techniques enable the capture of water quality parameters
+on site, they still do not address the need for continuous monitoring of the water source. Addition-
+ally, most of the time they do not allow for feedback control, such that new data can be obtained in
+response to the results of the initial analysis.
+A modern approach to water quality monitoring should overcome the shortcomings of both the
+TMLB and TMIS WQM approaches and should meet the following goals: 1) achieve high sensitivity
+and selectivity; 2) be able to detect water quality parameters in real time and on site; 3) provide
+distributed sensing of the water body and support local analysis of the data from the distributed
+sensors; and 4) provide a long operational lifetime. For all these reasons, researchers have started
+considering WSNs as an alternative solution to WQM. In Figure 1(c), we illustrate the WSN-based
+monitoring approach for WQM.
+In recent years, low power sensor devices with wireless communication capabilities have be-
+come widely used for environmental sensing and monitoring because they can capture data from
+distributed sensors in real-time, perform local processing of the data, are robust, and are able to
+self-conﬁgure, self-power and operate autonomously [Estrin et al. 2001; Yadav et al. 2015; Chung
+and Yoo 2015]. A main advantage of using WSNs for environmental monitoring is that they do not
+require human presence or intervention to operate [O’Flyrm et al. 2007; Zhang and Zhang 2011],
+so that the sensors can be deployed in areas or regions where human accessibility is difﬁcult or in-
+convenient. A requirement, however, is that the network should provide and transfer data in a timely
+manner [Chen et al. 2011].
+In the following sections, we discuss the state-of-the-art WSN-based WQM systems, starting
+from an overview of the traditional, manual lab-based (TMLB) approach to water quality monitor-
+ing, then moving on to the development of approaches that use in-situ sensors (TMIS), and ﬁnally
+to WSN-based systems that provide real-time, continuous monitoring of water quality parameters.
+3. TRADITIONAL MANUAL LAB-BASED (TMLB) WATER QUALITY MONITORING
+In order to capture and utilize measurable and meaningful information on the general character-
+istics of water quality, as shown in Figure 2, the design of Traditional Manual Lab-Based (TMLB)
+water quality monitoring systems is often divided into six phases: network design, sample collec-
+tion, laboratory analysis, data handling, data analysis, and information utilization [Sanders 1983;
+Strobl and Robillard 2008].
+The Network design consists of three main activities: identiﬁcation of the sampling sites, selection
+of the water quality parameters (or variables) to monitor and the lab-based sensors to measure these
+parameters, and the sampling frequency with which to gather water samples to guarantee a certain
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:6 K. S. Adu-Manu et al.
+Network 
+design 
+Sample 
+collection 
+Laboratory 
+analysis 
+Data 
+handling 
+Data 
+analysis 
+Information 
+utilization 
+Water quality control 
+Water quality assurance 
+Feedback control 
+Fig. 2. Traditional water quality monitoring framework [Sanders 1983].
+detection accuracy. Thus, during the network design phase, the main goal is to identify what is to
+be detected from the water samples, as well as to identify where, when and how often these water
+samples are to be collected [Bartram and Ballance 1996].
+The sample collection phase consists of determining the speciﬁc sampling technique, the eventual
+measurements that can be done at the sampling point, and the techniques to be used for storing and
+preserving the samples during transport to the laboratory for analysis. It is important to note that
+each water quality parameter requires selecting a sampling method that may or may not differ from
+the sampling method used for other variables, or may differ from that of the same parameter at a
+different location [United Nations 2005].
+The laboratory analysis is the core activity of the water monitoring process. This is a complex
+task that involves several physical, chemical and biological procedures to determine the water qual-
+ity variables deﬁned during the network design using the water samples collected during thesample
+collection phase. Moreover, operational procedures, quality control and assurance, and data record-
+ing are other important operations that are part of the laboratory analysis phase.
+The last three phases within the water quality monitoring framework deal with thedata handling,
+data analysis and the ﬁnal information utilization. During the data handling phase, the received data
+are screened, veriﬁed, and stored for later use and/or reported to management for decision making.
+In data analysis, basic summary statistics, regression analysis, water quality indices, quality control
+interpretation, time series analysis, and water quality models are used to analyze the data. Finally, in
+the information utilization phase, the appropriate data formats and operation procedures are deﬁned
+in order to utilize the information generated from analyzing the data [Sanders 1983; Strobl and
+Robillard 2008].
+In order to achieve the objectives of the monitoring program, the general guidelines must be
+followed carefully in the ﬁrst three phases (i.e., network design , sample collection , and labora-
+tory analysis). This is extremely important because the last three phases largely depend on what
+happened in the ﬁrst three phases of the monitoring framework. In essence, WQM is designed to
+capture data from the water source, to extract speciﬁc information from this data and ﬁnally to use
+this information for efﬁciently managing the water resources [Strobl and Robillard 2008].
+Water quality monitoring has historically been viewed as a set of operational activities that aim to
+assess whether water sample parameters conform to speciﬁc values that have been shown to signify
+healthy/safe water quality. Over the years, several guidelines and standards have been proposed to
+support WQM. For example, extensive guidelines for WQM are provided in [Chapman 1996], with
+a particular focus on the data processing, data quality control and data transfer from the sampling
+location to the laboratory for analysis. Moreover, different types of water bodies (e.g., rivers, lakes,
+reservoirs and ground water) are described, taking into account their particular physical, chemical
+and biological characteristics.
+Similarly, the authors in [Bartram and Ballance 1996] specify that the requirements for WQM
+should consist of a clear identiﬁcation of the purpose and objectives of the water analysis, followed
+by a determination of the sampling site(s) and sampling rate(s) to meet these objectives. In addition,
+the details of the laboratory analysis, storage and safety of the water samples gathered are discussed
+in this work. The authors also propose some guidelines on the various testing methods and the
+quality assurance procedures that should be followed when dealing with the acquired water sam-
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:7
+Table I. Water quality parameters and the World Health Organization (WHO) values for safe drinking water.
+Measurement
+Parameter Deﬁnition WHO Standard
+(drinking water) References
+pH Effective hydrogen-ion concentration, i.e.,
+pH =− log[H+] 7–8.5 (preferably≤ 8)
+[WHO 2011; Yue and
+Ying 2011; Wagner
+et al. 2006]
+Turbidity
+Amount of solid matter (particles or
+colloids) suspended in water that obstruct
+light transmission
+1–5 NTU
+[WHO 2011; Yue and
+Ying 2011; Wagner
+et al. 2006]
+Dissolved
+oxygen (DO) Amount of dissolved oxygen 5–6 mg/l [Yue and Ying 2011;
+Wagner et al. 2006]
+Residual chlorine
+detection (RCD)
+Amount of chlorine (residual after
+chlorine-based water disinfection) 2–3 mg/l [WHO 2011]
+Conductivity
+(also Salinity)
+Ability of an aqueous solution to transfer an
+electrical current (a measure for salinity) 25 ◦C [Wagner et al. 2006]
+Temperature Temperature impacts dissolved oxygen
+content
+Drinking Water Supply
+(15◦C)
+[Eckenfelder 2001;
+Wagner et al. 2006;
+WHO 2011]
+Fluoride Salts that form when Fluorine combines
+with minerals in soil or rocks
+4 mg/l (or 2 mg/l,
+secondary standard)
+[WHO 2011;
+Analytical
+Technology, Inc.
+2015]
+Calcium
+Hardness
+Amount of calcium salts (reacts with most
+detergents and can reduce the effectiveness
+of the cleaning process)
+75–100 mg/l [WHO 2011; Cotruvo
+2011]
+Total Dissolved
+Solids (TDS)
+Amount of inorganic salts and small organic
+matter 600–1000 mg/l [WHO 2011; 2003]
+Magnesium
+Hardness
+Amount of magnesium salts (causes an
+undesirable taste and stains laundry) 50–100 mg/l [WHO 2011; Cotruvo
+2011]
+Manganese
+Mineral that naturally occurs in rocks and
+soil. It is a normal constituent of the human
+diet
+< 0.1 mg/l
+[WHO 2011;
+Connecticut
+Department of Public
+Health 2015]
+Sodium Essential mineral. It is commonly found in
+the form of sodium chloride (salt) ∼ 200 mg/l [WHO 2011; W A
+Health 2012]
+Hydrogen sulﬁde Formed by sulfur and sulfate-reducing
+bacteria that can occur naturally in water 0.05–0.1 mg/l
+[McFarland and
+Provin 1999; WHO
+2011]
+Oxidation
+reduction
+potential (ORP)
+Capacity to either release or accept
+electrons from chemical reactions. Inﬂuence
+the life span of bacteria in water.
+650–700 mV [Suslow 2004]
+ples. Following these guidelines, it is possible to determine the physical, chemical, and biological
+characteristics of the water samples and assure satisfactory results from the WQM process.
+Additional guidelines on site selection, ﬁeld operation, calibration, record computation, and re-
+porting in order to facilitate the design of the WQM process are provided in [Wagner et al. 2006].
+As seen in the above discussion of research on traditional, manual, lab-based WQM systems,
+these works mainly focus on the network design (e.g., sample frequencies and timing), sample
+collection, the procedures for data processing, retrieval and transfer, and the storage of the data.
+In this regard, we note that the design phase is mainly inﬂuenced by the number of parameters
+to be analyzed and by the frequency with which samples must be collected. In addition, both the
+parameters to be sampled and the sample frequency are dependent on the equipment available at the
+laboratory for analysis.
+4. SENSORS FOR MEASURING WATER QUALITY PARAMETERS
+There has been much research aimed at identifying the different parameters that should be mea-
+sured to determine water quality, as well as the sensors that can measure these parameters. This
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:8 K. S. Adu-Manu et al.
+Table II. Guidelines for data processing in a WQM system [Wagner et al. 2006].
+Data Processing Procedures Explanation
+Initial data evaluation
+The initial data evaluation is conducted to verify the accurate transfer of raw
+ﬁeld data (instrument readings) to the database and to evaluate and identify
+erroneous data. A variety of formats is available to store raw ﬁeld data,
+depending on the recording equipment and the means of downloading data
+from the recording equipment.
+Application of data corrections
+The application of data corrections allows recorded data to be adjusted for
+instrument calibration drift and sensor fouling errors that occurred between
+subsequent servicing visits. These are due to environmental or
+instrumentation effects, and other factors such as cross-section variability or
+calculated parameters.
+Application and evaluation of
+cross-section corrections
+If the measurement point is not representative of the stream, the measurement
+point should be relocated to a more representative measuring point in the
+cross section.
+Final data evaluation
+Final data evaluation consists of reviewing the data record, checking data
+corrections, and making any needed ﬁnal corrections. When review is
+completed, the data are veriﬁed for publication and rated for quality.
+Record computation The record computation process veriﬁes the data and overall report quality.
+Accurate ﬁeld notes and calibration logs are essential in processing the record.
+Final record review Review of a continuous water-quality record involves analysis of the tables of
+the measured ﬁeld parameters.
+section highlights the various parameters that have been proposed for measurement and describes
+different sensors that can be used to measure these parameters.
+Table I provides a summary of water quality parameters that may be measured, along with refer-
+ences to works that utilize these parameters in their WQM systems. In addition, Table I presents the
+threshold values for the various WQM parameters to ensure that water quality remains within safe
+limits, as determined by researchers at the World Health Organization (WHO) [Wagner et al. 2006].
+If the water parameters are sensed to be outside of these safe limits, trigger warnings/alarms should
+be raised.
+4.1. Evolution of Sensor Devices
+Sensor devices for WQM have evolved from the traditional lab-based sensors, such as poten-
+tiometric, conductometric, mass spectrometry, ion-sensitive electrodes, and amperometric sensors,
+to in-situ sensors capable of real-time measurement of water quality parameters on site, such as
+biosensors, ﬁber optic sensors, lab-on-a-chip sensors, electromagnetic wave sensors, ﬂuorescence
+detection, and infra-red (IR) sensors [Korostynska et al. 2013; Storey et al. 2011]. The current gen-
+eration of sensor devices for monitoring water quality parameters are referred to as wireless sensor
+nodes and have the ability to not only measure water parameters in-situ but also to locally process
+and transmit the measured data.
+In-situ sensors used for water quality monitoring must be calibrated in the laboratory before
+installation at a monitoring station/site. Ideally, these sensors should be easy to calibrate in the
+ﬁeld as well. Data from these sensors must be processed following a set of standard guidelines to
+ensure an acceptable quality, as outlined in Table II. Hence, the sensors ideally should provide a
+standard and user friendly format for data reporting, in order to facilitate verifying and publishing
+the data in a format that is readily accessible for public use or analysis [Wagner et al. 2006]. Two
+notable organizations that have published water quality data for public use are the U.S. Geological
+Survey (USGS) [USGS 2015], and the United Nations Global Environment Monitoring System
+(GEMS) [United Nations 2005].
+Standard sensors for measuring the different water quality parameters are commercially avail-
+able from several manufacturers (like, e.g., ATI Analytic Technologies [ATI Analytic Technologies
+2016], CENSAR Technologies [CENSAR Technologies 2016], Hach [Hach 2016], In-Situ [In-Situ
+2016], Libelium [Libelium 2016], S::can [S::can 2016], Technical Associates [Technical Associates
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:9
+POWER UNIT
+SENSOR 
+UNIT
+CPU
+MEMORY
+PROTOCOLS
+A/D TRANSCEIVER
+SENSING COMPUTING COMMUNICATION
+POWER GENERATOR
+SENSOR PROBES
+Fig. 3. Generic wireless sensor node hardware architecture.
+2016], YSI [YSI 2016] and Zap Technologies [Zap Technologies 2016]). A list of common com-
+mercially available water quality sensors and their capabilities is provided in Table III. Nevertheless,
+several researchers have focused on improving the sensors for water quality measurements. For ex-
+ample, in [Bhardwaj et al. 2015], the authors provide an overview of modern sensor devices used
+for monitoring water quality, such as optical sensors (OS), microelectronics mechanical systems
+(MEMS) and bio-sensors, and the authors discuss the advantages of these current, in-situ sensor
+technologies over the traditional lab-based sensors. While these modern sensors present several ad-
+vantages such as high sensitivity, high selectivity, good response time, lack of need for a reference
+sensor, insensitivity to electromagnetic interference, and the possibility of real time analysis, they
+also have some direct shortcomings. In particular, when compared to traditional methods such as
+UV , spectrometry and ion sensitive electrodes, these modern sensors require substantial additional
+power, they need to be equipped with an individual electronic transducer unit, and they require reg-
+ular maintenance visits to ensure their correct operation. These shortcomings make it difﬁcult to
+achieve concurrent detection of different water parameters [Bhardwaj et al. 2015].
+Recently, the authors in [Murphy et al. 2015] designed a low-cost autonomous optical sensor
+for monitoring a range of water quality parameters. The optical sensor designed by the authors is
+robust, easily deployable, and simple to operate. This sensor consists of a multi-wavelength light
+source with two photodiode detectors. This sensor is capable of measuring the transmission and
+side-scattering of the light in the detector head, which contains ﬁve LEDs of different wavelengths.
+The detector head forms part of the sensor head, which covers the optics and controls the detection
+abilities of the sensor. The sensor head is covered with copper to protect it against corrosion. The
+detector head enables the sensor to provide quantitative data on the changes in the optical opacity
+of the water.
+4.2. Wireless Sensor Nodes
+WSNs extend the capabilities of in-situ monitoring systems. While traditional in-situ systems
+enable analysis on site, they require that the data collected be transported manually to remote ofﬁces
+or control centers for further analysis and action. WSNs enable the automatic transfer of this data
+as well as providing a feedback mechanism in some instances, to reﬁne the granularity of data
+collection. Typically, a wireless sensor node consists of the sensor unit, the interface circuitry, a
+processor, a transceiver system, and a power supply unit [Yang et al. 2002; Yang and Pan 2010;
+Wang et al. 2010], as shown in Figure 3.
+There are a number of commercially available wireless sensor nodes for measuring water qual-
+ity parameters. These wireless sensor nodes are designed to accommodate a variety of situations
+ranging from short term or spot sampling of the water quality parameters to long-term, unattended
+monitoring and analysis. Additionally, there are other sensors that are designed to ﬂoat on water,
+such as buoys that come with ﬂow controls and mini wet labs to collect water samples for analy-
+sis [Burke and Allenby 2014].
+Different types of commercial sensors are presented in Table III. The sensors are classiﬁed into
+single and multiple parameters, depending on the number of water quality parameters that the sensor
+is able to detect. Several studies also proposed the use of specialized hardware devices to support
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:10 K. S. Adu-Manu et al.
+Table III. Common commercially available water quality sensors and their capabilities for measuring the water
+quality parameters.
+Single Parameter
+Sensor Model Water Quality Parameter References
+ATI Free Chlorine [Hall et al. 2007]
+Hach model A-15 Cl-17 Free/Total chlorine [Hall et al. 2007]
+Hach 1720 D, WQ730,
+WQ720 Turbidity
+[Hall et al. 2007;
+Xylem Inc.
+2015b]
+GLI Model PHD, WQ201,
+WQ101 pH
+[Hall et al. 2007;
+Xylem Inc.
+2015b]
+GLI Model 3422, WQ-Cond Speciﬁc conductance
+[Hall et al. 2007;
+Xylem Inc.
+2015b]
+Hach Astro TOC Ultraviolet
+/ Process analyzer Total organic carbon [Hall et al. 2007]
+WQ401 Dissolved oxygen [Xylem Inc.
+2015b]
+WQ600 Oxidation reduction potential (ORP) [Xylem Inc.
+2015b]
+Multiple Parameters
+Sensor Model Water Quality Parameters References
+Dascore six-sense sonde Speciﬁc conductance, dissolved oxygen, oxidation reduction
+potential, temperature, free chlorine [Hall et al. 2007]
+YSI 6600 Sonde, 6820 V2,
+600XL, WQMS
+Speciﬁc conductance, dissolved oxygen, oxidation reduction
+potential, pH, temperature, free chlorine, ammonia-nitrogen,
+chloride, nitrate-oxygen, turbidity
+[Hall et al. 2007;
+Xylem Inc.
+2015b]
+Hydrolab Data Sonde 4a
+Speciﬁc conductance, dissolved oxygen, oxidation reduction
+potential, pH, temperature, free chlorine, ammonia-nitrogen,
+chloride, nitrate-oxygen, turbidity
+[Hall et al. 2007]
+Smart Water (Libelium) Conductivity, dissolved oxygen, oxidation reduction potential,
+pH, temperature, turbidity, nitrates, dissolved ions [Libelium 2014]
+the wireless sensor nodes for measuring water quality parameters. These include, for example, Au-
+tonomous Underwater Vehicles (AUVs) [Zhan et al. 2009], ﬁsh robots [Shin et al. 2007], unmanned
+airboats [Kaizu et al. 2011], miniboats [Tuna et al. 2013] and digital cameras [Goddijn and White
+2006]. The characteristics of these specialized hardware technologies, as well as some details about
+their advantages and disadvantages are summarized in Table IV.
+5. WIRELESS SENSOR NETWORK (WSN)-BASED WATER QUALITY MONITORING
+In this section, we present an overview of WSN-based WQM systems. We start by identifying
+a common functional framework for WQM systems that utilize WSNs, derived from the TMLB
+framework presented in Figure 2. We then discuss different techniques that have been proposed in
+the literature for enabling communication, energy management, and data processing in WSN-based
+WQM systems.
+5.1. WSN Framework
+When considering the use of WSNs for WQM, the traditional WQM framework presented in Fig-
+ure 2 can be divided into two main activities, as shown in Figure 4(a). The ﬁrst activity is performed
+in-situ by the WSN and comprises the functionsData Acquisition, Processing and Transfer (DAPT).
+DAPT is viewed as a uniﬁed process when a WSN is employed. To support DAPT, sensor devices
+are distributed around the water body (e.g., river, lake, or ground water), thereby enabling sampling
+at different spatial locations at regular time intervals. The data collected are potentially processed
+locally on the sensor nodes and then transmitted to a local monitoring station close by the sensor
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:11
+Table IV. Specialized hardware devices for supporting wireless sensor nodes.
+Device Communication Implementation Advantages Disadvantages Reference
+Digital
+Videos
+ZigBee and
+CDMA
+Three
+monitoring
+points along a
+river
+Multi-hop, ability to
+monitor a large area,
+ﬂexible and easy to
+extend three layer
+architecture
+Data acquisition is
+not clearly deﬁned
+[Peng
+2009]
+Automatic
+Underwater
+Vehicles
+GPRS
+(multi-hop
+routing)
+3D grid of
+sensors
+The proposed
+algorithm showed
+high performance
+AUV navigates only
+in one direction
+[Zhan et al.
+2009]
+Fish Robots ZigBee, Infrared
+and GPS
+Swimming pool
+testing with
+sonar
+localization
+Sonar localization
+proved to be more
+efﬁcient than GPS,
+autonomous system
+Battery operating
+devices with short
+lifetime
+[Shin et al.
+2007]
+Battery-
+operated
+miniboat
+Wireless link
+(type not
+speciﬁed)
+Simulation
+studies
+Cheap to implement
+and maintain
+Performance depends
+on several
+parameters. Battery
+operating devices
+with short lifetime
+[Tuna et al.
+2013]
+Buoys
+mounted
+with probes
+Wireless and
+wired links (type
+not speciﬁed)
+Simulation
+studies
+Cheap to implement
+and maintain
+Performance depends
+on several parameters
+[Tuna et al.
+2013]
+Air boat GPS Experiments on
+a mire pool
+Using grid sampling,
+the boat was able to
+obtain ﬁne-resolution
+water-quality
+distribution maps
+The design of the
+boat can be improved
+to reduce side to side
+oscillation. Complex
+to determine the
+optimal control
+parameters
+[Kaizu
+et al. 2011]
+Network 
+design 
+Sample 
+collection 
+Laboratory 
+analysis 
+Data 
+handling 
+Data 
+analysis 
+Information 
+utilization 
+Data Acquisition, Processing and Transfer (DAPT) Data Processing, Storage and Retrieval (DPSR) 
+Water quality control 
+Water quality assurance 
+Feedback control 
+WSN-based (in situ) Traditional technologies (remote) 
+(a) Adaptation of the traditional WQM framework when using a WSN for data acquisition, processing and transfer
+(DAPT).
+Data acquisition Filtering/Processing Data transfer Analysis, storage and 
+reporting 
+9 T ype of sensor 
+9 Resolution 
+9 Frequency 
+9 Filtering techniques 
+9 Detection algorithms 
+9 In-node processing 
+9 Collaborative processing 
+9 ZigBee 
+9 WiFi/WiFi Direct 
+9 GSM 
+9 3G/GPRS 
+9 Satellite 
+9 Algorithms 
+9 Software design 
+9 Oﬄine storage 
+9 Online/web-based 
+  storage (cloud) 
+9 Graphs and charts 
+(b) WSN pipeline for water quality monitoring.
+Fig. 4. WSN-based WQM framework and relative sequence of operations, with examples of operation speciﬁc techniques.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:12 K. S. Adu-Manu et al.
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+Lorem ipsum dolor sit amet,
+consectetur adipisicing elit
+0
+01
+02
+03
+04
+05
+06
+07
+01 02 03 04 05 06 07
+Wireless Sensor Network
+Sensor 
+Node
+Local Monitoring
+Station (BS)
+Local 
+Communication
+Remote 
+Communication
+Cloud
+Internet
+Remote Monitoring 
+Station
+Fig. 5. WQM system using a WSN for data acquisition and transfer.
+nodes, where further processing of all the data from the multiple distributed sensor nodes may be
+performed. Processing the data locally at the node does have implications for energy consumption.
+At the local monitoring station (or base station), the processed data is either transmitted through a
+long range communication technology (e.g., cellular, WiMax, satellite) to an end user at a remote
+monitoring station, or is stored in a local database at the local monitoring station for eventual col-
+lection by a user who travels to the site to gather the data. Other systems that exist for data transfer
+include the use of automatic vehicles and satellite. The next stage is the Data Processing, Storage
+and Retrieval (DPSR) operations, which in WSN-based systems is normally fully automated. An
+example of a WSN-based WQM system that follows this framework is illustrated in Figure 5.
+Alternatively, it is possible to describe the WSN-based WQM framework represented above by
+focusing on the different building blocks that compose the system. To this end, Figure 4(b) presents
+the WSN pipeline as composed of four building blocks, which represent the main operations that
+need to be performed by the system, namelydata acquisition, ﬁltering/processing, data transfer and
+ﬁnal analysis, storage and reporting . In the ﬁrst block, data acquisition, the spatially distributed
+wireless sensor nodes acquire samples from the water source at periodic intervals. Using multiple
+distributed sensors for acquiring data increases the level of accuracy since data from different sen-
+sors (and samples taken from spatially distributed areas) can be used for analysis. Additionally, the
+frequency of gathering data from the sensors can be set to meet the WQM goals.
+In the second block, ﬁltering/processing, the samples collected during the acquisition phase are
+processed. This phase requires specialized computation and beneﬁts from devices that are able to
+perform computationally intensive operations locally. Filtering techniques and efﬁcient algorithms
+for detecting the required water quality parameters are implemented. For processing the data, two
+main approaches are proposed: in-node processing (InP) and collaborative task processing (CTP).
+In-node processing (InP) is when a node processes its own samples, either individually or over time.
+Collaborative task processing (CTP), on the other hand, is when nearby nodes share data with each
+other, and the processing considers the spatially distributed samples from the different nodes. A
+WSN can utilize both InP and CTP, so that the individual nodes process their data locally and then
+share this processed data with their neighbors for additional collaborative task processing. Often
+when one needs to know the condition of the water body, CTP provides a general or average value
+whereas values obtained from InP gives an indication of the water condition at particular points,
+hence the ability to detect the source of contamination.
+The next functional block is represented by the data transfer, which describes the way in which
+the data is moved from the source to the ﬁnal destination. The data transfer is largely dependent
+on the architecture of the network. The choice of routing protocol and their efﬁciency becomes an
+important consideration. A number of technologies are available for this including ZigBee, WiFi,
+WiFi-Direct, LTE, GSM or WiMAX.
+The ﬁnal block of the WSN-based WQM pipeline consists of the data analysis, storage and
+reporting. In this phase, the system performs some additional computations, and organizes and
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:13
+Table V. Wireless Network Technologies
+Local Communication
+Technology Coverage Frequency Speed Advantages Disadvantages References
+ZigBee 50 m 2.4–
+2.48 GHz 20/40/250
+Kbps
+Low cost, low
+power consumption,
+ad hoc, potential to
+support a large
+number of users
+Does not penetrate
+buildings well, low
+speed
+[Ho et al.
+2013;
+Sidhu et al.
+2007]
+WiFi
+(a/b/g/n) 200 m 2.4 and
+5 GHz
+up to
+150 Mbps
+Low cost, high
+speed, wide
+distribution,
+common standard
+High power
+consumption,
+requires a central
+access point,
+scalability
+[Ho et al.
+2013;
+Dhawan
+2007]
+WiFi Direct 200 m 2.4 and
+5 GHz
+up to
+150 Mbps
+Ad hoc, low cost,
+high speed, easy to
+set up
+High power
+consumption,
+limited platform
+support, scalability
+[Feng et al.
+2014; WiFi
+Direct
+2015]
+Remote Communication
+Technology Coverage Frequency Speed Advantages Disadvantages References
+RF Module 8 Km 2.4 GHz 250 KBs
+Resilient to noise
+and variations in the
+signal strength
+Requires complex
+demodulator, low
+speed
+[Laird
+Technolo-
+gies
+2012]
+GSM 10 Km 900–1800
+GHz 9.6 Kbps
+Wide distribution,
+2-factor
+authentication,
+support for roaming
+Low speed, high
+energy
+consumption, needs
+special processing
+to handle handoffs
+[Rahnema
+1993; Ho
+et al. 2013]
+WiMAX 5–100 Km 2–11 GHz
+10–66 GHz
+up to
+80 Mbps
+Relative low cost to
+deploy, secure and
+reliable, high speed
+and coverage
+Tradeoff between
+bit rate and
+coverage, limited
+access to spectrum,
+limited diffusion
+[Ho et al.
+2013;
+Dhawan
+2007]
+LTE 100 Km 698–960
+MHz
+300
+Mbps
+DL; 75
+Mbps UL
+Low latency, high
+capacity, high
+speed, backward
+compatible
+Equipment is
+expensive, high
+energy
+consumption
+[Lee and
+Wong
+2010; Ho
+et al. 2013]
+classiﬁes the data collected by the WSN. Data can also be stored using ofﬂine storage media, online
+storage media and/or the cloud. The data is then presented to the user in the form of graphs, charts
+and tables.
+Utilizing a WSN infrastructure within a WQM system overcomes the limitations of traditional,
+manual WQM systems, as 1) WSNs enable the sensors to be ﬁxed in place for gathering consistent
+samples, 2) water quality can be sampled as frequently as desired, 3) the water quality measurements
+can be transmitted to an end user for real-time analysis of the water quality, and 4) feedback from the
+end user can change the sampling frequency on demand in case additional or fewer measurements
+are required [Bartram and Ballance 1996; Wagner et al. 2006; Strobl and Robillard 2008; WHO
+2011].
+5.2. Network Communication
+The design of the communication network is an important aspect of WSN-based WQM systems.
+The network architecture can be separated into two main parts: 1) local network communication:
+transmission of the data from the sensor nodes to a local monitoring station (or base station), and
+2) remote network communication: transmission of the data from the local monitoring station to a
+remote monitoring station that enables users to access the data.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:14 K. S. Adu-Manu et al.
+Table VI. Comparison of Network Architectures
+Communication
+Technology / Protocol Network Design Routing Sensor
+overlay
+Network
+Type Reference
+ZigBee
+Sensors send data to local
+monitoring center through the
+ZigBee network
+Multi-hop None Local [Chen et al.
+2011]
+Hierarchical WSN
+Sensors are connected to a
+central fusion center via local
+fusion centers
+Multi-hop Clustering Local [Karami
+et al. 2012]
+ZigBee Sensors transmit data through
+base station to data center
+Not
+speciﬁed
+Not
+speciﬁed Local
+[Amruta
+and Satish
+2013]
+ZigBee
+Sensors are connected to a local
+host computer through a
+ZigBee/Ethernet gateway
+Not
+speciﬁed
+Not
+speciﬁed Local [Postolache
+et al. 2014]
+ZigBee Sensors connect to a gateway and
+then to the ﬁeld servers Multi-hop Clustering Local [Chung and
+Yoo 2015]
+ZigBee, CDMA
+Sensors transfer data to a local
+base station (ZigBee/CDMA
+gateway)
+Multi-hop Three
+layers
+Local and
+Remote [Peng 2009]
+ZigBee, CDMA
+Sensor nodes are connected to
+the remote monitoring center
+through a cluster head that acts as
+a ZigBee/CDMA gateway
+Single hop Clustering Local and
+Remote
+[Wang et al.
+2010]
+ZigBee, WiMAX
+Sensors are connected to a
+remote station through a local
+ZigBee/WiMAX gateway
+Single hop Star
+topology
+Local and
+Remote
+[Silva et al.
+2011]
+ZigBee, GPRS/GSM
+Sensors transfer data to a local
+base station (ZigBee/GPRS
+gateway)
+Single hop Clustering Local and
+Remote
+[Katsriku
+et al. 2015]
+GSM
+Sensors are connected to the
+remote monitoring center via
+GSM
+Direct
+connection None Remote [Mo et al.
+2012]
+In the local network communication, wireless communication techniques such as ZigBee, WiFi
+and WiFi-Direct are often used. Depending on the spatial location of the sensors and the local mon-
+itoring station, either direct communication from the sensor nodes to the local monitoring station or
+multi-hop communication, transmitting the data from a sensor through one of its neighbors to the
+local monitoring station, may be employed. When multi-hop communication is utilized, a cluster-
+based approach may be employed, where the sensor nodes form local clusters with a cluster head
+(CH) and transmit their data to their cluster head, and then the cluster head transmits the data indi-
+vidually or aggregated to the local monitoring station. Many different local network communication
+systems have been proposed [Nasirudin et al. 2011; Chen et al. 2011].
+In the remote network communication, long-range communication techniques, such as cellular
+(LTE, 3G, GSM, GPRS) and WiMax are used to transmit the data from the local monitoring station
+to a remote monitoring center or the cloud (see Figure 5). The use of remote network communication
+systems have been proposed in several studies, e.g., [Peng 2009; Yang and Pan 2010; Yue and Ying
+2011; Alkandari et al. 2011; Capella et al. 2013; Katsriku et al. 2015].
+Table V shows the features of various wireless technologies that have been used for both the local
+communication (WiFi, ZigBee and WiFi-Direct) as well as the remote communication (RF Module,
+WiMAX, LTE and GSM). Terrestrial communication standards such as WiMax, GSM, and LTE
+cover between 5 to 100 Km, which is desirable for remote monitoring in WQM environments. For
+local monitoring, ZigBee, WiFi, and WiFi Direct, which are typically used for shorter distances,
+range from 50 to 200 m. Additionally, Table VI provides an overview of several different commu-
+nication and networking architectures that have been proposed speciﬁcally for WSN-based WQM
+systems. Other technologies that have not been fully explored in WQM are underwater communica-
+tion technologies such as acoustic communication and optical communication. These technologies
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:15
+can support high performance in WQM communications. For example, acoustic communication
+provides long range communication distances with low rates, while underwater optical communi-
+cation has a very high rate over a few meters [Ge and Wang 2016; Akyildiz et al. 2016]. The com-
+munication range for radio in fresh water sources is above 100 m, while the communication range
+for radio in marine sources is between 10 and 100 m. Acoustic communication spans across several
+kilometers whereas optical communication ranges between 10 to 100 m [Ge and Wang 2016].
+Currently, to the best of our knowledge, little has been reported on WQM quality of service
+(QoS) performance metrics such as throughput, delay, security, etc., as far as the actual network is
+concerned. Work done over the past ten years and recent research in the area of WSNs for WQM
+has focused primarily on collecting data from sensor nodes and storing them in a database (DB).
+One such work is the design and deployment of a smart system for gathering data in estuaries
+using WSNs in which a server is used to request and collect data from several nodes and store them
+in a database [Parra et al. 2015]. Similarly, in [Nguyen et al. 2015], the authors presented a design
+of an energy efﬁcient environment monitoring station and data collection network based on ubiq-
+uitous WSNs. In this work, different climatic parameters from the sensor nodes were sent through
+the sensor network to the base station. The base station receives the data from the sensors, performs
+data processing, and transmits data packets to the remote monitoring center via a GPRS/3G data
+network. Another related work is found in [Ge and Wang 2016], where the authors provided an en-
+ergy efﬁcient network for WQM in Subterranean River in China. In their work, the authors evaluate
+the network communication architecture by placing emphasis on the node energy consumption in
+the network building stage, the data acquisition stage, and the transmission stage. Different node
+numbers were assigned to each node in the network, and their results indicated that the maximum
+energy consumed in the data acquisition and transmission phases takes place in the node with the
+largest node number.
+5.3. Energy Management
+An issue of key concern in the design of a WSN-based WQM system is how to power the de-
+vices and the technique used to manage the power consumption over time. In particular, the goal
+is to realize a system that can remain continuously operational without needing to constantly re-
+place batteries. There are two main design approaches to support the continuous operation of a
+WSN-based WQM system: 1) increase the energy available to the wireless sensor nodes, through
+renewable energy sources, by harvesting energy from solar, wind, RF, and hydro (running water)
+energy, and 2) reduce the energy draw of the wireless sensor node, through techniques such as duty-
+cycling, power control, use of energy efﬁcient routing protocols, wake-up radios, and low contention
+communication.
+Energy harvesting is a key technology to enable the implementation of long-lived WSN-based
+systems. Many approaches have been proposed for harvesting ambient energy and combining this
+harvested energy with local energy stored in both ﬁxed and rechargeable batteries as well as super-
+capacitors. In addition, several researchers have proposed using hybrid systems that harvest renew-
+able energy sources, such as solar energy and RF energy, in addition to traditional battery technolo-
+gies to power the sensors in WSN-based WQM systems [Wang et al. 2010; Chung and Yoo 2015;
+Amruta and Satish 2013]. Supporting the energy needs of the sensor nodes in WQM systems is par-
+ticularly challenging due to the harsh environment in which the sensors are deployed. A summary
+of the various energy harvesting systems that have been proposed for powering the sensor nodes
+used in WSN-based WQM systems, as well as the power management schemes and network con-
+ﬁgurations that were selected to achieve the desired performance goals, is presented in Table VII.
+In addition to developing energy harvesting techniques to recharge the batteries of the sensor
+nodes, researchers have also focused their efforts on reducing the energy consumption of the nodes.
+One method of reducing the energy dissipation for the sensor nodes is to utilize duty cycling,
+whereby the sensor nodes are put into a very low-power sleep mode when they are not sensing
+or transmitting data [Yue and Ying 2011]. Various techniques have been proposed to support the
+wake-up of the sensor nodes, including periodic wake-up as well as on-demand wake-up.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:16 K. S. Adu-Manu et al.
+Table VII. Energy sources and power management schemes.
+Power Source(s) Power Management Scheme Network Performance Reference
+Solar panel and
+rechargeable batteries Small sampling rate (once a day) System works continuosly
+throughout the year
+[Wang et al.
+2010]
+Solar panel and
+rechargeable batteries
+Alternates between the solar panel
+and the rechargeable batteries,
+depending on the amount of sunlight
+Not speciﬁed
+[Amruta
+and Satish
+2013]
+Solar panel and
+rechargeable batteries Not speciﬁed
+System works continuously for
+about 100 hours during cloudy
+days and about 30 days in
+sunshine
+[Mo et al.
+2012]
+Solar panel and
+rechargeable batteries
+Duty-cycling that puts the sensors
+into deep sleep if there are no
+background processes
+Not speciﬁed [Yue and
+Ying 2011]
+Solar panel and
+rechargeable batteries
+Local processing (time average) to
+reduce data transmissions
+Local processing substantially
+increases the system lifetimes
+[Chung and
+Yoo 2015]
+Solar panel and
+rechargeable batteries
+Four sensor modes of operation:
+active, sleeping, transmitting, and
+receiving
+Batteries are fully charged most
+of the time hence increasing
+network performance
+[Capella
+et al. 2013]
+Power-aware protocols and communication techniques are used to ensure long-lifetime WSN-
+based WQM systems. For example, to ensure minimum power usage by the sensor devices, the
+system described in [Alkandari et al. 2011] organizes the network into clusters, where the clus-
+ter head nodes are powered through Sphelar EIPV solar energy harvesting modules. Using these
+modules, the cluster heads are able to harvest from the environment enough energy to support their
+onerous role in the network (such as receiving, retransmitting and processing data for the entire
+cluster). To maximize the lifetime of the network and increase performance, a ﬁxed or stationary
+cluster-based network topology is utilized.
+Power management schemes for WSN-based WQM environment are discussed in [Shu 2016].
+Here, the authors propose to adapt the power consumption by dynamically changing the sensor
+sampling rate with the use of reinforcement learning techniques (i.e., self-aware scheduling). The
+sleep and wakeup strategies presented in this paper were proposed to be implemented either at the
+single node or for the entire network. At the node level, the proposed include the battery state-
+awareness, data standard deviation, and hybrid. When considering the entire network, the proposed
+techniques focus on energy efﬁcient routing and topology control.
+An aggregation routing algorithm, called Underwater Aggregation Routing Algorithm (UARA)
+was proposed by [Zhan et al. 2009] in order to prolong the lifetime of Automatic Underwater Ve-
+hicles (AUVs). These AUVs are used to collect the sensor data, as well as to prolong the lifetime
+of the sensor nodes, since both the sensor nodes and the AUVs have limited battery power (un-
+derwater, the batteries cannot be recharged via energy harvesting). The proposed routing protocol
+utilizes information about the current location of the AUV to optimize the routes from the sensors
+to the AUVs in order to minimize the total energy dissipation of the data communication. It has
+been shown that signiﬁcant gains can be obtained through the proposed protocol when compared to
+traditional static routing protocols that do not utilize the current location of the AUVs [Zhan et al.
+2009].
+In [Capella et al. 2013], the development of a WSN for the continuous in-situ monitoring of the
+nitrates in River Turia, Spain, is presented. In this real-world application, ion-selective electrode
+transducers and solar panels for energy harvesting were used. To reduce energy drain, the authors
+proposed the use of data fusion (or aggregation). In order to determine the energy used by the sys-
+tem, the authors performed an experiment at the River Turia. In this experiment, the sensor nodes
+remain in a low-energy consumption mode until 6 PM, in order to enable their batteries to be com-
+pletely charged (if possible) by means of the corresponding solar panels during the period of most
+intense solar radiation (during the day). At the aforementioned time, the sensor node is woken up
+by the Real Time Clock (RTC) to perform the nitrate measurement and to communicate the data to
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:17
+a neighbor sensor node in the chain (or to the gateway in case there is a direct link). An acknowl-
+edgement of the data is then expected. Once this process is over, the sensor nodes revert into the
+low energy consumption mode until the next operation cycle (on the following day) [Capella et al.
+2013]. The authors provide a description of the solar energy-harvesting module they developed in
+order to provide enough energy to power the sensor nodes perpetually without human intervention.
+In their experiment, the sensor nodes were placed under different operation modes (active, sleep-
+ing, transmitting, and receiving) of the ion-selective electrodes (ISE) sensor and the RTC. The solar
+panel they adapted was small in size with a double buffer to store power both in rechargeable bat-
+teries and super-capacitors. The authors tested the module experimentally to conﬁrm the energy
+provision of this solar panel, and they validated the energy harvesting system module during the
+sampling period. The experiments revealed that, before transmission, the battery was charged to
+around 100%, even on days with scarce solar radiation. Battery measurements in another scenario
+(right after transmission) showed that in the case of required retransmissions, the charge of the
+super-capacitor was not always high enough to provide the necessary energy for a retransmission,
+and therefore the sensor nodes had to use the energy stored in the rechargeable batteries. However,
+battery charge remained above 95% in all of the measurements obtained [Capella et al. 2013].
+In WSN-based WQM systems, energy drain still remains a key issue. As described in [Xu et al.
+2014], WSN for water monitoring should intelligently manage the batteries, harvest energy from the
+environment and implement energy management schemes at the node level. However, only a few
+references present details about the energy management schemes [Xu et al. 2014] and, as described
+above for WQM systems, most of the existing works have used duty cycling, wake up radios, and
+data fusion approaches to reduce the energy drain.
+5.4. Data Processing, Storage, and Retrieval
+The data collected by the wireless sensor nodes may be processed in several places: locally on
+the wireless sensor node, at the local monitoring station and ﬁnally at the remote monitoring station.
+The processing algorithms depend on the types of parameters collected. Additionally, it is important
+to enable data to be stored and retrieved for further processing or analysis to support the goals of
+the WQM system.
+5.4.1. Data Processing. In WQM, the concept of real-time sensing of water quality parameters
+has gained popularity around the world. From a data management point of view, this practice al-
+lows continuous monitoring of water quality parameters (physical, chemical and biological) within a
+reasonable time, thereby opening new opportunities to devise strategies for data processing and val-
+idation of the raw data, in order to convert them into useful information. However, current research
+on data processing for WSN-based WQM systems typically does not focus on speciﬁc algorithms,
+but instead focuses on answering the following questions:
+(1) Why is the water quality parameter being collected?
+(2) What type of data is sensed and transmitted?
+(3) How often is the data sensed and transmitted, and when does this data require usage?
+(4) How do we process and secure the data?
+(5) Which data sensing techniques and algorithms are appropriate for the data collection for optimal
+performance?
+(6) Where do the data reside?
+Sensors deployed for WQM are energy constrained, which has necessitated the development of
+energy-efﬁcient data aggregation/ processing schemes to prolong the network lifetime. A number
+of different energy-efﬁcient schemes have been proposed for data aggregation/processing. For ex-
+ample, the authors in [Wang et al. 2016] present a distributed compressed sensing theory for a
+cluster-based underwater acoustic sensor network that considered spatial and temporal correlations
+to minimize the total energy consumed by the sensor nodes during data collection. A similar data
+fusion algorithm has been proposed in [Capella et al. 2013].
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:18 K. S. Adu-Manu et al.
+In the past, prior to the introduction of WSNs for WQM and online monitoring of the water qual-
+ity parameters, data were manually recorded and interpreted by technicians [Storey et al. 2011].
+Calculations were also performed manually, which meant there was no quick response to pollutants
+in the water, and no real-time information was available for public health protection agencies. The
+water quality process depends largely on the time-relevance of the collected data. Therefore, appro-
+priate and timely response in detecting water quality problems from the data in real time is crucial in
+WQM [Storey et al. 2011]. Advances in computer hardware, software, and networks have been in-
+troduced in the WQM process to support data processing with proper analysis, documentation, and
+reporting. In particular, cloud computing techniques can be successfully used to perform the water
+quality data processing because of their ability to easily support report generation. These reports
+can then even be directly published by the WSN management system, thus helping policy makers
+to quickly develop proper strategies to maintain the water quality.
+The sensed data may be processed at three different levels [Yang and Pan 2010; Yue and Ying
+2011]. The ﬁrst level is at the sensor node, followed by the local monitoring station and ﬁnally at the
+remote monitoring station. The essence of these levels of computation is to support trend analysis,
+and to be able to determine the source of the contamination by looking at the parts of the water
+body that have the higher concentration of contaminants. This is possible because the sensor nodes
+are distributed across different parts of the water, and hence each of these sensor nodes will collect
+measurement parameters at different intervals for processing. For example, Finite element analysis
+(FEA) is used at the sensor nodes to process the gathered data and to make informed decisions about
+the pollution level of the water [Alkandari et al. 2011]. The local monitoring station and the remote
+monitoring station processing are used to complete the data processing cycle and the trend analysis.
+5.4.2. Data Storage and Retrieval. Several authors have provided different schemes for data stor-
+age and retrieval within WSN-based WQM systems. This task tends to be one of the most important
+aspects of the WQM process, as the amount of energy consumed by the devices greatly depends
+on the amount of data to be acquired and the frequency of data acquisition, as does the quality of
+the WQM process. Many existing implementations, rely on memory cards for data storage on the
+local node, while remote reporting is triggered by specialized commands transmitted from the local
+monitoring station [O’Flyrm et al. 2007; Regan et al. 2009; Jiang et al. 2009; Ritter et al. 2014].
+While this delay-tolerant data collection does not allow for real-time access to the water quality
+measurements, in some cases, it is considered more convenient due to its cost effectiveness [Ritter
+et al. 2014]. In order to reduce the energy consumption of the data transmission, the authors in [Yang
+and Pan 2010], present a data fusion technique that enables a reduction in the amount of data that
+need to be transmitted to the remote monitoring station.
+The remote monitoring center relies on a database management system for storing the water qual-
+ity data. In current implementations, these databases are mostly national databases, which are most
+of the time available online. For example, the United Nations Global Environment Monitoring Sys-
+tem (GEMS) program is dedicated to providing environmental water quality data and information of
+the highest integrity, accessibility and interoperability through its database referred to as the Global
+Water Quality Data and Statistics (GEMStat) [United Nations 2005]. An additional dataset is oper-
+ated by the US Geological Survey (USGS) [USGS 2015]. It is important to note that these databases
+are only repositories for storing the acquired data and, as a recent study points out, the data become
+less actively accessed over time [Dong et al. 2015]. Hence, there is a need to explore ways to per-
+form real-time trend analysis of the data collected and compare it continuously with the previous
+data collected and stored in repositories over the years. In this perspective, a common platform that
+integrates historical and real-time water quality data has recently been proposed in [Sandha et al.
+2016].
+6. IMPLEMENTATIONS OF WSN-BASED WQM SYSTEMS
+The idea of using WSNs for WQM started in early 2000, and there have been an increasing
+number of WSN-based WQM implementations since then. Most of the proposed systems represent
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:19
+more of a laboratory feasibility test rather than a fully functional deployment in the environment.
+Nevertheless, the current body of work on the topic provides a complete overview of the different
+building blocks and limitations of an automatic WQM system. In what follows, we highlight the
+key design choices that characterize the different implementations, and then describe the details
+and limitations of 4 selected implementations that follow the WSN-based framework described in
+Section 5.1.
+There have been a number of implementations of WSN-based WQM systems that have been
+tested or deployed in Australia [Silva et al. 2011; Rao et al. 2013], China [Jiang et al. 2009; Jin et al.
+2010; Wang et al. 2011; Yue and Ying 2011], Cyprus [Hadjimitsis et al. 2009], Kuwait [Alka-
+ndari et al. 2011], Greece [Rapousis et al. 2015], India [Verma and Prachi 2012; Amruta and
+Satish 2013; Wagh and Rao 2014; Moon et al. 2015], Indonesia [Wiranto et al. 2015], Ire-
+land [O’Flyrm et al. 2007; Regan et al. 2009; O’Connor et al. 2012; Garcia et al. 2012; Murphy
+et al. 2015], Malawi [Zennaro et al. 2009], Malaysia [Rasin and Abdullah 2009], Mexico [Curiel
+et al. 2016], Peru [Ritter et al. 2014], Portugal [Postolache et al. 2014], Tanzania [Faustine et al.
+2014], Turkey [Tuna et al. 2014] and USA [Yang et al. 2002; Seders et al. 2007; Burke and Allenby
+2014; Sun et al. 2016]. Details of these systems are summarized in Tables VIII and IX.
+In addition to these implementations, researchers in China [Yang and Pan 2010; Chen et al. 2011],
+India [Verma and Prachi 2012], Kingdom of Saudi Arabia [Aleisa 2013] and Zambia [Chaamwe
+2010] describe the limitations of the current WQM practice adopted in their region, and propose the
+idea and presented the beneﬁt of automating WQM through the adoption of WSN technologies.
+These different implementations agree on a general WSN-based WQM framework, which in-
+cludes the use of WSNs, a local monitoring station (or BS) and a remote monitoring station, as
+described is Section 5.1. However, most of the existing solutions only focus on the design and
+implementation of the local monitoring network (i.e., WSN and local monitoring station), either
+through laboratory feasibility testing [Chaamwe 2010; Wang et al. 2011; Chen et al. 2011] or ﬁeld
+deployment [Seders et al. 2007; O’Flyrm et al. 2007; Sun et al. 2016], and some of the references
+actually include the ﬁnal interconnection with the remote monitoring station [Yang and Pan 2010;
+Silva et al. 2011; Alkandari et al. 2011; O’Connor et al. 2012; Faustine et al. 2014]. Several works
+provide automated warning signals displayed on computer screens or communicated to decision
+makers via text or email.
+Almost all of the authors describe the design of the hardware of the sensor (i.e., microcontroller,
+communication interface, water quality parameter probe), gateway and remote center (e.g., PC), and
+the software used by each component. For some of the implementations, additional details about the
+design of the communication architecture and protocol [Jiang et al. 2009; Wang et al. 2011; Chen
+et al. 2011], power management scheme [Regan et al. 2009], data processing and visualization at
+the monitoring center [Alkandari et al. 2011; Rao et al. 2013; Amruta and Satish 2013], and how to
+adapt the system to different testing/deployment conditions [Seders et al. 2007] are also provided.
+Regarding the hardware used at the sensor nodes, it is interesting to note that starting from the
+early 2010s, there has been a substantial shift from hardware that was traditionally used by the
+WSN community, like, for example, MICA2 motes [Seders et al. 2007; Wang et al. 2011], Sun
+SPOT platform [Zennaro et al. 2009], Libelium Waspmote [Rapousis et al. 2015] or custom made
+architectures [Jiang et al. 2009; Wang et al. 2011], to Arduino-based architectures like, e.g., Arduino
+Uno [Curiel et al. 2016] and Arduino Mega [Rao et al. 2013].
+The primary communication technology used for networking data within the WSN is ZigBee (or
+sometimes simply IEEE 802.15.4), and several researchers describe the beneﬁt and ease of use of
+ZigBee when compared with other communication technologies. Nevertheless, some implementa-
+tions rely on underwater acoustic communications [Yang et al. 2002], WiFi [Rapousis et al. 2015],
+or consider direct connection between each individual sensor and the remote monitoring station
+through GSM/GPRS communications [Zhou et al. 2012a; Hadjimitsis et al. 2009; Rao et al. 2013].
+Reporting the acquired data from the local to the remote monitoring station is done through cellular
+communications, either using GPRS [Hadjimitsis et al. 2009; Jiang et al. 2009; Wang et al. 2011;
+Garcia et al. 2012; Capella et al. 2013; Faustine et al. 2014; Sun et al. 2016], 3G [Alkandari et al.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:20 K. S. Adu-Manu et al.
+Table VIII. Existing implementations of WSN-based WQM systems
+Reference Measured Parameters Communication
+Technology Main Contributions Location
+[Yang et al.
+2002] Temperature, pH RF and acoustic
+transducer
+Description of an aqueous
+sensor network with hybrid
+terrestrial/underwater
+communications
+Pennsylvania,
+USA
+[Seders et al.
+2007] Temperature, pH, DO RF
+The system allowed
+in-network computation to
+detect change points in the
+data stream
+Indiana, USA
+[O’Flyrm
+et al. 2007;
+Regan et al.
+2009]
+Temperature, pH,
+phosphate, DO,
+conductivity, turbidity,
+water level
+ZigBee Plug-and-play multi-sensor
+system Ireland
+[Rasin and
+Abdullah
+2009]
+Temperature, pH, turbidity ZigBee
+Design and implementation of
+a low cost system based on
+ZigBee
+Malaysia
+[Zennaro
+et al. 2009] Turbidity, pH, DO ZigBee Adaptation of SunSPOT in a
+three layer architecture Malawi
+[Hadjimitsis
+et al. 2009]
+Temperature, pressure,
+salinity, turbidity GPRS Integration of satellite imaging
+and WSN-based monitoring Cyprus
+[Jiang et al.
+2009] Temperature, pH ZigBee, GPRS
+Present the design of the
+hardware and software of the
+sensors, base station and
+remote monitoring center
+China
+[Jin et al.
+2010]
+Temperature, pH, DO,
+salinity
+ZigBee,
+3G/GPRS
+Design of a multiparameters
+sensor system with hybrid
+ZigBee/GPRS
+communications
+China
+[Wang et al.
+2011] pH, nitrate, phosphate ZigBee, GPRS System based on TinyOS,
+LabVIEW and MySQL China
+[Silva et al.
+2011]
+Temperature, pH, DO,
+conductivity
+ZigBee,
+Ethernet,
+WiMax
+Hybrid ZigBee/WiMax
+network Australia
+[Yue and
+Ying 2011] pH, turbidity, DO Ethernet Hierarchical network
+architecture China
+[Alkandari
+et al. 2011]
+Temperature, pH, DO,
+nitrate, ammonia, carbon
+dioxide, chlorine
+ZigBee, 3G
+Radio-to-shore, cellular,
+satellite and RFID
+communications. Finite
+Element Analysis of gathered
+data
+Kuwait
+[O’Connor
+et al. 2012]
+Temperature,
+conductivity, depth ZigBee, 3G
+Multi-modal approach that
+combines visual sensors and
+context information to support
+a conventional WSN
+Ireland
+[Garcia et al.
+2012]
+Temperature, depth, ﬂow,
+turbidity
+ZigBee,
+GPRS/GSM
+Use of in-network data
+aggregation algorithms for
+WQM and prediction
+Ireland
+[Rao et al.
+2013]
+Temperature, pH, light,
+conductivity, DO, ORP 4G
+Design of a low-cost WQM
+system based on open-source
+hardware (Arduino)
+Australia
+[Amruta and
+Satish 2013] pH, DO, turbidity ZigBee
+Design and implementation of
+a prototype sensor node
+powered by a solar panel
+India
+[Capella et al.
+2013] Nitrate ZigBee,
+GPRS/GSM
+Deployment of an energy
+harvesting WSN for continuos
+in-line monitoring of a river.
+Spain
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:21
+Table IX. Existing implementations of WSN-based WQM systems (continued)
+Reference Measured Parameters Communication
+Technology Main Contributions Location
+[Ritter et al.
+2014]
+Temperature, pH, DO,
+ORP, conductivity ZigBee
+Continuos in-sensor data
+collection with on demand
+access to the data
+Peru
+[Wagh and
+Rao 2014] pH, water level ZigBee
+Design of a simple sensor for
+river monitoring powered by a
+solar panel
+India
+[Faustine
+et al. 2014]
+Temperature, DO, pH,
+conductivity
+ZigBee,
+GSM/GPRS
+(SMS)
+WQM system prototype based
+on an Arduino microcontroller
+and powered by a solar panel
+Tanzania
+[Postolache
+et al. 2014]
+Temperature,
+conductivity, turbidity ZigBee
+Design of a low cost WQM
+system based on off-the-shelf
+components
+Portugal
+[Tuna et al.
+2014]
+Temperature, pH, DO,
+conductivity, turbidity,
+nitrate
+ZigBee
+Design of buoys-mounted
+wireless sensor nodes with
+web-based data visualization
+Turkey
+[Burke and
+Allenby
+2014]
+Temperature, pH, DO,
+conductivity, salinity,
+speciﬁc conductance,
+resistivity, water level,
+ORP, TDS
+Not speciﬁed
+Use of a multiparameters
+sensor with integrated display
+and data logger system
+Maryland,
+USA
+[Murphy
+et al. 2015]
+Temperature, pH,
+conductivity, DO, water
+level, chlorophyll,
+turbidity, blue-green algae
+concentration
+WiFi
+Use of optical sensor for
+monitoring the aquatic
+environment
+Ireland
+[Wiranto
+et al. 2015] Temperature, pH, DO ZigBee
+Design of a continuous WQM
+system with automatic sample
+collection unit
+Indonesia
+[Rapousis
+et al. 2015]
+Temperature, pH,
+conductivity, ORP,
+chlorine
+WiFi
+Combination of a WSN and
+crowd-sourced information
+(user feedback)
+Greece
+[Moon et al.
+2015]
+Temperature, pH, DO,
+conductivity, ORP,
+turbidity
+RF
+Design and implementation of
+WQM system with security
+functionalities (authentication
+and encryption)
+India
+[Sun et al.
+2016] Temperature, pH, DO ZigBee,
+GSM/GPRS
+Combination of a specialized
+data logger (STORM 3) with a
+prototype WSN
+Texas, USA
+[Curiel et al.
+2016] Temperature, pH ZigBee
+Design and implementation of
+a WQM prototype based on an
+Arduino Uno
+Mexico
+2011; O’Connor et al. 2012] or 4G [Rao et al. 2013]. Additional details about the communication
+technologies used by the different implementations are provided in Section 5.2.
+Regarding the measured parameters, almost all the implementations include temperature and pH.
+Additionally, many implementations also reported information about dissolved oxygen (DO), con-
+ductivity and turbidity, while a few specialized implementations also looked at the oxidation reduc-
+tion potential (ORP) [Rao et al. 2013; Ritter et al. 2014; Burke and Allenby 2014; Moon et al. 2015],
+salinity [Jin et al. 2010; Burke and Allenby 2014] or the concentration of chlorine [Alkandari et al.
+2011; Rapousis et al. 2015], phosphate [O’Flyrm et al. 2007; Wang et al. 2011], nitrate [Wang et al.
+2011; Tuna et al. 2014] or blue-green algae [Murphy et al. 2015].
+In order to relate the architecture shown in Figure 5 with the existing implementations, we high-
+light four key implementations of WSN-based WQM systems deployed in Indiana (USA) [Seders
+et al. 2007], Malawi [Zennaro et al. 2009], China [Yang and Pan 2010] and Texas (USA) [Sun et al.
+2016]. For these implementations, we examine how the authors developed the various components
+of the WSN-based WQM framework described in Section 5.1. In particular, we present the water
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:22 K. S. Adu-Manu et al.
+quality parameters selected for measurement, the approaches used in determining the sampling fre-
+quency and sample size, the network architecture and data communication methods used, the type
+of data analysis performed, how the data were evaluated and presented (e.g., in the form of maps,
+charts, graphs, etc.) and, ﬁnally, the methods used for storing the data to be accessed by the end
+users.
+6.1. LakeNet (Indiana, USA)
+The ﬁrst implementation is the work presented in [Seders et al. 2007]. LakeNet, an integrated
+sensor network for environmental sensing in lakes and wetlands that focuses on lake water quality,
+was deployed at St. Mary’s Lake on the Notre Dame campus in the fall of 2005 to detect changes in
+temperature, pH, and DO.
+Data samples were collected using a MICA2/MDA300 (the MDA300 is a small data acquisition
+module that is connected to the three sensor probes, while the MICA2 is a radio/processor that
+is interfaced with the MDA300) sensor module that transmitted the data through radio waves at
+a frequency of 433 MHz. In this implementation, a gateway node was connected to a laptop and
+transported to the ﬁeld daily in order to retrieve the sampled data. When a command was issued
+from the gateway attached to the laptop, that command was propagated through the ad hoc network.
+Sensor data were then routed back from the WSN to the gateway node. According to this approach,
+when a sensor is unable to communicate directly with the gateway node, a multi-hop network is
+formed to relay data from sensor to sensor before reaching the gateway (i.e., the laptop).
+Two D-cell batteries (which provides 2000 mA-h of current at 5 V) were used to power the
+MICA2/MDA300, and a 12 volt battery was used to power the three sensor probes. While in this
+implementation the WSN autonomously collects data, the researchers have to visit the site in order
+to access and process the measurements.
+A test with 18 sensor probes was conducted for a 10-day period to collect data on pH, DO, and
+temperature. Sensor data was gathered in 10-15 minute intervals, which allowed for continuous
+battery operation (additional tests showed a maximum lifetime of about 2 weeks). In this imple-
+mentation, the nodes were deployed in two rows. Within each row, the sensors were roughly 2m
+apart, with about 1m between the two rows. The communication distance between the sensor nodes
+deployed in the water and the gateway (the laptop) was approximately 30m. Data collected from the
+different sensors was aggregated at the gateway node, and presented to the user in the form of plots.
+6.2. Water Quality Wireless Sensor Network (Malawi)
+In the second implementation, the authors in [Zennaro et al. 2009] presented their implementation
+of an integrated wireless sensor network for WQM deployed in Malawi. The network architecture
+was designed with a three layer approach, consisting of the water sensor board layer (data gathering),
+the wireless sensor node layer (data transfer), and the wireless gateway layer (data storage). The
+authors adapted the Sun Small Programmable Object Technology (SPOT) architecture, and extended
+it with an additional component referred to as the gateway layer. The Sun SPOT hardware platform
+is made up of Java-based wireless sensor nodes. It uses off-the-shelf components, it is small in size,
+and it has a modular architecture. The Sun SPOT kit comes with two free-ranged Sun SPOT units
+and one base station unit (which does not have a battery board). The base station unit communicates
+wirelessly with the free-ranged units and streams the data via a USB connection [Sun Microsystems
+2007]. The general workﬂow of the system design consists of taking water quality samples at a pre-
+deﬁned time of the day, a subsequent transmission of the data to the gateway, and the ﬁnal storage of
+the data at the gateway layer. After this cycle, all the elements of the system go to sleep until the next
+day, when the system wakes up and performs the entire cycle again (i.e., sampling, transmission and
+storage). These processes were mapped onto the three layer architecture.
+As water quality sensors, the system uses 90-FLT (water sensor board layer). The 90-FLT is a
+single-unit portable water quality logger, and it combines sensors for dissolved oxygen, conductiv-
+ity, TDS, pH, mV , turbidity and temperature [TPS Pty Ltd 2008], with the Sun SPOT architecture,
+thus allowing for easy implementation of all the system functionalities.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:23
+The sensor nodes were powered through rechargeable lithium-ion batteries. The architecture pro-
+posed in [Zennaro et al. 2009] relies on a wake-up mechanism to prolong the system lifetime by
+turning off the devices when they are not in use. The Sun SPOT switches to a power saving mode
+(shallow sleep) for power reduction whenever it detects that all the running threads are idle. In ad-
+dition, an external eSerial board was used to switch off the 90-FLT sensor when the device was not
+reading data. To turn the 90-FLT on and off, a string was sent through the serial port from the eSerial
+board to the 90-FLT sensor. The eSerial board was also powered down when not communicating
+with the sensor. The wake-up mechanism (from shallow sleep or deep sleep mode) was tested by
+supplying power to the Sun SPOT architecture by connecting it to a computer. In their experiments,
+for each acquired measurement, the free-range Sun SPOT nodes and the 90-FLT were in the active
+state for 50 seconds in order to transfer the current measurement through the serial connection, and
+then switched to the deep sleep mode. The authors concluded that the wake-up mechanism is able
+to provide signiﬁcant energy savings.
+In order to further extend the lifetime of the system, the authors performed other experiments us-
+ing different power control mechanisms. Using this approach, the node dynamically adjusts its trans-
+mission power based on the distance of its neighbors. However, their experimental results showed
+that the Sun SPOT consumed almost the same amount of power even when communicating with
+nodes at different distances. Therefore, the energy saving technique implemented in their deployed
+system only included the adaptation of the shallow and deep sleep modes.
+6.3. Monitoring of Fushun Reach River (China)
+An implementation similar to the one presented in [Zennaro et al. 2009], has been presented
+in [Yang and Pan 2010]. Here, the authors present a WSN-based WQM architecture to monitor the
+quality of water at the point where the Hunhe River reaches the industrial city of Fushun (Liaoning
+province, China). The architecture is composed of several sensor nodes and a base station (local
+monitoring station) connected to the Internet through a GPRS cellular connection, which is used to
+upload and store the data to a remote database server. In this implementation, the authors deployed
+sensor nodes in the Hunhe river to detect physical and chemical water quality parameters such as
+temperature, pH, salinity, turbidity and DO, in order to determine the level of pollution in the river.
+The network was constructed such that the sensor nodes collected the water parameters and trans-
+mitted this data through multi-hop routing to the base station (local monitoring station). The authors
+state that the sampling frequency and the accuracy of the samples are determined based on prelim-
+inary studies (unspeciﬁed in the paper). The local monitoring station connects the sensor network
+with the Internet, and transfers all the data acquired at the base station to a remote site. At the remote
+site, the collected data are processed, analyzed, and stored in a database. End users are then able to
+access the data remotely via the Internet.
+The sensor nodes are placed at different distances from the base station, and they are powered
+using batteries, and hence have limited lifetime. The nodes nearer to the base station consume more
+power since they are required to transfer a considerable amount of data from the other sensor nodes
+to the base station. Therefore, the authors implemented a data fusion algorithm (details not provided)
+as a way to manage the amount of energy consumed by sensor nodes closer to the base station in
+order to decrease the amount of data to be transmitted to prolong the lifetime of the network. Data
+from the WSN, in the form of graphs and charts, are presented to the Environmental Department of
+China to identify water pollutants and enable them to take appropriate action. The output they were
+interested in was to display a message in case the acquired parameters fell outside a set range and
+trigger an alarm is such situations to alert management.
+6.4. Water Quality Monitoring Using Storm 3 Data Logger and a WSN (Texas, USA)
+Finally, a more recent implementation of using a WSN to monitor water quality was presented
+in [Sun et al. 2016] to monitor a pond at Lamar University in Beaumont, TX, USA. In this work,
+the authors compare the real-time data collection through a STORM 3 data logger (a specialized
+water monitoring station produced by WaterLOG [WaterLOG 2016]) and a WSN. The WSN is
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:24 K. S. Adu-Manu et al.
+composed of four wireless sensor nodes, two National Instruments (NI) WSN-3202 and two WSN-
+3212. The nodes communicate directly with a gateway (NI WSN-9791), which is then connected to
+the Internet. On the other hand, the data logger is directly connected to the Internet through a cellular
+communication link (GSM/GPRS), and proprietary software from WaterLOG (Storm Central, a
+cloud based data collection platform) allows the user to visualize and analyze the data collected by
+the logger.
+Data was collected from the H-377 temperature sensors every 15 minutes everyday for over 5
+months. Each wireless sensor node, instead, was equipped with a DO probe and a pH electrode
+(both produced by Sensorex). The pH electrode was attached to the WSN-3202 node and the DO
+sensor was also attached to a WSN-3212 module. Data was collected for both the DO and pH
+sensors every hour. The sensors communicated through a gateway node deployed on the ﬁeld near
+the pond. The gateway required external power and internet access for communicating with the
+nodes and the monitoring center. At the monitoring center, data collection, analysis and visualization
+are performed using LabView. In addition, LabView was used to monitor the signal strength of each
+node and to check the residual energy of the deployed nodes.
+The authors conclude that a WSN can efﬁciently replace a more expensive specialized water mon-
+itoring station. However, in both cases the different sensor probes need to be re-calibrated frequently
+in order to guarantee a sufﬁcient level of accuracy.
+7. OPEN ISSUES AND FUTURE RESEARCH DIRECTIONS
+In the previous sections, we presented a review of WSN-based WQM systems, describing re-
+search and implementations as well as describing the different network architectures, energy con-
+siderations, data processing methods, water quality measurements, and other current developments
+in WQM. Although WSNs have been proposed by several authors as the appropriate infrastructure
+for WQM systems, there are still areas that require additional investigation.
+In particular, while the different system architectures and implementations described in this pa-
+per highlighted the potential gains that can be achieved with the use of WSNs for monitoring water
+quality, they are still affected by the challenges that are limiting the wide diffusion and adoption of
+WSNs for environmental monitoring. In particular, challenges that arise with power management
+and energy harvesting, data computation, and data transfer must be considered. Security, privacy,
+and conﬁdentiality of the data, require particular consideration, as WQM systems rely on unsu-
+pervised devices deployed in the environment and need to provide online access to the acquired
+data. Moreover, issues speciﬁc to the WQM process arise from the particularly challenging water
+environment. These include biofouling, sensor drift and underwater signal propagation.
+In this section, we discuss some of the future research directions that require additional attention
+in order to improve the performance and reliability of WSN-based WQM systems.
+7.1. Data Computation, Analysis and Reporting
+In most WSN-based WQM systems, data computation, analysis, and reporting are performed ei-
+ther at the local monitoring station (base station) or at the remote monitoring center. The processes
+are automated and the outcomes are compared to predeﬁned water quality measurements to draw
+conclusions. WSNs can be used to perform the computation on different water quality parameters
+sensed at various sampling locations to determine the water pollution arising at different points of
+the water source. Although WSNs have the capabilities to sense water parameters from different
+locations, to the best of our knowledge, specialized algorithms for combining the water quality pa-
+rameters from the different sampling points have not yet been proposed. New algorithms should
+therefore be developed to perform the computations at the sample acquisition points in real-time.
+The results from different sensors distributed across the water surface can be merged, and further
+computations can be performed at the local monitoring station. Also, the algorithms could be fur-
+ther extended to check for completeness and accuracy before the records are processed for a ﬁnal
+decision. This will improve the quality of the acquired data to be compared against the standard
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:25
+threshold values, therefore minimizing redundancies and inconsistencies and ﬁnally enabling the
+generation of higher quality reports.
+Future work should look at performing computation at all points within the WSN architecture,
+that is, at the source (among the sensor nodes), the local monitoring station, and the remote moni-
+toring station. The sensor nodes’ ability to perform computation at the source is essential, but then
+multiple sensors’ data should also be considered for additional computation, performing collabo-
+rative task processing (CTP) among the sensor nodes. Moreover, using CPT techniques, individual
+nodes may ofﬂoad some of their computation to nearby nodes that have less to compute and/or more
+energy to process the data. When CPT is explored to its full potential, it could complement existing
+energy management schemes and augment the overall system performance. It is expected that for
+the WSN to become more energy efﬁcient, distributed task processing among the sensor nodes in
+the network will be an effective solution.
+Moreover in future work, the algorithms and mathematical models can be extended to predict the
+trends that may result from the changes in the water quality. Intelligent systems that incorporate
+prediction tools can be used to predict the changes in water quality that occur as a result of human
+activities or other environmental factors in order to provide early warning signs. This predictive
+analysis will be essential for economic growth and development, and it will also enable future
+planning for longer periods of time, letting decision makers know what they can expect in the
+future [Chapman 1996]. Continuously analyzing and reporting the data collected from the sensor
+nodes in real-time will increase the corrective mechanisms that can be put forth to enhance the
+quality of the water.
+Apart from developing predictive tools, it is also essential to develop detection algorithms of con-
+tamination events during the monitoring process. The development of these algorithms will help
+trigger alarms to the monitoring center in real-time to enable prompt intervention and thus limit
+the spread of the contamination. These real-time sensing platforms are promising for preserva-
+tion of water resources as access to high-frequency spatial and temporal information obtained from
+such platforms can facilitate real-time event detection. When quality and continuous ﬂow of data
+are obtained from these platforms, novel analytical techniques can be adapted and employed by
+researchers to analyze the data. Analytic techniques such as time series analysis and anomaly de-
+tection, data mining, rule-based decision support techniques for making informed decisions, semi-
+supervised learning for predictive analysis, and the implementation of optimization techniques can
+all support decision making [Sandha et al. 2016]. Hence, it is expedient to look into these techniques
+speciﬁcally for the data generated from WQM applications.
+Currently, WQM application data are stored in local databases. Going forward, these data can
+be stored over multiple database instances in the cloud using linked-data technology for seamless
+analysis and limitless scalability by building more responsive geo-spatial queries to provide a rich
+interpretation of the condition of the different types of fresh water sources. Cloud computing, geo-
+spatial databases, and geographical information systems should be further explored.
+7.2. Data Communication and Transmission
+The communication architecture serves as the channel between the sensor nodes and the local
+monitoring station, and then between the local monitoring station and the remote monitoring sta-
+tion. Current works extend the communication design to incorporate a web interface to enable user
+participation and reporting.
+From our discussions on the communication techniques utilized in existing implementations, it
+can be noticed that modern wireless technologies such as WiFi Direct and 3G/4G cellular have
+not been fully explored within the existing implementations of WSN-based WQM systems. It is
+essential to explore the use of these other communication techniques within a WQM system because
+of their advantages in terms of bandwidth and coverage. For example, there can be a high gain in
+using WiFi Direct with respect to bandwidth and coverage as compared to ZigBee; however, in
+terms of power consumption, ZigBee has a lower power consumption compared to WiFi Direct.
+Similar considerations can be drawn for the technology used to connect the local monitoring station
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:26 K. S. Adu-Manu et al.
+to the remote monitoring station or to the cloud where, for example, there are clear performance
+beneﬁts in using LTE (e.g., bandwidth, latency and coverage) at the expense of a higher energy
+consumption. These trade-offs should be explored in future WSN-based WQM systems.
+In addition to the wireless technology to be used for both the local and remote communication,
+different network design techniques have still to be explored. In particular, regarding the local WSN
+organization, the current body of work on this topic does not deﬁne a common network protocol
+stack to efﬁciently implement WSN-based WQM systems. As a result, when implementing these
+systems, researchers need to evaluate different Medium Access Control (MAC) protocols, routing
+and clustering techniques in order to determine the combination that provides the best overall per-
+formance. However, as described in Sections 3 and 5.1, most of the systems will share a common
+Network design, e.g., similar node deployments and water quality parameters. In this perspective,
+there is the need for a comprehensive evaluation of the limitations on the system design imposed by
+the traditional Network design phase, which can then drive the development of a suitable network
+protocol stack that can greatly beneﬁt and speed up the deployment of WSN-based WQM systems.
+Moreover, research is needed to integrate and evaluate different topology control and sensor selec-
+tion schemes to ensure application-speciﬁc Quality of Service (QoS) and reduce the network energy
+consumption by allowing, for example, non-selected nodes to sleep (duty-cycling).
+In order to interconnect the local WSN with the remote monitoring station, additional studies are
+necessary in order to identify the functionalities and number of gateway nodes to be deployed. In this
+regard, while increasing the number of gateway nodes removes the dependency from a single point
+of failure, thus improving the reliability/fault tolerance of the system, it will also increase the overall
+deployment and maintenance costs. Similarly, increasing the functionalities of the gateway requires,
+among others, an efﬁcient management of the node energy consumption to allow for continuous
+operation.
+Finally, it is important to note that the data communication and transmission protocols need to
+be integrated with the data computation, analysis and reporting techniques used by the network. As
+an example, when gathering correlated data, as is the case for WSN-based WQM systems, a joint
+data acquisition, compression and transmission scheme can greatly improve the performance of the
+network [Pattem et al. 2008].
+7.3. Security, Privacy and Data Conﬁdentiality
+Security is very important in preserving and protecting the reliability of a WQM system. One
+open issue that has not yet been tackled in most WQM systems utilizing WSNs is the security of
+data, both within the local network as well as when transmitting this data over the wide-area network
+to the remote monitoring station. Security is critical, as a WQM system must ensure that high quality
+water is provided to the consumer, and this is one of the guidelines that has not been given adequate
+attention in the literature [U.S. EPA 2015b]. Security mechanisms, therefore, must be implemented
+from the water source to the point where the water is utilized by the consumer.
+There are several issues that affect the physical security of the local monitoring station, the sensors
+themselves and the network in general. In order to ensure system and data integrity, it is essential
+to examine the threats that may affect the WQM process and system. Implementing and deploying
+a WSN architecture requires a high level of physical security [U.S. EPA 2015b], which ensures
+the integrity of water distribution facilities and deters acts of tampering, theft and vandalism of the
+sensor nodes and the local monitoring station.
+Current research has not paid much attention to security issues within WQM systems as, tradi-
+tionally, the data was manually obtained from the WQM systems and was then, most of the time,
+accessed only by a small group of decision makers. However, in recent WQM systems employing
+WSNs, the data acquisition is automatic and does not require user interaction, and there has been a
+shift toward an unrestricted web-based data access. The entire WQM architecture is now tracked on-
+line using different web technologies, distributed databases, servers, and software systems [Storey
+et al. 2011]. As described in Section 6, most of the existing WQM implementations do not include
+any security functionality.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:27
+In what follows, we brieﬂy present some node and data security mechanisms that need to be
+considered at the different phases of the WSN framework presented in Section 5. At the network
+level, we consider the node and data security concerns. The nodes can be tampered with or destroyed
+by intruders at the water site. Once compromised, these nodes can lure other nodes to send data to
+them (e.g., a sinkhole or wormhole type attack). Once received by the compromised node(s), the
+data can be modiﬁed, making the data invalid. The compromised node(s) could also affect sensor
+activities and trafﬁc analysis. Attackers could also set up other sensor devices nearby the collection
+point to eavesdrop on transmissions of the WQM data from the WSN. One major concern in WSNs
+is extending the network lifetime. A security breach and compromised node(s) may exhaust the
+batteries of the sensor nodes, rendering the network inoperable [Wang et al. 2006; Chen et al. 2009].
+At the same time, data integrity and conﬁdentiality is paramount since hackers or intruders can
+intercept the network and alter the data. This will affect the analysis, the results and consequently
+affect decision making. Also, intruders can attack the route of data transfer and redirect the data for
+their own gain. When unauthorized users gain access into the database, they may attempt to modify
+its contents. Therefore, setting up authentication and authorization levels will increase the node
+security. Additionally, injecting malicious code can affect the analyzed data in the system. Malicious
+code can also be injected into the database, which can result in data loss or data inconsistency [Wang
+et al. 2006; Chen et al. 2009].
+Given the above, research is needed to integrate existing security mechanisms within WSN-based
+WQM systems or, if needed, develop new security measures to protect the entire system against
+these types of attacks.
+7.4. Energy Harvesting
+Energy is a precious resource in WSNs, as sensor devices require energy to sense different water
+quality parameters as well as to process and transmit the data to the local monitoring station. The
+need for a continuous source of energy, coupled with the difﬁculty in replacing the batteries for the
+sensor nodes at the water source, has led to research into energy harvesting techniques to harness
+different renewable energy sources.
+The main focus of the energy harvesting research to date has been to ﬁnd suitable methods for
+opportunistically gathering energy/power from the immediate environment where the sensor net-
+work is deployed. The idea is to augment the battery power and store the harvested energy for
+future use in rechargeable batteries or super-capacitors. In Section 5.3, Table VII shows that in ex-
+isting WSN-based WQM systems, energy is harvested mainly from the sun using solar panels, and
+this harvested energy is then used to charge Li-Ion batteries. Solar energy is considered to provide
+the highest power density among all energy harvesting sources (15 mW/cm 2 on a bright sunny
+day) [Morais et al. 2008].
+Additionally, as described in Section 5.3, energy management schemes are implemented in order
+to regulate the amount of energy used within a sensor node and at the monitoring station. Current
+approaches for reducing energy drain include the use of ultra-low power sensors, duty cycling based
+on long sleep times, use of low-power radios, voltage scaling, and the use of algorithmic techniques
+at different levels of the protocol stack [Mathúna et al. 2008]. When implementing the energy min-
+imization schemes, the sensor nodes are put to sleep or in an idle state as often as possible, and
+only made active for the time the nodes are expected to perform operations such as sampling, data
+processing and data transfer. Additional research in this area can ensure that the node power re-
+quirements are low enough to be supported by the harvested energy and the rechargeable batteries
+for long periods of time.
+There are several energy harvesting sources that are yet to be considered for use in WSN-based
+WQM systems. One such energy harvesting source is kinetic energy that can be obtained from
+ﬂowing water [Morais et al. 2008]. Research work done in this area is still in its infancy, but, when
+fully explored and implemented, this could provide signiﬁcant support for the energy requirements
+of the sensor nodes used in the WSN-based WQM systems.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:28 K. S. Adu-Manu et al.
+Another interesting area to be studied is harvesting energy from Radio Frequency (RF) sources.
+This new area also needs to be explored in conjunction with WQM environments. According
+to [Mouser Electronics, Inc 2015], RF signals can be obtained from natural sources such as sun
+ﬂares, lightning, and from stars in space that radiate RF waves as they age. Apart from the natural
+sources, RF signals can also be obtained from the artiﬁcially created electromagnetic radio waves
+created by television broadcasting, radar systems, computer and mobile platform networks, remote
+control and remote metering/monitoring. With these vast application domains, it may be possible
+to generate usable energy from these RF sources. Particularly for WQM, energy can be harvested
+from water current depending on the water ﬂow rate, either from water ﬂow with greater pressure
+(turbulent) or ﬂow at a constant velocity. The energy derived from ﬂowing water is mainly kinetic.
+In harvesting energy from ﬂowing water to power sensor nodes, researchers could explore either
+the use of small turbines or the use of temperature gradient (i.e., difference in temperature in the
+water). Energy harvesting from water ﬂow is characterized by low-level power generation which
+may be useful for low-powered devices such as sensor nodes. Small turbines based on Pelton and
+propeller designs have been constructed for small-scale energy harvesting systems by [Azevedo and
+Santos 2012]. These hydro turbines are good for generating power directly to charge the batteries
+of sensor nodes deployed for monitoring fresh water sources. This could serve as a good alternative
+for harvesting energy to power sensor nodes deployed in shady areas where harvesting energy from
+solar panels is not feasible. Other devices designed to harvest energy from ﬂowing water include
+the use of a ﬂag-shaped piezoelectric polymer harvester and micro-structured piezo-bimorph gen-
+erator [Pobering and Schwesinger 2004], Intellisonde probe (to measure water ﬂow, temperature,
+and pressure) [Ye and Soga 2011], and an energy harvesting eel [Taylor et al. 2001]. Although these
+technologies have not yet been fully harnessed and implemented for monitoring water quality in a
+WSN environment, advances in the manufacturing of wireless sensor nodes are expected to increase
+to support the implementation of these technologies for WQM.
+Additionally, it would be beneﬁcial to consider a hybrid energy harvesting system that derives
+energy from a number of different sources simultaneously in order to ensure continuous operation
+of the WSN-based WQM system. It is therefore essential to determine how to efﬁciently incorporate
+these new renewable energy sources within the WQM environment, where nodes require energy to
+perform sensing, computation and data transfer.
+Based on the energy consumption in various states in WQM applications (i.e., sensing, process-
+ing, and transmission), a complete energy evaluation model is required to be developed. This energy
+evaluation model will take into account the types of parameters that need to be sensed and the sens-
+ing frequency, the amount of energy to be harvested from the different harvesting sources, and
+ﬁnally the energy requirement of the protocols and services (such as routing protocols or localiza-
+tion). When modeled accurately, these factors will enable a prolonged network lifetime.
+7.5. Biofouling
+WQM is aimed at collecting data for fresh water analysis. Hence, most sensor devices used for
+WQM are immersed in the water for a long period of time. In such applications, due to the long-
+term and continuous monitoring, sensor protection from fouling becomes vital in order to improve
+the accuracy of the water quality data obtained over time. While for WSN-based environmental
+monitoring power management and battery lifetime are the main issues, for WQM systems attention
+is now turning to biofouling as a key factor in determining the length of time water quality sensors
+can stay deployed in fresh water sources when these sensors are immersed in the various water
+bodies [Xylem Inc. 2015a].
+The introduction of remote monitoring of water quality parameters with sensor devices makes
+it difﬁcult to reduce fouling of the devices [Wagner et al. 2006]. In order to enhance measurement
+accuracy and prolong the lifetime of the sensors, [Delauney et al. 2010] analyzed the biofouling
+effects on marine sensors’ measurements, and proposed some promising techniques for the biofoul-
+ing protection of in situ sensors. The effect of biofouling was also discussed in [Regan et al. 2009],
+in which the authors pointed out that the optical turbidity sensor readings used in their experiments
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:29
+degraded, possibly owing to biofouling, and the data collected was not consistent with the levels
+that would have been expected over a period of time.
+According to [Xu et al. 2014], biofouling developing on a sensor device surface is subject to sev-
+eral factors that relate to the different categories of water quality parameters (i.e., chemical, physical
+and biological). Biofouling decreases the operating lifetime of sensors deployed in the ﬁeld and on
+the whole introduces a degree of error into the data obtained from the sensing operation [Regan
+et al. 2009]. In Marine Environment Monitoring (MEM), different techniques have been studied
+to prevent fouling developing on materials used for detecting marine water parameters, such as
+wipers mechanisms, copper corrosion mechanisms, and chlorine evolution mechanisms [Delauney
+et al. 2010]. Challenges with these techniques in MEM applications are that the sensor node heads
+should be designed in such a way as to make it suitable for wiper cleaning and the wipers must be
+in good condition to perform such functionalities. Also, adapting copper corrosion mechanisms for
+sensor protection does not easily work for existing sensors and the cost is also relatively high.
+In regard to WQM, researchers and manufacturers should look into new ways WQM sensor de-
+vices can be designed with antifouling capabilities to ensure that the sensor devices are operational
+at all times and to extend the lifetime of the sensor nodes. This is necessary because the existing
+sensors with anti-fouling capabilities for fresh water monitoring (YSI EXO sonde and YSI 6-Series
+sonde have shorter deployment duration ranging from 60-90 days and 30 days, respectively (site
+dependent) [Xylem Inc. 2015a]. These sensor devices should be able to support local and remote
+communication technologies. Researchers should also consider the power consumption of sensors
+in an attempt to introduce new design choices to overcome fouling. In designing these new sen-
+sor devices, cost should be considered since the current techniques adapted in MEM are costly to
+implement. Therefore low-cost sensor devices that can support longer deployment duration with an-
+tifouling capabilities for WQM should be explored and developed for commercial purposes. It will
+also be beneﬁcial for the research community to analyze the bio-fouling effects on sensor devices
+used for measuring water quality parameters in fresh water sources and propose various possible
+solutions for bio-fouling protection of sensors.
+7.6. Sensor Drift and Calibration
+According to [Holmberg et al. 1997], drift is a temporal shift of sensor response under constant
+physical and chemical conditions. These conditions are typically induced by water damage to the
+sensors or water ﬂuxes within the ground, which could affect the interpretation of data to be seen as
+measurement errors [Luethi and Phillips 2016]. The authors in [Luethi and Phillips 2016] discussed
+the challenges and solutions for long-term permafrost borehole temperature monitoring and data
+interpretation. Utilizing WSN for WQM requires sensors to detect certain parameters in real-time,
+which comes with technology related limitations known as sensor drift. Sensor drift has to be solved
+when sensors are going to be deployed for monitoring purposes in which the data obtained might
+be used for process control and decision making.
+Sensor drift affects chemical and biochemical sensors, which are mainly used for sensing and
+measuring chemical parameters in fresh water due to aging of the sensors, or environmental changes
+such as temperature and pressure variations [Holmberg et al. 1997; Bourgeois et al. 2003]. Sensor
+drift affects the accuracy of data collected for analysis over time. This means that using the data for
+trend analysis or for prediction may result in data inaccuracy and inconsistency. Another limitation
+with respect to sensor drift is related to calibration. A calibration drift is an electronic drift in the
+equipment from the last time it was calibrated, and is determined by the difference between readings
+on check-standards (solutions that contain a range of routine and challenging analytes, useful for
+setting up instrumentation or troubleshooting) of a cleaned sensor and a calibrated sensor [Wagner
+et al. 2006]. Existing techniques use adaptive estimation algorithms to model drifting of sensors in
+odor recognition applications and adaptive drift compensation models for malodorous sources in
+environment applications [Holmberg et al. 1997; Romain et al. 2002].
+Sensors deployed to monitor fresh water sources over a long period of time are liable to drift, and
+this drift must be taken into account in data processing/aggregation. It would be beneﬁcial for re-
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:30 K. S. Adu-Manu et al.
+searchers to study and develop new algorithms and models that consider sensor drift in WSN-based
+WQM systems. Moreover, research efforts should be put on making the existing sensor devices more
+stable and less affected by drift when deployed for a long time. Also, researchers should incorporate
+sensor drift in protocol analysis when designing various protocols for WSNs for WQM.
+7.7. Underwater Propagation
+Communication among nodes in underwater WSNs is a challenging task due to limited avail-
+ability of bandwidth, signal fading, node failure, and propagation delay [Tan et al. 2011; Suciu
+et al. 2015]. Underwater communication in marine water sources is challenging because GPS sig-
+nals and other communication technologies such as ZigBee do not propagate well through water;
+hence, an alternative communication such as acoustic communication is needed for such environ-
+ments [Suciu et al. 2015]. In WQM, most of the deployed systems use terrestrial communication
+technologies (e.g., GSM, GPRS, ZigBee, WiFi, and WiMax) since the sensor nodes normally are
+incorporated with a radio module for wireless communication. In monitoring underground water,
+two or more communication technologies could be adapted for real-time monitoring. Combining
+underwater acoustic communication and any of the terrestrial communication standards (i.e., GPRS
+or GSM) will be a better choice when monitoring fresh water sources that require the sensors to
+be placed underwater. In considering the combination of both underwater and terrestrial commu-
+nication standards in WQM applications (especially for underground water quality monitoring),
+researchers should look into issues related to the channel, the protocol (e.g., MAC) and also issues
+that have to do with the node mobility.
+8. CONCLUSIONS
+In this paper, we provide a survey of the current state-of-the-art in the design and implementa-
+tion of WSN-based WQM systems, describing a framework for WSN-based WQM systems and
+discussing the technologies used at each stage in the monitoring process. Furthermore, we describe
+existing implementations that use WSNs to monitor water quality. The communication techniques,
+energy management schemes and data processing approaches employed in these systems are also
+discussed.
+While there have been many advances in water quality monitoring over the years, as highlighted in
+this paper, there are a number of open issues that need additional research to further the use of WSN-
+based WQM systems. To the best of our knowledge, there are no security mechanisms discussed in
+this area. The safety of the data and the entire network in the WQM process is paramount. Issues
+with malicious attackers or physical break-down of the infrastructure, eavesdropping, and trafﬁc
+analysis should be thoroughly considered in future systems. Moreover, energy harvesting techniques
+that can support the sensor network to make it operational for longer periods of time should also
+be researched. Finally, data processing and aggregation algorithms should be developed to ensure
+proper data management, and biofouling, sensor drift and underwater communication are all issues
+that should be considered in the development of WSNs for WQM. Addressing these issues will
+enhance the overall performance and utility of WSN-based WQM systems.
+REFERENCES
+F. Adamo, F. Attivissimo, C. G. C. Carducci, and A. M. L. Lanzolla. 2015. A Smart Sensor Network for Sea Water Quality
+Monitoring. Sensors Journal, IEEE 15, 5 (2015), 2514–2522.
+I.F. Akyildiz and E.P. Stuntebeck. 2006. Wireless underground sensor networks: Research challenges.Ad Hoc Networks 4, 6
+(2006), 669–686. DOI:http://dx.doi.org/10.1016/j.adhoc.2006.04.003
+I. F. Akyildiz, P. Wang, and S.-C. Lin. 2016. SoftWater: Software-deﬁned networking for next-generation underwater com-
+munication systems. Ad Hoc Networks 46 (2016), 1–11.
+C. Albaladejo, P. Sánchez, A. Iborra, F. Soto, J. A. López, and R. Torres. 2010. Wireless sensor networks for oceanographic
+monitoring: A systematic review. Sensors 10, 7 (2010), 6948–6968.
+E. Aleisa. 2013. Wireless Sensor Networks Framework for Water Resource Management that Supports QoS in the King-
+dom of Saudi Arabia. In Proc. of Ambient Systems, Networks and Technologies (ANT). Elsevier, Halifax, Nova Scotia,
+Canada, 232–239. DOI:http://dx.doi.org/10.1016/j.procs.2013.06.034
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:31
+A. Alkandari, M. Alnasheet, Y . Alabduljader, and S.M. Moein. 2011. Wireless sensor network (WSN) for water monitoring
+system: case study of Kuwait Beaches. International Journal of Digital Information and Wireless Communications
+(IJDIWC) 1, 4 (2011), 709–717.
+M.K. Amruta and M.T. Satish. 2013. Solar powered water quality monitoring system using wireless sensor network. In
+Proc. of International Multi-Conference on Automation, Computing, Communication, Control and Compressed Sensing
+(iMac4s). IEEE, Kottayam, 281–285. DOI:http://dx.doi.org/10.1109/iMac4s.2013.6526423
+I. Amundson and X.D. Koutsoukos. 2009. A Survey on Localization for Mobile Wireless Sensor Networks. In Mobile
+Entity Localization and Tracking in GPS-less Environments , Richard Fuller and Xenofon D. Koutsoukos (Eds.).
+Lecture Notes in Computer Science, V ol. 5801. Springer-Verlag Berlin Heidelberg, Berlin Heidelberg, 235–254.
+DOI:http://dx.doi.org/10.1007/978-3-642-04385-7_16
+Analytical Technology, Inc. 2015. Fast, Reliable Fluoride Monitoring! (2015). Retrieved August, 2016 from http://www.
+analyticaltechnology.com/analyticaltechnology/gas-water-monitors/product.aspx?ProductID=1076&ImageID=1360
+ATI Analytic Technologies 2016. Measuring The Air We Breathe & the Water We Drink. (2016). Retrieved August, 2016
+from http://www.analyticaltechnology.com
+J. A. R. Azevedo and F. E. S. Santos. 2012. Energy harvesting from wind and water for autonomous wireless sensor nodes.
+IET Circuits, Devices Systems 6, 6 (Nov. 2012), 413–420. DOI:http://dx.doi.org/10.1049/iet-cds.2011.0287
+J. Bartram and R. Ballance. 1996.Water quality monitoring: a practical guide to the design and implementation of freshwater
+quality studies and monitoring programmes (1st. ed.). E&FN Spon, London.
+M. S. BenSaleh, S. M. Qasim, A. M. Obeid, and A. Garcia-Ortiz. 2013. A review on wireless sensor network for water
+pipeline monitoring applications. In Collaboration Technologies and Systems (CTS), 2013 International Conference on.
+IEEE, 128–131.
+J. Bhardwaj, K.K. Gupta, and R. Gupta. 2015. A review of emerging trends on water quality measurement sensors. In
+Proc. of International Conference on Technologies for Sustainable Development (ICTSD). IEEE, Mumbai, India, 1–6.
+DOI:http://dx.doi.org/10.1109/ICTSD.2015.7095919
+S. Bhattacharya, S. Sridevi, and R. Pitchiah. 2012. Indoor air quality monitoring using wireless sensor network.
+In Proc. of the Sixth International Conference on Sensing Technology (ICST) . IEEE, Kolkata, India, 422–427.
+DOI:http://dx.doi.org/10.1109/ICSensT.2012.6461713
+W. Bourgeois, J.E. Burgess, and R.M. Stuetz. 2001. On-line monitoring of wastewater quality: a review.Journal of chemical
+technology and biotechnology 76, 4 (2001), 337–348.
+W. Bourgeois, A.-C. Romain, J. Nicolas, and R. M. Stuetz. 2003. The use of sensor arrays for environmental monitoring:
+interests and limitations. Journal of Environmental Monitoring 5, 6 (2003), 852–860.
+D. G. Burke and J. Allenby. 2014. Low Cost Water Quality Monitoring Needs Assessment. (2014). Retrieved August, 2016
+from http://burkeassociates.biz/low-cost-water-quality-monitoring-needs-assessment/
+J.V . Capella, A. Bonastre, R. Ors, and M. Peris. 2013. In line river monitoring of nitrate concentration by means of a Wireless
+Sensor Network with energy harvesting. Sensors and Actuators B: Chemical 177 (2013), 419–427.
+D. Carboni, A. Gluhak, J. A. McCann, and T. H. Beach. 2016. Contextualising Water Use in Residential Settings: A Survey
+of Non-Intrusive Techniques and Approaches. Sensors 16, 5 (2016), 738.
+M. L. Carroll, S. Cochrane, R. Fieler, R. Velvin, and P. White. 2003. Organic enrichment of sediments from salmon farming
+in Norway: environmental factors, management practices, and monitoring techniques.Aquaculture 226, 1â ˘A¸ S4 (2003),
+165 – 180. DOI:http://dx.doi.org/10.1016/S0044-8486(03)00475-7 Management of Aquaculture Efﬂuents.
+CENSAR Technologies 2016. Drinking Water Quality, Distribution system monitoring, Water plants. (2016). Retrieved
+August, 2016 from http://www.censar.com
+N. Chaamwe. 2010. Wireless sensor networks for water quality monitoring: a case of Zambia. In Proc. of the 4th
+International Conference on Bioinformatics and Biomedical Engineering (iCBBE) . IEEE, Chengdu, China, 1–6.
+DOI:http://dx.doi.org/10.1109/ICBBE.2010.5515792
+D. Chapman. 1996.Water Quality Assessments: A guide to the use of biota, sediments and water in environmental monitoring
+(2nd. ed.). University Press, Cambridge, UK.
+C. Chen, X. Jun-ming, and G. Hui-fang. 2011. Polluted water monitoring based on wireless sensor. In Proc. of the
+International Conference on Electronics, Communications and Control (ICECC) . IEEE, Ningbo, China, 961–963.
+DOI:http://dx.doi.org/10.1109/ICECC.2011.6066393
+X. Chen, K. Makki, K. Yen, and N. Pissinou. 2009. Sensor network security: a survey. Communications Surveys Tutorials,
+IEEE 11, 2 (Second 2009), 52–73. DOI:http://dx.doi.org/10.1109/SURV .2009.090205
+W.-Y . Chung and J.-H. Yoo. 2015. Remote water quality monitoring in wide area.Sensors and Actuators B: Chemical 217
+(2015), 51–57.
+Connecticut Department of Public Health 2015. Manganese in Drinking Water. (2015). Retrieved August, 2016 from http:
+//www.ct.gov/dph/lib/dph/drinking_water/pdf/manganese.pdf
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:32 K. S. Adu-Manu et al.
+L.E. Cordova-Lopez, A. Mason, J.D. Cullen, A. Shaw, and A.I. Al-Shamma’a. 2007. Online vehicle and atmospheric pol-
+lution monitoring using GIS and wireless sensor networks. In Journal of Physics: Conference Series , V ol. 76. IOP
+Publishing Ltd, Bristol, UK, 12–19. DOI:http://dx.doi.org/10.1088/1742-6596/76/1/012019
+J. Cotruvo. 2011. Hardness in Drinking Water, Background Document for Development of WHO Guidelines for Drink-
+ing Water Quality. (2011). Retrieved January, 2016 from http://www.who.int/water_sanitation_health/dwq/chemicals/
+hardness.pdf
+C. E. H. Curiel, V . H. B. Baltazar, and J. H. P. Ramírez. 2016. Wireless Sensor Networks for Water Quality Monitoring: Proto-
+type Design. International Journal of Environmental, Chemical, Ecological, Geological and Geophysical Engineering
+10, 2 (2016), 158–163.
+L. Delauney, C. Compere, and M. Lehaitre. 2010. Biofouling protection for marine environmental sensors. Ocean Science
+6, 2 (2010), 503–511.
+Y . Derbew and M. Libsie. 2014. A wireless sensor network framework for large-scale industrial wa-
+ter pollution monitoring. In Proc. of IST-Africa Conference . IEEE, Le Meridien Ile Maurice, 1–8.
+DOI:http://dx.doi.org/10.1109/ISTAFRICA.2014.6880619
+S. Dhawan. 2007. Analogy of promising wireless technologies on different frequencies: Bluetooth, WiFi, and WiMAX. In
+Proc. of the 2nd International Conference on Wireless Broadband and Ultra Wideband Communications. IEEE, Sydney,
+NSW, 14. DOI:http://dx.doi.org/10.1109/AUSWIRELESS.2007.27
+J. Dong, G. Wang, H. Yan, J. Xu, and X. Zhang. 2015. A survey of smart water quality monitoring system. Environmental
+Science and Pollution Research22, 7 (2015), 4893–4906.
+M. Eckenfelder. 2001. Government of British Columbia, Environmental Protection Division, Water Quality Guidelines
+for Temperature. (Aug. 2001). Retrieved January, 2016 from http://www.env.gov.bc.ca/wat/wq/BCguidelines/temptech/
+temperature.html
+D. Estrin, L. Girod, G. Pottie, and M. Srivastava. 2001. Instrumenting the world with wireless sensor networks. In Proc.
+of the IEEE International Conference on Acoustics, Speech, and Signal Processing , V ol. 4. IEEE, Salt Lake City, UT,
+2033–2036. DOI:http://dx.doi.org/10.1109/ICASSP.2001.940390
+D. Estrin, A. Sayeed, and M. Srivastava. 2002. Wireless sensor networks. In Tutorial at the Eighth ACM International
+Conference on Mobile Computing and Networking (MobiCom), V ol. 255. ACM, Atlanta, GA.
+K. Farrell-Poe. 2005. Water Quality & Monitoring. (2005). Retrieved August, 2016 from https://cals.arizona.edu/
+watershedsteward/resources/docs/guide/(10)Water\%20Quality.pdf
+A. Faustine, A. Mvuma, H. Mongi, M. Gabriel, A. Tenge, and S. Kucel. 2014. Wireless Sensor Networks for Water Quality
+Monitoring and Control within Lake Victoria Basin: Prototype Development. Wireless Sensor Network 6, 12 (Dec.
+2014), 281–290. DOI:http://dx.doi.org/10.4236/wsn.2014.612027
+D. Feng, L. Lu, Y . Yuan-Wu, G. Li, S. Li, and G. Feng. 2014. Device-to-device communications in cellular networks.
+Communications Magazine, IEEE 52, 4 (2014), 49–55.
+M. S. Garcia, D. Carvalho, O. Zlydareva, C. Muldoon, B. F. Masterson, M. J. O’Grady, W. G. Meijer, J. J. O’Sullivan, and
+Gregory M. P. O’Hare. 2012. An Agent-Based Wireless Sensor Network for Water Quality Data Collection . Springer
+Berlin Heidelberg, Berlin, Heidelberg, 454–461. DOI:http://dx.doi.org/10.1007/978-3-642-35377-2_63
+F. Ge and Y . Wang. 2016. Energy Efﬁcient Networks for Monitoring Water Quality in Subterranean Rivers.Sustainability 8,
+6 (2016), 526.
+H.B. Glasgow, J.M. Burkholder, R.E. Reed, A.J. Lewitus, and J.E. Kleinman. 2004. Real-time remote monitoring of water
+quality: a review of current applications, and advancements in sensor, telemetry, and computing technologies. Journal
+of Experimental Marine Biology and Ecology 300, 1 (2004), 409–448.
+L.M. Goddijn and M. White. 2006. Using a digital camera for water quality measurements in Galway Bay.Estuarine, coastal
+and shelf science 66, 3 (2006), 429–436.
+Hach 2016. Leading The Way in Water Analytics. (2016). Retrieved August, 2016 from http://www.hach.com
+D. G. Hadjimitsis, M. G. Hadjimitsis, K. Themistocleous, and A. Agapiou. 2009. Integration of micro-sensor technology
+and remote sensing for monitoring coastal water quality in a municipal beach and other areas in Cyprus. (2009).
+DOI:http://dx.doi.org/10.1117/12.830582
+J. Hall, A.D. Zafﬁro, R.B. Marx, P.C. Kefauver, E.R. Krishnan, R.C. Haught, and J.G. Herrmann. 2007. On-line water quality
+parameters as indicators of distribution system contamination. Journal (American Water Works Association)99, 1 (Jan.
+2007), 66–77.
+Q.-D. Ho, Y . Gao, and T. Le-Ngoc. 2013. Challenges and research opportunities in wireless communication networks for
+smart grid. IEEE Wireless Communications 20, 3 (2013), 89–95.
+M. Holmberg, F. AM. Davide, C. Di Natale, A. D’Amico, F. Winquist, and I. Lundström. 1997. Drift counteraction in odour
+recognition applications: lifelong calibration method. Sensors and Actuators B: Chemical 42, 3 (1997), 185–194.
+In-Situ 2016. Water Monitoring Equipment, Water Monitoring Testing & More. (2016). Retrieved August, 2016 from https:
+//in-situ.com
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:33
+Trupti Jadhav, Ulka Patil, Sonali Masrankar, Shweta Mestry, Manjiri Pathak, Vijaya Jadhav, and Savita Chavan. 2016.
+Analysing Quality of Water and Soil Using WSN. Imperial Journal of Interdisciplinary Research 2, 5 (2016).
+P. Jiang, H. Xia, Z. He, and Z. Wang. 2009. Design of a water environment monitoring system based on wireless sensor
+networks. Sensors 9, 8 (2009), 6411–6434.
+N. Jin, R. Ma, Y . Lv, X. Lou, and Q. Wei. 2010. A novel design of water environment monitor-
+ing system based on WSN. In Proc. of ICCDA , V ol. 2. IEEE, Qinhuangdao, China, V2–593–V2–597.
+DOI:http://dx.doi.org/10.1109/ICCDA.2010.5541305
+Y . Kaizu, M. Iio, H. Yamada, and N. Noguchi. 2011. Development of unmanned airboat for water-quality mapping.Biosys-
+tems Engineering 109, 4 (2011), 338–347.
+E. Karami, F.M. Bui, and H.H. Nguyen. 2012. Multisensor data fusion for water quality monitoring using wireless sensor
+networks. In Proc. of the Fourth International Conference on Communications and Electronics (ICCE) . IEEE, Hue,
+80–85. DOI:http://dx.doi.org/10.1109/CCE.2012.6315875
+F.A. Katsriku, M. Wilson, G.G. Yamoah, J.D. Abdulai, B.M.A. Rahman, and K.T.V . Grattan. 2015. Framework for Time
+Relevant Water Monitoring System. InComputing in Research and Development in Africa. Springer International Pub-
+lishing, Switzerland, 3–19. DOI:http://dx.doi.org/10.1007/978-3-319-08239-4_1
+K.K. Khedo, R. Perseedoss, and A. Mungur. 2010. A Wireless Sensor Network Air Pollution Monitoring System. CoRR
+abs/1005.1737 (2010), 31–45. http://arxiv.org/abs/1005.1737
+O. Korostynska, A. Mason, and A.I. Al-Shamma’a. 2013. Monitoring pollutants in wastewater: traditional lab based ver-
+sus modern real-time approaches. In Smart Sensors for Real-Time Water Quality Monitoring . V ol. 4. Springer Berlin
+Heidelberg, Berlin Heidelberg, 1–24. DOI:http://dx.doi.org/10.1007/978-3-642-37006-9_1
+Laird Technologies 2012. Understanding Range for RF Devices. (Oct. 2012). Retrieved August, 2016 from https://www.
+digikey.com/WebExport/SupplierContent/Laird_776/PDF/laird-wireless-understanding-range-rf-devices.pdf
+C.-T. Lee and K.-L. Wong. 2010. Planar monopole with a coupling feed and an inductive shorting strip for LTE/GSM/UMTS
+operation in the mobile phone. IEEE Transactions on Antennas and Propagation58, 7 (2010), 2479–2483.
+Libelium 2014. Smart Water Sensors to monitor water quality in rivers, lakes and the sea. (Feb. 2014). Retrieved August,
+2016 from http://www.libelium.com/smart-water-sensors-monitor-water-quality-leakages-wastes-in-rivers-lakes-sea
+Libelium 2016. Connecting Sensors to the Cloud. (2016). Retrieved August, 2016 from http://www.libelium.com
+K. Loizou and E. Koutroulis. 2016. Water level sensing: State of the art review and performance evaluation of a low-cost
+measurement system. Measurement 89 (2016), 204–214.
+R. Luethi and M. Phillips. 2016. Challenges and solutions for long-term permafrost borehole temperature monitoring and
+data interpretation. Geogr. Helv 71 (2016), 121–131.
+C.Ó. Mathúna, T. O’Donnell, R.V . Martinez-Catala, J. Rohan, and B. O’Flynn. 2008. Energy scavenging for long-term
+deployable wireless sensor networks. Talanta 75, 3 (2008), 613–623.
+M.L. McFarland and T.L. Provin. 1999. Hydrogen Sulﬁde in Drinking Water - Causes and Treatment Alternatives. (1999).
+Retrieved August, 2016 from http://soiltesting.tamu.edu/publications/L-5312.pdf
+D. Mo, Y . Zhao, and S. Chen. 2012. Automatic Measurement and Reporting System of Water Quality Based on GSM. In
+Proc. of the 2012 Second International Conference on Intelligent System Design and Engineering Application (ISDEA
+’12). IEEE Computer Society, Washington, DC, USA, 1007–1010. DOI:http://dx.doi.org/10.1109/ISdea.2012.595
+A. H. Moon, U. Iqbal, and G. M. Bhat. 2015. Secured Data Acquisition System for Smart Water Applications using WSN.
+Indian Journal of Science and Technology9, 10 (Dec. 2015).
+R. Morais, S.G. Matos, M.A. Fernandes, A.L.G. Valente, SFSP Soares, PJSG Ferreira, and MJCS Reis. 2008. Sun, wind and
+water ﬂow as energy supply for small stationary data acquisition platforms. Computers and electronics in agriculture
+64, 2 (2008), 120–132.
+Mouser Electronics, Inc 2015. RF Wireless Technology. (2015). Retrieved August, 2016 from http://www.mouser.com/
+applications/rf-wireless-technology/
+K. Murphy, B. Heery, T. Sullivan, D. Zhang, L. Paludetti, K.T. Lau, D. Diamond, E. Costa, and F. Regan. 2015. A low-cost
+autonomous optical sensor for water quality monitoring. Talanta 132 (2015), 520–527.
+M.A. Nasirudin, U.N. Za’bah, and O. Sidek. 2011. Fresh water real-time monitoring system based on Wireless Sensor
+Network and GSM. In Proc. of the IEEE Conference on Open Systems (ICOS) . IEEE, Langkawi, Malaysia, 354–357.
+DOI:http://dx.doi.org/10.1109/ICOS.2011.6079290
+N. Nasser, A. Ali, L. Karim, and S. Belhaouari. 2013. An efﬁcient Wireless Sensor Network-based water quality monitoring
+system. In Computer Systems and Applications (AICCSA), 2013 ACS International Conference on. IEEE, 1–4.
+T.-D. Nguyen, T. T. Thanh, L.-L. Nguyen, and H.-T. Huynh. 2015. On the design of energy efﬁcient environment monitoring
+station and data collection network based on ubiquitous wireless sensor networks. In Computing & Communication
+Technologies-Research, Innovation, and Vision for the Future (RIVF), 2015 IEEE RIVF International Conference on .
+IEEE, 163–168.
+R. Noble and R. Weisberg. 2005. A review of technologies for rapid detection of bacteria in recreational waters. J Water
+Health 3 (2005), 381–392.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:34 K. S. Adu-Manu et al.
+E. O’Connor, D. Zhang, A. F. Smeaton, N. E. O’Connor, and F. Regan. 2012. Multi-modal sensor networks for
+more effective sensing in Irish coastal and freshwater environments. In Oceans. IEEE, Hampton Roads, V A, 1–9.
+DOI:http://dx.doi.org/10.1109/OCEANS.2012.6404894
+B. O’Flyrm, R. Martinez, J. Cleary, C. Slater, F. Regan, D. Diamond, and H. Murphy. 2007. SmartCoast: a wireless sensor
+network for water quality monitoring. In Proc. of the 32nd IEEE Conference on Local Computer Networks (LCN) .
+IEEE, Dublin, Ireland, 815–816. DOI:http://dx.doi.org/10.1109/LCN.2007.34
+C.G. Panayiotou, D. Fatta, and M.P. Michaelides. 2005.Environmental monitoring using wireless sensor networks. Technical
+Report. University of Cyprus, Dept. of Electrical Engineering, Nicosia, Cyprus.
+L. Parra, E. Karampelas, S. Sendra, J. Lloret, and J. JPC Rodrigues. 2015. Design and deployment of a smart system for
+data gathering in estuaries using wireless sensor networks. In Computer, Information and Telecommunication Systems
+(CITS), 2015 International Conference on. IEEE, 1–5.
+S. Pattem, B. Krishnamachari, and R. Govindan. 2008. The Impact of Spatial Correlation on Routing with Com-
+pression in Wireless Sensor Networks. ACM Trans. Sen. Netw. 4, 4, Article 24 (Sept. 2008), 33 pages.
+DOI:http://dx.doi.org/10.1145/1387663.1387670
+J. Peng. 2009. The Design of Wetland Water Environmental Monitoring System Using Digital Video Based on Wireless
+Sensor Networks. In Proc. of the WRI International Conference on Communications and Mobile Computing (CMC) ,
+V ol. 2. IEEE, Yunnan, China, 391–395.DOI:http://dx.doi.org/10.1109/CMC.2009.220
+D.P. Pereira, W.R.A. Dias, M. Braga, R.d.S. Barreto, C.M.S. Figueiredo, and V . Brilhante. 2008. Model to inte-
+gration of RFID into wireless sensor network for tracking and monitoring animals. In Computational Science
+and Engineering, 2008. CSE’08. 11th IEEE International Conference on . IEEE, Sao Paulo, Brazil, 125–131.
+DOI:http://dx.doi.org/10.1109/CSE.2008.25
+S. Pobering and N. Schwesinger. 2004. A novel hydropower harvesting device. In MEMS, NANO and Smart Systems, 2004.
+ICMENS 2004. Proceedings. 2004 International Conference on. IEEE, 480–485.
+O. Postolache, J.D. Pereira, and P.S. Girão. 2014. Wireless sensor network-based solution for environmental monitoring:
+water quality assessment case study. IET Science, Measurement & Technology8, 6 (2014), 610–616.
+M. Rahnema. 1993. Overview of the GSM system and protocol architecture. Communications Magazine, IEEE 31, 4 (April
+1993), 92–100. DOI:http://dx.doi.org/10.1109/35.210402
+A. S. Rao, S. Marshall, J. Gubbi, M. Palaniswami, R. Sinnott, and V . Pettigrovet. 2013. Design of low-cost autonomous
+water quality monitoring system. In Proc. of Advances in Computing, Communications and Informatics (ICACCI) .
+IEEE, Mysore, India, 14–19. DOI:http://dx.doi.org/10.1109/ICACCI.2013.6637139
+N. Rapousis, M. Katsarakis, and M. Papadopouli. 2015. QoWater: A Crowd-sourcing Approach for Assessing the Water
+Quality. In Proc. of ACM Cyber-Physical Systems for Smart Water Networks (CySWater) (CySWater ’15). ACM, New
+York, NY , USA, Article 11, 6 pages.DOI:http://dx.doi.org/10.1145/2738935.2738946
+Z. Rasin and M. R. Abdullah. 2009. Water quality monitoring system using zigbee based wireless sensor network. Interna-
+tional Journal of Engineering & Technology9, 10 (2009), 24–28.
+F. Regan, A. Lawlor, B. O. Flynn, J. Torres, R. Martinez-Catala, C. O’Mathuna, and J. Wallace. 2009. A demonstration
+of wireless sensing for long term monitoring of water quality. In Proc. of Local Computer Networks. IEEE, 819–825.
+DOI:http://dx.doi.org/10.1109/LCN.2009.5355047
+C. Ritter, M. Cottingham, J. Leventhal, and A. Mickelson. 2014. Remote delay tolerant water quality montor-
+ing. In Global Humanitarian Technology Conference (GHTC), 2014 IEEE . IEEE, San Jose, CA, 462–468.
+DOI:http://dx.doi.org/10.1109/GHTC.2014.6970323
+A.-C. Romain, P. André, and J. Nicolas. 2002. Three years experiment with the same tin oxide sensor arrays for the identiﬁ-
+cation of malodorous sources in the environment. Sensors and Actuators B: Chemical 84, 2 (2002), 271–277.
+T.G. Sanders. 1983. Design of networks for monitoring water quality. Water Resources Publication, Littleton, CO.
+S. S. Sandha, S. Randhawa, and B. Srivastava. 2016. Blue Water: A Common Platform to Put Water Quality Data in India to
+Productive Use by Integrating Historical and Real-time Sensing Data. (2016).
+K.E. Sawaya, L.G. Olmanson, N.J. Heinert, P.L. Brezonik, and M.E. Bauer. 2003. Extending satellite remote sensing to local
+scales: land and water resource monitoring using high-resolution imagery.Remote Sensing of Environment88, 1 (2003),
+144–156.
+S::can 2016. Intelligent. Optical. Online. (2016). Retrieved August, 2016 from http://www.s-can.at
+L. A. Seders, C. A. Shea, M. D. Lemmon, P. A. Maurice, and J. W. Talley. 2007. LakeNet: an integrated sensor network for
+environmental sensing in lakes. Environmental Engineering Science 24, 2 (2007), 183–191.
+D. Shin, S.Y . Na, J.Y . Kim, and S.-J. Baek. 2007. Sonar localization using ubiquitous sensor network for water pollution mon-
+itoring ﬁsh robots. In Proc. of the IEEE International Symposium on Signal Processing and Information Technology .
+IEEE, Giza, Egypt, 80–85. DOI:http://dx.doi.org/10.1109/ISSPIT.2007.4458027
+Tongxin Shu. 2016. Power management in a sensor network for automated water quality monitoring . Ph.D. Dissertation.
+University of British Columbia.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:35
+B. Sidhu, H. Singh, and A. Chhabra. 2007. Emerging wireless standards - WiFi, ZigBee and WiMAX. World Academy of
+Science, Engineering and Technology25, 2007 (2007), 308–313.
+S. Silva, H.N. Nguyen, V . Tiporlini, and K. Alameh. 2011. Web based water quality monitoring with sensor network: Em-
+ploying ZigBee and WiMax technologies. In Proc. of High Capacity Optical Networks and Enabling Technologies
+(HONET). IEEE, Riyadh, Saudi Arabia, 138–142. DOI:http://dx.doi.org/10.1109/HONET.2011.6149804
+M.V . Storey, B. van der Gaag, and B.P. Burns. 2011. Advances in on-line drinking water quality monitoring and early
+warning systems. Water Research45, 2 (2011), 741–747.
+R.O. Strobl and P.D. Robillard. 2008. Network design for water quality monitoring of surface freshwaters: A review.Journal
+of environmental management 87, 4 (2008), 639–648.
+G. Suciu, V . Suciu, C. Dobre, and C. Chilipirea. 2015. Tele-Monitoring System for Water and Underwater Environments
+Using Cloud and Big Data Systems. In 2015 20th International Conference on Control Systems and Computer Science.
+809–813. DOI:http://dx.doi.org/10.1109/CSCS.2015.31
+B. Sun, F. Ahmed, F. Sun, Q. Qian, and Y . Xiao. 2016. Water quality monitoring using STORM 3 Data Loggers and a
+wireless sensor network. International Journal of Sensor Networks 20, 1 (2016), 26–36.
+Sun Microsystems 2007. Sun Small Programmable Object Technology (SPOT). (2007). Retrieved August, 2016 from http:
+//academic.fuseyism.com/ambassador/slides/sunspot.pdf
+T. V . Suslow. 2004.Oxidation-Reduction Potential (ORP) for Water Disinfection Monitoring, Control, and Documentation.
+Technical Report. ANR Publication 8149. University of California, Division of Agriculture and Natural Resources.
+R. Szewczyk, J. Polastre, A. Mainwaring, and D. Culler. 2004. Lessons from a sensor network expedition. InWireless Sensor
+Networks. Lecture Notes in Computer Science, V ol. 2920. Springer Berlin Heidelberg, Berlin Heidelberg, 307–322.
+H.-P. Tan, R. Diamant, W. KG. Seah, and M. Waldmeyer. 2011. A survey of techniques and challenges in underwater
+localization. Ocean Engineering 38, 14 (2011), 1663–1676.
+G. W. Taylor, J. R. Burns, S. M. Kammann, W. B. Powers, and T. R. Wel. 2001. The energy harvesting eel: a small subsurface
+ocean/river power generator. Oceanic Engineering, IEEE Journal of 26, 4 (2001), 539–547.
+Technical Associates 2016. Nuclear Instruments and Systems. (2016). Retrieved August, 2016 from http://www.
+tech-associates.com
+TPS Pty Ltd 2008. 90-FLT Sensor. (March 2008). Retrieved August, 2016 from http://www.tps.com.au/handbooks/
+90FLTv9_01.pdf
+G. Tuna, O. Arkoc, and K. Gulez. 2013. Continuous monitoring of water quality using portable and low-cost ap-
+proaches. International Journal of Distributed Sensor Networks 2013, Article 249598 (May 2013), 11 pages.
+DOI:http://dx.doi.org/10.1155/2013/249598
+G. Tuna, B. Nefzi, O. Arkoc, and S. M. Potirakis. 2014. Wireless Sensor Network-Based Water Quality Monitoring System.
+In Proc. of Materials and Applications for Sensors and Transducers III (Key Engineering Materials) , V ol. 605. Trans
+Tech Publications, 47–50. DOI:http://dx.doi.org/10.4028/www.scientiﬁc.net/KEM.605.47
+United Nations 2005. United Nations Environment Programme - Operational Guide for Data Submission. (2005). Retrieved
+August, 2016 from http://www.unep.org/gemswater/Portals/24154/pdfs/op_guide_for_data_2005.pdf
+Universe Today 2015. Universe Today - What percent of Earth is Water? (Aug. 2015). Retrieved January, 2016 from http:
+//www.universetoday.com/65588/what-percent-of-earth-is-water/
+U.S. EPA 2015a. Online Water Quality Monitoring Primer for Water Quality Surveillance and Response Systems. (May
+2015). Retrieved January, 2016 from http://www.epa.gov/sites/production/ﬁles/2015-06/documents/online_water_
+quality_monitoring_primer.pdf
+U.S. EPA 2015b. Water Quality Surveillance and Response System Primer. (May 2015). Retrieved January, 2016 from
+http://water.epa.gov/infrastructure/watersecurity/lawsregs/upload/epa817b15002.pdf
+USGS 2015. World’s Water. (Aug. 2015). Retrieved January, 2016 from http://water.usgs.gov/edu/earthwherewater.html
+H. van Niekerk. 2004. UNEP Global Environmental Monitoring System/Water Programme :South African Monitoring
+Programme Design. (Nov. 2004). Retrieved August, 2016 from https://www.dwaf.gov.za/iwqs/water_quality/GEMS/
+South_African_UNEP_GEMSWater_Monitoring_Programme.pdf
+S. Verma and Prachi. 2012. Wireless Sensor Network application for water quality monitoring in India. In Proc.
+of the National Conference on Computing and Communication Systems (NCCCS) . IEEE, Durgapur, India, 1–7.
+DOI:http://dx.doi.org/10.1109/NCCCS.2012.6412990
+W A Health 2012. Sodium in Drinking Water. (2012). Retrieved August, 2016 from http://www.public.health.wa.gov.au/
+cproot/4188/2/SodiumInDrinkingWater.pdf
+T. R. Wagh and A. P. Rao. 2014. River Monitoring an Application for Wireless Sensor Network Platform. International
+Journal of Emerging Technology and Advanced Engineering (IJETAE)4, 11 (2014), 511–515.
+R.J. Wagner, R.W. Boulger Jr, C.J. Oblinger, and B.A. Smith. 2006. Guidelines and standard procedures for continuous
+water-quality monitors: station operation, record computation, and data reporting. Technical Report. U.S. Department
+of the Interior.
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+000:36 K. S. Adu-Manu et al.
+D. Wang, R. Xu, X. Hu, and W. Su. 2016. Energy-Efﬁcient Distributed Compressed Sensing Data Aggregation for Cluster-
+Based Underwater Acoustic Sensor Networks. International Journal of Distributed Sensor Networks 2016 (2016).
+J. Wang, X.-l. Ren, Y .-l. Shen, and S.-y. Liu. 2010. A remote wireless sensor networks for water quality monitoring. In
+Proc. of Asia-Paciﬁc Conf on Innovative Computing & Communication, Intl Conf on Information Technology & Ocean
+Engineering (CICC-ITOE). IEEE, Macau, China, 7–12.
+X. Wang, L. Ma, and H. Yang. 2011. Online Water Monitoring System Based on ZigBee and GPRS. Procedia Engineering
+15 (2011), 2680–2684. DOI:http://dx.doi.org/10.1016/j.proeng.2011.08.504
+Y . Wang, G. Attebury, and B. Ramamurthy. 2006. A survey of security issues in wireless sensor networks.IEEE Communi-
+cations Surveys & Tutorials 8, 2 (Second 2006), 2–23. DOI:http://dx.doi.org/10.1109/COMST.2006.315852
+Z. Wang, Q. Wang, and X. Hao. 2009. The design of the remote water quality monitoring system based on wsn. In Proc.
+of the 5th International Conference on Wireless Communications, Networking and Mobile Computing (WiCom). IEEE,
+Beijing, China, 1–4. DOI:http://dx.doi.org/10.1109/WICOM.2009.5303974
+WaterLOG 2016. Precision Water Level solutions for rugged environments. (2016). Retrieved August, 2016 from http://
+www.waterlog.com
+WHO 2003. Total dissolved solids in Drinking-water, Background document for development of WHO Guidelines
+for Drinking-water Quality. (2003). Retrieved January, 2016 from http://www.who.int/water_sanitation_health/dwq/
+chemicals/tds.pdf
+WHO (Ed.). 2011. Guidelines for Drinking-water Quality (4th ed.). WHO Press, Geneva, Switzerland.
+WiFi Direct 2015. NFC vs Bluetooth vs Wiﬁ Direct: Comparison, Advantages and Disadvantages. (2015). Retrieved August,
+2016 from http://www.itechwhiz.com/2014/01/nfc-bluetooth-Wiﬁdirect-comparison-differences.html
+G. Wiranto, G. A. Mambu, Hiskia, I. D. P. Hermida, and S. Widodo. 2015. Design of online data measurement and automatic
+sampling system for continuous water quality monitoring. In Proc. of IEEE Mechatronics and Automation (ICMA) .
+IEEE, Beijing, China, 2331–2335. DOI:http://dx.doi.org/10.1109/ICMA.2015.7237850
+G. Xu, W. Shen, and X. Wang. 2014. Applications of wireless sensor networks in marine environment monitoring: A survey.
+Sensors 14, 9 (2014), 16932–16954.
+Xylem Inc. 2015a. 10 Tips to Prevent Biofouling on Water Quality Instruments. (2015). https://www.ysi.com/File\
+%20Library/Documents/Tips/E108-Antifouling-Tips-Book.pdf Last time accessed: June 2016.
+Xylem Inc. 2015b. Water Quality Instrumentation. (2015). Retrieved August, 2016 from http://www.globalw.com/catalog_
+wq.html
+S.G.S. Yadav, A. Chitra, and C.L. Deepika. 2015. Reviewing the process of data fusion in wireless sensor network: a brief
+survey. International Journal of Wireless and Mobile Computing 8, 2 (2015), 130–140.
+S.-c. Yang and Y . Pan. 2010. The Application of the Wireless Sensor Network (WSN) in the Monitoring of Fushun Reach
+River in China. InProc. of the Second International Conference on Computer and Network Technology (ICCNT). IEEE,
+Bangkok, Thailand, 331–333. DOI:http://dx.doi.org/10.1109/ICCNT.2010.70
+X. Yang, K. G. Ong, W. R. Dreschel, K. Zeng, C. S. Mungle, and C. A. Grimes. 2002. Design of a wireless sensor network
+for long-term, in-situ monitoring of an aqueous environment. Sensors 2, 11 (2002), 455–472.
+G. Ye and K. Soga. 2011. Energy harvesting from water distribution systems.Journal of Energy Engineering (2011).
+YSI 2016. Water Quality Sampling and Monitoring. (2016). Retrieved August, 2016 from https://www.ysi.com
+R. Yue and T. Ying. 2011. A water quality monitoring system based on wireless sensor network & solar power supply.
+In Proc. of the IEEE International Conference on Cyber Technology in Automation, Control, and Intelligent Systems
+(CYBER). IEEE, Kunming, China, 126–129. DOI:http://dx.doi.org/10.1109/CYBER.2011.6011777
+Zap Technologies 2016. Detect. Respond. (2016). Retrieved August, 2016 from http://www.zapstechnologies.com
+M. Zennaro, A. Floros, G. Dogan, T. Sun, Z. Cao, C. Huang, M. Bahader, H. Ntareme, and A. Bagula. 2009. On the
+design of a water quality wireless sensor network (wqwsn): An application to water quality monitoring in malawi. In
+Proc. of the International Conference on Parallel Processing Workshops (ICPPW) . IEEE, Vienna, Austria, 330–336.
+DOI:http://dx.doi.org/10.1109/ICPPW.2009.57
+A. Zhan, G. Chen, and W. Wang. 2009. Utilizing automatic underwater vehicles to prolong the lifetime of underwater sensor
+networks. In Proc. of the 18th International Conference on Computer Communications and Networks (ICCCN). IEEE,
+San Francisco, CA, 1–6. DOI:http://dx.doi.org/10.1109/ICCCN.2009.5235299
+S. Zhang and L. Zhang. 2011. Water pollution monitoring system based on Zigbee wireless sensor network. In Proc. of the
+International Conference on Electronics, Communications and Control (ICECC). IEEE, Zhejiang, China, 1775–1779.
+DOI:http://dx.doi.org/10.1109/ICECC.2011.6067965
+B. Zhou, W. Dehua, L. Pan, L. Bo, and G. Zeng. 2012a. Water Quality Automatic Monitoring System
+Based on GPRS Data Communications. In Proc. of Modern Hydraulic Engineering . Elsevier, 840–843.
+DOI:http://dx.doi.org/10.1016/j.proeng.2012.01.820
+Y . Zhou, D. Wen, F. Yuan, J. Li, and M. Li. 2012b. Research of online water quality monitoring system based on zigbee
+network. Advances in Information Sciences and Service Sciences 4, 5 (2012).
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.
+Water Quality Monitoring Using Wireless Sensor Networks 000:37
+X. Zhu, D. Li, D. He, J. Wang, D. Ma, and F. Li. 2010. A remote wireless system for water quality online monitoring in
+intensive ﬁsh culture. Computers and Electronics in Agriculture 71 (2010), S3–S9.
+Received February 2016; revised August 2016; accepted October 2016
+ACM Transactions on Sensor Networks, V ol. 00, No. 00, Article 000, Publication date: 2016.

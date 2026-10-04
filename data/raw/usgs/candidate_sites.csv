@@ -1,0 +1,15 @@
+site,name,state,stratum,selection_note
+01458500,Delaware River at Frenchtown,NJ,large river,15-min T/SC/DO(mg/L+%sat)/pH
+01438500,Delaware River at Montague,NJ,large river,15-min T/SC/DO(mg/L+%sat)/pH
+05420400,Mississippi River at Dam 13 near Fulton,IL,large regulated river,15-min T/SC/DO(mg/L+%sat)/pH
+05586300,Illinois River at Florence,IL,large agricultural river,15-min T/SC/DO(mg/L+%sat)/pH
+01473500,Schuylkill River at Norristown,PA,mid-size river,15-min T/SC/DO(mg/L+%sat)/pH
+01400500,Raritan River at Manville,NJ,mid-size river,15-min T/SC/DO(mg/L+%sat)/pH
+01402000,Millstone River at Blackwells Mills,NJ,mid-size river,15-min T/SC/DO(mg/L+%sat)/pH
+01388000,Ramapo River at Pompton Lakes,NJ,mid-size river,15-min T/SC/DO(mg/L+%sat)/pH
+01467087,Frankford Creek at Castor Ave Philadelphia,PA,urban stream (CSO),15-min T/SC/DO(mg/L+%sat)/pH
+01475530,Cobbs Creek at US Hwy 1 Philadelphia,PA,urban stream,15-min T/SC/DO(mg/L+%sat)/pH
+01465798,Poquessing Creek at Grant Ave Philadelphia,PA,urban stream,15-min T/SC/DO(mg/L+%sat)/pH
+01473900,Wissahickon Creek at Fort Washington,PA,suburban stream,15-min T/SC/DO(mg/L+%sat)/pH
+11510700,Klamath River below John C. Boyle powerplant near Keno,OR,regulated (hydropeaking),15-min T/SC/DO(mg/L+%sat)/pH
+14078260,SF Crooked River near Bell Butte,OR,rangeland stream,15-min T/SC/DO(mg/L+%sat)/pH

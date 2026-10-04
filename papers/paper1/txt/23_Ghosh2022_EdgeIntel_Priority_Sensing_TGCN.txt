@@ -1,0 +1,2319 @@
+1
+Edge Intelligence Framework for Data-Driven
+Dynamic Priority Sensing and Transmission
+Sushmita Ghosh, Swades De, Shouri Chatterjee, and Marius Portmann
+Abstract—Owing to the limited storage capacity, battery-
+powered wireless sensor nodes often suffer from energy sus-
+tainability. To optimize the energy consumption of a multi-
+parameter sensor hub, a novel edge intelligence-based data-
+driven priority-aware sensing and transmission framework is
+proposed in this paper. The proposed framework jointly exploits
+the cross-correlation among the sensing parameters and temporal
+correlation of the individual sensing signals to find an optimal
+active sensor set and optimal sampling instants of the sensors in
+the next measurement cycle. The length of measurement cycle
+is dynamically decided based on the change in cross-correlation
+among the parameters and the system state. A discounted upper
+confidence bound algorithm-based optimization function is for-
+mulated to find the optimal active sensor set by solving the trade-
+off among cross-correlation, energy consumption, and length of
+measurement cycle. The proposed framework uses Gaussian pro-
+cess regressor-based prediction models to estimate the temporal
+and cross-correlated parameters of the active and inactive sensor
+set, respectively. The sampling interval of each active sensor is
+dynamically adapted based on the temporal prediction error.
+Extensive simulations are performed on air pollution monitoring
+dataset to validate the efficacy of the proposed framework in both
+real-time and non-real-time applications. The proposed algorithm
+saves up to 41% energy and 32% bandwidth with 68% data
+accuracy compared to the existing competitive frameworks for
+non-real-time systems. The proposed framework also identifies
+the time-critical sensing scenarios with 98% accuracy.
+Index Terms —Temporal correlation, cross-correlation, adap-
+tive sensing, edge intelligence, optimal sensor set, optimal sam-
+pling instants, priority-aware sensing.
+I. I NTRODUCTION
+The evolving Internet-of-Things (IoT) technology is ex-
+pected to connect billions of devices that are used in our daily
+lives. To sense the environmental conditions, IoT sensor nodes
+have enormous applications in today’s world and it is growing
+at a significant rate. To monitor various parameters in the
+environment, sensor hubs are equipped with multiple sensors.
+Such a large number of sensor hubs, wirelessly connected to
+an edge node or a central entity (CE) constitutes a wireless
+sensor network (WSN). WSNs are used in industrial process
+monitoring, smart city, smart agriculture, hospital monitoring,
+border surveillance, etc. Good quality environmental sensors
+are highly energy consuming. In many cases, sensing energy
+is higher than communication energy [1]. Hence, the energy
+efficiency and sustainability of sensor nodes with limited
+S. Ghosh, S. De, and S. Chatterjee are with the UQ-IITD Academy and De-
+partment of Electrical Engineering, Indian Institute of Technology Delhi, New
+Delhi, India (e-mail: sushmita.ghosh@uqidar.iitd.ac.in, swadesd@ee.iitd.ac.in,
+shouri@ee.iitd.ac.in)
+M. Portmann is with the School of IT and Electrical Engineering, University
+of Queensland, Brisbane, Australia (e-mail: marius@itee.uq.edu.au).
+battery capacity are of major concern [2], [3]. In such scenarios
+managing high energy demand over a massive deployment of
+sensor nodes is very challenging. To mitigate these problems
+and increase the energy efficiency of WSNs, various intelli-
+gent sensing strategies are considered in the literature. The
+edge intelligence-based adaptive sensing strategies can reduce
+the energy consumption at the sensor nodes by shifting the
+computation/processing complexity at the edge node [4], [5].
+The sensing parameters of a multi-sensing node often pos-
+sess temporal correlation and cross-correlation, which can be
+exploited at the node-level to predict some parameters from
+the other parameters. In many applications, the parameter
+variations are captured and stored at the individual sensor
+nodes, which are transmitted to the edge node at the end
+of a period called measurement cycle [6]. These mechanisms
+reduce the energy consumption in the case of non-real-time
+systems [7], where the data is not time-critical. However,
+in the case of real-time systems, the samples need to be
+transmitted to the edge node immediately after sensing. Hence,
+energy consumption in a time-critical WSN is still a subject
+of significant research interest.
+A. Related Works
+In most of the studies, sensor data collection mechanism
+is considered as a non-real-time process. The sensors collect
+samples over a cycle and transmit the stored data to the CE or
+edge node at the end of the cycle. The works in [1], [8]–[10]
+are dedicated to node-level analysis, where the sampling rate
+of a sensor is adapted based on the previously collected time
+series samples. On the other hand, the works in [4], [11], [12]
+are dedicated to network-level analysis, where some sensor
+nodes are activated to collect samples while the other nodes
+remain inactive in the network.
+In [8], three different adaptive sampling algorithms were
+proposed for node-level analysis. The first one uses the Anova
+model and Bartlett test, the second and third methods use
+the Jaccard similarity function and the Euclidean distance
+function respectively to find the new sampling rate based
+on the previously collected samples. These algorithms were
+applied on temperature and humidity sensors independently.
+The adaptive sampling algorithm, proposed in [9] uses Kalman
+Filtering based estimation technique to adapt the sampling
+interval based on the estimation error.
+The work in [10] proposed an adaptive sensor selection
+mechanism that exploits the cross-correlation among the sens-
+ing parameters of a sensor hub to find an optimal active sensor
+set at each measurement cycle based on the cross-correlation
+2
+and sensing energy consumptions of the parameters; the sen-
+sors collect samples at the Nyquist sampling rate.
+A sparse Bayesian learning (SBL)-based adaptive sensing
+strategy was proposed in [11], where some sensors in the
+network are selected over a measurement cycle based on
+the spatio-temporal correlations among the sensing signals.
+The sensor nodes were considered to have a single sensor to
+monitor a single parameter in the environment. To increase the
+energy efficiency of densely deployed multi-sensing networks,
+an adaptive sensing framework was proposed in [4]. The
+algorithm in [4] exploited the spatio-temporal correlation and
+cross-correlation among the parameters to find an optimum
+number of sensors to be activated in the next measurement
+cycle. Similarly, a Compressive sensing algorithm, proposed
+in [12] selects some sensor nodes from a large set of nodes in
+a heterogeneous sensing environment.
+A Gaussian process regression (GPR)-based prediction
+model was proposed in [13] to predict spatio-temporal pa-
+rameters of a mobile sensor network. According to [14]–[16],
+GPR can predict the spatio-temporally varying signals with
+good accuracy.
+The adaptive sensing strategies discussed above considered
+that the sensing process is non-real-time, where the data are
+transmitted to the edge node at the end of the measurement
+cycle. However, the works, in [17], [18] considered a real-
+time system, where the data collected at the sensor node are
+transmitted immediately to the edge node to monitor the sys-
+tem state. Similarly, a node-level adaptation was proposed in
+[1] for a real-time snow monitoring application. The algorithm
+detects the maximum frequency of the sensing signal using fast
+Fourier transform of the previously collected samples and the
+new sampling rate is decided based on Nyquist criteria. The
+collected samples are transmitted to the base station without
+any delay. Hence, the energy consumption in real-time systems
+is much higher than that in non-real-time systems.
+B. Research Gap and Motivation
+As noted above, several studies have been reported on
+learning-based adaptive sensing to reduce the energy consump-
+tion in WSNs. However, in a large-scale deployment scenario,
+limited battery capacity of a miniature sensor hub limits the
+network lifetime.
+A comparison of the state-of-the-art and the proposed
+framework is presented in Table I. The considered sampling
+rate adaptation algorithm in [1], [8], [9], [19] are applicable
+on individual sensors. The adaptive sensing algorithm in
+[10], exploits only cross-correlation of the parameters to find
+optimal active sensor set, where the sensors collect samples
+at a fixed Nyquist sampling rate. The studies in [11]–[13]
+considered densely-deployed WSN for monitoring the same
+parameter, where a subset of sensor nodes is activated in
+the network based on the spatio-temporal correlation of the
+sensing parameter and the remaining energy of the nodes. The
+above algorithms do not exploit the cross-correlation among
+multiple sensing parameters in a sensor hub .
+In the SBL-based multi-sensing framework [4], the recon-
+struction accuracy is achieved by jointly predicting the sensing
+TABLE I: Comparison of state-of-the-art
+State-of-
+the-art
+System
+model
+Sensing
+Parameters
+Correlation ex-
+ploited
+System
+state
+Sampling
+interval
+[1], [8],
+[9]
+node
+level
+single not exploited non-real-
+time
+adaptive
+[4] network
+level
+multiple spatio-temporal
+and cross
+non-real-
+time
+fixed
+[10] node
+level
+multiple cross-
+correlation
+non-real-
+time
+fixed
+[11] network
+level
+single spatio-temporal non-real-
+time
+fixed
+Proposed
+work
+node
+level
+multiple temporal and
+cross
+adaptive adaptive
+signals based on the spatio-temporal correlation and cross-
+correlation among the parameters. However,it did not consider
+multi-parameter sensor hub in a typical sparse deployment
+scenario, such as in an individual home or office environment,
+where spatial signal information do not exist. Hence, the SBL-
+based framework is not suitable in such scenarios.
+So far, none of the works in the literature have exploited
+both the temporal correlation and cross-correlation of a dis-
+tributed multi-parameter sensor hub. Also, the existing sensing
+algorithms consider the systems dealing with either purely
+real-time applications or purely non-real-time applications.
+The sensed signal aware dynamic adaptability of sensing and
+transmission time-criticality has not been addressed before.
+C. Contributions
+We observe that, in real-life, multi-sensing optimization
+at the individual sensor nodes are of interest in scenarios
+where for lack of network connectivity and/or security/privacy
+sensors, such as in ambient parameter sensing in home/office
+spaces and medical health monitoring, network-level (inter-
+node) cooperation is not possible. Further, sensing and data
+reporting in such applications may need to be adapted from
+non-time-critical (‘good’ state) to time-critical (‘bad’ state)
+depending on the values of some sensed parameters. Thus,
+motivated by the need for individual node-level multi-sensing
+and transmission optimization, and dynamic adaptation, a
+learning-based data-driven priority aware sensing and trans-
+mission is proposed in this paper, which exploits the sensing
+process dynamics of a multi-parameter sensor hub. At every
+measurement cycle, an optimal set of sensors are activated
+by exploiting the cross-correlation among the parameters and
+temporal correlation of the selected sensing signals based on
+reinforcement learning (RL) techniques [10], [20]. In view
+of the non-stationary distribution of sensing parameters, dis-
+counted upper confidence bound (UCB) algorithm is adopted
+to find the next optimal set of sensors. The proposed frame-
+work uses GPR models to estimate the temporal and cross-
+correlated parameters for non-real-time and real-time modes
+of data handling. To the best of our knowledge, such data-
+driven dynamic multi-sensing and adaptation has not been
+considered before in the literature.
+The key contributions and significance of the proposed
+approach are as follows:
+1) A novel edge intelligence-based framework on dynamic
+priority sensing and transmission to optimize the energy
+3
+sustainability of a multi-parameter sensor hub is pro-
+posed in this paper. The algorithm exploits the cross-
+correlation among the parameters and temporal corre-
+lation in a selected time sequence of data to find an
+optimal active sensor set and optimal sampling instants
+at every measurement cycle.
+2) Unlike the prior art, sensing and communication priority
+of the sensed parameters are dynamically varied from
+non-real-time (in ‘good’ state) to time-critical (real-time,
+in ‘bad’ state) depending on the value of the sensed
+parameters. The corresponding GPR models are also
+developed for the estimation of missing temporal/cross-
+correlated parameter samples.
+3) An optimization function is formulated to find the opti-
+mal length of measurement cycle for each active sensor
+set by exploiting the cross-correlation of the parameters
+and the ‘good’ state probability of the sensors that
+belong to the inactive/sleep set in that cycle.
+4) An optimization function is developed to find the opti-
+mal sensor set for the next measurement cycle by solving
+the trade-off among the cross-correlation, energy con-
+sumption of the sensors, and the length of measurement
+cycle using discounted UCB algorithm.
+5) The proposed framework detects the time-critical (i.e,
+‘bad’) states of the system with 98% accuracy in report-
+ing the events to the edge node.
+6) With O(I) computational complexity for predicting I
+samples at the sensor node, the proposed RL-aided in-
+telligent multi-sensing algorithm saves up to 41% node-
+level sensing energy and 32% communication bandwidth
+compared to the multi-sensing framework in [4].
+D. Paper Organization
+Section II presents the system model and problem definition.
+The characterization of sensing signal dynamics is discussed
+in Section III, followed by the GPR-based temporal and cross-
+correlated parameter prediction model in Section IV. The
+proposed data-driven adaptive sensing framework is explained
+in Section V, followed by results and discussion in Section VI
+and conclusion in Section VII.
+Notations: A denotes a set; A ∈ RN×1 denotes a P
+dimensional vector, and A∈ RN×I denotes a matrix of size
+N×I; and the cardinality of a set A is denoted as |A| =A.
+II. S YSTEM MODEL AND PROBLEM DEFINITION
+The proposed system model is presented in Section II-A,
+followed by the problem definition in Section II-B.
+A. System Model
+As shown in Fig. 1, a multi-parameter sensor hub consists
+of P sensors to monitor P different parameters in the envi-
+ronment. The sensor node is wirelessly connected to an edge
+node to report the sensed data. The edge node further transmits
+the data to the cloud. An intelligence algorithm is executed at
+the edge node to find the optimal parameters of the system
+based on the data received from the individual sensor nodes
+Edge node Sensor node
+𝒏𝒑 time series 
+samples for 𝒑𝒕𝒉
+parameter
+Temporal and cross-correlation 
+information of multiple sensing 
+parameters are exploited here
+Pollution 
+source
+Data and 𝑬𝟎
+𝒙
+𝑨𝒊
+𝒙 , 𝑻𝒙 , 𝒇𝒔𝒙
+S1 S2 S3 SP
+Cloud 
+Fig. 1: Smart sensing system model.
+and the information is transmitted back to the sensor nodes,
+as depicted in Fig. 1. Consider a set P ={Pp; 1≤ p≤ P}
+that contains all the parameters. The data sensed by the pth
+parameter atith sampling instant of thexth measurement cycle
+is denoted as zx
+p(i). If Nx
+p is the number of samples collected
+for pth parameter in xth measurement cycle, Zx
+p ∈ RNx
+p×1
+contains the temporal measurements of the pth parameter,
+which can be expressed as [21]
+Zx
+p = Yx
+p + ηx
+p, (1)
+where Yx
+p∈ RNx
+p×1 is the true signal vector and ηx
+p∈ RNx
+p×1
+is the identically and independently distributed measurement
+noise vector associated with thepth sensor, whereη∼N(0,σ )
+for all the parameters.
+B. Problem Definition
+In the system model, depicted in Section II-A, the sensor
+node consists of P sensors. Consider that the pth sensor col-
+lects data at a fixed Nyquist sampling interval tp and transmits
+the samples to the edge node which is placed at a fixed point
+nearby. If the sensing signals remain within the satisfactory
+level/threshold, the system is considered to be in ‘good’ state
+and behaves as a non-real-time system, where the data can be
+sent to the edge node at the end of the measurement cycle. If
+any signal crosses the threshold, the system is considered to be
+in ‘bad’ state and acts as a real-time system, wherein and the
+data is sent to the edge node immediately with higher priority.
+When the system acts on non-real-time basis, the interval
+between two data transmissions or the length of measurement
+cycle depends on the process dynamics. Let τx be the length
+of xth measurement cycle, where τx =Nx
+ptp. To reduce the
+complexity,tp is considered to be fixed in every measurement
+cycle. Since the time series data exhibits a strong temporal
+correlation, the signals can be reconstructed with Mx
+p≪Nx
+p
+number of samples, where Mx
+p is the number of optimal
+sampling instants for pth parameter at the xth measurement
+cycle. Let Nx ∈ R1×P and Mx ∈ R1×P be the vectors
+containing the total sampling instants and the optimal sampling
+instants of P parameters, respectively, such that Nx(p) =Nx
+p
+and Mx(p) =Mx
+p .
+As observed in [4], the sensing signals exhibit cross-
+correlation, hence all the sensors need not to be activated
+all the time. N′ = (2P− 2) number of sensor sets can be
+created Using P sensors, excluding the null set and the set
+containing all parameters. Let Ax
+i ={PAx
+i,m; 1≤ m≤ Ax
+i}
+4
+(a)
+-0.02 -0.01 0 0.01 0.02
+Data (Zp)
+0
+50
+100
+150Density
+PM2.5
+Gaussian (b)
+-2 -1 0 1 2
+Data (Zp) 10-3
+0
+500
+1000Density
+CO
+Gaussian (c)
+Fig. 2: (a) Two-state Markov model of sensing signal, (b) distribution of 1st order time derivative of PM 2.5, and (c) distribution of 1st order
+time derivative of CO.
+be the ith active sensor set in the xth measurement cycle,
+thenBx
+i = P−A x
+i contains the inactive/sleeping sensors.
+Hence, ith sleep set in the xth measurement cycle is Bx
+i =
+{PBx
+i,k; 1≤ k ≤ Bx
+i}. Sx = {(Ax
+i,Bx
+i ); 1≤ i ≤ N′}
+contains the active-sleep pair of sets.
+The sensor node collects samples based on the optimal
+active sensor set and optimal sampling instants of the active
+sensors. The data collected by the sensor node is transmit-
+ted to the edge node as per non-real-time/real-time priority.
+Section III describes the process of deciding the non-real-
+time/real-time nature of the system based on the sensed signal
+values. If any of the sensing signals crosses above a user-
+defined satisfactory level, the system operates in real-time
+mode, else it operates in non-real-time mode. The missing
+samples are estimated at the edge node using GPR-based
+prediction models, as described in Section IV. At the end
+of every measurement cycle, the edge node exploits cross-
+correlation among the parameters and temporal correlation
+of the sensing signals to find an optimal sensor set and the
+optimal sampling instants for the next measurement cycle
+based on the adaptive sensing algorithm proposed in Section
+V-D and the information is transmitted to the sensor node.
+By optimizing the number of samples to be collected at each
+measurement cycle, the proposed framework achieves energy
+saving as well as bandwidth saving.
+III. C HARACTERIZATION OF SENSING SIGNAL DYNAMICS
+This section describes the characterization of sensing signal
+dynamics. The sensing signals are usually non-stationary [22].
+If any signal remains within its satisfactory level it is said to
+be in ‘good’ state. Otherwise, the signal is considered to be in
+‘bad’ state. Thus, according to [23], [24], a two-state Markov
+model can be created for each signal; shown in Fig. 2(a). In the
+proposed model, the system is statically defined. The system
+acts on non-real-time basis when all the parameters are in
+‘good’ state. If any parameter enters into the ‘bad’ state, the
+system acts as a real-time system.
+Let Zp(t) be the amplitude of pth parameter signal at time
+t. The signal is said to be in ‘bad’ state if Zp(t) > Zp,th,
+else it is in ‘good’ state. If Zp(t) = Z0
+p at the present time
+slot, then its amplitude after time Tp can be expressed as,
+Zp(t + ∆1) ≈ Z0
+p + ˙Zp∆1, where ∆1 << 1s is the slot
+duration. LetZ1
+p = ˙Zp∆1, similarly afterj slotsZj
+p = ˙Zpj∆1.
+To find the distribution of time derivative of sensing signals,
+an air-pollution monitoring dataset with parameters PM 2.5,
+CO, NH3, NO2, Ozone, SO2 are studied. It has been observed
+that the distribution of sensing parameters are non-stationary,
+however, the time derivative of these signals follow Gaussian
+distribution, as shown in Fig. 2(b) and Fig. 2(c). Thus,
+˙Zp = dZp
+dt is a zero mean Gaussian random variable (RV)
+i.e, ˙Zp ∼ N(0, ˙σZp), where ˙σZp is the standard deviation.
+Following the study in [25], Zj
+p is a truncated Gaussian RV
+and its probability density function is given by,
+fZj
+p
+(Zj
+p) =
+
+
+
+1
+√
+2π ˙σZj
+p
+(1−Φ(−
+Z0p
+˙σ
+Zj
+p
+))
+exp(−
+Zj
+p
+2
+2 ˙σ2
+Zj
+p
+), Z j
+p≥−Z0
+p
+0, elsewhere,
+where σ2
+˙Zj
+p
+= jσ2
+˙Z1p
+and Φ(x) =
+Rx
+−∞
+1√
+2πexp(−t2
+2 )dt. If
+Zp(t) = Z0(< Zpth), the Gaussian mixture distribution of
+the temporal variation of the signal over the next ζ slots is:
+fΓ(γ|Zp(t) =Z0,ζ )=
+
+
+
+1
+ζ
+Pζ
+j=1(
+exp(− γ2
+2 ˙σ2
+Zj
+p
+)
+√
+2π ˙σZj
+p
+(1−Φ(−Z0
+˙σ
+Zj
+p
+))),γ≥−Z0
+0, elsewhere.
+The probability that the pth parameter will remain below
+threshold up to ζ slots is given by,
+Pg
+p (Zp(t) =Z0,ζ ) =Pr (Zp(t)<Z pth)
+= 1
+ζ
+ζX
+j=1
+1
+(1− Φ(−Z0
+˙σZj
+p
+))
+Z Zpth
+0
+1√
+2π ˙σZj
+p
+exp(−(γ−Z0)2
+2 ˙σ2
+Zj
+p
+).
+(2)
+The probability that the pth parameter will be above threshold
+up to ζ slots is:
+Pb
+p(Zp(t) =Z0,ζ ) =Pr (Zp(t)>Z pth)
+= 1−Pg
+p (Zp(t) =Z0,ζ ). (3)
+Let τx be the length of xth measurement cycle which can
+be divided into J slots such that τx = ∆ 1J. Then Pg,x
+p =
+Pg
+p (Zp(t) = Z0
+p,J ) and Pb,x
+p = Pb
+p(Zp(t) = Z0
+p,J ) are the
+‘good’ and ‘bad’ state probabilities of the pth parameter in the
+xth measurement cycle, which will be subsequently used in
+Section V-A to find the optimal length of measurement cycle.
+IV. GPR- BASED TEMPORAL AND CROSS -CORRELATED
+PARAMETER PREDICTION MODEL
+This section describes the GPR-based signal recovery mod-
+els to predict the sensing signals. As stated in Section I-A,
+5
+GPR is widely used to predict sensing parameters in WSNs
+due to its efficient signal recovery performance. GPR exploits
+all possible functions, drawn from a Gaussian distribution
+passing through the points rather than assuming a fixed para-
+metric model of the data and finds a suitable function that
+fits the data well with ±1 standard deviation [26]–[28]. The
+proposed framework uses GPR model to predict the temporal
+and cross-correlated parameters, as it performs better than the
+existing signal recovery methods [13]–[15].
+In the proposed approach, two GPR models are used. GPR 1
+model consists of P regressors to predict the time series data
+from their previous samples based on the temporal correlation
+of the individual parameters. The P regressor models are
+implemented in both the edge node and the sensor node.
+The sensor node predicts the next sample from the previous
+samples of each parameter belongs to Ax
+i . Based on the
+predicted data, the node decides the next state of the parameter.
+If the parameter goes to the ‘bad’ state the sensor node collects
+the next sample for that parameter and verify the state of the
+signal. If it still remains in the ‘bad’ state, the sensor node
+immediately transmits the data to the edge node. GPR 2 is
+used to predict the parameters of Bx
+i from the cross-correlated
+parameters ofAx
+i . The GPR2 model consists ofN′ sub-models
+for N′ active-sleep pairs of S. IfAx
+i ⊂P is activated in the
+xth measurement cycle, theith sub-model is selected to predict
+the parameters of Bx
+i . Intuitively, the correlated parameters
+have more significance in prediction. GPR 1 and GPR2 models
+are briefly described in Section IV-A, and IV-B, respectively.
+A. GPR Model for Time Series Prediction
+The GPR model used to predict the temporal values of
+the parameters, named as GPR 1 is placed at both the edge
+node and the end/sensor node. The GPR 1 model consists of
+P regressors to predict the temporal samples of P parameters.
+Let p ∈ Pis selected to activate in the xth measurement
+cycle. The jth temporal sample of pth parameter can be
+predicted from previous lp samples, where lp is the lag value.
+Thus, the true signal value is Yx
+p (j) = f(Zx
+p (j− 1),Zx
+p (j−
+2),··· ,Zx
+p (j−lp)).
+The training matrix and target vector forpth regressor model
+are respectively Zp ∈ Rn×lp and Zp ∈ Rn×1, where n is
+the number of training samples. To predict Yx
+p (∗) in the xth
+measurement cycle, GPR finds the underlying function fp as,
+Yx
+p (∗) =fp(Zx
+p(∗)) =fx
+p,∗, (4)
+where fp ∼ N(0,Kn×n). Kn×n = [k(Zp(r), Zp(s))]n×n,
+wherek(Zp(r), Zp(s)) is the covariance function between the
+rth andsth instant of design/training matrix Zp. According to
+[29, Ch. 2], the squared exponential covariance function for
+the pth regressor of GPR 1 model is given by,
+k(Zp(r), Zp(s)) =exp{− 1
+2l′2
+lpX
+q=1
+|Zp(r,q )−Zp(s,q )|2}
++σ2δrs. (5)
+The pth prediction model of GPR 1 is given by,
+fx
+p,∗|Zp, Zp, Zx
+p(∗) ∼ N(fxp,∗, Cov(fx
+p,∗)), where fxp,∗ and
+Cov(fx
+p,∗) are the mean and covariance function, respectively,
+which can be derived from (A.1) and (A.2) of Appendix A.
+From [29, Ch. 2], fxp,∗ and Cov(fx
+p,∗) are expressed as,
+fxp,∗ =K(Zp, Zx
+p(∗))[K(Zp, Zp) +σ2I]−1Zp (6)
+Cov(fx
+p,∗) =k(Zx
+p(∗), Zx
+p(∗)) +K(Zx
+p(∗), Zp)[K(Zp, Zp)
++σ2I]−1K(Zp, Zx
+p(∗)). (7)
+B. GPR Model for Cross-correlated Parameter Prediction
+The GPR model used to predict cross-correlated parame-
+ters, named as GPR 2 is placed at the edge node. Let Ax
+i
+be the optimal sensor set selected to activate in the xth
+measurement cycle and the parameters of Bx
+i need to be
+predicted from the cross-correlated parameters of Ax
+i using
+the ith sub-model of GPR 2. The ith sub-model contains Bx
+i
+number of regressors, each predicts one parameter of Bx
+i .
+The training matrix of the kth regressor of the ith sub-
+model of GPR 2 is ZAi ∈ Rn×Ai and the target vector
+is ZBx
+i (k) ∈ Rn×1. Each row of ZAi corresponds to one
+feature vector. The jth row of ZAi is expressed as ZAi =
+{ZAi(j, 1),ZAi(j, 2),··· ,ZAi(j,Ai)}. During prediction in
+the xth measurement cycle, the measurement vectors of
+Ax
+i and Bx
+i for the jth sampling instant are expressed as
+Zx
+Ai(j) = {Zx
+Ai(j, 1),Zx
+Ai(j, 2),··· ,Zx
+Ai(j,Ax
+i )} ∈R1×Ax
+i
+and Zx
+Bi(j) = {Zx
+Bi(j, 1),Zx
+Bi(j, 2),··· ,Zx
+Bi(j,Ax
+i )} ∈
+R1×Bx
+i , respectively.
+The equation (1) forAx
+i andBx
+i can be written as, Zx
+Ai(j) =
+Yx
+Ai(j)+ ηx
+Ai(j) and Zx
+Bi(j) = Yx
+Bi(j)+ ηx
+Bi(j), respectively.
+For a test vector Zx
+Ai(∗), GPR finds the underlying function
+fx,k
+i,∗ for the kth regressor as,
+Yx
+Bi(∗,k ) =fk(Zx
+Ai(∗)) =fx,k
+i,∗ ∈ R∀k∈ Yx
+Bi(∗), (8)
+where fk
+i ∼ N(0,Kn×n). Kn×n is the covariance matrix
+whose elements are derived from the squared exponential
+covariance function, as described in Section IV-A.
+The prediction model for GPR 2 is given by,
+fx,k
+i,∗|ZAi, ZBi(k), Zx
+Ai(∗) ∼ N(fx,k
+i,∗ , Cov(fx,k
+i,∗ )). Thus,
+the mean function and the covariance function, derived from
+(A.1) and (A.2) of Appendix A are expressed as,
+fx,k
+i,∗ =K(ZAi, Zx
+Ai(∗))[K(ZAi, ZAi) +σ2I]−1ZBi(k) (9)
+Cov(fx,k
+i,∗ ) =k(Zx
+Ai(∗), Zx
+Ai(∗)) +K(Zx
+Ai(∗), ZAi)
+[K(ZAi, ZAi) +σ2I]−1K(ZAi, Zx
+Ai(∗)). (10)
+These prediction models will be used in Section V to
+estimated temporal values of the parameters at the edge/end
+node and cross-correlated parameter values at the edge node.
+V. P ROPOSED FRAMEWORK
+This section describes the proposed data-driven dynamic
+priority sensing and transmission framework. The formulation
+of optimization function to find the optimal length of mea-
+surement cycle is presented in Section V-A, followed by the
+method to find optimal lead values of the sensing parameters
+in Section V-B. Section V-C presents the formulation of
+UCB-based optimization function to find optimal sensor set,
+6
+followed by the algorithms applied at the edge/sensor node in
+Section V-D and complexity of the framework in Section V-E.
+As discussed in Section I, a sensor node has limited energy
+availability, which needs to be used optimally to enhance the
+network lifetime. The adaptive sensing algorithm, running at
+the sensor node increases the processing energy consumption
+of the node. To reduce the complexity and hence energy
+requirement of the sensor node, an edge intelligence-based
+adaptive sensing framework is proposed in this section.
+Let a and b are two sensing parameters having cross-
+correlation coefficientc(a,b ).a andb are said to be correlated
+if|c(a,b )|≥ cth, where cth is the cross-correlation threshold.
+As discussed in Section II, 2P− 2 active-sleep pair of subsets
+can be created from P sensors excluding the set having all the
+parameters and the null set. The ith sensor set is said to be
+correlated if all the parameters of Bx
+i are correlated with at
+least one parameter of Ax
+i . The strength of cross-correlation
+betweenAx
+i andBx
+i is defined by the cross-correlation factor
+Cx
+i . IfAx
+i andBx
+i are cross-correlated, Cx
+i is given by,
+Cx
+i = 1
+Ax
+iBx
+i
+Bx
+iX
+k=1
+Ax
+iX
+m=1
+|cx(m,k )|;∀k∈B x
+i and m∈Ax
+i. (11)
+IfAx
+i andBx
+i are not cross-correlated, Cx
+i = 0 for the ith
+active-sleep sensor set.
+The performance of the proposed algorithm is measured
+in terms of reconstruction error of the sensing parameters at
+the edge node. If Pex
+p is the reconstruction error of the pth
+parameter in the xth measurement cycle, the average error is:
+PEx
+i = 1
+P
+PX
+p=1
+Pex
+p;∀p∈P . (12)
+A. Optimal Length of Measurement Cycle
+Let, AT ∈ RP×1 be the binary sensing vector such that
+A(p) = 1 if p ∈ P is active. A set Qx = {Ax
+i ; 1 ≤
+i ≤ N′} is the set of vectors created from N′ active sets
+inSx. A correlation matrix Cx∈ RP×P contains the cross-
+correlation coefficients of the parameters such that Cx(p,q ) =
+|c(p,q )|;∀p,q∈P , wherec(p,q ) is a function of the length of
+measurement cycleτ. Ifτ increases the signal estimation error
+increases due to the large variation in environmental conditions
+between two cycles. Thus c(p,q ) decreases with the increase
+in τ. Moreover, the Pg
+k ;∀k∈B x
+i should be higher than the
+threshold Pg
+th to ensure that the inactive sensors will not go
+to ‘bad’ state over the whole measurement cycle.
+If any signal enters into ‘bad’ state, the data stored in the
+sensor node need to be transmitted immediately. Let, Ec be
+the total communication energy required for one transmission.
+Ec =Ew +Et, where Ew and Et are the wake up and data
+transmission energy, respectively. Ew is assumed to be fixed
+and Et increases with the increase in the number of samples
+to be transmitted. Hence, the transmission energy consumption
+of ith active sensor set in the xth measurement cycle is:
+Etx
+i =Et1
+Ax
+iX
+m=1
+Mx
+m;∀m∈A x
+i. (13)
+Et1 is the transmission energy consumed by the radio module
+to transmit one sample. SinceEw is the initial energy required
+to turn on the communication module, it is much higher
+than Et. Although data transmission energy increases with
+the length of measurement cycle, total communication energy
+over a large period decreases due to the fewer number of
+activations of the radio module. Therefore, an optimal length
+of measurement cycle τ has to find by solving the trade-off
+among Cx, Pg
+k ;∀k∈B x
+i , and Ew. Due to the unavailability
+of data for the (x + 1)th cycle, the cross-correlation factor is
+calculated from the data received at the xth cycle. However,
+the ‘good’ state probabilities of the parameters are estimated
+for (x + 1)th cycle using (III). It is assumed that the sensing
+signals are slowly varying [11]. Hence, the cross-correlation
+among the parameters does not change drastically. Thus, Cx
+can be used to find the length of (x+1)th cycle.τ is a function
+ofAx
+i . For each active set Ax
+i , the optimal value of τx
+Ai is:
+τx
+Ai = max {ζc}
+s.t. 1
+Ax
+iBx
+i
+|Ax
+i Cx
+1(UT− Ax
+i
+T )− Ax
+i Cx
+ζc(UT− Ax
+i
+T )|<δ
+Pg
+k (Zk(t) =Z0, ∆2
+∆1
+ζc)>P g
+th∀k∈B x
+i
+ζc∈{ζc
+min,ζc
+max}.
+(14)
+Cx
+1 is the cross-correlation matrix obtained from the most
+recent samples of the xth measurement cycle and Cx
+ζc is
+obtained by shifting the data window up to pastζc slots, where
+the duration of each slot is ∆2. ∆2 should be very small and
+it is assumed that the process dynamics are similar over ∆2.
+B. Optimal Lead Values of the Sensing Parameters
+The GPR 1 model, discussed in Section IV-A is used to
+predict the consecutive samples of the active sensors from their
+previous samples. If the prediction error remains below the
+threshold, these samples need not be collected by the sensors,
+which reduces the sensing energy further.
+Let, ctx
+p(n) be the temporal correlation between Zx
+p (i) and
+Zx
+p (i−n). If ctx
+p(n)≥ctp,th, n consecutive samples can be
+predicted from their previous samples with prediction error
+belowetth. The maximum value of n is the lead value of the
+pth parameter in the xth cycle; defined as lead value ζtx
+p. At
+the edge node, the optimal value of ζtx
+p is given by,
+ζtx
+p = max n
+s.t. ctx
+p(n)≥ctp,th.
+(15)
+Thus,Mx
+p =
+Nx
+p
+(ζtx
+p+1) = Tx
+tp(ζtx
+p+1) is the number samples need
+to be collected for the pth parameter in the xth measurement
+cycle. Here tp is the interval between two collected/predicted
+samples, obtained using Nyquist sampling rate. For simplicity
+of the algorithm tp is not computed at every cycle. ζtx
+p,
+obtained form (15) is used to estimate Mx
+p which is further
+used to find the optimal active sensor set for (x + 1)th
+measurement cycle.
+Ifetp(n) is the temporal prediction error of the pth param-
+eter for the nth sample, etp(n) can be represented as,
+etp(n) =αpnβp. (16)
+7
+αp,βp = min
+α,β
+{
+npX
+n=1
+(etp(n)−αnβ)2}. (17)
+The optimal values of αp and βp are estimated using (17).
+After receivingAx+1
+i , the sensor node updates the lead val-
+ues of the active sensors to dynamically adapt their sampling
+intervals based on the temporal prediction error. If etp,0 is the
+prediction error at the nth
+p,0 slot in the sensor node, the new
+ζtx+1
+p in the x + 1th measurement cycle at the sensor node is
+given by,
+ζtx+1
+p = min
+n
+(etp,0 +αp(nβ−nβ
+p,0)−etth)2. (18)
+The deviation of temporal prediction error from its threshold
+value decides the new value of ζtx+1
+p . After ζtx+1
+p slots the
+sensor node collects lp samples for the pth active parameter
+to predict the next consecutive samples.
+C. Discounted UCB-based Optimization Function for Sensor
+Selection
+The optimization functions formulated to find the optimal
+sensor set to be activated in the next measurement cycle are
+discussed in this subsection. (19) presents the optimization
+function used to find the optimal sensor set for the next cycle
+from the data collected at the present cycle. To make the
+system more predictive, an optimization function is formulated
+in (21), that finds the optimal sensor set for the next cycle
+from the data collected at the present and past cycles using
+discounted UCB algorithm.
+Let Es be a diagonal matrix whose diagonal elements
+contain the energy consumed by the sensors to collect one
+sample. Thus, Es(p,p ) = Es1p, where Es1p is the energy
+consumption of ph sensor to collect one sample. Hence, the
+total sensing energy consumption of the ith active set in the
+xth measurement cycle is Esx
+i = Ax
+i EsMx, where Mx con-
+tains the optimal sampling instants of the parameters obtained
+using (15) and Ax
+i is the binary sensing vector. LetUT∈ RP×1
+be a unity vector such that U(i) = 1; 1≤ i≤ P . The cross-
+correlation factor of the ith active set for the first slot (ζc = 1)
+is given by,Cx
+i (1) =Cx
+i = 1
+Ax
+iBx
+i
+[Ax
+i Cx
+1(UT− Ax
+i
+T )]. Higher
+value of Cx
+i gives better sensing quality. Let Gx
+i ∈ RP×1 be
+a vector such that Gx
+i = Cx
+1Ax
+i
+T .Ax
+i andBx
+i are correlated if
+Gx
+i (k)>c th;∀k∈B x
+i .
+To incorporate the energy awareness, the residual energy
+is considered as another performance parameter for finding
+optimal sensor set. Let Ebatt be the battery capacity of the
+sensor node and Ex
+0 be its available energy in xth measure-
+ment cycle. λx ∆
+= Ex
+0
+Ebatt
+is the normalized energy available at
+the sensor node. The objective is to maximize Cx
+i ,τx
+Ai andλx
+and minimize Esx
+i .
+The optimization function formulated to find Ax+1
+i by
+solving the trade-off among the cross-correlation, energy con-
+sumption, residual energy of the sensor node, and length of
+measurement cycle is given by,
+max
+Ax
+i∈Qx
+λxCx
+iτx
+Ai
+Esx
+i
+s.t. Gx
+i (k)>c th;∀k∈B x
+i
+Esx
+i <E x
+0.
+(19)
+The above optimization function explores all the binary
+sensing vectors ofQx and selects an optimal sensing vector Ax
+i
+for the next cycle. The above function is a concave function,
+whose proof is given in the Appendix B. The first constraint
+ensures that the selected active and sleep sensor sets are
+correlated and each parameter of Bx
+i can be predicted from
+at least one parameter of Ax
+i . The second constraint ensures
+that the required sensing energy for the selected active sensor
+set is available at the sensor node.
+The optimization function, given in (19) can find an optimal
+sensor set for the next measurement cycle based on the present
+state of the system, without having any knowledge about
+the previous states. Since the environment is non-stationary,
+predicting the next state from only the present state may not
+give the optimal solution. The system becomes more predictive
+when it includes past experiences along with the present state.
+If a sensor set obtains higher rewards in the past cycles,
+its probability of being optimal in the next measurement
+cycle is higher than the other sets. Considering a sensor hub
+collecting samples of various parameters from an environment
+is a random process, an RL model can be created where the
+learner can learn the system with time, based on previous
+experiences. To this end, an RL algorithm such as UCB
+algorithm is used in the proposed framework to select an
+optimal sensor set to be activated in the next measurement
+cycles based on the present and previous rewards of the sensor
+set. UCB is widely used to select optimal arm in the multi-
+armed bandit problems. Finding an optimal arm in multi-armed
+bandit problems is analogous to finding an optimal sensor
+set in the proposed adaptive sensor selection problem. Let
+Rx
+i =
+λxCx
+iτx
+Ai
+νxEsx
+i
+be the reward obtained for the ith sensor
+set in the xth measurement cycle, where νx = max
+i∈Qx
+Cx
+iτx
+Ai
+Esx
+i
+.
+By putting ν in the denominator, the reward is bounded to
+[0, 1]. An optimal active sensor set can be chosen for the
+(x + 1)th measurement cycle based on the rewards of the
+sensor sets obtained in the present and past cycles. It has been
+observed that the reward distribution changes abruptly in a
+non-stationary environment. In such cases, the most recently
+collected samples are more responsible to decide the next state
+compared to the old samples. Since the sensing parameters
+follow non-stationary distribution, discounted UCB algorithm
+is more suitable in the proposed framework. The rewards are
+discounted using γ ∈ (0, 1) to give more weightage to the
+recent samples [30]. In the proposed discounted UCB-based
+sensor selection framework, the reward is computed for all the
+sensor sets at every measurement cycle.
+Let R1
+i,R 2
+i,R 3
+i,··· ,Rx
+i be the rewards for the ith active-
+sleep pair of sensor set up to xth measurement cycle. The
+rewards are identically and independently distributed Gaussian
+random variables. Thus, the empirical mean of the distribution
+of Ri is given by,
+bµx
+i = 1Px
+t=1γx−t
+xX
+t=1
+γx−tRt
+i = 1Px
+t=1γx−t
+xX
+t=1
+γx−tλtCt
+iτt
+Ai
+νtEst
+i
+.
+(20)
+The modified optimization function to find an optimal
+8
+sensor set in the (x + 1)th measurement cycle is given by,
+max
+Ax
+i∈Qx
+1Px
+t=1γx−t
+xX
+t=1
+γx−tλtCt
+iτt
+Ai
+νtEst
+i
++
+vuutα′
+Tx
+i
+log(
+N′
+X
+i−1
+Tx
+i )
+s.t. Gx
+i (k)>c th;∀k∈B x
+i
+Esx
+i <E x
+0.
+(21)
+In (21), the first term is the empirical mean of the distribu-
+tion of reward while the second term provides the confidence
+bound, where Tx
+i = Px
+t=1γx−t1[At=Ai]. A higher value of
+Tx
+i makes the learner more confident about the distribution
+of reward Rx
+i [10]. At the end of every measurement cycle
+the optimization function explores all the sensor sets and
+selects an optimal sensor set that satisfies the constraints
+given in (21). If sufficient energy available at the node, the
+optimization function always returns an optimal sensor set, as
+proven in the Appendix B. If Ax+1
+i is selected to activate in
+the (x+1)th cycle, the length of (x+1)th measurement cycle
+is τx+1 =τx
+Ai.
+D. Data-Driven Dynamic Priority Sensing and Transmission
+Mechanism
+As discussed in the problem definition in Section II, the
+sensor node transmits data to the edge node at the end of every
+measurement cycle when the system is in ‘good’ state and it
+transmits data immediately when the system is in ‘bad’ state.
+When the system is in ‘good’ state the data can be predicted
+with lesser accuracy, however, during the ‘bad’ state the data
+should be predicted with good accuracy. Hence, three different
+error thresholds are defined in the proposed algorithm. When
+the system is in ‘bad’ (‘good’) state, the temporal prediction
+error of GPR1 model should be below etb
+th (etg
+th). The overall
+error, which is the reconstruction error of the GPR 2 model is
+considered as eth. eth is the average reconstruction error of
+all the parameters over a measurement cycle. If a parameter
+is in ‘bad’ state, its temporal prediction error is below etb
+th.
+However, the overall error can be above etb
+th.
+Initially, the sensor node collects n samples for all the
+parameters at their respective Nyquist rates and transmits them
+to the edge node. The edge node receives the samples and
+reconstructs the sensing signals for all the parameters and
+sample data at a high sampling rate (maximum of all the
+Nyquist rates of the parameters) from all the sensing signals.
+As described in Algorithm 2, the GPR2 model is trained using
+the samples drawn from the reconstructed signals at a fixed
+sampling rate. The P regressors of GPR 1 model are trained
+using the data received from the sensor node based on their
+respective Nyquist rate. An identical GPR 1 model is created
+at the sensor node to predict temporal samples. The sensor
+node transmits only the collected samples to the edge node.
+The samples predicted by the GPR 1 model at the sensor node
+are not transmitted to the edge node, as these samples are
+predicted at the edge node using the same GPR1 model at both
+‘good’ and ‘bad’ states. The hyper-parameters of the algorithm
+such as, lag values, α, β, cth, ζc
+max, ζc
+min, ctth, and δ are
+estimated during training/retraining the models. At every xth
+Algorithm 1: Data-driven dynamic priority sensing algo-
+rithm at the sensor node
+Initialization: etg
+th, etb
+th, cth, Zth, α, β, x = 1, create
+GPR1 model for time series prediction, find ζtx
+.
+Input: Receive Ax
+i , τx, Nx, tx from edge node.
+if (e = 1) then
+Activate all sensors and collect samples at Nyquist
+sampling interval tx untill Time>τ x
+Retrain and test GPR 1 model for P parameters
+with recently collected samples.
+else
+for all Pp∈A x
+i do
+Activate sensors belongs to Ax
+i
+Collect lp samples∀Pp∈A x
+i
+Set j =lp + 1 and np,0 = 1
+while (j <Nx
+p ) do
+Predict next sample ˜Zx
+p (j) using GPR1 model;
+Collect next sample Zx
+p (j)
+if ((Zx
+p (j)<Z p,th)) then
+Find etp,0 =|Zx
+p (j)− ˜Zx
+p (j)|,
+Find new ζtx
+p by putting etth =etg
+th in (18)
+Set k =ζtx
+p
+while (k> 0 && ˜Zx
+p (j)<Z p,th) do
+Predict next sample ˜Zx
+p (j)
+Set k =k− 1, j =j + 1, and
+np,0 =ζtx
+p −k
+end
+else
+Collect w consecutive samples and find
+average ¯Zp
+Set j =j +w and np,0 =ζtx
+p −k +w
+while ( ¯Zp >Z p,th) do
+Set emp = 1; Send emp = 1 to the
+edge node
+Transmit the stored samples of all the
+parameters ofAx
+i
+while (emp = 1) do
+Predict next sample ˜Zx
+p (j); Collect
+next sample Zx
+p (j) and transmit to
+edge node
+if ((Zx
+p (j)>Z p,th)) then
+Find et
+p,0 =|Zx
+p (j)− ˜Zx
+p (j)|
+Find new ζtx
+p by putting
+etth =etb
+th in (18)
+Set k =ζtx
+p
+while (k> 0 & ˜Zx
+p (j)>Z p,th)
+do
+Predict next sample ˜Zx
+p (j)
+using GPR1 model
+Set k =k− 1 and j =j + 1
+end
+else
+Set emp = 0; Send emp = 0 to
+the edge node
+end
+end
+end
+end
+end
+end
+Set x =x + 1
+Output: Transmit data and Ex
+0 to the edge node.
+9
+Algorithm 2: Data-driven dynamic priority sensing algo-
+rithm at the edge node
+Initialization: etg
+th, etb
+th, eth, cth, ctb
+th, Zth, x = 1,
+e = 0, find tx and Nx using FFT, create GPR 1 and
+GPR2 models using recently collected samples.
+Input: Receive data and Ex
+0 from sensor node.
+if (e = 1) then
+Find tx and Nx for P parameters using FFT
+Retrain and test GPR 1 model for P parameters
+with recently collected samples.
+Retrain and test GPR 2 model for N′ active-sleep
+sensor sets with recently collected samples.
+Set e = 0else
+Predict the missing samples ∀Pp∈A x
+i using GPR1
+model (Section IV-A)
+Reconstruct the signals ∀Pp∈A x
+i
+Draw samples from the reconstructed signals at
+intervalt =min{tx
+k; 1≤k≤Bx
+i}
+Predict the cross-correlated parameters ∀Pp∈B x
+i
+using GPR2 model (Section IV-B)
+tx+1 = tx and Nx+1 = Nx
+end
+Set x =x + 1
+Find ctx−1
+p ;∀p∈P
+if (ctx−1
+p ≱ctb
+p,th;∀p∈P ) then
+Set e = 1
+Ax
+i =P, τx =n×max(tx)
+else
+if (Cx
+i ≤cth;∀i∈S x||Pg
+p (Zp,ζc
+min)≤Pg
+th;∀p∈
+P) then
+Ax
+i =P, τx =τx−1
+else
+Find ζtx
+p∀p∈P , τx, andAx
+i using (15), (14),
+and (21), respectively
+end
+end
+Transmit tx, Nx,Ax
+i , τx, and e to the sensor node
+Start listen mode
+Set Time = 1
+for all Pp∈A x
+i do
+while (Time<τ x) do
+while (emp = 1) do
+Send ACK= 1 to sensor node
+Receive the stored samples of all the
+parameters ofAx
+i
+while (emp = 1) do
+if (no sample received) then
+Predict the missing sample and store
+else
+Store the received sample
+end
+end
+end
+end
+Receive remaining samples
+measurement cycle, the edge node selects the active set Ax
+i
+using (21) and transmits Ax
+i , τx, tx, Nx, and status flag e to
+the sensor node. Based on the received information, the sensor
+node collects samples and transmits the collected samples
+and Ex
+0 to the edge node. When the temporal correlation of
+the parameters falls below ctb
+th, all the prediction models are
+retrained. Algorithm1 is programmed at the sensor node and
+Algorithm2 is programmed at the edge node.
+TABLE II: Specification of sensors
+Sensing pa-
+rameter
+Energy consump-
+tion (J)
+Threshold
+(Zpth )
+PM2.5 29.55 60µg/m3
+CO 26m 1mg/m3
+NH3 1.1 30µg/m3
+NO2 20m 38µg/m3
+Ozone 50m 50µg/m3
+SO2 26m 40µg/m3
+1 2 3 4 5 6
+Lag value 
+10-7
+10-5
+10-3
+Prediction error
+PM2.5 CO NH3 NO2 Ozone SO2
+Fig. 3: Variation of temporal prediction error with lp.
+E. Computational Complexity of the Proposed Framework
+The proposed framework is mainly edge intelligence-based,
+where GPR models for time series prediction and cross-
+correlated parameter prediction are developed at the edge
+node. For n training samples the computational complexity
+of GPR isO(n3) in training. However, the complexity in pre-
+diction isO(Ix), whereIx is the total number of samples pre-
+dicted in the xth measurement cycle. cth, lp, and ctth are es-
+timated during training/retraining with complexity O(P ). The
+complexity in finding τ isO(Pζmax)+O(P 2ζmax)+O(N′),
+where O(Pζmax) and O(P 2ζmax) are the complexity in
+findingPg
+p and C forP parameters overζc
+max slots andO(N′)
+is the complexity in finding τ forN′ sensor sets. Similarly,ζt
+forP parameters are estimated with complexityO(P ) and the
+optimal active sensor set is selected with complexity O(N′).
+Thus, the total complexity in training/retraining and estimating
+the hyper parameters is (N′ +P )O(n3) +O(P ). The compu-
+tational complexity at the edge node in the xth measurement
+cycle isO(Ix)+O(Pζmax)+O(P 2ζmax)+2O(N′)+O(P ).
+The sensor node is also programmed with GPR 1 model to
+predict the temporal samples of the sensing parameters. Hence,
+the complexity of the sensor node during training/retraining is
+PO(n3) and prediction in the xth cycle isO(Ix).
+VI. R ESULTS AND DISCUSSION
+The simulation results of the proposed framework, described
+in Section V are discussed in this section. An air pollution
+monitoring setup, consisting of six sensors has been deployed
+in the campus to capture the variation of six parameters
+(PM2.5, CO, NH 3, NO2, Ozone, SO 2) in the environment and
+store the data in the memory [31]. The dataset, retrieved from
+the sensor node is used to simulate the proposed algorithm in
+MATLAB. From [31] and [4], the energy consumption of the
+six sensors for monitoring six parameters are listed in Table
+II. To decide the ‘good’ and ‘bad’ states of the parameters, the
+respective threshold values considered for the parameters are
+also listed in Table II. The threshold values are chosen based
+on the dataset and the satisfactory level of the parameters. The
+10
+0 5 10 15 20 25 30
+lead value ( t)
+0.96
+0.98
+1
+Temporal correlation
+0
+1
+2
+3
+4
+5
+6
+Prediction error
+10-5
+Temporal correlation of PM2.5
+Prediction error of PM2.5
+(a) PM 2.5
+0 10 20 30 40
+lead value ( t)
+0.94
+0.96
+0.98
+1
+Temporal correlation
+0
+1
+2
+3
+4
+5
+6
+Prediction error
+10-5
+Temporal correlation of CO
+Prediction error of CO (b) CO
+0 10 20 30 40 50
+lead value ( t)
+0.94
+0.96
+0.98
+1
+Temporal correlation
+0
+1
+2
+3
+Prediction error
+10-5
+Temporal correlation of NH3
+Prediction error of NH3 (c) NH 3
+0 10 20 30 40 50
+lead value ( t)
+0.95
+0.97
+1
+Temporal correlation
+0
+1
+2
+Prediction error
+10-5
+Temporal correlation of NO2
+Prediction error of NO2
+(d) NO 2
+0 5 10 15 20 25
+lead value ( t)
+0.96
+0.98
+1
+Temporal correlation
+0
+0.1
+0.3
+0.5
+0.7
+0.9
+Prediction error
+10-4
+Temporal correlation of Ozone
+Prediction error of Ozone (e) Ozone
+0 10 20 30 40 50
+lead value ( t)
+0.96
+0.98
+1
+Temporal correlation
+0
+1
+2
+3
+Prediction error
+10-5
+Temporal correlation of SO2
+Prediction error of SO2 (f) SO 2
+Fig. 4: Variation of temporal prediction error and temporal correlation with lead value ζ t.
+parameters are assumed to be in ‘bad’ state when the signals
+exceed their respective threshold values.
+A. Finding Optimum Values of Hyper-Parameters
+In the proposed framework, the performance of the predic-
+tion models are evaluated by choosing appropriate values of
+temporal correlation threshold ctth∈ R1×P for P parameters
+and cross-correlation threshold cth. The sensing error for each
+parameter is calculated in terms of normalized mean squared
+error (nMSE) using (22).
+If Zx
+p and bZ
+x
+p are respectively the measurement vectors of
+the actual and predicted/reconstructed data sequence of thepth
+parameter in xth measurement cycle, the nMSE is given by,
+nMSEx
+p =||Zx
+p− bZ
+x
+p||
+||Zx
+p|| . (22)
+Initially, the temporal prediction error of each parameter is ob-
+served for different lag values. In [4], the nMSE achieved is on
+the order of 10−5. Hence, nMSE = 10−5 is considered as the
+temporal prediction error threshold etb
+th when the parameters
+are in ‘bad’ state. It ensures good accuracy of the recovered
+signal at the edge node during ‘bad’ state. On the other
+hand, nMSE = 10−4 is chosen as temporal prediction error
+threshold etg
+th in ‘good’ state. Since the signals need not be
+predicted accurately in ‘good’ state, energy consumption gets
+more priority than accuracy. However, the optimal lag value
+for each parameter of the temporal prediction model GPR 1 is
+chosen to achieve error below 10−5. As shown in Fig. 3, the
+lag values for the parameter set {PM, CO, NH3, NO2, Ozone,
+SO2} are set as {lp, 1≤ l≤ P} ={3, 2, 1, 3, 5, 2}. When
+thepth sensor is turned on, it collects lp consecutive samples.
+The next consecutive samples are predicted from previous lp
+collected/predicted samples until the prediction error exceeds
+the threshold at that state. To reduce complexity at the sensor
+node, Nyquist sampling interval tp for each parameter is
+computed at the beginning while training GPR 1 model and
+is not updated at every cycle. The values are recomputed at
+the time of retraining the GPR 1 model. The sampling interval
+set, obtained from the simulation is {21, 65, 22, 75, 58, 41}.
+The variation of temporal prediction error and temporal
+correlation with the increase in lead value ζt for each pa-
+rameter is shown in Fig. 4. As discussed in Section V-B,
+the relation between temporal prediction error and ζt is
+established as, etp(ζt) = αpζtβp
+, which is validated by
+Fig. 4. αp and βp for pth parameter is obtained from the
+initial training samples using (17). Since the temporal cor-
+relation decreases and prediction error increases with ζt, a
+temporal correlation threshold ctg
+p,th (ctb
+p,th) is set for pth
+parameter, such that the prediction error remains below etg
+th
+(etb
+th). Thus, from Fig. 4, ctg
+th and ctb
+th for P parameters
+are respectively set as {0.96, 0.95, 0.93, 0.95, 0.96, 0.96} and
+{0.98, 0.97, 0.955, 0.965, 0.99, 0.985}. If Pg
+P ≥ Pg
+th, ctg
+p,th
+is used to solve (15), else ctb
+p,th is used to find ζt
+p for pth
+parameter in (15).
+The ‘bad’ state parameters of the active set are predicted
+with an error below 10−5, whereas the ‘good’ state parameters
+of the active set are predicted with an error below 10−4 using
+GPR1 at both the sensor node and the edge node. The pa-
+rameters of the inactive set are predicted from the parameters
+of the active set using GPR 2, as discussed in Section V-D.
+After predicting all parameters of the inactive set, the signals
+are reconstructed at the edge node and the reconstruction
+error is calculated in terms of nMSE. It is observed that the
+multi-sensing strategy, proposed in [4], achieved nMSE on
+the order of 10−5 due to joint prediction at the network level,
+where the spatial samples of the parameters are were also
+available. However, the proposed model in [4] is completely
+dedicated to the node-level analysis of a multi-parameter
+sensor hub. Applying the adaptive multi-sensing strategy of
+[4] in the proposed model, the average signal reconstruction
+error achieved is 2.1× 10−3. Hence, the reconstruction error
+(nMSE) threshold for GPR 2 is set at 10−3 to find optimum
+values of cth and δ. As shown in Fig. 5a, the reconstruction
+error decreases and energy consumption increases with cth.
+Thus, cth = 0.72 is set as the optimum value. It is observed
+in Fig. 5a that the error increases with δ, whereas δ = 0.01
+results in a small length of measurement cycle which in turn
+increase the communication energy. Hence, an optimum value
+11
+0 0.25 0.5 0.75 1
+Cross-correlation threshold (cth)
+10-4
+10-3
+10-2
+10-1
+100
+Reconstruction error 
+          (nMSE)               
+0
+1
+2
+3
+Energy consumption
+(J)
+ =0.01  =0.05  =0.1 =0.15
+cth=0.72
+(a)
+0 2000 4000 6000
+Time slot ( c)
+0.6
+0.7
+0.8
+0.9
+1
+Average cross-
+correlation coefficient
+c
+max = 3690 Sec (b)
+Fig. 5: (a) Average energy consumption and reconstruction error versus cross-correlation threshold and (b) Variation of cross-correlation
+coefficient with ζ c.
+0
+50
+100
+150Active sensor set index
+0 20 40 60 80 100
+Measurement cycle
+(a)
+0
+1000
+2000
+3000
+4000
+Length of measurement  
+              cycle (sec)                 
+0 20 40 60 80 100
+Measurement cycle (b)
+0
+0.02
+0.04
+0.06
+0.08 C
+0 20 40 60 80 100
+Measurement cycle (c)
+Fig. 6: (a) Optimal active sensor set, (b) adaptive length of measurement cycle, and (c) deviation of average cross-correlation coefficient of
+the active set.
+of δ is set as 0.05.
+As discussed in Section V-A, the length of measurement
+cycle for each sensor set is obtained using (14), where the
+time slot ζc is bounded to [ζc
+min,ζc
+max]. As shown in Fig.
+5b, the average cross-correlation factor of N′ sets is changing
+with time. With slot duration ∆2 = 1 sec,ζc
+max is set as 3690.
+Hence the maximum length of measurement cycle is 3690 sec,
+whereas the minimum length of measurement cycle is the set
+as the minimum value of all the Nyquist sampling intervals of
+the parameters i,e. 21 sec. The noise variance is considered as
+σ2 = 10−6 for all the parameters [11].
+B. Validation of the Proposed Algorithm
+The proposed algorithm is simulated over 100 measurement
+cycles to validate the efficacy of the algorithm. Fig. 6(a)
+captures the variation of optimal active sensor set at different
+measurement cycles. The variation of length of measurement
+cycle is shown in Fig. 6(b), which shows that the τ remains
+within the bound [21, 3200] sec. ∆C = is the change in
+cross-correlation factor of the selective sensor set over the
+cycle. It can be observed that ∆C remains below δ = 0.05
+in almost every cycle. Although it exceeds 0.05 in some
+cycles, the deviation is very small. The average of ∆C is
+0.018< 0.05, which validates the efficiency of the algorithm.
+Fig. 6 shows that the proposed algorithm is adaptive to the
+process dynamics.
+C. ‘bad’ states Detection Accuracy
+As discussed in Section III, the proposed system model
+is statically defined. If any parameter crosses above the
+‘bad’ threshold value, the system responds on real-time basis.
+Otherwise, the system responds on non-real-time basis. To
+detect the state of the system, the parameter values are either
+TABLE III: Comparison with state-of-the-art
+Proposed
+framework
+Nyquist-based
+framework
+Sensing energy (J) 264.3 2210
+Communication energy (J) 0.0055 0.0998
+Number of samples 68 810
+Reconstruction error 7× 10−4 2.5× 10−6
+‘bad’ states detection efficiency 98% 100%
+predicted or collected at the sensor node at their individual
+Nyquist sampling rate. To find the accuracy of the proposed
+algorithm in detecting ‘bad’ states of the system, it is com-
+pared with the Nyquist-based adaptive sampling algorithm
+proposed in [1]. In the Nyquist-based algorithm, all the sensors
+periodically collect data at their individual sampling intervals
+and transmit sporadically to the edge node. However, in the
+proposed model the data is transmitted sporadically during
+‘bad’ state. In Fig. 7(a), it has been observed that the ‘bad’
+states detection accuracy increases with higher Pg
+th and lower
+etb
+th. Considering 100% ‘bad’ states detected in Nyquist-
+based model, the proposed model detects 98% ‘bad’ states
+with Pg
+th = 0.95 and etb
+th = 10−5. When Pg
+th = 0.9 and
+etb
+th = 10−4, the ‘bad’ state detection accuracy is 96%. Hence,
+required accuracy can be achieved by by adjusting Pg
+th and
+etb
+th. A comparison of reconstruction error and residual energy
+between the proposed framework and Nyquist-based model
+are respectively shown in Fig. 7(b) and Fig. 7(c) considering
+Pg
+th = 0.95 and etb
+th = 10−5. It has been observed that the
+signal reconstruction error (nMSE) in the proposed framework
+is much higher than the Nyquist-based framework due to
+prediction errors of GPR 1 and GPR2, however, it is below the
+threshold (10−3). Fig. 7(c) shows that the proposed framework
+is more energy-efficient compared to [1].
+A performance comparison of the proposed framework with
+12
+NH3
+PM2.5 CO NO2
+Ozone SO2
+0
+1000
+2000
+3000Number of bad states
+Nyquist-based adaptive sampling (real-time)
+Proposed framework (Pgth=0.95, etth
+b =10-5)
+Proposed framework (Pgth=0.9, etth
+b =10-4)
+(a)
+0 20 40 60 80 100
+Measurement cycle
+10-7
+10-5
+10-3
+10-1
+Reconstruction error
+Proposed adaptive sensing
+Nyquist-based adaptive sampling (b)
+0 20 40 60 80 100
+Measurement cycle
+0
+5
+10
+15
+Residual energy 
+at node (J)     
+104
+Proposed framework
+Nyquist-based adaptive sampling (c)
+Fig. 7: Comparison of (a) number of ‘bad’ state detected, (b) residual energy at the sensor node, and (c) reconstruction error of the proposed
+framework with Nyquist-based framework [1].
+(a) PM 2.5
+ (b) CO
+ (c) NH 3
+(d) NO 2
+ (e) Ozone
+ (f) SO 2
+Fig. 8: Comparison of actual and reconstructed sensing signals.
+the Nyquist-based framework in terms of average sensing en-
+ergy consumption, average communication energy consump-
+tion, average number of samples, average reconstruction error,
+and ‘bad’ states detection accuracy is shown in Table III.
+Remark 1: The proposed framework is 88% more energy-
+efficient and 91% more bandwidth-efficient compared to the
+Nyquist-based adaptive sampling algorithm [1] with moderate
+complexity, while maintaining a sensing error below 10−3 and
+detecting the system states with 98% accuracy.
+D. Reconstruction Performance Evaluation
+The comparison of actual and reconstructed sensing signals
+at both ‘good’ and ‘bad’ states is presented in this subsection.
+As shown in Fig. 8, the signals are sampled at a faster rate
+when they exceed the threshold. The sensors are not collecting
+samples when they are inactive.
+The reconstruction error (nMSE) of all the six parameter
+are presented in Fig. 9. It is observed that the error is below
+10−5 when the parameters are in ‘bad’ state. However, the
+error is bounded to [10−5, 10−3] when the parameters are in
+‘good’ state. Fig. 8 and Fig. 9 validates the efficiency of the
+GPR-based prediction models, discussed in Section IV.
+E. Performance Comparison with State-of-the-Art
+In the proposed framework, both temporal- and cross-
+correlation of the parameters are exploited. A performance
+comparison in terms of error and energy efficiency between
+the proposed signal recovery and the SBL-based approach,
+proposed in [4], is studied in this subsection.
+Since the SBL-based prediction framework in [4] considers
+the system as non-real-time, it is unable to detect the time-
+criticality of the system. On the other hand, the proposed
+framework detects the time-criticality of the system with
+98% accuracy. It is assumed that the active sensors in [4],
+collect samples at Nyquist sampling rate. However, due to
+time series prediction model at the edge node and the end
+node in the proposed framework, the active sensors collect
+only a few samples, which gives a huge reduction in energy
+consumption and bandwidth utility. Considering NB-IoT as the
+radio module, the communication energy ( Ec =Ew +Et) is
+computed using (13), where each sample is represented in 32
+bits [31], [32].
+As shown in Fig. 10(a), GPR-based prediction models
+performs better than SBL-based model in terms of accuracy.
+Although the proposed framework consumes more energy and
+bandwidth in ‘bad’ states compared to ‘good’ states, Figs.
+10(b)-(e) depict that the proposed framework is more energy
+and bandwidth-efficient compared to SBL-based approach [4].
+The average sensing error in the proposed and SBL-based
+framework are respectively 7× 10−4 and 2.1× 10−3.
+Remark 2: The proposed framework saves 41% sensing
+energy, 67% communication energy, and 32% bandwidth com-
+pared to the framework in [4] with 68% reduction in sensing
+error, while detecting the system states with 98% accuracy.
+13
+0 20 40 60 80 100
+Measurement cycle
+10-6
+10-5
+10-4
+10-3
+Reconstruction error
+PM2.5
+Bad state
+(a) PM 2.5
+0 20 40 60 80 100
+Measurement cycle
+10-6
+10-5
+10-4
+10-3
+Reconstruction error
+CO
+Bad state (b) CO
+0 20 40 60 80 100
+Measurement cycle
+10-6
+10-5
+10-4
+10-3
+Reconstruction error
+NH3
+Bad state (c) NH 3
+0 20 40 60 80 100
+Measurement cycle
+10-6
+10-5
+10-4
+10-3
+Reconstruction error
+NO2
+Bad state
+(d) NO 2
+0 20 40 60 80 100
+Measurement cycle
+10-6
+10-5
+10-4
+10-3
+Reconstruction error
+Ozone
+Bad state (e) Ozone
+0 20 40 60 80 100
+Measurement cycle
+10-5
+10-4
+10-3
+Reconstruction error
+SO2 (f) SO 2
+Fig. 9: Reconstruction error of the parameters at the edge node.
+0 25 50 75 100
+Measurement cycle
+10-5
+10-3
+10-1
+Reconstruction error
+Proposed framework
+SBL-based approach
+(a)
+0 25 50 75 100
+Measurement cycle
+0
+2500
+5000
+7500
+10000
+Residual energy at 
+    node (J)           
+SBL-based approach
+Proposed framework (b)
+0
+1000
+2000
+3000Sensing energy (J)
+0 20 40 60 80 100
+Measurement cycle
+Proposed framework
+SBL-based approach
+(c)
+0
+0.02
+0.04
+Communication 
+energy (j)    0 20 40 60 80 100
+Measurement cycle
+Proposed framework
+SBL-based approach (d)
+0
+100
+200
+300Number of samples
+0 20 40 60 80 100
+Measurement cycle
+Proposed framework
+SBL-based approach (e)
+Fig. 10: Performance comparison of the proposed framework with SBL-based approach [4].
+TABLE IV: Performance comparison of the proposed framework with
+and without RL
+Without
+RL
+with RL
+(UCB)
+with RL (Q-
+learning)
+Average energy consumption 340.35 J 264.3 J 264.2 J
+Average reconstruction error 9× 10−4 7× 10−4 6.4× 10−4
+Computational complexity O(N ) O(N ) O(NI itr)
+F . Sensitivity of the Proposed Framework to RL-based Opti-
+mization Functions
+To analyze the efficiency of the proposed discounted UCB-
+based adaptive sensor selection algorithm, the performance
+matrices are compared using RL-based optimization func-
+tion (21) and without RL-based optimization function (19).
+As discussed in Section V-C, the proposed framework uses
+discounted UCB algorithm to find optimal active sensor set
+for the next measurement cycle, where γ and α′ in (21) are
+respectively set as 0.9 and 0.95 [30]. However, Q-learning
+algorithm is also used widely to solve RL problems. A
+performance comparison of discounted UCB and Q-learning-
+based optimization function is shown in Table IV. Table IV
+also lists the performance matrices without using any RL
+algorithm in the optimization function as given in (19). Here
+the Q-learning is used as a stateless variant with ϵ-greedy
+method, as discussed in [33]. The values ofϵ, learning rate, and
+decay are respectively set as 1, 0.9, and 0.95. In Q-learning,
+the Q-value of a sensor set is estimated iteratively. If Iitr is
+the number of iterations, the complexity to find optimal sensor
+set out of N′ sets isO(N′Iitr).
+Remark 3: The energy consumption and error in RL-
+based methods are much lower compared to without RL-
+based method. Although Q-learning performs slightly better,
+the computational complexity of Q-learning is much higher
+than that of discounted UCB.
+VII. C ONCLUSION
+A novel data-driven edge intelligence-based priority aware
+sensing and transmission framework has been presented in
+this paper. The cross-correlation among the parameters and
+temporal correlation of the sensing signals have been exploited
+14
+to find the optimal active sensor set and optimal sampling
+instants of the sensors. The optimal active set has been esti-
+mated by solving the trade-off among performance parameters
+using discounted UCB-based optimization function. Exten-
+sive simulation studies on air-pollution monitoring parameters
+have validated the efficacy of the proposed framework. The
+GPR-based prediction models perform better in the proposed
+framework compared to the SBL-based prediction model. The
+application of reinforcement learning in finding optimal sensor
+set in a non-stationary environment increases the efficacy of
+the proposed framework. The proposed framework is both
+energy and bandwidth-efficient compared to the existing real-
+time and non-real-time adaptive sensing algorithms, while
+detecting the system states with close to 100% accuracy.
+As an immediate extension, the proposed framework will
+be implemented in a real-life sensor network to validate its
+efficiency. The sensor node will be wirelessly connected to
+an edge node to transmit data and receive instructions based
+on the intelligence algorithm programmed in the edge node.
+It will be interesting to study the energy efficiency of the
+proposed framework in real operation scenario applications, as
+there is a clear tradeoff of sensing and communication energy
+saving versus computational energy overhead.
+APPENDIX A
+Let f(Z) ∼ GP (m(Z),k (Z, Z′)) ∀ Z, Z′ is a Gaussian
+process, where m(Z) = E[f(Z)] is the mean function and
+k(Z, Z′) =E[(f(Z)−m(Z))(f(Z′)−m(Z′))] is the covari-
+ance function. If Z is the training matrix withn feature vectors,
+Y is the target vector, and W is the weight vector, the prior
+and posterior distributions of the underlying function f for a
+test point Z∗ are respectively given by,
+Pr (f(Z∗)) =
+Z
+W
+Pr (f|W, Z∗)Pr (W)dW (A.1)
+Pr (f(Z∗)|Z, Y) =
+Z
+W
+Pr (f|W, Z∗)Pr (W|Z, Y)dW. (A.2)
+Assuming Pr (W) is Gaussian and Pr (f|W, Z∗) is deter-
+ministic, Pr (f(Z∗)) and Pr (f(Z∗)|Z, Y) are also Gaussian
+[29, Ch. 2]. Equation (A.1) and (A.2) are used in Section
+IV to find the mean and covariance functions of GPR-based
+temporal and cross-correlated parameter prediction models.
+APPENDIX B
+The optimization function to select an optimal sensor set A
+in the (x + 1)th measurement cycle is given by,
+Fx+1(A) =
+xX
+t=1
+γx−t
+E0
+t
+Ebatt
+1
+AB [ACt
+1(UT− AT )]τt
+A
+νtAEsMt
++
+vuutα′
+Tx
+A
+log(
+N′
+X
+i−1
+Tx
+A). (B.1)
+In (B)νt = max
+A∈Qt
+1
+AB [AC
+t
+1(UT−AT )]τt
+A
+AEsMt is constant for a measure-
+ment cycle and independent of At. Similarly, E0
+t
+Ebatt
+andτt
+Ai are
+also independent of At. Although Tx
+A in (B) is a function of
+Ax, it is the number of times vector A is selected to activate
+up to x measurement cycles. Thus, (B) can be rewritten by
+replacing the constant terms with c1 and c2 as, Fx+1(A) =Px
+t=1ct
+1Ft
+1(A) +cx
+2, where F1(A) = AC1(UT−AT )
+AEsM . If F1(A)
+is concave, F (A) is also concave. The Frechet derivative of
+F1(A) is given by [34],
+F1(A + V)−F1(A) = (A + V)C1(UT− (A + V)T )
+(A + V)EsM − AC1(UT− AT )
+AEsM
+= (AC1UT + VC1UT− AC1AT− AC1VT− VC1AT− VC1VT )(AEsM)
+(AEsM + VEsM)(AEsM)
+− (AC1(UT− AT ))((A + V)EsM)
+(AEsM + VEsM)(AEsM)
+= (VC1UT− AC1VT− VC1AT− VC1VT )(AEsM)
+(AEsM + VEsM)(AEsM)
+− (AC1UT− AC1AT )(VEsM)
+(AEsM + VEsM)(AEsM)
+= (VC1UT− AC1VT− VC1AT− VC1VT )(AEsM)
+(AEsM + VEsM)(AEsM)
+− (VC1UT− VC1AT )(AEsM)
+(AEsM + VEsM)(AEsM)
+= (−AC1VT− VC1VT )(AEsM)
+(AEsM + VEsM)(AEsM) = (−AC1VT− VC1VT )
+(A + V)EsM .
+(B.2)
+Putting VC1VT = 0 and (A + V)≈ A, we get the Frechet
+derivative of F1(A) as, ∇F1(A) = −AC1
+AEsM . Similarly, the
+Hessian of F1(A) is given by,
+∇2F1(A) = 0
+AEsM = 0 (B.3)
+According to [34], a twice differentiable function F (A) is
+concave if and only if ∇2F (A)≤ 0∀A∈ RP×1. Thus, the
+optimization functions in (19) and (21) are concave, which
+ensures a single maximum point exists. Since the domain of
+A is discrete, it makes a non-convex set. It can be converted
+to a convex set by considering the convex hull of Qx.
+REFERENCES
+[1] C. Alippi, G. Anastasi, M. Di Francesco, and M. Roveri, “An adaptive
+sampling algorithm for effective energy management in wireless sensor
+networks with energy-hungry sensors,” IEEE Trans. Instrum. Meas. ,
+vol. 59, no. 2, pp. 335–344, 2009.
+[2] V . Gupta, S. Tripathi, and S. De, “Green sensing and communication:
+A step towards sustainable IoT systems,” J. Indian Inst. Sc. , pp. 1–16,
+2020.
+[3] H. Al-Tous and I. Barhumi, “Differential game for resource allocation
+in energy harvesting wireless sensor networks,” IEEE Trans. Green
+Commun. Netw., vol. 4, no. 4, pp. 1165–1173, 2020.
+[4] V . Gupta and S. De, “Collaborative multi-sensing in energy harvesting
+wireless sensor networks,” IEEE Trans. Signal Inf. Process. Netw., vol. 6,
+pp. 426–441, 2020.
+[5] D. Rajavel, A. Chakraborty, and S. Misra, “QoS-aware sensor virtual-
+ization for provisioning green sensors-as-a-service,” IEEE Trans. Green
+Commun. Netw., pp. 1–1, 2021.
+[6] S. Ghosh, S. De, S. Chatterjee, and M. Portmann, “Learning-based smart
+sensing for energy-sustainable WSN,” in proc. IEEE ICC, Montreal,
+Canada, 2021, pp. 1–6.
+[7] S. Tripathi and S. De, “Data-driven optimizations in IoT: A new frontier
+of challenges and opportunities,” Springer CSI Trans. ICT, vol. 7, no. 1,
+pp. 35–43, 2019.
+[8] H. Harb and A. Makhoul, “Energy-efficient sensor data collection
+approach for industrial process monitoring,” IEEE Trans. Ind. Informat.,
+vol. 14, no. 2, pp. 661–672, 2017.
+15
+[9] A. Jain and E. Y . Chang, “Adaptive sampling for sensor networks,” in
+Proc. intl. wksp on Data manag. sensor networks: In conjunction with
+VLDB, Toronto, Canada, 2004, pp. 10–16.
+[10] S. Ghosh, S. De, S. Chatterjee, and M. Portmann, “Learning-based
+adaptive sensor selection framework for multi-sensing WSN,” IEEE
+Sensors J., pp. 1–1, 2021.
+[11] V . Gupta and S. De, “SBL-based adaptive sensing framework for WSN-
+assisted IoT applications,” IEEE Internet Things J. , vol. 5, no. 6, pp.
+4598–4612, 2018.
+[12] S. Hwang, R. Ran, J. Yang, and D. K. Kim, “Multivariated Bayesian
+compressive sensing in wireless sensor networks,” IEEE Sensors J. ,
+vol. 16, no. 7, pp. 2196–2206, 2015.
+[13] Y . Xu, J. Choi, S. Dass, and T. Maiti, “Sequential Bayesian prediction
+and adaptive sampling algorithms for mobile sensor networks,” IEEE
+Trans. Autom. Control, vol. 57, no. 8, pp. 2078–2084, 2011.
+[14] M. Jadaliha, Y . Xu, J. Choi, N. S. Johnson, and W. Li, “Gaussian process
+regression for sensor networks under localization uncertainty,” IEEE
+Trans. Signal Process., vol. 61, no. 2, pp. 223–237, 2012.
+[15] D. Gu and H. Hu, “Spatial Gaussian process regression with mobile
+sensor networks,” IEEE Trans. Neural Netw. Learn. Syst., vol. 23, no. 8,
+pp. 1279–1290, 2012.
+[16] T. Zheng, M. H. Bergin, R. Sutaria, S. N. Tripathi, R. Caldow, and D. E.
+Carlson, “Gaussian process regression model for dynamically calibrating
+and surveilling a wireless low-cost particulate matter sensor network in
+Delhi.” Atmospheric Measurement Techniques, vol. 12, no. 9, 2019.
+[17] S. Tripathi and S. De, “Dynamic prediction of powerline frequency for
+wide area monitoring and control,” IEEE Trans. Ind. Informat. , vol. 14,
+no. 7, pp. 2837–2846, 2017.
+[18] H. Harb, A. Mansour, A. Nasser, E. M. Cruz, and I. de la Torre Diez,
+“A sensor-based data analytics for patient monitoring in connected
+healthcare applications,” IEEE Sensors J. , vol. 21, no. 2, pp. 974–984,
+2020.
+[19] M. V . Ramesh and V . P. Rangan, “Data reduction and energy sustenance
+in multisensor networks for landslide monitoring,” IEEE Sensors J. ,
+vol. 14, no. 5, pp. 1555–1563, 2014.
+[20] K. Li, W. Ni, M. Abolhasan, and E. Tovar, “Reinforcement learning
+for scheduling wireless powered sensor communications,” IEEE Trans.
+Green Commun. and Netw. , vol. 3, no. 2, pp. 264–274, 2019.
+[21] R. Tan, G. Xing, X. Liu, J. Yao, and Z. Yuan, “Adaptive calibration for
+fusion-based wireless sensor networks,” in Proc. IEEE INFOCOM, San
+Diego, CA, USA , 2010, pp. 1–9.
+[22] J. Wang, S. Tang, B. Yin, and X.-Y . Li, “Data gathering in wireless
+sensor networks through intelligent compressive sensing,” in Proc. IEEE
+INFOCOM, Orlando, FL, USA , 2012, pp. 603–611.
+[23] M. Zorzi, R. R. Rao, and L. B. Milstein, “ARQ error control for fading
+mobile radio channels,” IEEE Trans. Veh. Technol., vol. 46, no. 2, pp.
+445–455, 1997.
+[24] R. E. Caraka, R. C. Chen, T. Toharudin, B. Pardamean, H. Yasin, and
+S. H. Wu, “Prediction of status particulate matter 2.5 using state Markov
+chain stochastic process and hybrid var-nn-PSO,” IEEE Access, vol. 7,
+pp. 161 654–161 665, 2019.
+[25] P. Mukherjee, D. Mishra, and S. De, “Gaussian mixture based context-
+aware short-term characterization of wireless channels,” IEEE Trans.
+Veh. Technol., vol. 69, no. 1, pp. 26–40, 2019.
+[26] S. Roberts, M. Osborne, M. Ebden, S. Reece, N. Gibson, and S. Aigrain,
+“Gaussian processes for time-series modelling,” Philosophical Trans.
+Royal Soc. A: Mathematical, Physical and Engineering Sciences , vol.
+371, 2013.
+[27] C. M. Bishop et al., Neural networks for pattern recognition . Oxford
+University press, 1995.
+[28] J. Lee, Y . Bahri, R. Novak, S. S. Schoenholz, J. Pennington, and J. Sohl-
+Dickstein, “Deep neural networks as Gaussian Processes,”arXiv preprint
+arXiv:1711.00165, 2017.
+[29] C. Rasmussen and C. Williams, Gaussian processes for machine learn-
+ing. MIT Press: Cambridge, MA, 2006.
+[30] T. Lattimore and C. Szepesv ´ari, Bandit algorithms . Cambridge Uni-
+versity Press, 2020.
+[31] P. Das, S. Ghosh, S. Chatterjee, and S. De, “Energy harvesting-enabled
+5G advanced air pollution monitoring device,” in Proc. IEEE 3rd 5G
+World Forum, Bangalore, India, 2020, pp. 218–223.
+[32] Q. W. S. Co. Lte bc66 nb-iot module. [Online]. Available:
+https://www.quectel.com/product/bc66.htm
+[33] T. B. de Oliveira, A. L. Bazzan, B. C. da Silva, and R. Grunitzki,
+“Comparing multi-armed bandit algorithms and Q-learning for multi-
+agent action selection: a case study in route choice,” in Proc. IJCNN,
+Rio de Janeiro, Brazil , 2018.
+[34] S. Boyd and L. Vandenberghe, Convex optimization . Cambridge
+university press, 2004.
+Sushmita Ghosh received the B.Tech degree in
+Electronics and Communication Engineering in
+2016 and M.Tech degree in VLSI Design in 2019
+from National Institute of Technology Agartala,
+Tripura, India. She is currently pursuing the Ph.D.
+degree from the UQ-IITD Academy of Research,
+Indian Institute of Technology Delhi, New Delhi,
+India. Her current research interest includes design
+of energy-efficient IoT communication systems and
+networks.
+Swades De (S’02-M’04-SM’14) is a Professor with
+the Department of Electrical Engineering, IIT Delhi.
+His research interests are broadly in communication
+networks, with emphasis on performance modeling
+and analysis. Current directions include energy har-
+vesting sensor networks, broadband wireless access
+and routing, cognitive/whitespace access networks,
+smart grid networks, and IoT communications.
+Shouri Chatterjee (Senior Member, IEEE) received
+the B.Tech. degree in electrical engineering from
+IIT Madras, Chennai, India, in 2000, and the M.S.
+and Ph.D. degrees in electrical engineering from
+Columbia University, New York, NY , USA, in 2002
+and 2005, respectively. From 2005 to 2006, he was a
+Design Engineer with the Wireless Division, Silicon
+Laboratories Inc., NJ, USA. Since November 2006,
+he has been with the faculty of the Department of
+Electrical Engineering, IIT Delhi, New Delhi, India,
+where he is currently a Professor and NXP/Philips
+Chair Professor. His primary area of work is in integrated circuit design,
+circuits, and systems. His research interests include filter design, ultra-low
+power circuits for energy scavenging, and wireless front-ends for millimeter-
+wave radios.
+Marius Portmann received his Ph.D. degree in
+Electrical Engineering from the Swiss Federal Insti-
+tute of Technology (ETH), Zurich, in 2002. He is
+currently an Associate Professor with the University
+of Queensland, Australia. His research interests in-
+clude general networking, pervasive computing, IoT
+and cyber security

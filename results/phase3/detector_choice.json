@@ -1,0 +1,20 @@
+{
+ "cfg": 7,
+ "config": {
+  "mode": "lag",
+  "lag_min": 120,
+  "k": 3,
+  "H": 8,
+  "c": 6
+ },
+ "rule": "median FA <= 2.0/param/30d on tuning sites; max mean detection of amp-5 events",
+ "tuning_sites": [
+  "USGS 01388000",
+  "USGS 01402000",
+  "USGS 01458500",
+  "USGS 01467087",
+  "USGS 01473900",
+  "USGS 05420400",
+  "USGS 11510700"
+ ]
+}

@@ -1,0 +1,314 @@
+168 jobs; tuning=['USGS 01388000', 'USGS 01402000', 'USGS 01458500', 'USGS 01467087', 'USGS 01473900', 'USGS 05420400', 'USGS 11510700']
+  1/168 USGS 01388000 cfg0 0.8 min, ~135 min left
+  2/168 USGS 01388000 cfg1 0.8 min, ~67 min left
+  3/168 USGS 01388000 cfg2 1.7 min, ~93 min left
+  4/168 USGS 01388000 cfg3 1.7 min, ~70 min left
+  5/168 USGS 01388000 cfg4 2.5 min, ~80 min left
+  6/168 USGS 01388000 cfg5 2.5 min, ~67 min left
+  7/168 USGS 01388000 cfg6 3.2 min, ~74 min left
+  8/168 USGS 01388000 cfg7 3.2 min, ~65 min left
+  9/168 USGS 01388000 cfg8 4.0 min, ~71 min left
+  10/168 USGS 01388000 cfg9 4.1 min, ~64 min left
+  11/168 USGS 01388000 cfg10 4.9 min, ~70 min left
+  12/168 USGS 01388000 cfg11 4.9 min, ~64 min left
+  13/168 USGS 01402000 cfg0 5.3 min, ~64 min left
+  14/168 USGS 01402000 cfg1 5.4 min, ~59 min left
+  15/168 USGS 01402000 cfg2 5.8 min, ~59 min left
+  16/168 USGS 01402000 cfg3 5.8 min, ~55 min left
+  17/168 USGS 01402000 cfg4 6.2 min, ~55 min left
+  18/168 USGS 01402000 cfg5 6.3 min, ~52 min left
+  19/168 USGS 01402000 cfg6 6.8 min, ~53 min left
+  20/168 USGS 01402000 cfg7 6.8 min, ~50 min left
+  21/168 USGS 01402000 cfg8 7.3 min, ~51 min left
+  22/168 USGS 01402000 cfg9 7.3 min, ~49 min left
+  23/168 USGS 01402000 cfg10 7.8 min, ~49 min left
+  24/168 USGS 01402000 cfg11 7.9 min, ~47 min left
+  25/168 USGS 01458500 cfg0 8.3 min, ~47 min left
+  26/168 USGS 01458500 cfg1 8.3 min, ~45 min left
+  27/168 USGS 01458500 cfg2 8.8 min, ~46 min left
+  28/168 USGS 01458500 cfg3 8.8 min, ~44 min left
+  29/168 USGS 01458500 cfg4 9.2 min, ~44 min left
+  30/168 USGS 01458500 cfg5 9.2 min, ~42 min left
+  31/168 USGS 01458500 cfg6 9.6 min, ~43 min left
+  32/168 USGS 01458500 cfg7 9.7 min, ~41 min left
+  33/168 USGS 01458500 cfg8 10.1 min, ~41 min left
+  34/168 USGS 01458500 cfg9 10.1 min, ~40 min left
+  35/168 USGS 01458500 cfg10 10.5 min, ~40 min left
+  36/168 USGS 01458500 cfg11 10.5 min, ~39 min left
+  37/168 USGS 01467087 cfg0 10.9 min, ~39 min left
+  38/168 USGS 01467087 cfg1 10.9 min, ~37 min left
+  39/168 USGS 01467087 cfg2 11.3 min, ~37 min left
+  40/168 USGS 01467087 cfg3 11.3 min, ~36 min left
+  41/168 USGS 01467087 cfg4 11.7 min, ~36 min left
+  42/168 USGS 01467087 cfg5 11.7 min, ~35 min left
+  43/168 USGS 01467087 cfg6 12.1 min, ~35 min left
+  44/168 USGS 01467087 cfg7 12.1 min, ~34 min left
+  45/168 USGS 01467087 cfg8 12.5 min, ~34 min left
+  46/168 USGS 01467087 cfg9 12.5 min, ~33 min left
+  47/168 USGS 01467087 cfg10 12.8 min, ~33 min left
+  48/168 USGS 01467087 cfg11 12.9 min, ~32 min left
+  49/168 USGS 01473900 cfg0 12.9 min, ~31 min left
+  50/168 USGS 01473900 cfg1 12.9 min, ~31 min left
+  51/168 USGS 01473900 cfg2 13.0 min, ~30 min left
+  52/168 USGS 01473900 cfg3 13.0 min, ~29 min left
+  53/168 USGS 01473900 cfg4 13.0 min, ~28 min left
+  54/168 USGS 01473900 cfg5 13.0 min, ~28 min left
+  55/168 USGS 01473900 cfg6 13.1 min, ~27 min left
+  56/168 USGS 01473900 cfg7 13.1 min, ~26 min left
+  57/168 USGS 01473900 cfg8 13.1 min, ~26 min left
+  58/168 USGS 01473900 cfg9 13.2 min, ~25 min left
+  59/168 USGS 01473900 cfg10 13.2 min, ~24 min left
+  60/168 USGS 01473900 cfg11 13.2 min, ~24 min left
+  61/168 USGS 05420400 cfg0 13.6 min, ~24 min left
+  62/168 USGS 05420400 cfg1 13.7 min, ~23 min left
+  63/168 USGS 05420400 cfg2 14.1 min, ~23 min left
+  64/168 USGS 05420400 cfg3 14.1 min, ~23 min left
+  65/168 USGS 05420400 cfg4 14.5 min, ~23 min left
+  66/168 USGS 05420400 cfg5 14.5 min, ~22 min left
+  67/168 USGS 05420400 cfg6 14.9 min, ~22 min left
+  68/168 USGS 05420400 cfg7 14.9 min, ~22 min left
+  69/168 USGS 05420400 cfg8 15.3 min, ~22 min left
+  70/168 USGS 05420400 cfg9 15.4 min, ~21 min left
+  71/168 USGS 05420400 cfg10 15.7 min, ~22 min left
+  72/168 USGS 05420400 cfg11 15.8 min, ~21 min left
+  73/168 USGS 11510700 cfg0 16.5 min, ~21 min left
+  74/168 USGS 11510700 cfg1 16.5 min, ~21 min left
+  75/168 USGS 11510700 cfg2 17.5 min, ~22 min left
+  76/168 USGS 11510700 cfg3 17.5 min, ~21 min left
+  77/168 USGS 11510700 cfg4 18.5 min, ~22 min left
+  78/168 USGS 11510700 cfg5 18.6 min, ~21 min left
+  79/168 USGS 11510700 cfg6 19.6 min, ~22 min left
+  80/168 USGS 11510700 cfg7 19.6 min, ~22 min left
+  81/168 USGS 11510700 cfg8 20.9 min, ~22 min left
+  82/168 USGS 11510700 cfg9 21.0 min, ~22 min left
+  83/168 USGS 11510700 cfg10 22.2 min, ~23 min left
+  84/168 USGS 11510700 cfg11 22.3 min, ~22 min left
+  85/168 USGS 01400500 cfg0 23.3 min, ~23 min left
+  86/168 USGS 01400500 cfg1 23.3 min, ~22 min left
+  87/168 USGS 01400500 cfg2 24.4 min, ~23 min left
+  88/168 USGS 01400500 cfg3 24.4 min, ~22 min left
+  89/168 USGS 01400500 cfg4 25.3 min, ~22 min left
+  90/168 USGS 01400500 cfg5 25.3 min, ~22 min left
+  91/168 USGS 01400500 cfg6 26.0 min, ~22 min left
+  92/168 USGS 01400500 cfg7 26.1 min, ~22 min left
+  93/168 USGS 01400500 cfg8 26.7 min, ~21 min left
+  94/168 USGS 01400500 cfg9 26.7 min, ~21 min left
+  95/168 USGS 01400500 cfg10 27.4 min, ~21 min left
+  96/168 USGS 01400500 cfg11 27.4 min, ~21 min left
+  97/168 USGS 01438500 cfg0 27.7 min, ~20 min left
+  98/168 USGS 01438500 cfg1 27.8 min, ~20 min left
+  99/168 USGS 01438500 cfg2 28.0 min, ~20 min left
+  100/168 USGS 01438500 cfg3 28.1 min, ~19 min left
+  101/168 USGS 01438500 cfg4 28.3 min, ~19 min left
+  102/168 USGS 01438500 cfg5 28.4 min, ~18 min left
+  103/168 USGS 01438500 cfg6 28.6 min, ~18 min left
+  104/168 USGS 01438500 cfg7 28.7 min, ~18 min left
+  105/168 USGS 01438500 cfg8 28.9 min, ~17 min left
+  106/168 USGS 01438500 cfg9 28.9 min, ~17 min left
+  107/168 USGS 01438500 cfg10 29.1 min, ~17 min left
+  108/168 USGS 01438500 cfg11 29.2 min, ~16 min left
+  109/168 USGS 01465798 cfg0 29.6 min, ~16 min left
+  110/168 USGS 01465798 cfg1 29.6 min, ~16 min left
+  111/168 USGS 01465798 cfg2 30.0 min, ~15 min left
+  112/168 USGS 01465798 cfg3 30.1 min, ~15 min left
+  113/168 USGS 01465798 cfg4 30.4 min, ~15 min left
+  114/168 USGS 01465798 cfg5 30.5 min, ~14 min left
+  115/168 USGS 01465798 cfg6 30.9 min, ~14 min left
+  116/168 USGS 01465798 cfg7 30.9 min, ~14 min left
+  117/168 USGS 01465798 cfg8 31.3 min, ~14 min left
+  118/168 USGS 01465798 cfg9 31.4 min, ~13 min left
+  119/168 USGS 01465798 cfg10 31.7 min, ~13 min left
+  120/168 USGS 01465798 cfg11 31.8 min, ~13 min left
+  121/168 USGS 01473500 cfg0 32.2 min, ~12 min left
+  122/168 USGS 01473500 cfg1 32.2 min, ~12 min left
+  123/168 USGS 01473500 cfg2 32.6 min, ~12 min left
+  124/168 USGS 01473500 cfg3 32.7 min, ~12 min left
+  125/168 USGS 01473500 cfg4 33.1 min, ~11 min left
+  126/168 USGS 01473500 cfg5 33.2 min, ~11 min left
+  127/168 USGS 01473500 cfg6 33.6 min, ~11 min left
+  128/168 USGS 01473500 cfg7 33.7 min, ~11 min left
+  129/168 USGS 01473500 cfg8 34.0 min, ~10 min left
+  130/168 USGS 01473500 cfg9 34.1 min, ~10 min left
+  131/168 USGS 01473500 cfg10 34.5 min, ~10 min left
+  132/168 USGS 01473500 cfg11 34.6 min, ~9 min left
+  133/168 USGS 01475530 cfg0 34.9 min, ~9 min left
+  134/168 USGS 01475530 cfg1 35.0 min, ~9 min left
+  135/168 USGS 01475530 cfg2 35.4 min, ~9 min left
+  136/168 USGS 01475530 cfg3 35.5 min, ~8 min left
+  137/168 USGS 01475530 cfg4 35.8 min, ~8 min left
+  138/168 USGS 01475530 cfg5 35.9 min, ~8 min left
+  139/168 USGS 01475530 cfg6 36.3 min, ~8 min left
+  140/168 USGS 01475530 cfg7 36.4 min, ~7 min left
+  141/168 USGS 01475530 cfg8 36.8 min, ~7 min left
+  142/168 USGS 01475530 cfg9 36.9 min, ~7 min left
+  143/168 USGS 01475530 cfg10 37.4 min, ~7 min left
+  144/168 USGS 01475530 cfg11 37.5 min, ~6 min left
+  145/168 USGS 05586300 cfg0 38.0 min, ~6 min left
+  146/168 USGS 05586300 cfg1 38.0 min, ~6 min left
+  147/168 USGS 05586300 cfg2 38.6 min, ~6 min left
+  148/168 USGS 05586300 cfg3 38.6 min, ~5 min left
+  149/168 USGS 05586300 cfg4 39.1 min, ~5 min left
+  150/168 USGS 05586300 cfg5 39.2 min, ~5 min left
+  151/168 USGS 05586300 cfg6 39.6 min, ~4 min left
+  152/168 USGS 05586300 cfg7 39.7 min, ~4 min left
+  153/168 USGS 05586300 cfg8 40.1 min, ~4 min left
+  154/168 USGS 05586300 cfg9 40.2 min, ~4 min left
+  155/168 USGS 05586300 cfg10 40.7 min, ~3 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  156/168 USGS 05586300 cfg11 40.7 min, ~3 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  157/168 InWaterSense n1 cfg0 40.9 min, ~3 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  158/168 InWaterSense n1 cfg1 41.0 min, ~3 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  159/168 InWaterSense n1 cfg2 41.1 min, ~2 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  160/168 InWaterSense n1 cfg3 41.2 min, ~2 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  161/168 InWaterSense n1 cfg4 41.3 min, ~2 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  162/168 InWaterSense n1 cfg5 41.4 min, ~2 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  163/168 InWaterSense n1 cfg6 41.5 min, ~1 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  164/168 InWaterSense n1 cfg7 41.6 min, ~1 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  165/168 InWaterSense n1 cfg8 41.8 min, ~1 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  166/168 InWaterSense n1 cfg9 41.9 min, ~1 min left
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+  167/168 InWaterSense n1 cfg10 42.1 min, ~0 min left
+  168/168 InWaterSense n1 cfg11 42.2 min, ~0 min left
+saved results\phase3\roc.csv
