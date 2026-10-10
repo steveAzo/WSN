@@ -216,11 +216,32 @@ The two fixes:
 
 The model is built from published measurements and validated against them.
 - **Suppression extends battery life 1.1–3.5×.** It's largest when reports are costly relative to sensing (fig 10). With 5 s sensing on NB-IoT, it's 1.5–1.7×; with 30 s sensing, ~1.2× at best.
-- **RLS-D adds only 0–7% over SOD**, because after suppression reports are just 10–27% of the energy. The detector costs about 1%.
+- **RLS-D adds only about 5% over SOD on efficient radios** (NB-IoT with RAI, L2; about 17% with default NB-IoT timers), because after suppression reports are just 10–27% of the energy. The detector costs about 1%.
 - **The strongest claim is equal accuracy** (fig 11):
   - at the same worst-case error, RLS-D lives **53% longer** than 30-min reporting;
   - at about the same battery life as hourly reporting, its worst-case error is **7.8× smaller**, and events arrive immediately.
 - **Honest framing:** a solar node with a 2 W panel has **≥ 33×** more energy than needed, so for solar nodes energy isn't the argument. Fewer reports matter for battery-only nodes (manholes, pipes, submerged probes), smaller hardware, per-message costs and LoRaWAN airtime limits.
+
+### Phase 4b: The Weija held-out test (a prediction that failed, and why that's good)
+
+**What "pre-registration" means.** Before running anything on Weija, we wrote down in a dated file what our own theory predicts: "Weija's diel share is 0.39, so RLS-T should save about 30 % of reports, somewhere between 18 % and 43 %." Writing the prediction first means we can't adjust the story to fit the result afterwards. This is how a theory gets a fair test.
+
+**What happened.** Prediction *cost* 16 % more reports than plain send-on-delta. The prediction failed clearly.
+
+**Why this is good science, not bad news.** A theory that can never fail tells you nothing. Ours made a risky, specific prediction on new data from another continent, and the data said no. So we learned the theory's limit: diel share is *not enough on its own*.
+
+**Why it failed (we checked, one hypothesis at a time):**
+- *Not* the 30-min sampling: US rivers thinned to 30 min still gain about 40 %.
+- *Not* the missing parameters, the short data stretches, or the choice of temperature probe.
+- *Not* the cycle changing from day to day: Weija's daily rhythm is as regular as the best US river.
+- **What fits:** Weija's temperature is flat at night and spikes sharply at midday (sun-heated sensors?). A predictor that only looks at recent values gets no warning before the spike, and after it the predictor imagines movement during the calm night. Persistence ("last value") makes no such mistakes.
+
+**Also found:** the received "cleaned" files contained interpolated values that were not marked as such. The giveaway was the number of decimal places (real readings have ≤ 3). I first missed one kind of interpolation, spotted it in a figure, fixed the cleaner and re-ran everything; the conclusion didn't change. Lesson: **look at your data plotted, not just at summary numbers.**
+
+**What it changes:**
+- C1 becomes "ρ = 0.84 on 14 datasets, 0.62 with Weija".
+- The practical advice gets sharper: on low-cost real deployments (Kosovo and Ghana), send-on-delta is the right default.
+- RLS-D stays safe there: it costs 10 % more reports but never breaks the error bound. The SWITCH method correctly chose send-on-delta.
 
 ---
 
@@ -229,7 +250,7 @@ The model is built from published measurements and validated against them.
 **Title:** When Does Prediction Pay? Predictability-Aware, Error-Bounded Report Suppression for LPWAN Water-Quality Monitoring.
 
 **Research questions:**
-1. **RQ1:** When are water-quality series predictable enough for prediction to pay? *Answer: where the day–night cycle dominates; diel share predicts the gain (ρ = 0.84).*
+1. **RQ1:** When are water-quality series predictable enough for prediction to pay? *Answer: where a smooth day–night cycle dominates; diel share predicts the gain (ρ = 0.84 on 14 datasets), but a pre-registered held-out test on Weija failed (ρ = 0.62 with it), so diel share is not sufficient on its own.*
 2. **RQ2:** How much do report-level decisions save? *Answer: 30–45%.*
 3. **RQ3:** Can we keep guarantees (bounded error, event awareness) while matching adaptive schemes? *Answer: yes. ADAPTIVEML's error is 8–17× worse at equal cost; the detector recovers events at loose tolerances; "bounded or flagged" under loss.*
 4. **RQ4:** What does it buy in energy and cost? *Answer: 1.1–3.5× battery life, and 53% longer at equal accuracy; energy matters for battery-only nodes. Framing to agree with the Prof.*
@@ -243,7 +264,7 @@ The model is built from published measurements and validated against them.
 
 **What we are NOT claiming:**
 - that the report-level idea is new (Santini and Ghosh anticipated it);
-- that RLS-D beats SOD everywhere (it doesn't on InWaterSense);
+- that RLS-D beats SOD everywhere (it doesn't on InWaterSense or Weija);
 - that energy is the binding constraint on solar nodes;
 - hardware measurements of our own.
 
@@ -253,7 +274,7 @@ The model is built from published measurements and validated against them.
 
 ### 5.1 One-minute pitch (practise saying this aloud)
 
-> "Sensor nodes waste most of their transmissions sending readings the server could have guessed. We studied when prediction-based suppression actually pays, using InWaterSense and 13 US rivers. The answer is: where the day–night cycle dominates. A simple measure of that rhythm predicts the saving with a correlation of 0.84. Sending all parameters together whenever one must go saves another 30–45%. Unlike the newest competing method, ADAPTIVEML, our scheme guarantees the error bound; theirs is 8–17 times worse in the worst case at the same cost. We added an event detector and loss-recovery protocols, and a battery model built from published NB-IoT and LoRaWAN measurements. At the same battery life as hourly reporting, our worst-case error is about 8 times smaller."
+> "Sensor nodes waste most of their transmissions sending readings the server could have guessed. We studied when prediction-based suppression actually pays, using InWaterSense and 13 US rivers. The answer is: where the day–night cycle dominates. A simple measure of that rhythm predicts the saving with a correlation of 0.84, although on your Weija data, which we kept aside as a test, the prediction failed, and we can show why. Sending all parameters together whenever one must go saves another 30–45%. Unlike the newest competing method, ADAPTIVEML, our scheme guarantees the error bound; theirs is 8–17 times worse in the worst case at the same cost. We added an event detector and loss-recovery protocols, and a battery model built from published NB-IoT and LoRaWAN measurements. At the same battery life as hourly reporting, our worst-case error is about 8 times smaller."
 
 ### 5.2 Six figures to show, in this order
 
@@ -263,6 +284,7 @@ The model is built from published measurements and validated against them.
 4. `results/phase3/figures/fig8_detector_tradeoff.png`: loose tolerance + detector beats tightening.
 5. `results/phase4/figures/fig11_equal_accuracy.png`: same battery life, about 8× smaller worst-case error.
 6. `results/phase4/figures/fig10_gain_vs_sensing.png`: when suppression pays in battery life.
+7. `results/weija/figures/figW2_test.png` and `figW1_week.png`: the Weija test, and the midday spikes we need him to explain.
 
 ### 5.3 Questions the Prof may ask, and your answers
 
@@ -294,25 +316,28 @@ The model is built from published measurements and validated against them.
   They're a sweep (L0–L4) chosen to span sensor resolution up to coarse monitoring. We'd like your guidance or regulatory references (Ghana EPA, WHO, EU) for defensible values.
 
 - **"What about Weija?"**
-  The data arrived today. About 4 months (Oct 2018 – Mar 2019). T, pH and EC are co-sampled every ~30 min; DO is only every ~5 h. 24% of temperature values are imputed, and some values look like sensor faults (pH 0 and 13, DO 46 mg/L). It can be a third, tropical case study on T/pH/EC once cleaned. Ask the Prof which parts are trustworthy.
+  We used it as a held-out test with the prediction written down first. Usable: temperature and EC every 32.5 min, about 9 weeks (31 Oct 2018 – 4 Jan 2019). The rest had problems: temperature is fully imputed from February; some interpolated values aren't flagged; calcium and fluoride look like noise from December; pH swings 8.5–12.8 every day. Our prediction (30 % saving) failed: prediction cost 16 %. We traced it to sharp midday temperature spikes. *Then ask:* where were the probes placed, which temperature probe was in the water, and are the raw files available? (Say it as questions, not criticism: someone else processed the files, and part of the data was lost.)
 
 ### 5.4 Decisions to ask the Prof for (write the answers down)
 
 1. **RQ4 framing:** battery-only + hardware + cost, or battery only?
 2. **Tolerances:** any reference values?
 3. **Venue:** IEEE IoT Journal? A conference version first?
-4. **Weija:**
-   - which files and periods are trustworthy;
-   - probe models and settling times;
-   - which radio was used;
-   - permission to publish results.
+4. **Weija** (full list in `results/weija/WEIJA_REPORT.md` §7):
+   - probe placement (depth, flow cell, enclosure, sun) behind the midday spikes;
+   - which temperature probe measured the water; pH compensation and calibration;
+   - are raw, unprocessed files available;
+   - probe settling times and the radio used;
+   - permission to publish Weija as a held-out case study.
 5. **InWaterSense:** how long the node was awake per reading; whether node 1 was in effluent or river water.
 6. **Authorship and timeline** for the first draft.
 
 ### 5.5 Things NOT to overclaim in the meeting
 
 - "We invented report-level reporting." No: Santini 2006 and Ghosh 2022 came first.
-- "RLS-D always wins." No: on noisy nodes SOD is best, and RLS-D adds only 0–7% battery life over SOD.
+- "RLS-D always wins." No: on noisy nodes SOD is best, and RLS-D adds only about 5% battery life over SOD on efficient radios (about 17% with default NB-IoT timers).
+- "Diel share predicts the gain everywhere." No: it failed on Weija.
+- "The Weija data are wrong." We don't know that; we only know which values look interpolated or implausible. Ask, don't accuse.
 - "The detector catches all events." No: slow ramps and gradual real events are still hard.
 - "10-year battery life." The numbers depend on the module, operator and sensing time. Ratios are robust; absolute years are indicative.
 
@@ -355,7 +380,7 @@ The model is built from published measurements and validated against them.
   - `results/phase4/PHASE4_REPORT.md`
 - Figures: `results/phase*/figures/`. Tables: `results/phase*/tables/`.
 - Code: `src/` (data, analysis, sim, energy). Tests: `tests/` (78 passing).
-- Weija data: `cleaned/cleaned/`.
+- Weija data: `cleaned/cleaned/` (received); cleaned cycles `data/clean/weija_cycles.csv`; report `results/weija/WEIJA_REPORT.md`.
 
 **Check yourself** (answers in Part 3):
 1. Why does report-level reporting help even when only one parameter changed?

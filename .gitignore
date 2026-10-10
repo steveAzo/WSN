@@ -1,0 +1,53 @@
+# ---------------------------------------------------------------------------------------------
+# WSN / Paper 1 repository. Grouped by WHY a file must not be pushed.
+# NOTE: .gitignore only affects UNTRACKED files. Files already committed must be removed from the
+# index with `git rm -r --cached <path>` (this keeps them on disk) - see docs/HANDOVER.md.
+# ---------------------------------------------------------------------------------------------
+
+# 1. Copyrighted literature (publisher PDFs licensed to the University of Ghana, and text
+#    extracted from them). Keep only our own notes about them.
+papers/**/*.pdf
+papers/**/txt/
+papers/dataset_context/*.txt
+!papers/paper1/LITERATURE_NOTES.md
+!papers/paper1/README.md
+docs/datasheets/
+
+# 2. Private / unpublished material
+#    Weija deployment: the Prof's unpublished data files and our cleaned copy of them
+#    (results derived from them are fine to publish; the data itself is not ours to release).
+cleaned/
+data/clean/weija_cycles.csv
+#    Editorial review of the draft (private correspondence)
+papers/paper1/*.docx
+#    Paper drafts: the manuscript is unpublished. Decide with the Prof before making it public.
+papers/paper1/draft/
+
+# 3. Generated build artefacts (LaTeX, pandoc), anywhere
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# 4. Python caches and tool state
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+
+# 5. Other tools' working copies and local editor/OS files
+.kilo/
+.vscode/
+.idea/
+.DS_Store
+__MACOSX/
+Thumbs.db
+desktop.ini
+~$*

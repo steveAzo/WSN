@@ -74,7 +74,7 @@ Scripts: `src/data/clean_inws.py`, `src/data/clean_usgs.py`, `src/analysis/check
 
 **Phase 2 (baselines, 2,016 runs on 14 datasets; full report in [`results/phase2/PHASE2_REPORT.md`](results/phase2/PHASE2_REPORT.md)).**
 - **Bounded learned prediction beats SOD only at moderate tolerances.** RLS-T vs SOD saves +19% / **+26%** / +7% at L1 / L2 / L3 (12, 13 and 10 of 13 USGS sites). It loses at L0 (−6%) and is n.s. at L4. InWaterSense: SOD best or tied at every level. Paper defaults (Santini LMS, RLS γ = 0.98) report 87–99% of samples.
-- **Central result:** Phase 1 diel share predicts the RLS-T saving over SOD. Spearman ρ = 0.84 at L2 (14 sites, p = 0.0002); USGS only ρ = 0.80, worst leave-one-out 0.75. Diel share beats fitted skill as a predictor.
+- **Central result:** Phase 1 diel share predicts the RLS-T saving over SOD. Spearman ρ = 0.84 at L2 (14 sites, p = 0.0002); USGS only ρ = 0.80, worst leave-one-out 0.75. Diel share beats fitted skill as a predictor *on these 14*. **Qualified by the held-out Weija test (below):** with Weija, ρ = 0.62 (p = 0.013), and skill (0.66) is level with diel share.
 - **RQ2:** report-level decisions save 30–45% of reports vs per-parameter DPS. Bundling dominates at tight tolerances, free-riding at loose ones. Free-riding helps in 253/260 cases.
 - **RQ3:** at matched report rates, ADAPTIVEML's max error is 8–17× larger (100% of cases) and its RMSE 2–5× larger, with lower event capture at α ≥ 2.
 - **Fixed schedules:** periodic max error is 4–24× larger; batching delays events 15–120 min.
@@ -94,8 +94,19 @@ Scripts: `src/data/clean_inws.py`, `src/data/clean_usgs.py`, `src/analysis/check
   - Confirmed uplink: overhead ≈ loss rate.
   - Unconfirmed + heartbeat: 0 unflagged violations in 1,120 runs (all 14 sites), but +15–30% reports for RLS-D. SOD is self-synchronising.
 
+**Weija held-out test (2026-10-04; full report in [`results/weija/WEIJA_REPORT.md`](results/weija/WEIJA_REPORT.md)).** The Prof's 2018–19 deployment was never used for tuning. Its prediction was written down first (`PREREGISTRATION.md`).
+- **Usable data:** T + EC every 32.5 min, 31 Oct 2018 – 4 Jan 2019 (2,478 cycles).
+  - Received files contain unflagged interpolation (> 3 decimals; per-row ramps).
+  - Ca and F are white noise from December; pH is implausible (8.5–12.8 daily, tracking T); DO and ORP are 5-hourly.
+- **Pre-registered prediction failed.**
+  - Diel share 0.39 → predicted saving 30 % [18, 43] at L2. Measured **−16 %**, a loss at all levels.
+  - Not explained by the step (USGS thinned to 30 min: ≤ 3-point change), the parameter set, short history, the probe, or day-to-day irregularity.
+  - Supported (post hoc): spike-shaped midday excursions (skewness 1.6 vs ≤ 0.85). RLS-T loses at night and on EC.
+- **RLS-D: +10 % reports vs SOD at L2** (InWaterSense +3 %). Bound held. SWITCH correctly stayed on SOD (training replay is representative in the aseasonal tropics).
+- **Implication:** diel share is not sufficient. On both real low-cost deployments (Kosovo, Ghana), SOD is the right default.
+
 **Phase 4 (energy; full report in [`results/phase4/PHASE4_REPORT.md`](results/phase4/PHASE4_REPORT.md)).** The model reproduces 20/24 of Michelinakis's lifetimes and Casals's airtime table.
-- **Battery life:** suppression extends it 1.1–3.5×, depending on report energy vs sensing energy. RLS-D adds 0–7% over SOD; the detector costs ≈ 1%.
+- **Battery life:** suppression extends it 1.1–3.5×, depending on report energy vs sensing energy. RLS-D adds a per-site median of +5.5% over SOD at L2 for NB-IoT RAI with 5 s sensing (+16.9% with default NB-IoT timers; corrected 2026-10-04 from "0–7%"); the detector costs ≈ 1%.
 - **Equal accuracy:** RLS-D at L4 lives 53% longer than 30-min periodic at the same worst-case error. RLS-D at L2 has 7.8× smaller error than hourly reporting at about the same battery life.
 - **Framing:** energy does not bind solar nodes (≥ 33× margin with a 2 W panel). RQ4 should cover battery-only nodes, hardware size and per-message / duty-cycle costs.
 
@@ -171,9 +182,10 @@ Scripts: `src/data/clean_inws.py`, `src/data/clean_usgs.py`, `src/analysis/check
 - Note: some sites report at 30 min (e.g. Montague). Keep them and state the cadence; horizons are defined in physical time.
 - *Extension if needed:* add 2022 for a cross-year test; add more sites from the 68 using the same rule.
 
-### 5.3 Weija intake (Ghana, Prof's deployment, paper 22): requested
-- Same Libelium hardware; 30–60-minute reporting; fouling and DO issues.
-- If available: a second real-deployment case and the Ghana-impact story (Ghana Water Company intake).
+### 5.3 Weija intake (Ghana, Prof's deployment, paper 22): received 2026-10-04, held-out test
+- Received as pre-processed files (`cleaned/cleaned/`); part of the data was lost.
+- Usable: T (Sensor Two) + EC, 32.5 min, 31 Oct 2018 – 4 Jan 2019. Cleaner: `src/data/clean_weija.py`.
+- Used as a pre-registered held-out test of C1 (not for tuning). Result and caveats: `results/weija/WEIJA_REPORT.md`.
 
 ---
 
@@ -307,6 +319,7 @@ Replay real traces (InWaterSense and a USGS site) through the device's scheme: d
 | 2. Simulator & baselines | Trace-driven simulator; all baselines (§6.3) incl. ADAPTIVEML; per-parameter vs report-level | Baseline Pareto fronts on all sites → [`results/phase2/PHASE2_REPORT.md`](results/phase2/PHASE2_REPORT.md) | ✅ (2,016 runs; open: injected events, tuned-LMS variant) |
 | 3. Proposed scheme | RLS-D predictor (selection and switching = negative results); CUSUM detector; loss protocols; ablations | [`results/phase3/PHASE3_REPORT.md`](results/phase3/PHASE3_REPORT.md) | ✅ |
 | 4. Energy | NB-IoT (2 modules, 4 configs) + LoRaWAN (SF7/SF12) models validated against papers 09/11; sensing-time sweep; equal-accuracy view; solar margin | [`results/phase4/PHASE4_REPORT.md`](results/phase4/PHASE4_REPORT.md) | ✅ (LTE-M/GPRS need a measured source; RQ4 framing to discuss) |
+| 4b. Weija held-out test | Profile and re-clean; Check A/B; pre-registered prediction; Phase 2/3 grids; diagnostics | [`results/weija/WEIJA_REPORT.md`](results/weija/WEIJA_REPORT.md) | ✅ (prediction failed; C1 qualified; questions for Prof) |
 | 5. Hardware (optional) | Only if equipment becomes available; otherwise skipped | Model validation | Optional (§8) |
 | 6. Writing | Draft → Prof → revise → submit | Manuscript + code release | |
 
@@ -314,7 +327,7 @@ Replay real traces (InWaterSense and a USGS site) through the device's scheme: d
 
 ## 12. Questions for Prof Adu-Manu
 
-1. **Weija data** (asked by text 2026-10-03): format, period, and permission to use and publish results.
+1. **Weija data** (received 2026-10-04): permission to publish; probe placement (depth / flow cell / enclosure / sun) behind the midday spikes; which T probe is the water probe; pH compensation and calibration; are raw, unprocessed files available? (Details: `results/weija/WEIJA_REPORT.md` §7.)
 2. **Hardware (§8, optional):** if lab equipment comes back online, is a Libelium Waspmote 4G available for energy measurements? (Not required.)
 3. **DO at Weija:** how was the Libelium DO sensor converted and calibrated? (Our evidence for %sat is in `docs/DO_UNITS_EVIDENCE.md`.)
 4. **Tolerances δ:** an acceptable reporting error per parameter? Any Ghana EPA / WHO / EU reference?

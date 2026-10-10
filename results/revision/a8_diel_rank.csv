@@ -1,0 +1,12 @@
+weeks,n_sites,draw,rho_median,rho_p05,rho_p95
+full year,14,-,0.841758,,
+1,14,random window per site,0.402198,0.0945055,0.674725
+1,14,first valid k weeks (deployment),0.397802,,
+2,14,random window per site,0.459341,0.182418,0.696703
+2,14,first valid k weeks (deployment),0.336264,,
+4,14,random window per site,0.520879,0.336264,0.736264
+4,14,first valid k weeks (deployment),0.595604,,
+8,14,random window per site,0.652747,0.481319,0.797802
+8,14,first valid k weeks (deployment),0.520879,,
+13,12,random window per site,0.559441,0.426224,0.79021
+13,12,first valid k weeks (deployment),0.461538,,

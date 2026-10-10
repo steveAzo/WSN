@@ -1,0 +1,33 @@
+level,stage,median_pct,ci_lo,ci_hi
+1,separate_SOD,79.193,59.9302,104.289
+1,bundled_SOD,58.8766,41.4874,67.2101
+1,report_SOD,58.3418,39.343,64.3038
+1,report_RLS-T,41.5797,39.4427,51.5756
+1,report_RLS-D,41.5866,36.7597,51.5402
+1,saving: bundling,30.7738,24.4349,36.1708
+1,saving: free-riding,3.87755,3.16578,5.41649
+1,saving: prediction (RLS-D over SOD),19.6424,15.4231,21.2132
+2,separate_SOD,37.9001,30.3587,60.957
+2,bundled_SOD,32.8678,26.8663,46.5063
+2,report_SOD,28.3367,22.9518,36.2402
+2,report_RLS-T,21.3306,18.0988,26.7797
+2,report_RLS-D,21.0334,18.0806,25.8602
+2,saving: bundling,20.93,12.7443,24.1127
+2,saving: free-riding,18.1709,14.5701,22.8291
+2,saving: prediction (RLS-D over SOD),26.9299,15.9625,32.8032
+3,separate_SOD,13.4259,9.78949,26.5114
+3,bundled_SOD,11.9594,8.94746,22.8405
+3,report_SOD,9.90502,5.83891,15.6885
+3,report_RLS-T,8.9689,5.89348,10.6835
+3,report_RLS-D,9.03346,5.68612,11.1486
+3,saving: bundling,10.9738,8.21206,13.8464
+3,saving: free-riding,26.4692,21.4775,29.3261
+3,saving: prediction (RLS-D over SOD),12.646,4.22721,28.9377
+4,separate_SOD,5.18404,3.08481,10.2846
+4,bundled_SOD,4.7924,2.92513,9.31551
+4,report_SOD,3.72084,1.89901,6.51932
+4,report_RLS-T,4.14952,2.57203,4.89189
+4,report_RLS-D,3.97075,2.13548,5.11357
+4,saving: bundling,7.02179,5.49273,9.42272
+4,saving: free-riding,20.3453,15.8854,27.8924
+4,saving: prediction (RLS-D over SOD),3.36538,-7.04501,19.8286

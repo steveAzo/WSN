@@ -122,7 +122,7 @@ def run_batch(X, seg_start, k):
 
 
 def run_dps_lossy(X, seg_start, make_predictors, delta, loss_p, protocol="ack", retries=2,
-                  hb_steps=None, seed=0):
+                  hb_steps=None, seed=0, ack_loss=0.0):
     """Report-level bounded DPS over a lossy uplink. Node and server hold SEPARATE predictor
     copies (built by the same deterministic factory).
 
@@ -143,6 +143,19 @@ def run_dps_lossy(X, seg_start, make_predictors, delta, loss_p, protocol="ack", 
       ANY received report (report-level mode sends every parameter), so the flag clears then.
     A segment start (data gap) is a forced full report; under "seq" it is also a full resync
     point (both rebuild), because learned weights may have diverged before the gap.
+
+    ack_loss (revision 2026-10-10, review M11): probability that the ACK of a DELIVERED attempt is
+      lost. The node retries until it receives an ACK, so the server may hold a report that the node
+      believes failed. With ack_loss = 0 no extra random numbers are drawn (v0.1 results reproduce).
+      Under "ack" such a step silently desynchronises the copies (the node feeds its prediction, the
+      server stored the reading): the v0.1 protocol is NOT bounded-or-flagged under ACK loss.
+    protocol "ack_rs" (confirmed uplink with flagged resync, the revised protocol): as "ack", but a
+      report that ends without an ACK makes the node UNCERTAIN from that step on. Its next step is a
+      forced resync report (both sides rebuild their predictors, primed with the reported values, as
+      a "seq" heartbeat) that carries the index of the first uncertain step; the server flags every
+      step from that index up to the resync, retroactively. The node stays uncertain, and keeps
+      sending resync reports, until one is acknowledged. Every unflagged server value is then within
+      delta (tests/test_sim.py). hb_steps also applies (liveness heartbeat).
     Returns dict: R, tx (transmissions per step), delivered, flagged, attempts."""
     rng = np.random.default_rng(seed)
     N, P = X.shape
@@ -151,13 +164,21 @@ def run_dps_lossy(X, seg_start, make_predictors, delta, loss_p, protocol="ack", 
     R = np.empty_like(X); tx = np.zeros(N, int); delivered = np.zeros(N, bool)
     flagged = np.zeros(N, bool)
     last_rx, stale, since_hb = -1, False, 0
+    confirmed = protocol in ("ack", "ack_rs")
+    rebuild = protocol in ("seq", "ack_rs")                   # protocols with rebuilding resyncs
+    unc_since = None                                          # ack_rs: first step the node is unsure of
     for t in range(N):
         x = X[t]
-        resync = bool(seg_start[t]) or (protocol == "seq" and hb_steps and since_hb >= hb_steps)
+        hb_due = bool(rebuild and hb_steps and since_hb >= hb_steps)
+        unc = protocol == "ack_rs" and unc_since is not None
+        resync = bool(seg_start[t]) or hb_due or unc
+        # "seq" rebuilds at every resync; "ack_rs" only when the copies may differ (uncertain) or at a
+        # heartbeat - at a plain segment start its copies are known to be identical (as under "ack")
+        do_rebuild = resync if protocol == "seq" else (protocol == "ack_rs" and (hb_due or unc))
         if seg_start[t]:
             for p in range(P):
                 nodeP[p].reset_history(); srvP[p].reset_history(); nodes[p].clear()
-        if resync and protocol == "seq":
+        if do_rebuild:
             nodeP = make_predictors()                         # node rebuilds when sending
             for p in range(P):                                # ...primed with the values it sends
                 if hasattr(nodeP[p], "prime"): nodeP[p].prime(x[p])
@@ -168,16 +189,21 @@ def run_dps_lossy(X, seg_start, make_predictors, delta, loss_p, protocol="ack", 
             nodes[p].push(x[p])
         send = resync or any(xn[p] is None or nodeP[p].force_report() or abs(x[p] - xn[p]) > delta[p]
                              for p in range(P))
-        ok = False
+        ok = False                                            # server received the report
+        acked = False                                         # node received an ACK
         if send:
-            tries = 1 + (retries if protocol == "ack" else 0)
+            tries = 1 + (retries if confirmed else 0)
             for _ in range(tries):
                 tx[t] += 1
                 if rng.random() >= loss_p:
-                    ok = True; break
+                    ok = True
+                    if not confirmed or ack_loss == 0.0 or rng.random() >= ack_loss:
+                        acked = True; break
         delivered[t] = ok
         # ---- server side
-        if ok and resync and protocol == "seq":
+        if ok and unc:
+            flagged[unc_since:t] = True                       # retroactive, index carried in the report
+        if ok and do_rebuild:
             srvP = make_predictors()
             for p in range(P):                                # same values: received in the report
                 if hasattr(srvP[p], "prime"): srvP[p].prime(x[p])
@@ -192,14 +218,22 @@ def run_dps_lossy(X, seg_start, make_predictors, delta, loss_p, protocol="ack", 
         if protocol == "seq" and stale:
             flagged[t] = True
         # ---- advance both copies
-        node_reported = send and (ok or protocol == "seq")   # under seq the node assumes delivery
+        # the node believes delivery if acknowledged (confirmed) or always (seq: it cannot know)
+        node_reported = send and (acked if confirmed else True)
         for p in range(P):
             nodeP[p].observe(x[p] if node_reported else xn[p], node_reported, nodes[p])
             srvP[p].observe(x[p] if ok else xs[p], ok, nodes[p])
         if send and not ok and protocol == "seq":
             stale = True                                      # (server learns it at next rx)
+        if protocol == "ack_rs":
+            if send and not acked and unc_since is None:
+                unc_since = t                                 # uncertain from this step on
+            elif unc and acked:
+                unc_since = None                              # an acknowledged resync clears it
         since_hb += 1
     # flags for losses never followed by a received report
     if protocol == "seq" and stale:
         flagged[last_rx + 1:] = True
+    if protocol == "ack_rs" and unc_since is not None:
+        flagged[unc_since:] = True
     return {"R": R, "tx": tx, "delivered": delivered, "flagged": flagged}

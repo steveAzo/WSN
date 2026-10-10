@@ -200,6 +200,96 @@
   - Air-quality data only.
 - **Use:** the nearest *multi-parameter, wake-up-aware* prior work. Cite it for the "fixed wake-up cost" argument. Our difference: real-time bounded-error suppression with no batching delay, an event detector instead of fixed limits, and LPWAN per-report energy where communication dominates.
 
+### 26: Wu, Chen, Chen, Fan, Liu (2020). *An Adaptive Dual Prediction Scheme Based on Edge Intelligence* (ARUCP). IEEE IoT J 7(10):9481–9493. (Added 2026-10-10, full read)
+- **Setting:** IoT *search*. The cloud predicts each sensor's current output so that search queries need not poll the sensors. Not a monitoring/telemetry paper.
+- **Method:**
+  - **Cycle-level transfer decision at the node.** The node buffers the m samples of a reporting cycle and compares them with the predicted sequence using a compressed LCSS similarity (CLCSS, eqs. 1–3). It reports the **whole cycle** only if the dissimilarity Val_T exceeds a threshold θ. **θ is left unspecified** ("beyond the scope").
+  - **Cloud side:** an ELM predictor updated online (AOUM-OSELM, where the update weight grows with Val_T) and a DBSCAN pattern monitor (AWPC) that rebuilds the model on a new pattern. The new weights are sent back down to the node.
+- **Data:** UCI hydraulic test rig (Helwig 2015). TS1–TS4 and PS1–PS6, 60-s cycles, 2,205 cycles; trained on the first 400, tested on 1,500.
+- **Results:**
+  - 332 reports in 1,500 cycles (−77.9%) at about 4 points lower R² than reporting every cycle.
+  - 76.56% communication energy saved at 95.47% "accuracy" (mean windowed R²).
+  - Energy uses the first-order radio model (Heinzelman 2002), per bit.
+- **Not done:**
+  - **No per-sample error bound.** The decision is a sequence similarity, and LCSS deliberately ignores outlying points, so short excursions can be absorbed as "noise".
+  - Single-parameter models (one per sensor).
+  - Batching delay of one reporting cycle.
+  - No packet loss; no water data; no comparison with a constant/SOD predictor.
+- **Use:**
+  - A **third ancestor of the "joint/block decision"**, alongside Santini 2006 and Ghosh 2022. It is a *temporal* block (one sensor, many samples), not a cross-parameter one.
+  - Cite in "Multi-parameter and joint decisions". Strengthens "the report-level decision is not new in itself; our difference is per-parameter hard bounds and immediate reporting".
+
+### 27: Almalki, Ben Othman, Almalki, Sakli (2021). *EERP-DPM: Energy Efficient Routing Protocol Using Dual Prediction Model for Healthcare Using IoT.* J. Healthcare Eng. 2021:9988038. (Added 2026-10-10, full read)
+- **What:** a WBAN routing protocol.
+  - The DPS part is the Santini/Jarwan scheme: a buffer of N values; report if |P_n − NDV_n| > e_max, otherwise feed the prediction back. **The predictor itself is never specified.**
+  - Readings beyond fixed upper/lower limits (example: BP > 180/120 mmHg) are "emergency data": high priority, sent **directly** to the aggregator. Normal data goes via relay nodes.
+  - The aggregator packs all sensors' forwarded data of a round into one message.
+- **Evaluation:** MATLAB (first-order radio model, 0.5 J nodes, 15,000 rounds) plus the MySignals HW V2 platform. Compared with E-HARP and PCRP on lifetime, residual energy, throughput, path loss and delay.
+  - **No transmission-reduction rate and no reconstruction error are reported.**
+- **⚠ Important for our citation.** The paper is internally inconsistent about critical values:
+  - Its prose (§3.2.2) says data is sent "if it is different from the data predicted, **or** data is considered critical".
+  - Its **Algorithm 1** checks criticality **only inside the e_max-violation branch**. There, the limit changes the *routing*, not whether a report is sent.
+  - Płaczek 2023 (paper 13) repeats the prose version.
+  - So cite it as *"flag readings beyond fixed upper/lower limits as emergency data and route them directly with priority"*, **not** as "always report values outside the limits".
+- **Use:** the primary source for the "fixed critical limits in DPS" sentence (replace the secondary citation via Płaczek).
+
+### 28: Shu, Chen, Bhargava, de Silva (2019). *An Energy-Efficient DPS Using LMS Filter and LSTM in WSNs for Environment Monitoring.* IEEE IoT J 6(4):6736–6747. (Added 2026-10-10, full read)
+- **Method:**
+  - **GD-LMS:** the step size is chosen per step using the Moore–Penrose pseudo-inverse (eqs. 9–15).
+  - **Hybrid:** when GD-LMS misses e_threshold, the node checks an offline-trained LSTM (2 layers, 50/15 units, window 50). If the LSTM is within the threshold, the node sends a short **beacon** ("use the LSTM value") instead of the reading. Otherwise it sends the reading.
+  - Tolerance rule (eq. 24): e = min(|max−avg|, |min−avg|)·λ%. λ = 5% gives 0.2 °C.
+- **Data:** Intel Lab temperature, node 13: 25,000 samples, 31-s sampling, abnormal values interpolated. The LSTM uses 21,332 training samples and is tested on **2,545**. The comparison with Santini's LMS uses nodes 1, 11, 13 and 49 (6–9 March).
+- **Results:**
+  - At 0.2 °C, fewer than one third of the 2,545 samples are sent, plus beacons.
+  - **"At least 62.3% of transmission energy"** saved, assuming a beacon costs ≤ ½ a data packet (ZigBee).
+  - MAE 0.0688; "accuracy ≈ 93%".
+  - Table IV reports the maximum absolute error.
+- **Not done (in their own words):**
+  - "The algorithm proposed in this paper **assumes that there is no network failure**"; loss is future work.
+  - Univariate.
+  - One indoor dataset.
+  - Energy counted as a packet count.
+  - No comparison with constant/SOD.
+  - The LSTM is trained offline on 85% of the series (the test is only the last ~10%).
+- **⚠ Our derivation (verified numerically 2026-10-10, max difference 5e-15):** GD-LMS (eqs. 12–15) is exactly **normalised LMS with unit step**: W ← W + X·e/‖X‖². The same holds for OSSLMS in Jarwan 2019 (paper 29, eq. 5). Because the unit step projects the weights onto the latest sample, the filter tends towards persistence. This is consistent with Jarwan's report that its weights converge to [1, 0, …, 0].
+- **Use:**
+  - In-domain (environmental) IoT-J DPS: the closest "learned predictor in a DPS" paper to cite.
+  - Its explicit no-loss assumption supports our loss contribution.
+  - The beacon idea is a cousin of our heartbeat/flag messages.
+
+### 29: Jarwan, Sabbah, Ibnkahla (2019). *Data Transmission Reduction Schemes in WSNs for Efficient IoT Systems.* IEEE JSAC 37(6):1307–1324. (Added 2026-10-10, full read)
+- **Not a review.** It is a research paper with a comparative study:
+  - **Tier 1:** a bounded DPS between cluster member and cluster head (Santini-style feedback, e_max). OSSLMS vs online NN vs online LSTM.
+  - **Tier 2:** lossy block compression at the cluster head (PCA, NMF, T-SVD, truncated DWT, and a new R-DWT-PCA). This tier has **no hard bound** and adds a delay of m slots.
+- **Data:** Intel Lab temperature, **resampled to 5-hour intervals** with gaps filled, first 600 slots, six clusters.
+- **Results (DP):**
+  - At e_max = 0.5 °C, N = 10: mean transmission reduction over all nodes is **LSTM 51.2%, NN 51.1%, OSSLMS 48.3%**. Learned models gain only ~3 points.
+  - "The latest N−1 weights in W converge to zero … the first weight approaches one". In other words, **OSSLMS degenerates to the last value (persistence)**.
+- **Open issues it names that we answer (§VI):**
+  - **Loss ambiguity:** "a suppressed transmission … looks the same as a failed reception … some techniques must be developed".
+  - **Cross-parameter prediction:** "using data from all onboard sensors to predict … each individual sensor is beneficial", plus time-of-day features.
+  - Critical data may bypass DP.
+  - Evaluation is application-layer only; lifetime and hardware are future work.
+- **Use:**
+  - Correct the draft's "Jarwan et al. review …" to describe a *comparison*.
+  - Its ~3-point gain of LSTM over (persistence-like) OSSLMS is independent prior evidence for our C1: learned prediction pays little unless the signal has predictable structure.
+  - Cite its loss-ambiguity statement in the loss subsection.
+
+### 30: Liazid, Lehsaini, Liazid (2019). *An Improved Adaptive Dual Prediction Scheme for Reducing Data Transmission in WSNs.* Wireless Networks 25(6):3545–3555. (Added 2026-10-10, full read)
+- **Not about adaptive thresholds.** The draft v0.1 said it was; corrected 2026-10-10.
+- **What it does:**
+  - The sink builds AR models (cloud-assisted) and disseminates them by unicast; the model is not independently generated at the node.
+  - When a model drifts beyond e_max, the usual adaptive DPS (Aderohunmu 2013) re-collects a history table of readings to refit.
+  - Liazid instead **estimates the new model's parameters from the stored collection of previously used models**, which saves the history-table transmissions.
+- **Evaluation:**
+  - Data: Tlemcen airport weather (T, pressure, RH), 30-min sampling, January 2017. AR orders 3/3/4, chosen by a validation criterion.
+  - **The transmission tables come from the Dias 2017 ring-network model with *assumed* accuracies a_min and b_min (0–0.9).** They are not measured suppression on the data.
+  - Results: 1–5 points better than ordinary adaptive DPS, "up to 99%" when accuracies are high; energy is TelosB per-bit.
+- **Not done:**
+  - "Synchronization problem … not considered"; "the number of lost packets will not be taken into consideration".
+  - Event detection is "not under the scope".
+- **Use:** an example of model-maintenance refinements and of the no-loss assumption. Cited in Related Work ("Later work" and the loss sentence).
+
 ### 22: Adu-Manu, Katsriku, Abdulai, Engmann (2020). *Smart River Monitoring Using WSNs.* Wireless Commun. Mobile Comput. (Added 2026-10-03)
 - **What:** a Libelium Smart Water + Smart Water Ions deployment at the **Weija intake (Ghana)**, Sept 2018 – Feb 2019.
   - Star topology; ZigBee to a base station ~1.5 km away; 4G/GPRS to the cloud with a web portal and SMS alerts; solar harvesting.
@@ -300,7 +390,16 @@ Neither gives per-parameter hard bounds with immediate (no batching delay) repor
 
 ## E. Still to obtain via the UG library (for completeness)
 
-*Obtained 2026-10-03: Ghosh et al. 2022 (23), Santini & Römer 2006 (24), Adu-Manu et al. 2020 (22). The rest have been requested via the Prof.*
+*Obtained 2026-10-03: Ghosh et al. 2022 (23), Santini & Römer 2006 (24), Adu-Manu et al. 2020 (22).*
+*Obtained 2026-10-05 and read in full 2026-10-10: Wu 2020 (26), Almalki 2021 (27), Shu 2019 (28), Jarwan 2019 (29); see the cards in §B. Liazid 2019 (30) was added and read the same day. Every paper cited in the draft has now been read in full. Still missing: Ahmedi 2018 (the InWaterSense system paper, not cited).*
+
+*Draft edits made 2026-10-10 from papers 26–30 (Related Work only; no results changed):*
+- *Jarwan is described as a comparison, not a review.*
+- *Liazid is described as model maintenance, not adaptive thresholds.*
+- *Wu is added to the joint decisions.*
+- *The critical-limits sentence now cites Almalki directly (Płaczek dropped from the references).*
+- *A loss-ambiguity sentence was added.*
+- *A footnote states GD-LMS/OSSLMS = unit-step NLMS.*
 
 - Liazid, Lehsaini, Liazid (2019), *Wireless Networks* 25:3545. Adaptive DPS, threshold from a moving average of errors.
 - Shu, Chen, Bhargava, de Silva (2019), *An energy-efficient DPS using LMS filter and LSTM…*, IEEE IoT J 6(4):6736. (Authors verified via OpenAlex.)

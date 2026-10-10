@@ -73,7 +73,7 @@ The Phase 1 **diel variance share** (an offline, model-free statistic) predicts 
 | **L2** | **0.84 (0.0002)** | **0.80 (0.001)** | **0.75** |
 | L3 | 0.78 (0.001) | 0.74 (0.004) | 0.67 |
 
-- At L2 the saving ranges from 6–15% (diel share 0.12–0.20) to 39–43% (diel share 0.40–0.56).
+- At L2, four of the five sites with diel share < 0.20 save 6–15% (the fifth, Millstone, saves 30%); the five sites above 0.40 save 26–43%. (Corrected 2026-10-04: this line previously said "6–15% ... to 39–43%", which picked the extremes.)
 - Diel share predicts the gain better than fitted 1-h forecast skill (ρ 0.80 vs 0.55 at L2, USGS).
 - **Practical meaning:** an operator can decide from a few weeks of data, before deployment, whether prediction is worth implementing on a node.
 

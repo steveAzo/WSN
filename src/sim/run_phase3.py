@@ -15,7 +15,8 @@ Methods (all report-level, all error-bounded by delta):
   det = 2           : sensitivity analysis with a high-sensitivity detector config
 Runs per (dataset, level, method): clean data (Check B events, report cost) and two injected-event
 copies (amp 5 step / ramp, 3 h; known onsets) for informed / alarm capture.
-Usage: python src/sim/run_phase3.py [--jobs 2]   -> results/phase3/phase3.csv (resumable)
+Usage: python src/sim/run_phase3.py [--jobs 2] [--datasets Weija --out results/weija/phase3.csv]
+       -> results/phase3/phase3.csv (resumable)
 """
 import argparse
 import warnings
@@ -127,6 +128,8 @@ def job(spec):
         ri = run_dps(X, ds.seg_start, factory(ds, kind, delta, choice), **kw)
         e = eval_events(ev, ri, ds.step_min)
         row[f"{shape}_n"] = len(e)
+        if len(e) == 0:                  # no admissible placement (Weija: short segments, many events)
+            continue
         row[f"{shape}_informed"] = e.informed.mean()
         row[f"{shape}_inf_delay"] = e.inf_delay.median()
         row[f"{shape}_alarmed"] = e.alarmed.mean()
@@ -138,7 +141,9 @@ def job(spec):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("--jobs", type=int, default=1)
-    ap.add_argument("--datasets", default=None); a = ap.parse_args()
+    ap.add_argument("--datasets", default=None)
+    ap.add_argument("--out", default=str(OUT))      # held-out sets (Weija) go to their own file
+    a = ap.parse_args(); OUT = Path(a.out)
     names = a.datasets.split(",") if a.datasets else dataset_names()
     S = [(n, l, m) for n in names for l in LEVELS_RUN for m in range(len(METHODS))]
     rows = []

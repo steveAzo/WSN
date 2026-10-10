@@ -38,7 +38,7 @@ Gap to the per-site best fixed predictor, min(send-on-delta, RLS-T), in % of rep
 1. **Selecting the predictor at deployment from early data fails.** Both diel share and replay on the training period were tried. The training period is mostly winter, when send-on-delta suffices; RLS-T wins in the busy summer. Training-replay picked the wrong predictor at 29–50% of site-levels, costing up to +85%. Training diel share puts InWaterSense (0.112) level with the Mississippi (0.115) and Illinois (0.117), where RLS-T wins. This is the Phase 1 seasonality finding again: diel share explains gains *across sites over a year* (Phase 2, ρ = 0.84), but not from a few winter weeks. (`selection_replay.csv`)
 2. **Online switching between send-on-delta and RLS-T does not pay.**
    - Version 1 thrashed (70–130 switches): its shadow predictor was evaluated on the active one's reconstruction, so the "last value" shadow tracked the RLS prediction.
-   - Version 2 uses exact node-side virtual pipelines and is stable (≤ 16 switches). It still loses: per-parameter virtual counts mis-rank predictors under report-level free-riding, and each switch has a transient cost.
+   - Version 2 uses exact node-side virtual pipelines and is stable (≤ 16 switches at L1–L3, 21 at L4; corrected 2026-10-04, previously "≤ 16"). It still loses: per-parameter virtual counts mis-rank predictors under report-level free-riding, and each switch has a transient cost.
    - It correctly stays on send-on-delta at InWaterSense.
 3. **Online adaptation of the change model matters little.** Frozen weights (RIDGE-D) cost up to +13% on InWaterSense and are mixed elsewhere. The paper-default covariance (ρ = 10) causes large post-reset transients, so ρ = 0.01 is used.
 
@@ -79,7 +79,7 @@ Together they make one predictor near-optimal at L1–L3 with no selection step.
 - A loose tolerance plus the sensitive detector catches more injected events than tightening to L3, at **40% of the reports**.
 - At L1–L2 injected events are 5–10 × δ and are always reported anyway; there the detector adds the *event flag* only (72–88% of steps flagged, median delay 15–45 min).
 - **Limitation:** real Check B events improve less (0.62 → 0.72; L3 reaches 0.81). Real events are slower and more gradual than injected steps, and slow drifts are the detector's weak point.
-- **Negative ablation:** halving δ during events costs +4–15% reports for at most +0.04 capture. It is dropped.
+- **Negative ablation:** halving δ during events costs +2–15% reports over RLS-D alone (L1–L4; corrected 2026-10-04 from "+4–15%") for at most +0.04 capture. It is dropped.
 
 ## 5. Packet loss and resynchronisation
 
@@ -87,7 +87,7 @@ All 14 datasets, L2; loss of 0.5%, 1% and 5%; 3 seeds (seed-to-seed variation �
 
 | Protocol | Extra transmissions | Violations of δ | Time flagged as unverified (1% loss) |
 |---|---|---|---|
-| Confirmed, 2 retries | ≈ loss rate (+0.6% at 0.5%, +5% at 5%) | ≈ 0 (≈20 steps per site per test year, only at 5% loss; the node knows of them) | — |
+| Confirmed, 2 retries | ≈ loss rate (+0.6% at 0.5%, +5% at 5%) | ≈ 0 (only at 5% loss: 18–23 steps *in total* over the 42 runs per predictor, 14 datasets × 3 seeds; the node knows of them. Corrected 2026-10-04: this cell previously said "≈20 per site per test year") | — |
 | Unconfirmed, 24-h heartbeat | SOD +2%, RIDGE-D +4%, RLS-D +15%, RLS-T +79% | **0 unflagged** in all 1,120 runs | SOD 1.6%, RIDGE-D 10.5%, RLS-D 10.5% |
 | Unconfirmed, 6-h heartbeat | SOD +8%, RIDGE-D +18%, RLS-D +30%, RLS-T +71% | **0 unflagged** | SOD 1.7%, RIDGE-D 4.1%, RLS-D 3.8% |
 

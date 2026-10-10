@@ -1,0 +1,96 @@
+
+=== Weija T+EC (n=2202) ===
+corr_levels
+        T     EC
+T   1.000 -0.108
+EC -0.108  1.000
+corr_first_diff
+        T     EC
+T   1.000  0.228
+EC  0.228  1.000
+corr_ar_residuals
+        T     EC
+T   1.000  0.052
+EC  0.052  1.000
+out-of-sample: skill vs persistence (AR, VAR); VAR/AR MSE ratio [95% CI]
+  h1_T       AR +0.213  VAR +0.214  VAR/AR 0.999 [0.982, 1.016]  n=1079
+  h1_EC      AR -0.192  VAR -0.312  VAR/AR 1.101 [1.027, 1.174]  n=1079
+  h2_T       AR +0.185  VAR +0.187  VAR/AR 0.998 [0.986, 1.008]  n=1074
+  h2_EC      AR -0.068  VAR -0.108  VAR/AR 1.038 [0.964, 1.115]  n=1074
+  h11_T      AR +0.050  VAR +0.047  VAR/AR 1.003 [1.000, 1.006]  n=1024
+  h11_EC     AR +0.038  VAR -0.010  VAR/AR 1.049 [1.023, 1.102]  n=1024
+diel share {'T': 0.736, 'EC': 0.118}
+quantization {'T': {'resolution': 0.004, 'zero_share': 0.009584664536741214, 'dh_over_res': 28.249999999999886}, 'EC': {'resolution': 0.121, 'zero_share': 0.004107713372889092, 'dh_over_res': 9.793388429752085}}
+
+=== Weija T+EC+pH (n=2188) ===
+corr_levels
+        T     EC     pH
+T   1.000 -0.107  0.821
+EC -0.107  1.000 -0.188
+pH  0.821 -0.188  1.000
+corr_first_diff
+        T     EC     pH
+T   1.000  0.228  0.408
+EC  0.228  1.000 -0.080
+pH  0.408 -0.080  1.000
+corr_ar_residuals
+        T     EC     pH
+T   1.000  0.052  0.243
+EC  0.052  1.000 -0.033
+pH  0.243 -0.033  1.000
+out-of-sample: skill vs persistence (AR, VAR); VAR/AR MSE ratio [95% CI]
+  h1_T       AR +0.213  VAR +0.218  VAR/AR 0.994 [0.982, 1.007]  n=1072
+  h1_EC      AR -0.192  VAR -0.350  VAR/AR 1.132 [1.046, 1.213]  n=1072
+  h1_pH      AR +0.080  VAR +0.134  VAR/AR 0.942 [0.875, 1.014]  n=1072
+  h2_T       AR +0.185  VAR +0.202  VAR/AR 0.979 [0.966, 0.991]  n=1067
+  h2_EC      AR -0.068  VAR -0.144  VAR/AR 1.072 [0.999, 1.174]  n=1067
+  h2_pH      AR +0.111  VAR +0.234  VAR/AR 0.861 [0.800, 0.925]  n=1067
+  h11_T      AR +0.050  VAR +0.084  VAR/AR 0.964 [0.938, 0.996]  n=1017
+  h11_EC     AR +0.039  VAR -0.006  VAR/AR 1.048 [1.022, 1.094]  n=1017
+  h11_pH     AR +0.001  VAR +0.022  VAR/AR 0.980 [0.967, 0.995]  n=1017
+diel share {'T': 0.736, 'EC': 0.118, 'pH': 0.663}
+quantization {'T': {'resolution': 0.004, 'zero_share': 0.00964630225080386, 'dh_over_res': 28.875000000000206}, 'EC': {'resolution': 0.121, 'zero_share': 0.004134129536058797, 'dh_over_res': 9.826446280991796}, 'pH': {'resolution': 0.003, 'zero_share': 0.006430868167202572, 'dh_over_res': 58.666666666666714}}
+
+=== Weija T1+EC (n=2835) ===
+corr_levels
+       T1     EC
+T1  1.000 -0.076
+EC -0.076  1.000
+corr_first_diff
+       T1     EC
+T1  1.000  0.069
+EC  0.069  1.000
+corr_ar_residuals
+       T1     EC
+T1  1.000 -0.016
+EC -0.016  1.000
+out-of-sample: skill vs persistence (AR, VAR); VAR/AR MSE ratio [95% CI]
+  h1_T1      AR +0.355  VAR +0.351  VAR/AR 1.005 [0.994, 1.022]  n=1390
+  h1_EC      AR +0.038  VAR +0.038  VAR/AR 0.999 [0.958, 1.108]  n=1390
+  h2_T1      AR +0.329  VAR +0.321  VAR/AR 1.011 [0.994, 1.036]  n=1383
+  h2_EC      AR -0.020  VAR -0.033  VAR/AR 1.012 [0.938, 1.197]  n=1383
+  h11_T1     AR +0.056  VAR +0.059  VAR/AR 0.996 [0.984, 1.004]  n=1320
+  h11_EC     AR -0.009  VAR +0.008  VAR/AR 0.983 [0.964, 0.990]  n=1320
+diel share {'T1': 0.646, 'EC': 0.087}
+quantization {'T1': {'resolution': 0.018, 'zero_share': 0.038638780574264446, 'dh_over_res': 5.9444444444446045}, 'EC': {'resolution': 0.149, 'zero_share': 0.0031903580290677065, 'dh_over_res': 8.550335570469805}}
+
+Check B
+ dataset param  days  runs  events_per_30d  short_per_30d  event_median_dur_h  coherent_share
+  Weija     T    65    92           23.72          19.07                 2.2            0.39
+  Weija    EC    65    60           15.81          12.09                 1.6            0.44
+  Weija    pH    65    24            5.12           6.05                 1.1            1.00
+
+strongest events
+ param               start    dur_min  peak_sigma  coherent
+   EC 2018-11-13 12:39:49 194.566667   37.780764      True
+   EC 2018-12-18 07:36:54  98.050000   37.579672     False
+   EC 2018-11-10 12:39:41 194.133333   36.100195      True
+   EC 2018-11-11 13:34:28  97.483333   34.944978     False
+   EC 2018-11-12 12:31:24 194.666667   28.655749      True
+   EC 2018-12-06 21:42:31 423.700000   25.798746     False
+   EC 2018-11-29 14:42:33  97.950000   25.239050      True
+    T 2019-01-02 14:06:31 162.733333   21.112168     False
+   EC 2018-11-18 15:52:22  64.716667   18.209089      True
+    T 2018-12-08 14:46:44 194.366667   17.100935      True
+    T 2018-12-31 14:22:47 162.483333   15.843862     False
+    T 2018-12-02 13:51:54 195.366667   15.574066      True

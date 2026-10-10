@@ -1,0 +1,319 @@
+{
+  "link": {
+    "L0": {
+      "weija_gain": -16.1,
+      "weija_rank_of_15": 3,
+      "rho_diel_14": 0.52,
+      "rho_diel_15": 0.46,
+      "rho_skill_14": 0.25,
+      "rho_skill_15": 0.22,
+      "p_diel_15": 0.0813
+    },
+    "L1": {
+      "weija_gain": -20.4,
+      "weija_rank_of_15": 1,
+      "rho_diel_14": 0.71,
+      "rho_diel_15": 0.58,
+      "rho_skill_14": 0.47,
+      "rho_skill_15": 0.44,
+      "p_diel_15": 0.0238
+    },
+    "L2": {
+      "weija_gain": -16.4,
+      "weija_rank_of_15": 1,
+      "rho_diel_14": 0.84,
+      "rho_diel_15": 0.7,
+      "rho_skill_14": 0.64,
+      "rho_skill_15": 0.6,
+      "p_diel_15": 0.0039
+    },
+    "L3": {
+      "weija_gain": -12.7,
+      "weija_rank_of_15": 2,
+      "rho_diel_14": 0.78,
+      "rho_diel_15": 0.69,
+      "rho_skill_14": 0.69,
+      "rho_skill_15": 0.61,
+      "p_diel_15": 0.0048
+    },
+    "L4": {
+      "weija_gain": -10.2,
+      "weija_rank_of_15": 7,
+      "rho_diel_14": 0.75,
+      "rho_diel_15": 0.73,
+      "rho_skill_14": 0.71,
+      "rho_skill_15": 0.7,
+      "p_diel_15": 0.0019
+    }
+  },
+  "where_L2": {
+    "SOD": {
+      "T_per_day": 14.88,
+      "EC_per_day": 10.76,
+      "T_share_10_16h": 0.49,
+      "T_per_day_00_06h": 0.97
+    },
+    "DBP": {
+      "T_per_day": 14.54,
+      "EC_per_day": 11.86,
+      "T_share_10_16h": 0.5,
+      "T_per_day_00_06h": 0.64
+    },
+    "RLS-T": {
+      "T_per_day": 15.87,
+      "EC_per_day": 13.66,
+      "T_share_10_16h": 0.4,
+      "T_per_day_00_06h": 2.54
+    }
+  },
+  "history_L2": {
+    "test_share_short_history": 0.174,
+    "SOD": {
+      "per_step_full_history": 0.406,
+      "per_step_all_test": 0.443
+    },
+    "DBP": {
+      "per_step_full_history": 0.416,
+      "per_step_all_test": 0.452
+    },
+    "RLS-T": {
+      "per_step_full_history": 0.494,
+      "per_step_all_test": 0.516
+    }
+  },
+  "probes_L2": {
+    "T1+EC": {
+      "SOD": 9.43,
+      "DBP": 9.55,
+      "RLS-T": 10.46,
+      "gain_RLST": -10.9
+    },
+    "T only": {
+      "SOD": 14.88,
+      "DBP": 14.54,
+      "RLS-T": 15.87,
+      "gain_RLST": -6.6
+    },
+    "T1 only": {
+      "SOD": 6.78,
+      "DBP": 6.28,
+      "RLS-T": 6.99,
+      "gain_RLST": -3.1
+    },
+    "EC only": {
+      "SOD": 7.75,
+      "DBP": 9.2,
+      "RLS-T": 9.24,
+      "gain_RLST": -19.2
+    }
+  },
+  "thinning_L2": [
+    {
+      "site": "01475530",
+      "params": "T+EC+DO+pH",
+      "step_min": 15,
+      "gain_RLST": 42.5
+    },
+    {
+      "site": "01475530",
+      "params": "T+EC+DO+pH",
+      "step_min": 30,
+      "gain_RLST": 40.3
+    },
+    {
+      "site": "01475530",
+      "params": "T+EC",
+      "step_min": 15,
+      "gain_RLST": 41.1
+    },
+    {
+      "site": "01475530",
+      "params": "T+EC",
+      "step_min": 30,
+      "gain_RLST": 39.9
+    },
+    {
+      "site": "01400500",
+      "params": "T+EC+DO+pH",
+      "step_min": 15,
+      "gain_RLST": 39.1
+    },
+    {
+      "site": "01400500",
+      "params": "T+EC+DO+pH",
+      "step_min": 30,
+      "gain_RLST": 37.4
+    },
+    {
+      "site": "01400500",
+      "params": "T+EC",
+      "step_min": 15,
+      "gain_RLST": 30.6
+    },
+    {
+      "site": "01400500",
+      "params": "T+EC",
+      "step_min": 30,
+      "gain_RLST": 31.6
+    },
+    {
+      "site": "01458500",
+      "params": "T+EC+DO+pH",
+      "step_min": 15,
+      "gain_RLST": 29.0
+    },
+    {
+      "site": "01458500",
+      "params": "T+EC+DO+pH",
+      "step_min": 30,
+      "gain_RLST": 26.5
+    },
+    {
+      "site": "01458500",
+      "params": "T+EC",
+      "step_min": 15,
+      "gain_RLST": 26.5
+    },
+    {
+      "site": "01458500",
+      "params": "T+EC",
+      "step_min": 30,
+      "gain_RLST": 25.8
+    },
+    {
+      "site": "01473500",
+      "params": "T+EC+DO+pH",
+      "step_min": 15,
+      "gain_RLST": 11.1
+    },
+    {
+      "site": "01473500",
+      "params": "T+EC+DO+pH",
+      "step_min": 30,
+      "gain_RLST": 14.0
+    },
+    {
+      "site": "01473500",
+      "params": "T+EC",
+      "step_min": 15,
+      "gain_RLST": 0.3
+    },
+    {
+      "site": "01473500",
+      "params": "T+EC",
+      "step_min": 30,
+      "gain_RLST": 7.4
+    }
+  ],
+  "post_hoc": {
+    "per_param_T": [
+      {
+        "site": "Weija",
+        "param": "T",
+        "diel": 0.714,
+        "fdiel": 0.716,
+        "skew": 1.514
+      },
+      {
+        "site": "InWaterSense n1",
+        "param": "T",
+        "diel": 0.038,
+        "fdiel": 0.242,
+        "skew": 0.418
+      },
+      {
+        "site": "USGS 01458500",
+        "param": "T",
+        "diel": 0.43,
+        "fdiel": 0.553,
+        "skew": 0.315
+      },
+      {
+        "site": "USGS 01438500",
+        "param": "T",
+        "diel": 0.517,
+        "fdiel": 0.554,
+        "skew": 0.508
+      },
+      {
+        "site": "USGS 05420400",
+        "param": "T",
+        "diel": 0.367,
+        "fdiel": 0.52,
+        "skew": 0.591
+      },
+      {
+        "site": "USGS 05586300",
+        "param": "T",
+        "diel": 0.306,
+        "fdiel": 0.346,
+        "skew": 0.582
+      },
+      {
+        "site": "USGS 01473500",
+        "param": "T",
+        "diel": 0.317,
+        "fdiel": 0.384,
+        "skew": 0.56
+      },
+      {
+        "site": "USGS 01400500",
+        "param": "T",
+        "diel": 0.511,
+        "fdiel": 0.554,
+        "skew": 0.333
+      },
+      {
+        "site": "USGS 01402000",
+        "param": "T",
+        "diel": 0.396,
+        "fdiel": 0.334,
+        "skew": 0.496
+      },
+      {
+        "site": "USGS 01388000",
+        "param": "T",
+        "diel": 0.157,
+        "fdiel": 0.13,
+        "skew": 0.85
+      },
+      {
+        "site": "USGS 01467087",
+        "param": "T",
+        "diel": 0.269,
+        "fdiel": 0.187,
+        "skew": 0.263
+      },
+      {
+        "site": "USGS 01475530",
+        "param": "T",
+        "diel": 0.701,
+        "fdiel": 0.717,
+        "skew": 0.468
+      },
+      {
+        "site": "USGS 01465798",
+        "param": "T",
+        "diel": 0.661,
+        "fdiel": 0.689,
+        "skew": 0.554
+      },
+      {
+        "site": "USGS 01473900",
+        "param": "T",
+        "diel": 0.538,
+        "fdiel": 0.368,
+        "skew": 0.268
+      },
+      {
+        "site": "USGS 11510700",
+        "param": "T",
+        "diel": 0.239,
+        "fdiel": 0.809,
+        "skew": -0.139
+      }
+    ],
+    "rho_fdiel_15": 0.52,
+    "rho_fdiel_14": 0.53
+  }
+}

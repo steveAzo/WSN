@@ -1,0 +1,33 @@
+radio,factor,setting,life_base,gain_base,life_low,gain_low,life_high,gain_high,life_swing
+LoRaWAN SF12,sensing time per sample,1 s / 30 s (default 5 s),3.18015,2.15852,4.77322,2.73888,1.03052,1.37542,3.7427
+LoRaWAN SF12,battery size,5 Wh / 6600 mAh at 3.7 V,3.18015,2.15852,0.651136,2.15852,3.18015,2.15852,2.52901
+LoRaWAN SF12,host sleep power,hibernate 7 uA / 3 x deep sleep (default 33 uA),3.18015,2.15852,3.57217,2.30134,2.48725,1.9061,1.08492
+LoRaWAN SF12,host active power,-30 % / +30 %,3.18015,2.15852,3.72856,2.24965,2.77237,2.09077,0.956192
+LoRaWAN SF12,usable battery capacity,"70 % (self-discharge, cold, regulator) / ideal",3.18015,2.15852,2.2261,2.15852,3.18015,2.15852,0.954044
+LoRaWAN SF12,report energy,x0.5 / x2 of the measured median,3.18015,2.15852,3.5355,1.81571,2.64788,2.67201,0.88762
+LoRaWAN SF12,host during modem activity,asleep / awake (default awake),3.18015,2.15852,3.43093,1.91659,3.18015,2.15852,0.25078
+LoRaWAN SF12,packet loss,0.5 % / 5 % (default 1 %),3.18015,2.15852,3.18453,2.15429,3.14397,2.19342,0.0405607
+LoRaWAN SF7,sensing time per sample,1 s / 30 s (default 5 s),3.92943,1.43567,6.68713,1.74143,1.0984,1.12178,5.58874
+LoRaWAN SF7,battery size,5 Wh / 6600 mAh at 3.7 V,3.92943,1.43567,0.804552,1.43567,3.92943,1.43567,3.12488
+LoRaWAN SF7,host sleep power,hibernate 7 uA / 3 x deep sleep (default 33 uA),3.92943,1.43567,4.54586,1.50402,2.92321,1.32411,1.62265
+LoRaWAN SF7,host active power,-30 % / +30 %,3.92943,1.43567,4.74196,1.44057,3.35462,1.43221,1.38734
+LoRaWAN SF7,usable battery capacity,"70 % (self-discharge, cold, regulator) / ideal",3.92943,1.43567,2.7506,1.43567,3.92943,1.43567,1.17883
+LoRaWAN SF7,report energy,x0.5 / x2 of the measured median,3.92943,1.43567,4.02484,1.34364,3.75158,1.60725,0.273252
+LoRaWAN SF7,host during modem activity,asleep / awake (default awake),3.92943,1.43567,4.16111,1.21218,3.92943,1.43567,0.231673
+LoRaWAN SF7,packet loss,0.5 % / 5 % (default 1 %),3.92943,1.43567,3.93147,1.43371,3.9125,1.45201,0.0189655
+NB-IoT N211 RAI,sensing time per sample,1 s / 30 s (default 5 s),4.56869,1.78283,8.77712,2.50393,1.1431,1.19587,7.63401
+NB-IoT N211 RAI,battery size,5 Wh / 6600 mAh at 3.7 V,4.56869,1.78283,0.935439,1.78283,4.56869,1.78283,3.63325
+NB-IoT N211 RAI,host sleep power,hibernate 7 uA / 3 x deep sleep (default 33 uA),4.56869,1.78283,5.42381,1.92935,3.26284,1.55908,2.16097
+NB-IoT N211 RAI,host active power,-30 % / +30 %,4.56869,1.78283,5.72549,1.86325,3.80076,1.72945,1.92472
+NB-IoT N211 RAI,usable battery capacity,"70 % (self-discharge, cold, regulator) / ideal",4.56869,1.78283,3.19808,1.78283,4.56869,1.78283,1.37061
+NB-IoT N211 RAI,report energy,x0.5 / x2 of the measured median,4.56869,1.78283,4.83737,1.58031,4.11191,2.12713,0.725465
+NB-IoT N211 RAI,host during modem activity,asleep / awake (default awake),4.56869,1.78283,4.9345,1.5071,4.56869,1.78283,0.365812
+NB-IoT N211 RAI,packet loss,0.5 % / 5 % (default 1 %),4.56869,1.78283,4.57294,1.77962,4.53344,1.8094,0.0395023
+NB-IoT N211 default,sensing time per sample,1 s / 30 s (default 5 s),2.74572,3.15689,3.85721,4.03001,0.980264,1.77004,2.87694
+NB-IoT N211 default,battery size,5 Wh / 6600 mAh at 3.7 V,2.74572,3.15689,0.562186,3.15689,2.74572,3.15689,2.18353
+NB-IoT N211 default,host active power,-30 % / +30 %,2.74572,3.15689,3.36517,3.24972,2.31886,3.09292,1.04631
+NB-IoT N211 default,report energy,x0.5 / x2 of the measured median,2.74572,3.15689,3.15044,2.85183,2.18446,3.57993,0.965983
+NB-IoT N211 default,host during modem activity,asleep / awake (default awake),2.74572,3.15689,3.67761,2.45447,2.74572,3.15689,0.931895
+NB-IoT N211 default,usable battery capacity,"70 % (self-discharge, cold, regulator) / ideal",2.74572,3.15689,1.922,3.15689,2.74572,3.15689,0.823715
+NB-IoT N211 default,host sleep power,hibernate 7 uA / 3 x deep sleep (default 33 uA),2.74572,3.15689,3.03311,3.38265,2.21335,2.73869,0.81976
+NB-IoT N211 default,packet loss,0.5 % / 5 % (default 1 %),2.74572,3.15689,2.75278,3.15157,2.68813,3.20029,0.0646423

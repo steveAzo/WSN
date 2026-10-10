@@ -56,11 +56,12 @@ def _finish(name, df, params, events):
     return Dataset(name, params, df.t, df[params].to_numpy(float), seg_start, test, step, ev)
 
 
-def _events(prefix):
-    r = pd.read_csv("results/phase1/check_b_runs.csv")
+def _events(prefix, path="results/phase1/check_b_runs.csv", utc=None):
+    r = pd.read_csv(path)
     r = r[(r.kind == "event") & r.dataset.str.startswith(prefix)].copy()
+    utc = (prefix != "InWaterSense") if utc is None else utc
     for c in ("start", "end"):
-        r[c] = _naive(pd.to_datetime(r[c], utc=(prefix != "InWaterSense")))
+        r[c] = _naive(pd.to_datetime(r[c], utc=utc))
     return r
 
 
@@ -73,6 +74,14 @@ def load_inws():
 def load_usgs(site):
     d = pd.read_csv(f"data/clean/usgs/{site}.csv", parse_dates=["t"])
     return _finish(f"USGS {site}", d, ["T", "EC", "DO", "pH"], _events(site))
+
+
+def load_weija():
+    """Held-out case study (Prof Adu-Manu, Weija 2018-19; src/data/clean_weija.py).
+    T (Sensor Two) and EC only: pH readings are unverified (tracks T, 8.5-12.8 daily).
+    Timestamps are Ghana local time = UTC. Not part of all_datasets() / the frozen runs."""
+    c = pd.read_csv("data/clean/weija_cycles.csv", parse_dates=["t"])
+    return _finish("Weija", c, ["T", "EC"], _events("Weija", "results/weija/check_b_runs.csv", utc=False))
 
 
 def all_datasets():

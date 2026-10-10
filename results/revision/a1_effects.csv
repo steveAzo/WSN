@@ -1,0 +1,58 @@
+effect,family,level,n_sites,estimate,ci_lo,ci_hi,site_min,site_max,test,p,note,p_holm
+RLS-T saving over SOD (%),E1 RLS-T vs SOD,0,13,-5.9863,-10.6296,-1.36963,-18.3258,8.26373,"Wilcoxon signed-rank, exact, two-sided",0.0478516,wins 3/13,0.0957031
+RLS-T saving over SOD (%),E1 RLS-T vs SOD,1,13,18.8542,14.5166,20.9133,-2.14906,35.3386,"Wilcoxon signed-rank, exact, two-sided",0.000488281,wins 12/13,0.00195312
+RLS-T saving over SOD (%),E1 RLS-T vs SOD,2,13,26.1051,13.0354,30.4573,6.12245,42.5226,"Wilcoxon signed-rank, exact, two-sided",0.000244141,wins 13/13,0.0012207
+RLS-T saving over SOD (%),E1 RLS-T vs SOD,3,13,7.13943,1.65125,27.807,-12.7482,45.3141,"Wilcoxon signed-rank, exact, two-sided",0.00805664,wins 10/13,0.0241699
+RLS-T saving over SOD (%),E1 RLS-T vs SOD,4,13,0.961538,-12.3839,22.9684,-60.3715,45.8167,"Wilcoxon signed-rank, exact, two-sided",0.497314,wins 7/13,0.497314
+"Spearman rho, diel share vs RLS-T saving [14 datasets]",E2 diel link,0,14,0.516484,-0.133929,0.972543,,,permutation (200k),0.0616947,asymptotic p = 0.059,0.0616947
+"Spearman rho, diel share vs RLS-T saving [13 USGS]",E2 diel link,0,13,0.758242,0.282475,1,,,permutation (200k),0.00371998,asymptotic p = 0.0027,
+"Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]",E2 diel link,0,15,0.417857,-0.234657,0.893593,,,permutation (200k),0.123089,asymptotic p = 0.12,
+"Spearman rho, diel share vs RLS-T saving [14 datasets]",E2 diel link,1,14,0.70989,0.349048,0.897092,,,permutation (200k),0.00592997,asymptotic p = 0.0045,0.0118599
+"Spearman rho, diel share vs RLS-T saving [13 USGS]",E2 diel link,1,13,0.67033,0.260745,0.863636,,,permutation (200k),0.0146699,asymptotic p = 0.012,
+"Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]",E2 diel link,1,15,0.507143,-0.0472727,0.840298,,,permutation (200k),0.0548097,asymptotic p = 0.054,
+"Spearman rho, diel share vs RLS-T saving [14 datasets]",E2 diel link,2,14,0.841758,0.457399,0.986486,,,permutation (200k),0.000314998,asymptotic p = 0.00016,0.00157499
+"Spearman rho, diel share vs RLS-T saving [13 USGS]",E2 diel link,2,13,0.802198,0.355738,0.982906,,,permutation (200k),0.00156499,asymptotic p = 0.00097,
+"Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]",E2 diel link,2,15,0.625,0.0718166,0.967391,,,permutation (200k),0.0149049,asymptotic p = 0.013,
+"Spearman rho, diel share vs RLS-T saving [14 datasets]",E2 diel link,3,14,0.78022,0.348416,0.96,,,permutation (200k),0.00147499,asymptotic p = 0.00099,0.00589997
+"Spearman rho, diel share vs RLS-T saving [13 USGS]",E2 diel link,3,13,0.736264,0.228559,0.965909,,,permutation (200k),0.00567997,asymptotic p = 0.0041,
+"Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]",E2 diel link,3,15,0.582143,-0.0198915,0.924188,,,permutation (200k),0.0254049,asymptotic p = 0.023,
+"Spearman rho, diel share vs RLS-T saving [14 datasets]",E2 diel link,4,14,0.745055,0.282851,0.931663,,,permutation (200k),0.00302498,asymptotic p = 0.0022,0.00907495
+"Spearman rho, diel share vs RLS-T saving [13 USGS]",E2 diel link,4,13,0.752747,0.251397,0.948718,,,permutation (200k),0.00421498,asymptotic p = 0.003,
+"Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]",E2 diel link,4,15,0.685714,0.234114,0.905967,,,permutation (200k),0.00606497,asymptotic p = 0.0048,
+report-level saving over separate DPS (%),E3 report-level,0,13,44.5518,37.844,48.3844,35.2878,58.5093,"Wilcoxon signed-rank, exact (report vs separate, per-site medians)",0.000244141,draft value (median over 52 site x method) = 44.0; min over all 260 site x method x level cases computed separately,0.0012207
+report-level saving over separate DPS (%),E3 report-level,1,13,36.9586,31.3639,41.9471,27.4048,49.1035,"Wilcoxon signed-rank, exact (report vs separate, per-site medians)",0.000244141,draft value (median over 52 site x method) = 36.3; min over all 260 site x method x level cases computed separately,0.0012207
+report-level saving over separate DPS (%),E3 report-level,2,13,35.7552,32.8175,40.7553,19.849,44.1845,"Wilcoxon signed-rank, exact (report vs separate, per-site medians)",0.000244141,draft value (median over 52 site x method) = 35.9; min over all 260 site x method x level cases computed separately,0.0012207
+report-level saving over separate DPS (%),E3 report-level,3,13,37.2626,30.9986,42.441,10.8248,43.7947,"Wilcoxon signed-rank, exact (report vs separate, per-site medians)",0.000244141,draft value (median over 52 site x method) = 36.8; min over all 260 site x method x level cases computed separately,0.0012207
+report-level saving over separate DPS (%),E3 report-level,4,13,29.4351,23.9879,35.331,10.1746,41.9347,"Wilcoxon signed-rank, exact (report vs separate, per-site medians)",0.000244141,draft value (median over 52 site x method) = 30.6; min over all 260 site x method x level cases computed separately,0.0012207
+RLS-D gap to per-site best fixed predictor (%),E4 RLS-D gap,1,6,-0.214099,-0.655546,2.07444,-0.725042,3.03215,,,"6 held-out USGS sites; small n, CI is wide by necessity",
+SOD gap to per-site best fixed predictor (%),E4 RLS-D gap,1,6,21.6352,15.3995,50.085,13.1191,54.6517,,,,
+RLS-D gap to per-site best fixed predictor (%),E4 RLS-D gap,2,6,-0.516268,-2.05656,3.04912,-3.43348,5.32407,,,"6 held-out USGS sites; small n, CI is wide by necessity",
+SOD gap to per-site best fixed predictor (%),E4 RLS-D gap,2,6,35.6319,13.7309,69.0874,12.4724,73.9815,,,,
+RLS-D gap to per-site best fixed predictor (%),E4 RLS-D gap,3,6,0.35587,-4.71555,4.60155,-6.95444,5.0237,,,"6 held-out USGS sites; small n, CI is wide by necessity",
+SOD gap to per-site best fixed predictor (%),E4 RLS-D gap,3,6,34.7264,12.5852,51.0734,7.68834,53.2227,,,,
+RLS-D gap to per-site best fixed predictor (%),E4 RLS-D gap,4,6,2.38453,-2.38834,11.2716,-2.42718,15.8267,,,"6 held-out USGS sites; small n, CI is wide by necessity",
+SOD gap to per-site best fixed predictor (%),E4 RLS-D gap,4,6,21.2226,0.485437,38.9821,0,44.4739,,,,
+ADAPTIVEML / RLS-T max-error ratio (gmean over params),E5 ADAPTIVEML,alpha=0.5,13,8.38142,6.47077,9.93806,2.83264,17.6252,Wilcoxon exact on log ratio,0.000244141,median |log rate mismatch| = 0.142; max = 0.514,0.0012207
+"event capture, ADAPTIVEML minus RLS-T",E5b ADAPTIVEML capture,alpha=0.5,13,0,0,0,-0.037037,0.00925926,Wilcoxon (zeros present: zsplit),0.375,,0.375
+ADAPTIVEML / RLS-T max-error ratio (gmean over params),E5 ADAPTIVEML,alpha=1.0,13,11.7902,8.38633,15.8747,5.75937,32.8902,Wilcoxon exact on log ratio,0.000244141,median |log rate mismatch| = 0.113; max = 0.324,0.0012207
+"event capture, ADAPTIVEML minus RLS-T",E5b ADAPTIVEML capture,alpha=1.0,13,-0.00833333,-0.0107527,0,-0.0238095,0,Wilcoxon (zeros present: zsplit),0.0078125,,0.0234375
+ADAPTIVEML / RLS-T max-error ratio (gmean over params),E5 ADAPTIVEML,alpha=1.5,13,16.3595,9.5603,21.5273,3.60307,42.654,Wilcoxon exact on log ratio,0.000244141,median |log rate mismatch| = 0.204; max = 0.344,0.0012207
+"event capture, ADAPTIVEML minus RLS-T",E5b ADAPTIVEML capture,alpha=1.5,13,-0.0238095,-0.0384615,-0.0107527,-0.111111,0.00769231,Wilcoxon (zeros present: zsplit),0.000976562,,0.00488281
+ADAPTIVEML / RLS-T max-error ratio (gmean over params),E5 ADAPTIVEML,alpha=2.0,13,14.5908,10.7146,20.2002,4.97751,27.3457,Wilcoxon exact on log ratio,0.000244141,median |log rate mismatch| = 0.186; max = 0.344,0.0012207
+"event capture, ADAPTIVEML minus RLS-T",E5b ADAPTIVEML capture,alpha=2.0,13,-0.0506912,-0.0740741,-0.0449438,-0.115385,0,Wilcoxon (zeros present: zsplit),0.000976562,,0.00488281
+ADAPTIVEML / RLS-T max-error ratio (gmean over params),E5 ADAPTIVEML,alpha=3.0,13,17.3483,10.7088,24.9485,6.88615,39.0057,Wilcoxon exact on log ratio,0.000244141,median |log rate mismatch| = 0.104; max = 0.373,0.0012207
+"event capture, ADAPTIVEML minus RLS-T",E5b ADAPTIVEML capture,alpha=3.0,13,-0.0833333,-0.109489,-0.0692308,-0.37037,0.115385,Wilcoxon exact,0.010498,,0.0234375
+battery-life gain RLS-D L2 over every cycle (x),E6 lifetime,LoRaWAN SF12,13,2.05209,1.93456,2.20699,1.52957,2.52186,,,modelled,
+battery-life gain RLS-D over SOD at L2 (%),E6 lifetime,LoRaWAN SF12,13,8.50139,4.88537,14.788,2.08277,23.7605,Wilcoxon exact,0.000244141,modelled,0.00146484
+battery-life gain RLS-D L2 over every cycle (x),E6 lifetime,LoRaWAN SF7,13,1.41004,1.35073,1.45091,1.21646,1.52189,,,modelled,
+battery-life gain RLS-D over SOD at L2 (%),E6 lifetime,LoRaWAN SF7,13,2.98055,1.95879,6.24349,0.712678,9.71204,Wilcoxon exact,0.000244141,modelled,0.00146484
+battery-life gain RLS-D L2 over every cycle (x),E6 lifetime,NB-IoT BC95 RAI,13,1.48541,1.44462,1.53525,1.27994,1.62524,,,modelled,
+battery-life gain RLS-D over SOD at L2 (%),E6 lifetime,NB-IoT BC95 RAI,13,3.57506,2.32421,7.34316,0.860023,12.5603,Wilcoxon exact,0.000244141,modelled,0.00146484
+battery-life gain RLS-D L2 over every cycle (x),E6 lifetime,NB-IoT N211 RAI,13,1.72182,1.65394,1.80843,1.40544,1.97346,,,modelled,
+battery-life gain RLS-D over SOD at L2 (%),E6 lifetime,NB-IoT N211 RAI,13,5.52791,3.41845,10.5942,1.33978,18.1911,Wilcoxon exact,0.000244141,modelled,0.00146484
+battery-life gain RLS-D L2 over every cycle (x),E6 lifetime,NB-IoT N211 bad,13,1.88192,1.7931,1.99838,1.48642,2.22853,,,modelled,
+battery-life gain RLS-D over SOD at L2 (%),E6 lifetime,NB-IoT N211 bad,13,6.94118,4.21468,12.6878,1.69144,21.8245,Wilcoxon exact,0.000244141,modelled,0.00146484
+battery-life gain RLS-D L2 over every cycle (x),E6 lifetime,NB-IoT N211 default,13,2.88147,2.60435,3.26049,1.92586,4.25564,,,modelled,
+battery-life gain RLS-D over SOD at L2 (%),E6 lifetime,NB-IoT N211 default,13,16.8893,9.51903,23.9212,4.49515,41.5415,Wilcoxon exact,0.000244141,modelled,0.00146484
+equal accuracy: periodic-60min / RLS-D-L2 worst-case error (paired per site),E7 equal accuracy,2,13,7.8043,5.15848,13.6475,4.1386,19.2167,Wilcoxon exact on log ratio,0.000244141,,0.000244141
+equal accuracy: RLS-D-L2 / periodic-60min lifetime (paired per site),E7 equal accuracy,2,13,1.06205,1.01866,1.14185,0.924469,1.18514,,,modelled,

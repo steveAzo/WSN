@@ -1,0 +1,9 @@
+payload,bytes,sf,airtime_ms,E_report_J,E_report_ack_J,E_ack_vs_20B
+int16 values (4 params) + seq + time + flags,15,7,66.816,0.242233,0.162339,0.991456
+int16 values (4 params) + seq + time + flags,15,12,1646.59,0.684003,0.813009,0.94769
+float32 values (4 params) + seq + time + flags,23,7,77.056,0.245037,0.165137,1.00854
+float32 values (4 params) + seq + time + flags,23,12,1974.27,0.773755,0.90276,1.05231
+draft assumption,20,7,71.936,0.243635,0.163738,1
+draft assumption,20,12,1810.43,0.728879,0.857885,1
+"LoRaWAN SF12 maximum (EU868, DR0)",51,7,118.016,0.256256,0.176329,1.0769
+"LoRaWAN SF12 maximum (EU868, DR0)",51,12,2793.47,0.998133,1.12714,1.31386

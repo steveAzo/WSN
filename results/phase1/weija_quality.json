@@ -1,0 +1,50 @@
+{
+  "EC": {
+    "rows": 5061,
+    "imputed_dropped": 134,
+    "computed_dropped": 513,
+    "ramp_points": 9,
+    "range_fail": 0,
+    "spike_flag": 240,
+    "in_cycles": 4405
+  },
+  "pH": {
+    "rows": 5054,
+    "imputed_dropped": 0,
+    "computed_dropped": 874,
+    "ramp_points": 18,
+    "range_fail": 1098,
+    "spike_flag": 116,
+    "in_cycles": 2484
+  },
+  "T": {
+    "rows": 5060,
+    "imputed_dropped": 2220,
+    "computed_dropped": 20,
+    "ramp_points": 0,
+    "range_fail": 0,
+    "spike_flag": 65,
+    "in_cycles": 2478
+  },
+  "T1": {
+    "rows": 3573,
+    "imputed_dropped": 1,
+    "computed_dropped": 0,
+    "ramp_points": 0,
+    "range_fail": 0,
+    "spike_flag": 106,
+    "in_cycles": 3145
+  },
+  "cycles": {
+    "n": 4405,
+    "start": "2018-10-31 15:10:54",
+    "end": "2019-03-11 16:28:01",
+    "median_step_min": 32.516666666666666,
+    "complete_T_EC": 2478,
+    "complete_T_EC_pH": 2460,
+    "last_complete_T_EC": "2019-01-04 03:33:51",
+    "segments_T_EC": 44,
+    "segments_T_EC_ge_1day": 10,
+    "pH_share_above_9": 0.35119182746878547
+  }
+}

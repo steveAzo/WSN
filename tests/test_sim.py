@@ -280,3 +280,39 @@ def test_lossy_seq_heartbeat_keeps_model_active():
     os_ = run_dps_lossy(X, seg, mk_s, delta, 0.0, "seq", hb_steps=24)
     assert od["tx"].sum() != os_["tx"].sum()
     assert (np.abs(X - od["R"]) <= delta + 1e-12).all() and not od["flagged"].any()
+
+
+# ---- revision 2026-10-10 (review M11): ACK loss and the flagged-resync confirmed protocol "ack_rs"
+@pytest.mark.parametrize("name", ["SOD", "RLS"])
+def test_ack_rs_identical_to_ack_without_ack_loss(name):
+    """with no ACK loss the revised protocol changes nothing (v0.1 confirmed-uplink results stand)"""
+    from sim.engine import run_dps_lossy
+    X, seg = synth(); delta = np.array([0.1, 0.2, 0.05])
+    for p in (0.0, 0.1):
+        a = run_dps_lossy(X, seg, factory(name, X, seg, delta), delta, p, "ack", seed=4)
+        b = run_dps_lossy(X, seg, factory(name, X, seg, delta), delta, p, "ack_rs", seed=4)
+        np.testing.assert_array_equal(a["tx"], b["tx"])
+        np.testing.assert_array_equal(np.nan_to_num(a["R"]), np.nan_to_num(b["R"]))
+
+
+def test_ack_v01_protocol_silently_desyncs_under_ack_loss():
+    """documents the gap found in revision: a delivered report whose ACK is lost leaves the copies
+    different, and the v0.1 confirmed protocol never flags the resulting violations"""
+    from sim.engine import run_dps_lossy
+    X, seg = synth(); delta = np.array([0.1, 0.2, 0.05])
+    o = run_dps_lossy(X, seg, factory("RLS", X, seg, delta), delta, 0.1, "ack", seed=3, ack_loss=0.3)
+    err = np.abs(X - o["R"]); err[np.isnan(err)] = np.inf
+    assert ((err > delta + 1e-12).any(1) & ~o["flagged"]).sum() > 0
+
+
+@pytest.mark.parametrize("name", ["SOD", "RLS"])
+@pytest.mark.parametrize("p,ack_loss", [(0.01, 0.01), (0.05, 0.05), (0.1, 0.3), (0.3, 0.3), (0.3, 0.0)])
+@pytest.mark.parametrize("hb", [None, 96])
+def test_ack_rs_bounded_or_flagged(name, p, ack_loss, hb):
+    """revised confirmed protocol: every UNFLAGGED server value is within delta, under uplink and ACK loss"""
+    from sim.engine import run_dps_lossy
+    X, seg = synth(); delta = np.array([0.1, 0.2, 0.05])
+    o = run_dps_lossy(X, seg, factory(name, X, seg, delta), delta, p, "ack_rs", hb_steps=hb, seed=5,
+                      ack_loss=ack_loss)
+    err = np.abs(X - o["R"]); err[np.isnan(err)] = np.inf
+    assert not ((err > delta + 1e-12).any(1) & ~o["flagged"]).any()

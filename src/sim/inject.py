@@ -19,6 +19,10 @@ QUANT = None
 
 def resolution(ds):
     global QUANT
+    if ds.name == "Weija":                      # held-out set: measured by src/analysis/weija_phase1.py
+        import json
+        q = json.load(open("results/weija/phase1.json"))["T+EC+pH"]["quantization"]
+        return np.array([float(q[p]["resolution"]) for p in ds.params])
     if QUANT is None:
         QUANT = pd.read_csv("results/phase1/quantization.csv")
         QUANT["code"] = QUANT.site.str.split().str[0]

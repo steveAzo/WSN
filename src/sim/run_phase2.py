@@ -46,6 +46,8 @@ BATCH_MIN = [30, 60, 120, 240]
 @functools.lru_cache(maxsize=2)
 def get(name):
     """load ONLY the requested dataset (loading all of them in every worker exhausted memory)"""
+    if name == "Weija":
+        return D.load_weija()                   # held-out case study, only via --datasets Weija
     return D.load_inws() if name.startswith("InWaterSense") else D.load_usgs(name.split()[1])
 
 

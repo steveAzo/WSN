@@ -1,0 +1,599 @@
+<title>Paper 1 Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a long-read study guide in reading order; sticky contents rail on wide screens, inline contents on phones. River-water palette: teal ink, sediment amber for numbers worth memorising. */
+:root{
+  --bg:#f3f6f5; --surface:#ffffff; --fg:#17201e; --muted:#55615e; --line:#d5dedb;
+  --accent:#0b6b67; --accent-soft:#e1efed; --num:#9a6a00; --num-soft:#fbf1d9;
+  --good:#1f7a3a; --bad:#a3352b;
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1514; --surface:#162020; --fg:#e2eae8; --muted:#9aa9a5; --line:#2a3836;
+  --accent:#55b9b2; --accent-soft:#16312f; --num:#e6b94d; --num-soft:#2e2712;
+  --good:#5cc27a; --bad:#e2776c; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0f1514; --surface:#162020; --fg:#e2eae8; --muted:#9aa9a5; --line:#2a3836;
+  --accent:#55b9b2; --accent-soft:#16312f; --num:#e6b94d; --num-soft:#2e2712;
+  --good:#5cc27a; --bad:#e2776c; color-scheme:dark; }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.65;padding:0 16px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:40px 80px}
+@media (max-width:980px){.wrap{grid-template-columns:minmax(0,1fr);gap:24px}}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);align-self:start;font-family:var(--f-display);font-size:14px}
+@media (max-width:980px){nav.toc{position:static}}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+nav.toc a{color:var(--muted);text-decoration:none;display:flex;gap:8px;align-items:baseline;padding:3px 0}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--accent)}
+nav.toc .n{font-family:var(--f-mono);font-size:12px;min-width:20px}
+nav.toc a.done{color:var(--good)}
+nav.toc a.done .n::after{content:" ✓"}
+.progress{margin-top:16px;font-size:13px;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+main{min-width:0;max-width:760px}
+header.top .eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--accent);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,44px);line-height:1.1;margin:.3em 0 .4em;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--f-display);font-weight:700;font-size:27px;line-height:1.2;margin:0 0 .5em;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:1.6em 0 .4em}
+h4{font-family:var(--f-display);font-weight:600;font-size:16px;margin:1.2em 0 .3em;color:var(--accent)}
+p{margin:0 0 1em}
+.lede{font-size:19px;color:var(--muted)}
+section.part{border-top:1px solid var(--line);padding-top:36px;margin-top:44px;scroll-margin-top:20px}
+.part-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.part-head .k{font-family:var(--f-mono);font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
+.done-toggle{font-family:var(--f-display);font-size:14px;display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--fg);white-space:nowrap}
+.done-toggle input{accent-color:var(--accent);width:16px;height:16px}
+.time{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.num{font-family:var(--f-mono);font-weight:500;color:var(--num);background:var(--num-soft);padding:0 4px;border-radius:3px;white-space:nowrap}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:1.2em 0}
+.box.key{border-color:var(--accent);background:var(--accent-soft)}
+.box .lbl{font-family:var(--f-display);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700;display:block;margin-bottom:6px}
+.box p:last-child{margin-bottom:0}
+dl.terms{display:grid;gap:14px;margin:1em 0}
+dl.terms div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+dt{font-family:var(--f-display);font-weight:700}
+dd{margin:4px 0 0}
+dd .eg{display:block;color:var(--muted);font-size:15px;margin-top:4px}
+.tablewrap{overflow-x:auto;margin:1em 0}
+table{border-collapse:collapse;font-size:15px;min-width:420px;width:100%}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--f-display);font-weight:600;font-size:13px;color:var(--muted)}
+td.n,th.n{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+td.hit{color:var(--accent);font-weight:600}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:600;font-family:var(--f-display)}
+details[open] summary{margin-bottom:8px}
+ul,ol.steps{padding-left:1.3em;margin:0 0 1em}
+li{margin:.25em 0}
+code,.mono{font-family:var(--f-mono);font-size:.88em}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* toy */
+.toy{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:1.2em 0}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:12px}
+.controls label{font-family:var(--f-display);font-size:14px;display:grid;gap:4px}
+.controls output{font-family:var(--f-mono);color:var(--num)}
+.controls input[type=range]{width:100%;accent-color:var(--accent)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.presets button{font-family:var(--f-display);font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.presets button:hover{border-color:var(--accent);color:var(--accent)}
+.panels{display:grid;gap:12px}
+.panel h5{font-family:var(--f-display);font-size:14px;margin:0 0 4px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.panel h5 .c{font-family:var(--f-mono);color:var(--num)}
+svg.chart{width:100%;height:auto;display:block}
+svg .truth{fill:none;stroke:var(--muted);stroke-width:1;opacity:.7}
+svg .recon{fill:none;stroke:var(--accent);stroke-width:2}
+svg .dot{fill:var(--num)}
+svg .axis{stroke:var(--line);stroke-width:1}
+svg text{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.verdict{font-family:var(--f-display);font-size:15px;margin-top:10px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);font-family:var(--f-display);margin-top:6px}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:5px;border-radius:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+  <ol id="toc">
+    <li><a href="#plan"><span class="n">0</span>Tonight's plan</a></li>
+    <li><a href="#story"><span class="n">1</span>The paper in one minute</a></li>
+    <li><a href="#terms"><span class="n">2</span>The vocabulary</a></li>
+    <li><a href="#toy"><span class="n">3</span>Play with it</a></li>
+    <li><a href="#walk"><span class="n">4</span>The draft, section by section</a></li>
+    <li><a href="#results"><span class="n">5</span>The results, one by one</a></li>
+    <li><a href="#numbers"><span class="n">6</span>Numbers to know</a></li>
+    <li><a href="#questions"><span class="n">7</span>Questions he may ask</a></li>
+    <li><a href="#ask"><span class="n">8</span>What to ask him</a></li>
+    <li><a href="#quiz"><span class="n">9</span>Test yourself</a></li>
+  </ol>
+  <div class="progress"><span id="progtext">0 of 10 parts done</span><div class="bar"><span id="progbar"></span></div></div>
+</nav>
+
+<main>
+<header class="top">
+  <span class="eyebrow">Study guide · Paper 1 draft v0.1</span>
+  <h1>When Does Prediction Pay? Understanding our paper, from scratch</h1>
+  <p class="lede">For Stephen, the night before meeting Prof. Adu-Manu. Read it in order. Each part starts from what the previous one taught you. Tick a part when you can explain it out loud without looking.</p>
+</header>
+
+<!-- 0 -->
+<section class="part" id="plan">
+  <div class="part-head"><div><span class="k">Part 0</span><h2>Tonight's plan</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="plan" id="d-plan">Done</label></div>
+  <p>About three and a half hours in total, with breaks. Have the PDF of the draft open beside this page: <span class="mono">papers/paper1/draft/Paper1_draft_v0.1.pdf</span>.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Block</th><th>What</th><th class="n">Time</th></tr>
+    <tr><td>1</td><td>Parts 1–2: the story and the vocabulary. Don't rush the vocabulary; everything else rests on it.</td><td class="n">45 min</td></tr>
+    <tr><td>2</td><td>Part 3: play with the toy until the "sweet spot" makes sense to you.</td><td class="n">20 min</td></tr>
+    <tr><td>3</td><td>Part 4 with the PDF open: read each section of the draft, then the guide's notes on it.</td><td class="n">60 min</td></tr>
+    <tr><td>4</td><td>Part 5: the results. This is what the Prof will ask about most.</td><td class="n">40 min</td></tr>
+    <tr><td>5</td><td>Parts 6–9: numbers, likely questions, your questions, self-test. Sleep after this.</td><td class="n">45 min</td></tr>
+  </table></div>
+  <div class="box key"><span class="lbl">The one rule for tomorrow</span><p>You don't need to know everything. You need to explain the main story clearly, know where each result is in the paper, and say "I'll check that and get back to you" when you are not sure. That answer is respected; guessing is not.</p></div>
+</section>
+
+<!-- 1 -->
+<section class="part" id="story">
+  <div class="part-head"><div><span class="k">Part 1</span><h2>The paper in one minute</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="story" id="d-story">Done</label></div>
+  <p>Read this five times. If you can say it in your own words, you understand the paper.</p>
+  <ol class="steps">
+    <li><strong>The problem.</strong> A water-quality sensor in a river measures temperature, conductivity, oxygen and pH every 10–15 minutes and sends each reading over a cellular or long-range radio. Every transmission costs a fixed chunk of battery energy, so sending everything drains the battery in months.</li>
+    <li><strong>The known idea.</strong> The sensor and the server can both run the same "guessing" model. The sensor only transmits when the server's guess would be wrong by more than an agreed tolerance. That is called a <em>dual prediction scheme</em>. The server's view is then never wrong by more than the tolerance.</li>
+    <li><strong>Our question.</strong> Papers usually test this on one convenient dataset and assume a smarter guess means fewer transmissions. We asked: <em>when</em> does a smart guess actually beat the simplest one ("the value hasn't changed")? We tested on 14 real water-quality records: 13 US rivers and one real sensor deployment in Kosovo.</li>
+    <li><strong>What we found.</strong> A smart predictor helps only at moderate tolerances, and only on rivers with a strong day–night rhythm. A simple measure of that rhythm predicts the saving very well. On the noisy Kosovo sensor, the simplest scheme is best. Separately, sending all parameters together whenever one must be sent saves another 31–44%, on every site. A competing 2026 method gives up the error guarantee and has 8–17 times larger worst errors.</li>
+    <li><strong>What we built.</strong> A predictor called RLS-D that does nearly as well as the best choice on every site without having to choose. An event alarm on the sensor so real pollution events are not missed. Two ways to handle lost messages. And a battery model from real radio measurements: 1.1–3.5 times longer battery life.</li>
+  </ol>
+</section>
+
+<!-- 2 -->
+<section class="part" id="terms">
+  <div class="part-head"><div><span class="k">Part 2</span><h2>The vocabulary</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="terms" id="d-terms">Done</label></div>
+  <p>Grouped by topic. For each, read the plain definition, then the example. Cover the definition and say it out loud.</p>
+
+  <h3>A. The sensor and the radio</h3>
+  <dl class="terms">
+    <div><dt>Node (sensor node)</dt><dd>The box in the river: sensors, a small computer (microcontroller), a battery, maybe a solar panel, and a radio.<span class="eg">Example: the Libelium Waspmote nodes at Weija and in Kosovo.</span></dd></div>
+    <div><dt>Sampling cycle, cadence, step (Δt)</dt><dd>How often the node measures. Our data: every 10, 15 or 30 minutes. One "step" is one measurement time.<span class="eg">15-minute cadence = 96 steps per day.</span></dd></div>
+    <div><dt>Report</dt><dd>One transmission from node to server. It can carry one parameter or all of them.</dd></div>
+    <div><dt>LPWAN</dt><dd>Low-Power Wide-Area Network: radios designed for small messages over long distances on little power. We use two kinds: NB-IoT and LoRaWAN.</dd></div>
+    <div><dt>NB-IoT</dt><dd>Narrowband IoT: a cellular (mobile-network) technology for sensors, run by phone operators like MTN. Each report costs about 0.1–1.3 joules with good settings, up to ~4 J with default settings.</dd></div>
+    <div><dt>RAI (Release Assistance Indication)</dt><dd>An NB-IoT setting where the device tells the network "I'm done, release me now", so it doesn't stay awake waiting. Much cheaper per report.</dd></div>
+    <div><dt>PSM (Power Saving Mode)</dt><dd>NB-IoT deep sleep between reports. Uses about 10 microwatts.</dd></div>
+    <div><dt>LoRaWAN, spreading factor (SF7, SF12)</dt><dd>A long-range radio you can run yourself with your own gateway. The spreading factor trades range for speed: SF12 reaches farther but each message takes longer on air, so it costs more energy (~0.7–0.9 J) than SF7 (~0.2 J).</dd></div>
+    <div><dt>Confirmed uplink, ACK</dt><dd>The server sends an acknowledgement ("got it"). If the node gets no ACK, it knows the message was lost and can retry.</dd></div>
+    <div><dt>Fixed cost per report</dt><dd>The key fact behind the whole paper: on these radios most of the energy is spent setting up the connection, not on the data. Sending 4 numbers costs almost the same as sending 1.<span class="eg">That is why "send all parameters together" is almost free.</span></dd></div>
+    <div><dt>Battery life / lifetime</dt><dd>Battery energy divided by energy used per day. Our battery: 6,600 mAh, the same as the Weija node.</dd></div>
+  </dl>
+
+  <h3>B. The reporting schemes</h3>
+  <dl class="terms">
+    <div><dt>Tolerance δ ("delta")</dt><dd>The largest error we accept at the server. At our headline level L2: temperature 0.2 °C, dissolved oxygen 2 % saturation, pH 0.1, conductivity 2 % of its typical value.</dd></div>
+    <div><dt>Levels L0–L4</dt><dd>Five tolerance settings from very strict (L0, near sensor precision) to loose (L4). L2 is the middle.<span class="eg">Temperature: L0 0.05, L1 0.1, L2 0.2, L3 0.5, L4 1.0 °C.</span></dd></div>
+    <div><dt>Reconstruction</dt><dd>The server's version of the readings: real values when reported, guesses when not.</dd></div>
+    <div><dt>Error-bounded (bounded)</dt><dd>The reconstruction is never more than δ from the truth. This is a guarantee, not an average.</dd></div>
+    <div><dt>Dual prediction scheme (DPS)</dt><dd>Node and server run the same predictor on the same information. Both make the same guess. The node sends only when its true reading differs from the guess by more than δ. Because both sides compute the same thing, the server knows the error is at most δ when nothing arrives.</dd></div>
+    <div><dt>Send-on-delta (SOD)</dt><dd>The simplest DPS. The guess is "same as the last reported value". Send only when the reading has moved more than δ from it.<span class="eg">Worked example in Part 4, Section III.</span></dd></div>
+    <div><dt>Separate, bundled, report-level</dt><dd>Three ways of counting reports. <em>Separate</em>: each parameter that exceeds δ is its own message (how the Kosovo nodes worked). <em>Bundled</em>: parameters that exceed at the same moment share one message. <em>Report-level</em>: if any parameter must be sent, send all of them.</dd></div>
+    <div><dt>Free-riding</dt><dd>In report-level mode, the parameters that did not need sending "ride for free" in the report. They get refreshed, which delays their own next transmission.</dd></div>
+    <div><dt>Periodic reporting</dt><dd>Send every X minutes regardless. The server holds the last value in between ("zero-order hold"). What most deployments do, including Weija (every 30–60 min).</dd></div>
+    <div><dt>Batching</dt><dd>Collect samples and send them together every X minutes. Exact data, but late.</dd></div>
+    <div><dt>ADAPTIVEML</dt><dd>A 2026 method (Kangethe et al.) that sends when the error exceeds α times the recent variability of the signal. Its tolerance grows when the water changes quickly, so it is not bounded. Our main competitor.</dd></div>
+  </dl>
+
+  <h3>C. The predictors</h3>
+  <dl class="terms">
+    <div><dt>Predictor</dt><dd>The rule that guesses the next value from past values. SOD's predictor is "last value".</dd></div>
+    <div><dt>LMS</dt><dd>Least Mean Squares: a simple self-adjusting filter (Santini &amp; Römer 2006). With the paper's settings it sends 92–100% of samples on our data, so it fails.</dd></div>
+    <div><dt>DBP</dt><dd>Derivative-Based Prediction (Raza et al. 2015): estimate the slope from recent readings and extend it. Very cheap.</dd></div>
+    <div><dt>Ridge regression</dt><dd>A linear model that predicts the next value from the last 24 values, with a penalty that keeps the weights small. ADAPTIVEML's predictor.</dd></div>
+    <div><dt>RLS, forgetting factor γ</dt><dd>Recursive Least Squares: like Ridge, but it keeps updating its weights as reports arrive. γ controls how fast it forgets old data. γ = 0.98 (paper default) forgets in about 50 steps, too fast and unstable on our data. γ = 0.999 forgets in about 1,000 steps: that's <strong>RLS-T</strong> (T for tuned).</dd></div>
+    <div><dt>RLS-D (ours)</dt><dd>RLS that predicts <em>changes</em> instead of levels, plus two fixes: <em>damping</em> and <em>history repair</em>. Explained with numbers in Part 4, Section V.</dd></div>
+    <div><dt>RIDGE-D</dt><dd>RLS-D with frozen weights. Safer when messages can be lost silently.</dd></div>
+    <div><dt>SWITCH</dt><dd>A method that switches between SOD and RLS-T while running. It did not pay (a negative result).</dd></div>
+  </dl>
+
+  <h3>D. Data and statistics</h3>
+  <dl class="terms">
+    <div><dt>USGS</dt><dd>U.S. Geological Survey. Publishes high-quality, checked river data. We used 13 rivers, 2023, "approved" values only.</dd></div>
+    <div><dt>InWaterSense</dt><dd>A real low-cost deployment on the Sitnica river in Kosovo (2015). Noisy, fouling-prone. Our "real-world" case.</dd></div>
+    <div><dt>Diel, diel variance share</dt><dd>Diel = day–night (24-hour) cycle. Rivers warm by day and cool at night; plants make oxygen by day. The diel share is the fraction of a day's ups and downs explained by the time of day alone. 1 = perfectly regular daily rhythm; 0 = no rhythm.<span class="eg">Our rivers: site averages 0.12–0.56. Kosovo node: about 0.02.</span></dd></div>
+    <div><dt>Persistence</dt><dd>Another name for "last value" as a forecast.</dd></div>
+    <div><dt>Skill</dt><dd>How much better a model forecasts than persistence: 1 − (model's squared error ÷ persistence's squared error). 0 = no better. 0.5 = errors halved. Negative = worse than persistence.</dd></div>
+    <div><dt>AR, VAR</dt><dd>Autoregression: forecast a parameter from its own past. Vector autoregression: from the past of all parameters together.</dd></div>
+    <div><dt>Out-of-sample</dt><dd>Tested on data the model never saw while being fitted. The honest way to measure prediction.</dd></div>
+    <div><dt>Training / test split (20 / 80)</dt><dd>First 20% of each record (by time) for learning; the remaining 80% for scoring. Like a node installed with a few weeks of history.</dd></div>
+    <div><dt>Tuning sites / test sites</dt><dd>We split the 13 rivers in advance: 7 for choosing settings, 6 kept unseen (plus Kosovo). Choices made on tuning sites are then checked on test sites. This prevents fooling ourselves.</dd></div>
+    <div><dt>Median</dt><dd>The middle value when sorted. Less affected by one extreme site than the average.</dd></div>
+    <div><dt>Spearman ρ ("rho")</dt><dd>Does a higher X go with a higher Y, in rank order? From −1 to +1. ρ = 0.84 means sites ranked by diel share come out in almost the same order as sites ranked by saving.</dd></div>
+    <div><dt>p-value</dt><dd>How likely a pattern this strong would be by pure chance if there were no real relationship. p = 0.0002 means about 2 in 10,000. Below 0.05 is usually called significant.</dd></div>
+    <div><dt>Wilcoxon signed-rank test</dt><dd>A test for paired comparisons: on the same 13 rivers, is method A consistently cheaper than method B?</dd></div>
+    <div><dt>Leave-one-out</dt><dd>Recompute the result 13 times, each time leaving one site out. If the result never collapses, no single site is driving it.</dd></div>
+    <div><dt>Max error, MAE, RMSE</dt><dd>Worst error ever; average error; root-mean-square error (penalises big errors more). Our guarantee is about the max error.</dd></div>
+  </dl>
+
+  <h3>E. Events and lost messages</h3>
+  <dl class="terms">
+    <div><dt>Event</dt><dd>A real, sustained change worth knowing about: a storm flush, a pollution pulse, an oxygen crash.</dd></div>
+    <div><dt>Glitch</dt><dd>A short spike that quickly returns to normal: usually a sensor hiccup.</dd></div>
+    <div><dt>Check B / reference events</dt><dd>Our offline rule that labels events in the data (more than 5× the normal noise level for at least 1 hour). Used to score methods. Not "ground truth": a statistical label.</dd></div>
+    <div><dt>Injected events</dt><dd>Fake steps and ramps we add to real data at known times, so we know exactly when an event started. This is the ground truth for testing the alarm.</dd></div>
+    <div><dt>σ ("sigma")</dt><dd>The normal noise level of a series. A "5σ event" is five times bigger than normal wiggles.</dd></div>
+    <div><dt>CUSUM detector</dt><dd>Cumulative Sum (Page 1954). Keep a running total of how much each reading is "more surprising than usual". Small surprises fade away; a sustained surprise piles up. Alarm when the total passes a threshold H.</dd></div>
+    <div><dt>False alarm</dt><dd>An alarm when no labelled event is present. Our target: at most about 2 per parameter per month.</dd></div>
+    <div><dt>Packet loss</dt><dd>A report that never arrives. Real NB-IoT networks lose 0.5–1%.</dd></div>
+    <div><dt>Sequence number, heartbeat</dt><dd>Each report carries a counter, so the server notices a gap. A heartbeat is a full report sent every 6 or 24 hours, which resets both sides.</dd></div>
+    <div><dt>Bounded or flagged</dt><dd>Our guarantee under loss: every value the server shows is either within δ, or marked "unverified".</dd></div>
+    <div><dt>Equal-accuracy comparison</dt><dd>Comparing schemes that deliver the same worst error, or the same battery life, so we don't compare a careful scheme with a sloppy one.</dd></div>
+  </dl>
+</section>
+
+<!-- 3 -->
+<section class="part" id="toy">
+  <div class="part-head"><div><span class="k">Part 3</span><h2>Play with it</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="toy" id="d-toy">Done</label></div>
+  <p>This is a tiny version of our experiment: three days of made-up river temperature every 15 minutes. The top panel is send-on-delta. The bottom panel is a damped trend predictor with history repair, a simplified cousin of RLS-D. Grey is the truth, teal is what the server shows, amber dots are reports.</p>
+  <div class="toy">
+    <div class="presets" role="group" aria-label="Presets">
+      <button type="button" data-p="clean">Clean river, strong day–night cycle</button>
+      <button type="button" data-p="noisy">Noisy sensor (like Kosovo)</button>
+      <button type="button" data-p="sweet">Moderate noise</button>
+      <button type="button" data-p="flat">Weak cycle</button>
+    </div>
+    <div class="controls">
+      <label for="s-delta">Tolerance δ (°C) <output id="o-delta">0.20</output><input id="s-delta" type="range" min="0.05" max="1" step="0.05" value="0.2"></label>
+      <label for="s-amp">Day–night swing (°C) <output id="o-amp">1.5</output><input id="s-amp" type="range" min="0" max="2" step="0.1" value="1.5"></label>
+      <label for="s-noise">Sensor noise (°C) <output id="o-noise">0.02</output><input id="s-noise" type="range" min="0" max="0.2" step="0.01" value="0.02"></label>
+    </div>
+    <div class="panels">
+      <div class="panel"><h5><span>Send-on-delta</span><span class="c" id="c-sod"></span></h5><svg class="chart" id="g-sod" viewBox="0 0 720 150" role="img" aria-label="Send-on-delta reconstruction"></svg></div>
+      <div class="panel"><h5><span>Damped trend predictor</span><span class="c" id="c-pred"></span></h5><svg class="chart" id="g-pred" viewBox="0 0 720 150" role="img" aria-label="Predictor reconstruction"></svg></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--muted)"></i>truth</span><span><i style="background:var(--accent)"></i>server's view</span><span><i style="background:var(--num);height:8px;width:8px;border-radius:50%"></i>report sent</span></div>
+    <p class="verdict" id="verdict"></p>
+  </div>
+  <h4>Try these, in order</h4>
+  <ol class="steps">
+    <li><strong>Clean river, δ = 0.2.</strong> The predictor sends far fewer reports. It "rides" the daily curve while SOD makes a staircase. Notice that both keep the error within δ: that's the guarantee.</li>
+    <li><strong>Now raise the noise to 0.15.</strong> The predictor gets worse than SOD. Noise makes the trend look random, and every wrong trend guess costs a report. This is the Kosovo case.</li>
+    <li><strong>Set noise to 0.08 and move δ from 0.05 to 1.0.</strong> At 0.05, SOD wins (no predictor beats noise). Around 0.2–0.5 the predictor wins. At 1.0 both send almost nothing. That is the <em>sweet spot</em> from Table IV of the paper.</li>
+    <li><strong>Set the swing to 0.3.</strong> With a weak day–night cycle, there is little to predict, so SOD is as good or better. That's why diel share predicts the saving.</li>
+  </ol>
+  <div class="box"><span class="lbl">Keep in mind</span><p>This toy uses a made-up signal and a simplified predictor. The real numbers come from the paper. The toy is for intuition only.</p></div>
+</section>
+
+<!-- 4 -->
+<section class="part" id="walk">
+  <div class="part-head"><div><span class="k">Part 4</span><h2>The draft, section by section</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="walk" id="d-walk">Done</label></div>
+  <p>Read each section of the PDF first, then the notes below. Each note says what the section is for, the ideas you must own, and one sentence to remember.</p>
+
+  <h3>Abstract</h3>
+  <p>A summary of everything in about 250 words. Problem, approach, four findings, what we built, energy result. Reviewers often decide from the abstract alone whether to read on.</p>
+  <div class="box key"><span class="lbl">Remember</span><p>"We asked when prediction pays, on 14 real water-quality records, and found it depends on the river's day–night rhythm and on the tolerance."</p></div>
+
+  <h3>I. Introduction</h3>
+  <p>Explains why the problem matters (fixed energy per report on NB-IoT and LoRaWAN), what is already known (dual prediction), the two gaps (evaluation on one dataset; per-parameter decisions that ignore the per-report cost), the four research questions RQ1–RQ4, and the contributions.</p>
+  <p>The four research questions are the skeleton of the whole paper:</p>
+  <ul>
+    <li><strong>RQ1</strong>: when does prediction beat send-on-delta, and what property of a site explains it?</li>
+    <li><strong>RQ2</strong>: how much does deciding per report (instead of per parameter) save, and why?</li>
+    <li><strong>RQ3</strong>: can we keep the error guarantee, catch events, and survive lost messages, while matching adaptive methods?</li>
+    <li><strong>RQ4</strong>: what does it buy in battery life on real radios, and when does it matter?</li>
+  </ul>
+  <p>Note the honest motivation: the Prof's own Weija paper chose 30–60-minute reporting "to overcome communication delays and energy consumption". Our paper offers a principled alternative with a guarantee.</p>
+
+  <h3>II. Related Work</h3>
+  <p>What others did, and the gap. Know these five names:</p>
+  <ul>
+    <li><strong>Santini &amp; Römer (2006)</strong>: original dual prediction with LMS; the rule that both sides feed the guess when nothing is sent. Also first suggested a joint (block) decision but never built it.</li>
+    <li><strong>Raza et al. (2015)</strong>: DBP; in a real tunnel, 99% suppression gave only 3–7× battery life because fixed network costs dominate.</li>
+    <li><strong>Ghosh et al. (2022)</strong>: multi-sensor hub that batches readings (adds delay) and uses fixed alarm limits.</li>
+    <li><strong>Kangethe et al. (2026), ADAPTIVEML</strong>: our main competitor; adaptive threshold, not bounded.</li>
+    <li><strong>Michelinakis et al. (2021), Casals et al. (2017)</strong>: measured energy of NB-IoT and LoRaWAN, which our battery model uses.</li>
+  </ul>
+  <p>Table I is the gap table: each ✓ is a capability. Our column is the only one with all ✓. Be ready to say what is <em>not</em> new: the report-level idea itself (Santini proposed it, Ghosh batched). What's new is measuring it on many real sites under bounded errors and LPWAN costs.</p>
+
+  <h3>III. System Model</h3>
+  <p>The formal setup. Equation (1) is the guarantee: for every time and parameter, |truth − server| ≤ δ.</p>
+  <h4>Worked example: send-on-delta, δ = 0.2 °C</h4>
+  <div class="tablewrap"><table>
+    <tr><th>Time</th><th class="n">Reading</th><th class="n">Server's guess</th><th class="n">|Error|</th><th>Send?</th><th class="n">Server shows</th></tr>
+    <tr><td>06:00</td><td class="n">25.00</td><td class="n">(first)</td><td class="n">–</td><td class="hit">yes</td><td class="n">25.00</td></tr>
+    <tr><td>06:15</td><td class="n">25.10</td><td class="n">25.00</td><td class="n">0.10</td><td>no</td><td class="n">25.00</td></tr>
+    <tr><td>06:30</td><td class="n">25.15</td><td class="n">25.00</td><td class="n">0.15</td><td>no</td><td class="n">25.00</td></tr>
+    <tr><td>06:45</td><td class="n">25.30</td><td class="n">25.00</td><td class="n">0.30</td><td class="hit">yes</td><td class="n">25.30</td></tr>
+    <tr><td>07:00</td><td class="n">25.35</td><td class="n">25.30</td><td class="n">0.05</td><td>no</td><td class="n">25.30</td></tr>
+    <tr><td>07:15</td><td class="n">25.60</td><td class="n">25.30</td><td class="n">0.30</td><td class="hit">yes</td><td class="n">25.60</td></tr>
+  </table></div>
+  <p>3 reports instead of 6, and the server was never off by more than 0.15. That's the whole idea. A smarter predictor would have guessed "it's warming" and maybe skipped one more report.</p>
+  <h4>Worked example: report-level and free-riding</h4>
+  <p>Two parameters: temperature (δ 0.2) and pH (δ 0.1). Both were reported at 06:00 (T 25.00, pH 7.50).</p>
+  <div class="tablewrap"><table>
+    <tr><th>Time</th><th class="n">T</th><th class="n">pH</th><th>Separate mode</th><th>Report-level mode</th></tr>
+    <tr><td>06:15</td><td class="n">25.30</td><td class="n">7.55</td><td>T off by 0.30 → send T only. Server pH stays 7.50.</td><td>T must go → send <em>both</em>. Server pH becomes 7.55.</td></tr>
+    <tr><td>06:30</td><td class="n">25.35</td><td class="n">7.58</td><td>No report (pH off by 0.08).</td><td>No report (pH off by 0.03).</td></tr>
+    <tr><td>06:45</td><td class="n">25.40</td><td class="n">7.62</td><td>pH off by 0.12 → send pH.</td><td>pH off by 0.07 → no report.</td></tr>
+    <tr><td colspan="3"><strong>Total</strong></td><td class="hit">2 reports</td><td class="hit">1 report</td></tr>
+  </table></div>
+  <p>pH "rode for free" at 06:15, so it didn't need its own report at 06:45. On real data this saves 31–44%.</p>
+
+  <h3>IV. Data and Predictability Measures</h3>
+  <ul>
+    <li><strong>Why USGS?</strong> High-quality, checked data from many different rivers, so we can ask "on which kinds of river does prediction pay?". The sites were picked by a rule written <em>before</em> looking at results (no cherry-picking). One selected site had no data that year and was dropped, not replaced.</li>
+    <li><strong>Why InWaterSense?</strong> A real low-cost deployment with the same hardware family as Weija: noisy, with fouling. It represents what deployed nodes really see.</li>
+    <li><strong>Table II</strong>: every dataset, its type, whether it was a tuning or test site, its cadence and length.</li>
+    <li><strong>Check A</strong>: how predictable each series is, honestly (out-of-sample).</li>
+    <li><strong>Diel share</strong>: the day–night rhythm measure. Cheap, model-free.</li>
+    <li><strong>Check B</strong>: the offline event labels.</li>
+  </ul>
+  <p>Detail you may be asked: the Kosovo data looked 18% missing in the published grouped file, but when we rebuilt the original messages only 3–6 cycles were really incomplete. The missing values were a file-assembly artefact.</p>
+
+  <h3>V. Methods and Evaluation Protocol</h3>
+  <p>The baselines (the methods we compare against), our method RLS-D, the event detector, the loss protocols, and the rules of the evaluation.</p>
+  <h4>RLS-D in plain words</h4>
+  <p>Between reports, the predictor runs "blind" on its own guesses, sometimes for hours. Two things go wrong with ordinary learned predictors:</p>
+  <ol class="steps">
+    <li><strong>Drift.</strong> A trend guessed at 06:00 keeps being extended for hours, even though the river has stopped warming. <em>Fix: damping.</em> The predicted change is multiplied by φ<sup>k</sup>, where φ = 0.97 and k is the number of steps since the last report. At 15-minute steps: after 1 hour the trend is kept at <span class="num">×0.89</span>, after 6 hours <span class="num">×0.48</span>, after 12 hours <span class="num">×0.23</span>. So a long silence fades into "hold the last value", which is SOD.</li>
+    <li><strong>The fake jump.</strong> Suppose the last report was 25.0 at 06:00, the predictor guessed flat, and at 07:15 a report says 25.5. The history now shows 25.0, 25.0, 25.0, 25.0, 25.0, then 25.5: a jump of 0.5 in one step. The predictor thinks the river is warming fast and extrapolates. <em>Fix: history repair.</em> Both sides replace the blind guesses with a straight line: 25.0, 25.1, 25.2, 25.3, 25.4, 25.5. Now the slope is a realistic 0.1 per step.</li>
+  </ol>
+  <p>Both fixes use only information the server also has, so node and server stay identical. The damping value φ = 0.97 was chosen on the 7 tuning sites by a written rule, then tested on the others.</p>
+  <h4>The CUSUM detector, with numbers</h4>
+  <p>Each step, the node computes how surprising the reading is (z, in units of normal noise). It adds z − k to a running total S (never below 0), with k = 3. Alarm when S passes H = 8.</p>
+  <p>z values 1, 4, 5, 4.5, 5, 5 give S = 0, 1, 3, 4.5, 6.5, 8.5. The last one passes 8 → <strong>alarm</strong>. One big spike alone can't reach 8 (each step adds at most c − k = 3), so short glitches don't trigger it, but a sustained shift does.</p>
+  <h4>The evaluation rules (why the results are trustworthy)</h4>
+  <ul>
+    <li>Train on the first 20%, score on the last 80%.</li>
+    <li>Tuning sites (7) and test sites (6 + Kosovo) were fixed before any result was seen.</li>
+    <li>Every bounded run is checked automatically: the error never exceeded δ, in all 2,016 runs.</li>
+    <li>83 automated tests check the simulator (for example, that the server's view can be rebuilt from the reports alone).</li>
+  </ul>
+  <h4>The energy model, equation (3)</h4>
+  <p>Daily energy = sleeping + measuring + reporting. Only the reporting part depends on our scheme. Battery life = battery energy ÷ daily energy. The numbers come from published measurements of real modules (Michelinakis, Casals). The model reproduces 20 of 24 battery lifetimes from Michelinakis's table; the other 4 contradict that paper's own equation.</p>
+
+  <h3>VI. Results</h3>
+  <p>Covered result by result in Part 5.</p>
+
+  <h3>VII. Discussion</h3>
+  <ul>
+    <li><strong>Practical guidance</strong>: six rules for engineers. Always decide per report. Use SOD on noisy nodes. Use RLS-D where the day–night cycle is strong. Protect events with a detector, not a tighter δ. Match the loss protocol to the radio. Compare at equal accuracy.</li>
+    <li><strong>Limitations</strong>: one year of US data plus one deployment; the Weija paragraph; tolerances not regulatory; events labelled by a rule; energy from published measurements, not our own hardware.</li>
+    <li><strong>Conclusion</strong>: prediction pays only sometimes, and we can tell when.</li>
+  </ul>
+  <div class="box"><span class="lbl">The Weija paragraph</span><p>We wrote down a prediction before testing Weija: "diel share says 30% saving". The result was −16% (prediction cost reports). The sensor's temperature spiked 2–7 °C at midday, which suggests a sun-heated sensor. The paragraph is marked for the Prof: keep or drop. If he asks, the honest answer is that the data had problems (pre-processed files with hidden interpolation, sensors failing in January), but the failed prediction also teaches us that diel share alone is not enough.</p></div>
+</section>
+
+<!-- 5 -->
+<section class="part" id="results">
+  <div class="part-head"><div><span class="k">Part 5</span><h2>The results, one by one</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="results" id="d-results">Done</label></div>
+  <p>For each result: what we found, the number, why it happens, and where it is in the PDF.</p>
+
+  <h3>RQ1a. Most clean rivers are predictable; the Kosovo node is not</h3>
+  <p>One hour ahead, prediction beat persistence by more than 10% for temperature on <span class="num">10/13</span> rivers, pH <span class="num">11/13</span>, oxygen <span class="num">8/13</span>, but conductivity only <span class="num">3/13</span>. On Kosovo: none. <em>Why:</em> temperature, oxygen and pH follow sun and plants; conductivity changes with rain and upstream flow, which a sensor can't see coming. <em>Where:</em> Section VI-A, Fig. 1.</p>
+
+  <h3>RQ1b. The day–night rhythm explains predictability</h3>
+  <p>Diel share vs forecast skill: ρ = <span class="num">0.66</span> across 52 site–parameter pairs. Kosovo's diel share is only 0.01–0.04. <em>Why:</em> a regular daily rhythm is exactly what can be forecast.</p>
+
+  <h3>RQ1c. The costliest months are the most predictable</h3>
+  <p>For temperature, ρ = <span class="num">+0.78</span> between a month's reporting cost and its predictability. Summer has big daily swings, which make SOD expensive, but those swings are regular, so prediction helps most when it's needed most. In calm winter months, prediction can be worse than SOD.</p>
+
+  <h3>RQ1d. The tolerance sweet spot (Table IV)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Level</th><th class="n">L0</th><th class="n">L1</th><th class="n">L2</th><th class="n">L3</th><th class="n">L4</th></tr>
+    <tr><td>RLS-T saving vs SOD (USGS median)</td><td class="n">−6%</td><td class="n">19%</td><td class="n hit">26%</td><td class="n">7%</td><td class="n">1%</td></tr>
+    <tr><td>Rivers where RLS-T wins</td><td class="n">3/13</td><td class="n">12/13</td><td class="n hit">13/13</td><td class="n">10/13</td><td class="n">7/13</td></tr>
+  </table></div>
+  <p><em>Why:</em> at L0, the tolerance is smaller than sensor noise, so no prediction helps. At L4, both send almost nothing, so there is nothing left to save. In between, prediction pays. You saw this in the toy.</p>
+
+  <h3>RQ1e. Diel share predicts the saving: the central result (Fig. 2)</h3>
+  <p>ρ = <span class="num">0.84</span> at L2 over 14 datasets, p = 0.0002. Without Kosovo: 0.80. Leaving out any one site: never below 0.75. Sites with low diel share save 6–15% (one exception at 30%); sites above 0.40 save 26–43%. <em>Why it matters:</em> an engineer can compute diel share from a few weeks of data and know whether a smart predictor is worth it, before deploying. <em>Caveat:</em> Weija showed it's not sufficient on its own.</p>
+
+  <h3>RQ2. Report-level decisions save 31–44% (Table V)</h3>
+  <p>At strict tolerances most of the saving comes from bundling (several parameters exceed at the same time). At loose tolerances most comes from free-riding (refreshing the others delays their next report). Free-riding helped in <span class="num">253 of 260</span> cases. It works on Kosovo too (33–43%), even though prediction doesn't. <em>The practical message:</em> do this always; it costs nothing.</p>
+
+  <h3>RQ3a. Keeping the guarantee costs nothing in reports (Fig. 3)</h3>
+  <p>We paired each ADAPTIVEML run with our bounded RLS-T run that sent about the same number of reports. ADAPTIVEML's worst error was <span class="num">8–17×</span> larger in every single case (11.8× at its default setting). <em>Why:</em> its threshold widens when the water changes fast, which is exactly when errors matter. Periodic reporting at the same rate: worst errors <span class="num">2.5–24×</span> larger. Batching: exact, but 15–120 minutes late.</p>
+
+  <h3>RQ3b. RLS-D works without choosing (Table VI)</h3>
+  <p>The best predictor differs by site: SOD on noisy sites, RLS-T on rhythmic rivers. You only know which in hindsight. RLS-D comes within a median of <span class="num">0.5%</span> of that hindsight-best at L1–L3 (2.4% at L4), on the unseen test rivers. SOD alone is 22–36% worse there. On Kosovo, RLS-D costs 3–13% more than SOD: an honest limit.</p>
+  <h4>The three negative results (and why they're in the paper)</h4>
+  <ol class="steps">
+    <li><strong>Choosing the predictor at installation</strong> from early data picked wrong 29–50% of the time. The early data is winter, when SOD is enough; summer is where prediction pays.</li>
+    <li><strong>Switching while running</strong> was stable but didn't save reports.</li>
+    <li><strong>Halving δ during events</strong> cost more reports than it gained.</li>
+  </ol>
+  <p>Good journals respect negative results with a diagnosis. They show we didn't hide what failed, and they save other researchers time.</p>
+
+  <h3>RQ3c. Events (Fig. 4, Table VII)</h3>
+  <p>A bounded scheme doesn't guarantee that events are seen: at L4 only <span class="num">0.63</span> of real events are reported while happening, because events smaller than δ never trigger a report. The CUSUM detector catches <span class="num">70%</span> of injected 5σ steps (85% of 8σ), but only 5–24% of slow ramps. About half its "false" alarms actually fall near real events (6× more than chance), so the true false-alarm rate is about one per parameter per month.</p>
+  <p>The headline comparison: running at L4 with the sensitive detector catches more injected events than tightening to L3 (<span class="num">0.97 vs 0.87</span>) using only 40% of the reports. <em>Limit:</em> slow, gradual real events are still hard.</p>
+
+  <h3>RQ3d. Lost messages (Table VIII, Fig. 5)</h3>
+  <p>With acknowledgements, retries keep both sides in step; the cost is about the loss rate. Without acknowledgements, sequence numbers plus heartbeats give "bounded or flagged": <span class="num">0</span> unflagged violations in 1,120 runs. SOD heals itself with any report, so it's the robust choice there.</p>
+
+  <h3>RQ4. Energy (Tables IX, Figs. 6–7)</h3>
+  <ul>
+    <li>Battery life <span class="num">1.1–3.5×</span> longer than reporting every cycle, depending on radio and sensing time. NB-IoT with RAI, 5 s sensing: 2.56 → 4.62 years (<span class="num">1.72×</span>).</li>
+    <li>RLS-D over SOD: only about 5% more battery life on efficient radios (17% with default NB-IoT settings), because after suppression the sensing itself dominates.</li>
+    <li><strong>The strongest claim, equal accuracy:</strong> at about the same battery life as hourly reporting, our worst error is <span class="num">7.8×</span> smaller, and events arrive immediately. At the same worst error as 30-minute reporting, we last 53% longer.</li>
+    <li><strong>Honest framing:</strong> a 2 W solar panel gives at least 33× the energy needed, so for solar nodes energy isn't the argument. The value there is smaller hardware, cheaper data plans and radio duty-cycle limits. That framing is one of the decisions for the Prof.</li>
+  </ul>
+</section>
+
+<!-- 6 -->
+<section class="part" id="numbers">
+  <div class="part-head"><div><span class="k">Part 6</span><h2>Numbers to know</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="numbers" id="d-numbers">Done</label></div>
+  <p>If you know these, you can answer most questions. Cover the right column and test yourself.</p>
+  <div class="tablewrap"><table>
+    <tr><th>What</th><th class="n">Number</th></tr>
+    <tr><td>Datasets</td><td class="n">14 (13 USGS + Kosovo)</td></tr>
+    <tr><td>Baseline simulation runs</td><td class="n">2,016</td></tr>
+    <tr><td>L2 tolerances (T, DO, pH, EC)</td><td class="n">0.2 °C, 2 %sat, 0.1, 2%</td></tr>
+    <tr><td>RLS-T saving over SOD at L2</td><td class="n">26%, 13/13 rivers</td></tr>
+    <tr><td>Diel share vs saving</td><td class="n">ρ = 0.84</td></tr>
+    <tr><td>Kosovo diel share</td><td class="n">0.01–0.04</td></tr>
+    <tr><td>Report-level saving</td><td class="n">31–44%</td></tr>
+    <tr><td>ADAPTIVEML worst error at same reports</td><td class="n">8–17× (11.8× default)</td></tr>
+    <tr><td>RLS-D gap to hindsight-best (L1–L3)</td><td class="n">≈0.5%</td></tr>
+    <tr><td>Detector: 5σ steps caught</td><td class="n">70%</td></tr>
+    <tr><td>Detect at L4 vs tighten to L3</td><td class="n">0.97 vs 0.87 at 40% of reports</td></tr>
+    <tr><td>Unflagged violations under loss</td><td class="n">0 in 1,120 runs</td></tr>
+    <tr><td>Battery-life gain</td><td class="n">1.1–3.5×</td></tr>
+    <tr><td>Equal battery life as hourly: worst error</td><td class="n">7.8× smaller</td></tr>
+    <tr><td>Weija: predicted vs measured saving</td><td class="n">+30% vs −16%</td></tr>
+  </table></div>
+</section>
+
+<!-- 7 -->
+<section class="part" id="questions">
+  <div class="part-head"><div><span class="k">Part 7</span><h2>Questions he may ask</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="questions" id="d-questions">Done</label></div>
+  <p>Try answering each one yourself before opening it.</p>
+  <details><summary>What is new here? Isn't this just send-on-delta?</summary><p>Send-on-delta is our baseline, and we show it is actually the best choice on noisy nodes. What's new: (1) the first study across many real water-quality sites of when prediction beats it, with a simple predictor of the saving (diel share); (2) measuring how much report-level decisions save and why; (3) showing that keeping the error guarantee costs nothing compared with ADAPTIVEML; (4) RLS-D, plus a detector and loss protocols, evaluated together with real radio energy.</p></details>
+  <details><summary>Why simulate instead of deploying?</summary><p>Trace-driven simulation replays real recorded data, so the signals are real; only the transmission decisions are simulated. It lets us test 14 sites and thousands of settings fairly, which a deployment could never do. The energy comes from published measurements of real modules. Hardware validation is listed as future work.</p></details>
+  <details><summary>Why US data instead of Ghana data?</summary><p>We needed many sites with long, quality-checked records to answer "on which kinds of river does it pay". USGS publishes exactly that. Kosovo gives the real low-cost deployment. We screened Weija too, but after cleaning only about nine weeks of two parameters were usable, and the sensors showed midday spikes we need his help to interpret.</p></details>
+  <details><summary>Why not deep learning (LSTM)?</summary><p>Two reasons. The node must run the predictor itself, on a small microcontroller, every 15 minutes. And our results show the limit is the signal, not the model: on noisy data even the best forecast can't beat "last value". A bigger model doesn't fix noise.</p></details>
+  <details><summary>How do you know the error bound really holds?</summary><p>It holds by construction: a value is only skipped if the guess was within δ. We also check it automatically in every run (0 violations in all 2,016 baseline runs), and unit tests rebuild the server's view from the reports alone.</p></details>
+  <details><summary>Why did RLS-T need a different forgetting factor from the paper?</summary><p>With γ = 0.98 the model forgets in about 50 samples while estimating 24 weights; on 15-minute river data it became unstable and reported most samples. We report both the paper default and our tuned 0.999, so nobody can say we weakened the competitor.</p></details>
+  <details><summary>Why are the tolerances what they are?</summary><p>They are a sweep from sensor precision (L0) to coarse monitoring (L4), and we report results per level. We'd like his guidance or a regulatory reference (Ghana EPA, WHO) for the values a water utility would accept.</p></details>
+  <details><summary>Does energy matter if the nodes are solar-powered?</summary><p>For a 2 W panel, not much: there is at least 33× more energy than needed. The value of fewer reports then is smaller and cheaper hardware, lower data costs, and radio duty-cycle limits. For battery-only nodes (enclosed, submerged, in pipes or manholes) the 1.1–3.5× lifetime gain applies directly. We propose to frame RQ4 that way.</p></details>
+  <details><summary>Why is Weija not in the paper?</summary><p>It is mentioned in Limitations. The received files had been pre-processed with hidden interpolation, several sensors failed partway, and after cleaning only about nine weeks of temperature and conductivity remained. Its temperature spikes 2–7 °C at midday. We'd like to know how the probes were installed. If he prefers, the paragraph can be removed.</p></details>
+  <details><summary>Did you use AI tools?</summary><p>Yes. An AI assistant helped write analysis code and draft text. Everything was checked: every number was recomputed from the result files and every reference verified. The draft has a disclosure in the Acknowledgment, as journals require.</p></details>
+  <details><summary>Which journal, and when?</summary><p>The draft is formatted for IEEE (IoT Journal or Sensors Journal). Ask for his preference. Realistic next steps: his comments, figure polishing, code release, then submission.</p></details>
+</section>
+
+<!-- 8 -->
+<section class="part" id="ask">
+  <div class="part-head"><div><span class="k">Part 8</span><h2>What to ask him</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="ask" id="d-ask">Done</label></div>
+  <p>Write his answers down during the meeting. These are also in <span class="mono">COVER_NOTE.md</span>.</p>
+  <ol class="steps">
+    <li><strong>Author order.</strong> The draft has his name first. "Is this order what you'd like?"</li>
+    <li><strong>Venue.</strong> IEEE IoT Journal, IEEE Sensors Journal, ACM TOSN, or another?</li>
+    <li><strong>Energy framing (RQ4).</strong> Battery-only nodes vs solar nodes.</li>
+    <li><strong>Tolerances.</strong> Any regulatory or operational references?</li>
+    <li><strong>Weija.</strong> Keep or drop the paragraph? How were the probes installed (depth, enclosure, sun)?</li>
+    <li><strong>Kosovo oxygen units.</strong> Our evidence says % saturation; does he agree?</li>
+    <li><strong>Timeline.</strong> When does he want the next version?</li>
+  </ol>
+</section>
+
+<!-- 9 -->
+<section class="part" id="quiz">
+  <div class="part-head"><div><span class="k">Part 9</span><h2>Test yourself</h2></div>
+  <label class="done-toggle"><input type="checkbox" data-part="quiz" id="d-quiz">Done</label></div>
+  <p>Answer out loud first, then open.</p>
+  <details><summary>1. Why is sending all parameters together almost free?</summary><p>On NB-IoT and LoRaWAN most of the energy per report is the fixed cost of connecting, not the data. Adding three more numbers barely changes the cost.</p></details>
+  <details><summary>2. Why does prediction not help at L0?</summary><p>The tolerance is smaller than the sensor noise. The noise itself triggers reports, and no predictor can forecast random noise.</p></details>
+  <details><summary>3. Why does prediction help little at L4?</summary><p>Both schemes send very few reports at such a loose tolerance, so there is little left to save.</p></details>
+  <details><summary>4. What does ρ = 0.84 mean in plain words?</summary><p>If you rank the sites by their day–night rhythm and by how much prediction saved, the two rankings are almost the same.</p></details>
+  <details><summary>5. What is free-riding?</summary><p>When one parameter must be sent, the others are sent too. That refreshes the server's copy of them, which delays their own next report.</p></details>
+  <details><summary>6. Why is ADAPTIVEML's worst error so large?</summary><p>Its threshold is α times the recent variability of the signal. When the water changes fast, variability is high, so the threshold widens exactly when accurate data matters most.</p></details>
+  <details><summary>7. What two problems does RLS-D fix?</summary><p>Drift during long silences (fixed by damping, which fades the trend towards "hold") and the fake jump when a report arrives after a silence (fixed by history repair, which replaces the guesses with a straight line).</p></details>
+  <details><summary>8. Why can't the bounded scheme alone protect events?</summary><p>An event smaller than δ never makes the error exceed δ, so it never triggers a report. The node-side detector looks for sustained surprises instead.</p></details>
+  <details><summary>9. What does "bounded or flagged" mean?</summary><p>Under message loss, every value the server shows is either within δ or marked as unverified. There is never a wrong value presented as correct.</p></details>
+  <details><summary>10. Why split tuning and test sites?</summary><p>If you choose settings and then test on the same sites, the result looks better than it is. Choosing on 7 sites and checking on 6 unseen ones shows the method works on new rivers.</p></details>
+  <details><summary>11. What did Weija teach us?</summary><p>A strong day–night rhythm is not enough on its own. If the daily signal is a sharp spike instead of a smooth curve, a predictor that only looks at recent values gets no warning, and SOD wins.</p></details>
+  <details><summary>12. What is the strongest energy claim and why?</summary><p>At about the same battery life as hourly reporting, our worst error is 7.8× smaller, and events arrive immediately. It compares at equal battery life, so it isn't comparing a careful scheme with a sloppy one.</p></details>
+  <div class="box key"><span class="lbl">You're ready when</span><p>You can tell the one-minute story (Part 1) without notes, answer 10 of the 12 questions above, and point to where each result sits in the PDF. Then sleep. A rested mind explains better than a crammed one.</p></div>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  /* ---------- progress ---------- */
+  var KEY="p1guide-done";
+  var parts=["plan","story","terms","toy","walk","results","numbers","questions","ask","quiz"];
+  var done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){done={};}
+  function render(){
+    var n=0;
+    parts.forEach(function(p){
+      var on=!!done[p]; if(on)n++;
+      var cb=document.getElementById("d-"+p); if(cb)cb.checked=on;
+      var a=document.querySelector('nav.toc a[href="#'+p+'"]'); if(a)a.classList.toggle("done",on);
+    });
+    document.getElementById("progtext").textContent=n+" of "+parts.length+" parts done";
+    document.getElementById("progbar").style.width=(100*n/parts.length)+"%";
+  }
+  document.querySelectorAll("input[data-part]").forEach(function(cb){
+    cb.addEventListener("change",function(){
+      done[cb.getAttribute("data-part")]=cb.checked;
+      try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}
+      render();
+    });
+  });
+  render();
+
+  /* ---------- toy: SOD vs damped trend with history repair ---------- */
+  function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var N=288; // 3 days at 15 min
+  var base=[], white=[];
+  (function(){var r=rng(7),walk=0;
+    for(var i=0;i<N;i++){
+      var u1=Math.max(r(),1e-12),u2=r(),u3=Math.max(r(),1e-12),u4=r();
+      var g1=Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);
+      var g2=Math.sqrt(-2*Math.log(u3))*Math.cos(2*Math.PI*u4);
+      walk+=0.01*g1; base.push(walk); white.push(g2);
+    }})();
+  function signal(A,s){var x=[];for(var i=0;i<N;i++){x.push(25+A*Math.sin(2*Math.PI*(i-24)/96)+base[i]+s*white[i]);}return x;}
+  function simulate(x,d,mode){
+    var phi=0.97,r=[x[0]],reps=[[0,x[0]]],k=0,maxe=0;
+    for(var i=1;i<N;i++){
+      var xh=r[i-1];
+      if(mode==="pred"&&reps.length>=2){var a=reps[reps.length-2],b=reps[reps.length-1];xh=r[i-1]+Math.pow(phi,k)*(b[1]-a[1])/(b[0]-a[0]);}
+      if(Math.abs(x[i]-xh)>d){r.push(x[i]);reps.push([i,x[i]]);k=0;}
+      else{r.push(xh);k++;maxe=Math.max(maxe,Math.abs(x[i]-xh));}
+    }
+    return {r:r,reps:reps,maxe:maxe};
+  }
+  var W=720,H=150,PL=36,PR=8,PT=8,PB=22;
+  function draw(id,x,res,lo,hi){
+    var svg=document.getElementById(id);
+    function X(i){return PL+(W-PL-PR)*i/(N-1);}
+    function Y(v){return PT+(H-PT-PB)*(1-(v-lo)/(hi-lo));}
+    function path(arr){var s="";for(var i=0;i<arr.length;i++){s+=(i?"L":"M")+X(i).toFixed(1)+","+Y(arr[i]).toFixed(1);}return s;}
+    var g='<line class="axis" x1="'+PL+'" y1="'+(H-PB)+'" x2="'+(W-PR)+'" y2="'+(H-PB)+'"/>';
+    for(var dday=0;dday<=3;dday++){var xx=X(Math.min(dday*96,N-1));g+='<line class="axis" x1="'+xx+'" y1="'+PT+'" x2="'+xx+'" y2="'+(H-PB)+'"/>';if(dday<3)g+='<text x="'+(xx+4)+'" y="'+(H-6)+'">day '+(dday+1)+'</text>';}
+    g+='<text x="2" y="'+(Y(hi)+10)+'">'+hi.toFixed(1)+'</text><text x="2" y="'+(Y(lo)-2)+'">'+lo.toFixed(1)+'</text>';
+    g+='<path class="truth" d="'+path(x)+'"/>';
+    g+='<path class="recon" d="'+path(res.r)+'"/>';
+    for(var j=0;j<res.reps.length;j++){g+='<circle class="dot" r="2.6" cx="'+X(res.reps[j][0]).toFixed(1)+'" cy="'+Y(res.reps[j][1]).toFixed(1)+'"/>';}
+    svg.innerHTML=g;
+  }
+  var sD=document.getElementById("s-delta"),sA=document.getElementById("s-amp"),sN=document.getElementById("s-noise");
+  function update(){
+    var d=+sD.value,A=+sA.value,s=+sN.value;
+    document.getElementById("o-delta").textContent=d.toFixed(2);
+    document.getElementById("o-amp").textContent=A.toFixed(1);
+    document.getElementById("o-noise").textContent=s.toFixed(2);
+    var x=signal(A,s),a=simulate(x,d,"sod"),b=simulate(x,d,"pred");
+    var lo=Math.min.apply(null,x)-0.2,hi=Math.max.apply(null,x)+0.2;
+    draw("g-sod",x,a,lo,hi);draw("g-pred",x,b,lo,hi);
+    document.getElementById("c-sod").textContent=a.reps.length+" reports · worst error "+a.maxe.toFixed(2)+" °C";
+    document.getElementById("c-pred").textContent=b.reps.length+" reports · worst error "+b.maxe.toFixed(2)+" °C";
+    var v,diff=Math.round(100*(1-b.reps.length/a.reps.length));
+    if(Math.abs(a.reps.length-b.reps.length)<=Math.max(2,0.05*a.reps.length))v="About a tie: prediction doesn't pay here.";
+    else if(b.reps.length<a.reps.length)v="Prediction pays: "+diff+"% fewer reports than send-on-delta.";
+    else v="Prediction costs: "+(-diff)+"% more reports than send-on-delta.";
+    document.getElementById("verdict").textContent=v+" Both stay within δ = "+d.toFixed(2)+" °C of the truth.";
+  }
+  [sD,sA,sN].forEach(function(el){el.addEventListener("input",update);});
+  var presets={clean:[0.2,1.5,0.02],noisy:[0.2,1.5,0.15],sweet:[0.3,1.5,0.08],flat:[0.2,0.3,0.1]};
+  document.querySelectorAll(".presets button").forEach(function(btn){
+    btn.addEventListener("click",function(){var p=presets[btn.getAttribute("data-p")];sD.value=p[0];sA.value=p[1];sN.value=p[2];update();});
+  });
+  update();
+})();
+</script>

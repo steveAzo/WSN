@@ -1,0 +1,11 @@
+{
+  "title": "When Does Prediction Pay in LPWAN Water-Quality Monitoring? Code and results",
+  "upload_type": "software",
+  "description": "Code, configuration and result files for the paper 'When Does Prediction Pay in LPWAN Water-Quality Monitoring? Multi-Site Error-Bounded Report Suppression'. Trace-driven simulator of error-bounded dual-prediction schemes for multi-parameter water-quality nodes, baselines, the RLS-D predictor, a node-side CUSUM event detector, loss-recovery protocols, an NB-IoT/LoRaWAN energy model, and the scripts that regenerate every number, table and figure.",
+  "creators": [
+    {"name": "Adu-Manu, Kofi Sarpong", "affiliation": "University of Ghana"},
+    {"name": "Azongo, Stephen Kwaku", "affiliation": "University of Ghana"}
+  ],
+  "keywords": ["dual prediction", "send-on-delta", "report suppression", "water-quality monitoring", "NB-IoT", "LoRaWAN", "energy efficiency"],
+  "access_right": "open"
+}

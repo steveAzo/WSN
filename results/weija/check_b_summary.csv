@@ -1,0 +1,4 @@
+dataset,param,days,runs,events_per_30d,short_per_30d,event_median_dur_h,coherent_share
+Weija,T,65,92,23.72,19.07,2.2,0.39
+Weija,EC,65,60,15.81,12.09,1.6,0.44
+Weija,pH,65,24,5.12,6.05,1.1,1.0

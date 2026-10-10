@@ -1,0 +1,370 @@
+== revision_stats
+min report-level saving over every USGS site x method x level: -13.7
+draft (ratio of medians): err 7.8x, life 4.62 vs 4.32 y;  paired per site: median err ratio 7.8x, median life ratio 1.06
+                                                                      effect                 family               level  n_sites  estimate   ci_lo   ci_hi  site_min  site_max                                                               test        p   p_holm
+                                                   RLS-T saving over SOD (%)        E1 RLS-T vs SOD                   0       13     -5.99   -10.6   -1.37     -18.3      8.26                             Wilcoxon signed-rank, exact, two-sided   0.0479   0.0957
+                                                   RLS-T saving over SOD (%)        E1 RLS-T vs SOD                   1       13      18.9    14.5    20.9     -2.15      35.3                             Wilcoxon signed-rank, exact, two-sided 0.000488  0.00195
+                                                   RLS-T saving over SOD (%)        E1 RLS-T vs SOD                   2       13      26.1      13    30.5      6.12      42.5                             Wilcoxon signed-rank, exact, two-sided 0.000244  0.00122
+                                                   RLS-T saving over SOD (%)        E1 RLS-T vs SOD                   3       13      7.14    1.65    27.8     -12.7      45.3                             Wilcoxon signed-rank, exact, two-sided  0.00806   0.0242
+                                                   RLS-T saving over SOD (%)        E1 RLS-T vs SOD                   4       13     0.962   -12.4      23     -60.4      45.8                             Wilcoxon signed-rank, exact, two-sided    0.497    0.497
+                      Spearman rho, diel share vs RLS-T saving [14 datasets]           E2 diel link                   0       14     0.516  -0.134   0.973       NaN       NaN                                                 permutation (200k)   0.0617   0.0617
+                          Spearman rho, diel share vs RLS-T saving [13 USGS]           E2 diel link                   0       13     0.758   0.282       1       NaN       NaN                                                 permutation (200k)  0.00372      NaN
+        Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]           E2 diel link                   0       15     0.418  -0.235   0.894       NaN       NaN                                                 permutation (200k)    0.123      NaN
+                      Spearman rho, diel share vs RLS-T saving [14 datasets]           E2 diel link                   1       14      0.71   0.349   0.897       NaN       NaN                                                 permutation (200k)  0.00593   0.0119
+                          Spearman rho, diel share vs RLS-T saving [13 USGS]           E2 diel link                   1       13      0.67   0.261   0.864       NaN       NaN                                                 permutation (200k)   0.0147      NaN
+        Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]           E2 diel link                   1       15     0.507 -0.0473    0.84       NaN       NaN                                                 permutation (200k)   0.0548      NaN
+                      Spearman rho, diel share vs RLS-T saving [14 datasets]           E2 diel link                   2       14     0.842   0.457   0.986       NaN       NaN                                                 permutation (200k) 0.000315  0.00157
+                          Spearman rho, diel share vs RLS-T saving [13 USGS]           E2 diel link                   2       13     0.802   0.356   0.983       NaN       NaN                                                 permutation (200k)  0.00156      NaN
+        Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]           E2 diel link                   2       15     0.625  0.0718   0.967       NaN       NaN                                                 permutation (200k)   0.0149      NaN
+                      Spearman rho, diel share vs RLS-T saving [14 datasets]           E2 diel link                   3       14      0.78   0.348    0.96       NaN       NaN                                                 permutation (200k)  0.00147   0.0059
+                          Spearman rho, diel share vs RLS-T saving [13 USGS]           E2 diel link                   3       13     0.736   0.229   0.966       NaN       NaN                                                 permutation (200k)  0.00568      NaN
+        Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]           E2 diel link                   3       15     0.582 -0.0199   0.924       NaN       NaN                                                 permutation (200k)   0.0254      NaN
+                      Spearman rho, diel share vs RLS-T saving [14 datasets]           E2 diel link                   4       14     0.745   0.283   0.932       NaN       NaN                                                 permutation (200k)  0.00302  0.00907
+                          Spearman rho, diel share vs RLS-T saving [13 USGS]           E2 diel link                   4       13     0.753   0.251   0.949       NaN       NaN                                                 permutation (200k)  0.00421      NaN
+        Spearman rho, diel share vs RLS-T saving [15 incl. Weija (held out)]           E2 diel link                   4       15     0.686   0.234   0.906       NaN       NaN                                                 permutation (200k)  0.00606      NaN
+                                   report-level saving over separate DPS (%)        E3 report-level                   0       13      44.6    37.8    48.4      35.3      58.5 Wilcoxon signed-rank, exact (report vs separate, per-site medians) 0.000244  0.00122
+                                   report-level saving over separate DPS (%)        E3 report-level                   1       13        37    31.4    41.9      27.4      49.1 Wilcoxon signed-rank, exact (report vs separate, per-site medians) 0.000244  0.00122
+                                   report-level saving over separate DPS (%)        E3 report-level                   2       13      35.8    32.8    40.8      19.8      44.2 Wilcoxon signed-rank, exact (report vs separate, per-site medians) 0.000244  0.00122
+                                   report-level saving over separate DPS (%)        E3 report-level                   3       13      37.3      31    42.4      10.8      43.8 Wilcoxon signed-rank, exact (report vs separate, per-site medians) 0.000244  0.00122
+                                   report-level saving over separate DPS (%)        E3 report-level                   4       13      29.4      24    35.3      10.2      41.9 Wilcoxon signed-rank, exact (report vs separate, per-site medians) 0.000244  0.00122
+                              RLS-D gap to per-site best fixed predictor (%)           E4 RLS-D gap                   1        6    -0.214  -0.656    2.07    -0.725      3.03                                                                         NaN      NaN
+                                SOD gap to per-site best fixed predictor (%)           E4 RLS-D gap                   1        6      21.6    15.4    50.1      13.1      54.7                                                                         NaN      NaN
+                              RLS-D gap to per-site best fixed predictor (%)           E4 RLS-D gap                   2        6    -0.516   -2.06    3.05     -3.43      5.32                                                                         NaN      NaN
+                                SOD gap to per-site best fixed predictor (%)           E4 RLS-D gap                   2        6      35.6    13.7    69.1      12.5        74                                                                         NaN      NaN
+                              RLS-D gap to per-site best fixed predictor (%)           E4 RLS-D gap                   3        6     0.356   -4.72     4.6     -6.95      5.02                                                                         NaN      NaN
+                                SOD gap to per-site best fixed predictor (%)           E4 RLS-D gap                   3        6      34.7    12.6    51.1      7.69      53.2                                                                         NaN      NaN
+                              RLS-D gap to per-site best fixed predictor (%)           E4 RLS-D gap                   4        6      2.38   -2.39    11.3     -2.43      15.8                                                                         NaN      NaN
+                                SOD gap to per-site best fixed predictor (%)           E4 RLS-D gap                   4        6      21.2   0.485      39         0      44.5                                                                         NaN      NaN
+                      ADAPTIVEML / RLS-T max-error ratio (gmean over params)          E5 ADAPTIVEML           alpha=0.5       13      8.38    6.47    9.94      2.83      17.6                                        Wilcoxon exact on log ratio 0.000244  0.00122
+                                       event capture, ADAPTIVEML minus RLS-T E5b ADAPTIVEML capture           alpha=0.5       13         0       0       0    -0.037   0.00926                                   Wilcoxon (zeros present: zsplit)    0.375    0.375
+                      ADAPTIVEML / RLS-T max-error ratio (gmean over params)          E5 ADAPTIVEML           alpha=1.0       13      11.8    8.39    15.9      5.76      32.9                                        Wilcoxon exact on log ratio 0.000244  0.00122
+                                       event capture, ADAPTIVEML minus RLS-T E5b ADAPTIVEML capture           alpha=1.0       13  -0.00833 -0.0108       0   -0.0238         0                                   Wilcoxon (zeros present: zsplit)  0.00781   0.0234
+                      ADAPTIVEML / RLS-T max-error ratio (gmean over params)          E5 ADAPTIVEML           alpha=1.5       13      16.4    9.56    21.5       3.6      42.7                                        Wilcoxon exact on log ratio 0.000244  0.00122
+                                       event capture, ADAPTIVEML minus RLS-T E5b ADAPTIVEML capture           alpha=1.5       13   -0.0238 -0.0385 -0.0108    -0.111   0.00769                                   Wilcoxon (zeros present: zsplit) 0.000977  0.00488
+                      ADAPTIVEML / RLS-T max-error ratio (gmean over params)          E5 ADAPTIVEML           alpha=2.0       13      14.6    10.7    20.2      4.98      27.3                                        Wilcoxon exact on log ratio 0.000244  0.00122
+                                       event capture, ADAPTIVEML minus RLS-T E5b ADAPTIVEML capture           alpha=2.0       13   -0.0507 -0.0741 -0.0449    -0.115         0                                   Wilcoxon (zeros present: zsplit) 0.000977  0.00488
+                      ADAPTIVEML / RLS-T max-error ratio (gmean over params)          E5 ADAPTIVEML           alpha=3.0       13      17.3    10.7    24.9      6.89        39                                        Wilcoxon exact on log ratio 0.000244  0.00122
+                                       event capture, ADAPTIVEML minus RLS-T E5b ADAPTIVEML capture           alpha=3.0       13   -0.0833  -0.109 -0.0692     -0.37     0.115                                                     Wilcoxon exact   0.0105   0.0234
+                             battery-life gain RLS-D L2 over every cycle (x)            E6 lifetime        LoRaWAN SF12       13      2.05    1.93    2.21      1.53      2.52                                                                         NaN      NaN
+                                  battery-life gain RLS-D over SOD at L2 (%)            E6 lifetime        LoRaWAN SF12       13       8.5    4.89    14.8      2.08      23.8                                                     Wilcoxon exact 0.000244  0.00146
+                             battery-life gain RLS-D L2 over every cycle (x)            E6 lifetime         LoRaWAN SF7       13      1.41    1.35    1.45      1.22      1.52                                                                         NaN      NaN
+                                  battery-life gain RLS-D over SOD at L2 (%)            E6 lifetime         LoRaWAN SF7       13      2.98    1.96    6.24     0.713      9.71                                                     Wilcoxon exact 0.000244  0.00146
+                             battery-life gain RLS-D L2 over every cycle (x)            E6 lifetime     NB-IoT BC95 RAI       13      1.49    1.44    1.54      1.28      1.63                                                                         NaN      NaN
+                                  battery-life gain RLS-D over SOD at L2 (%)            E6 lifetime     NB-IoT BC95 RAI       13      3.58    2.32    7.34      0.86      12.6                                                     Wilcoxon exact 0.000244  0.00146
+                             battery-life gain RLS-D L2 over every cycle (x)            E6 lifetime     NB-IoT N211 RAI       13      1.72    1.65    1.81      1.41      1.97                                                                         NaN      NaN
+                                  battery-life gain RLS-D over SOD at L2 (%)            E6 lifetime     NB-IoT N211 RAI       13      5.53    3.42    10.6      1.34      18.2                                                     Wilcoxon exact 0.000244  0.00146
+                             battery-life gain RLS-D L2 over every cycle (x)            E6 lifetime     NB-IoT N211 bad       13      1.88    1.79       2      1.49      2.23                                                                         NaN      NaN
+                                  battery-life gain RLS-D over SOD at L2 (%)            E6 lifetime     NB-IoT N211 bad       13      6.94    4.21    12.7      1.69      21.8                                                     Wilcoxon exact 0.000244  0.00146
+                             battery-life gain RLS-D L2 over every cycle (x)            E6 lifetime NB-IoT N211 default       13      2.88     2.6    3.26      1.93      4.26                                                                         NaN      NaN
+                                  battery-life gain RLS-D over SOD at L2 (%)            E6 lifetime NB-IoT N211 default       13      16.9    9.52    23.9       4.5      41.5                                                     Wilcoxon exact 0.000244  0.00146
+equal accuracy: periodic-60min / RLS-D-L2 worst-case error (paired per site)      E7 equal accuracy                   2       13       7.8    5.16    13.6      4.14      19.2                                        Wilcoxon exact on log ratio 0.000244 0.000244
+        equal accuracy: RLS-D-L2 / periodic-60min lifetime (paired per site)      E7 equal accuracy                   2       13      1.06    1.02    1.14     0.924      1.19                                                                         NaN      NaN
+                               analysis    rho   ci_lo  ci_hi        p                                         note
+      pooled 52 site-parameters (draft)   0.66     NaN    NaN 9.98e-08 naive: treats 52 observations as independent
+    pooled 52, site-clustered bootstrap   0.66   0.221  0.842      NaN              20000 resamples of the 13 sites
+          stratified: T only (13 sites)  0.599   0.042  0.922   0.0345                                permutation p
+         stratified: DO only (13 sites)  0.676   0.157  0.895   0.0133                                permutation p
+         stratified: pH only (13 sites)  0.588 -0.0197  0.827    0.038                                permutation p
+         stratified: EC only (13 sites) -0.259  -0.803   0.49    0.392                                permutation p
+site means (13 sites, one obs per site)   0.72     NaN    NaN  0.00703                                permutation p
+== revision_frontiers
+A3: ADAPTIVEML vs bounded RLS-T front interpolated at the same report rate (USGS)
+            kind  alpha  n_sites_inside  n_sites_outside  max_ratio_median  ci_lo  ci_hi  site_min  site_max  share_worse  rmse_ratio_median
+      ADAPTIVEML    0.5               5                8                 8   5.98     12      5.98        12            1               2.36
+      ADAPTIVEML      1              11                2              10.6   8.62   15.1      5.27      27.9            1               3.21
+      ADAPTIVEML    1.5              11                2              13.8   8.24   17.7      5.36      30.6            1               3.37
+      ADAPTIVEML      2              11                2              13.7   7.97   16.3      6.04      29.4            1               3.75
+      ADAPTIVEML      3              11                2                17   7.76   23.2      6.62      34.2            1               4.64
+ADAPTIVEML-RLS-T    0.5               6                7              9.03   5.73   9.92      5.19      10.2            1                2.5
+ADAPTIVEML-RLS-T      1              11                2              10.4   7.03   13.7      4.61      24.5            1               3.07
+ADAPTIVEML-RLS-T    1.5              11                2              12.8   7.17   15.6      5.33      31.3            1               3.45
+ADAPTIVEML-RLS-T      2              11                2              14.8   6.76   17.6      4.52      37.6            1               3.76
+ADAPTIVEML-RLS-T      3              12                1              18.7   8.09   25.1      3.94      43.9            1               5.82
+max-ratio over all inside runs: min 3.94, runs worse than bounded: 100/100
+
+A4: reports as % of every cycle (USGS medians, 95% site-bootstrap CI)
+ level                               stage  median_pct  ci_lo  ci_hi
+     1                        separate_SOD        79.2   59.9  104.3
+     1                         bundled_SOD        58.9   41.5   67.2
+     1                          report_SOD        58.3   39.3   64.3
+     1                        report_RLS-T        41.6   39.4   51.6
+     1                        report_RLS-D        41.6   36.8   51.5
+     1                    saving: bundling        30.8   24.4   36.2
+     1                 saving: free-riding         3.9    3.2    5.4
+     1 saving: prediction (RLS-D over SOD)        19.6   15.4   21.2
+     2                        separate_SOD        37.9   30.4   61.0
+     2                         bundled_SOD        32.9   26.9   46.5
+     2                          report_SOD        28.3   23.0   36.2
+     2                        report_RLS-T        21.3   18.1   26.8
+     2                        report_RLS-D        21.0   18.1   25.9
+     2                    saving: bundling        20.9   12.7   24.1
+     2                 saving: free-riding        18.2   14.6   22.8
+     2 saving: prediction (RLS-D over SOD)        26.9   16.0   32.8
+     3                        separate_SOD        13.4    9.8   26.5
+     3                         bundled_SOD        12.0    8.9   22.8
+     3                          report_SOD         9.9    5.8   15.7
+     3                        report_RLS-T         9.0    5.9   10.7
+     3                        report_RLS-D         9.0    5.7   11.1
+     3                    saving: bundling        11.0    8.2   13.8
+     3                 saving: free-riding        26.5   21.5   29.3
+     3 saving: prediction (RLS-D over SOD)        12.6    4.2   28.9
+     4                        separate_SOD         5.2    3.1   10.3
+     4                         bundled_SOD         4.8    2.9    9.3
+     4                          report_SOD         3.7    1.9    6.5
+     4                        report_RLS-T         4.1    2.6    4.9
+     4                        report_RLS-D         4.0    2.1    5.1
+     4                    saving: bundling         7.0    5.5    9.4
+     4                 saving: free-riding        20.3   15.9   27.9
+     4 saving: prediction (RLS-D over SOD)         3.4   -7.0   19.8
+== revision_events
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+C:\Users\User\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1214: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis, out=out, keepdims=keepdims)
+5-sigma events, mean over durations:
+                                               detect      fa  delay_med
+config                    set          shape                           
+chosen (k=3, H=8, c=6)    InWaterSense ramp    0.076   2.509    101.833
+                                       step    0.290   2.509     40.733
+                          test         ramp    0.125   2.551    135.000
+                                       step    0.606   2.551     30.000
+                          tune         ramp    0.096   1.835    135.000
+                                       step    0.589   1.835     45.000
+sensitive (k=2, H=4, c=5) InWaterSense ramp    0.429  12.342    112.017
+                                       step    0.834  12.342     20.367
+                          test         ramp    0.598  11.667     90.000
+                                       step    0.851  11.667     15.000
+                          tune         ramp    0.576   8.442    120.000
+                                       step    0.885   8.442     15.000
+
+step: Pareto front (held-out sites)
+  lag_min   k   H   c shape  fa_per30d_median  detect_5sigma  delay_med_min
+   240.0 3.0 8.0 6.0  step              2.40           0.40           60.0
+    60.0 3.0 8.0 6.0  step              2.52           0.54           30.0
+   120.0 3.0 8.0 6.0  step              2.55           0.61           30.0
+   120.0 3.0 4.0 6.0  step              3.62           0.75           15.0
+    60.0 3.0 4.0 6.0  step              3.87           0.84           15.0
+    60.0 2.0 4.0 5.0  step             10.85           0.88           15.0
+
+ramp: Pareto front (held-out sites)
+  lag_min   k   H   c shape  fa_per30d_median  detect_5sigma  delay_med_min
+   240.0 3.0 8.0 6.0  ramp              2.40           0.08          165.0
+    60.0 3.0 8.0 6.0  ramp              2.52           0.14          112.5
+   240.0 3.0 4.0 6.0  ramp              3.44           0.24          150.0
+   120.0 3.0 4.0 6.0  ramp              3.62           0.32          120.0
+   120.0 2.0 8.0 5.0  ramp              5.03           0.34          135.0
+   240.0 2.0 4.0 5.0  ramp             10.79           0.52          127.5
+    60.0 2.0 4.0 5.0  ramp             10.85           0.53           75.0
+   120.0 2.0 4.0 5.0  ramp             11.67           0.60           90.0
+
+reference events: total 1612 over 14 datasets; per site-parameter median 10.5 range 0 - 187
+
+rounding: relative amplitude change, median over all 1.174%, worst case 13.4% (bound 0.5/3 = 16.7% when the scale is at the floor)
+           rel_change_median  rel_change_max
+amp_sigma                                   
+3                     0.1007          0.1345
+5                     0.0557          0.0854
+8                     0.0341          0.0552
+== revision_energy
+median USGS rates: 92 samples/day; RLS-D reports/day L1-L4 = 35.0, 17.6, 7.8, 2.4
+              radio                     factor                                         setting  life_base  gain_base  life_low  gain_low  life_high  gain_high
+       LoRaWAN SF12    sensing time per sample                        1 s / 30 s (default 5 s)       3.18       2.16      4.77      2.74       1.03       1.38
+       LoRaWAN SF12               battery size                        5 Wh / 6600 mAh at 3.7 V       3.18       2.16      0.65      2.16       3.18       2.16
+       LoRaWAN SF12           host sleep power hibernate 7 uA / 3 x deep sleep (default 33 uA)       3.18       2.16      3.57      2.30       2.49       1.91
+       LoRaWAN SF12          host active power                                   -30 % / +30 %       3.18       2.16      3.73      2.25       2.77       2.09
+       LoRaWAN SF12    usable battery capacity  70 % (self-discharge, cold, regulator) / ideal       3.18       2.16      2.23      2.16       3.18       2.16
+       LoRaWAN SF12              report energy                x0.5 / x2 of the measured median       3.18       2.16      3.54      1.82       2.65       2.67
+       LoRaWAN SF12 host during modem activity                  asleep / awake (default awake)       3.18       2.16      3.43      1.92       3.18       2.16
+       LoRaWAN SF12                packet loss                       0.5 % / 5 % (default 1 %)       3.18       2.16      3.18      2.15       3.14       2.19
+        LoRaWAN SF7    sensing time per sample                        1 s / 30 s (default 5 s)       3.93       1.44      6.69      1.74       1.10       1.12
+        LoRaWAN SF7               battery size                        5 Wh / 6600 mAh at 3.7 V       3.93       1.44      0.80      1.44       3.93       1.44
+        LoRaWAN SF7           host sleep power hibernate 7 uA / 3 x deep sleep (default 33 uA)       3.93       1.44      4.55      1.50       2.92       1.32
+        LoRaWAN SF7          host active power                                   -30 % / +30 %       3.93       1.44      4.74      1.44       3.35       1.43
+        LoRaWAN SF7    usable battery capacity  70 % (self-discharge, cold, regulator) / ideal       3.93       1.44      2.75      1.44       3.93       1.44
+        LoRaWAN SF7              report energy                x0.5 / x2 of the measured median       3.93       1.44      4.02      1.34       3.75       1.61
+        LoRaWAN SF7 host during modem activity                  asleep / awake (default awake)       3.93       1.44      4.16      1.21       3.93       1.44
+        LoRaWAN SF7                packet loss                       0.5 % / 5 % (default 1 %)       3.93       1.44      3.93      1.43       3.91       1.45
+    NB-IoT N211 RAI    sensing time per sample                        1 s / 30 s (default 5 s)       4.57       1.78      8.78      2.50       1.14       1.20
+    NB-IoT N211 RAI               battery size                        5 Wh / 6600 mAh at 3.7 V       4.57       1.78      0.94      1.78       4.57       1.78
+    NB-IoT N211 RAI           host sleep power hibernate 7 uA / 3 x deep sleep (default 33 uA)       4.57       1.78      5.42      1.93       3.26       1.56
+    NB-IoT N211 RAI          host active power                                   -30 % / +30 %       4.57       1.78      5.73      1.86       3.80       1.73
+    NB-IoT N211 RAI    usable battery capacity  70 % (self-discharge, cold, regulator) / ideal       4.57       1.78      3.20      1.78       4.57       1.78
+    NB-IoT N211 RAI              report energy                x0.5 / x2 of the measured median       4.57       1.78      4.84      1.58       4.11       2.13
+    NB-IoT N211 RAI host during modem activity                  asleep / awake (default awake)       4.57       1.78      4.93      1.51       4.57       1.78
+    NB-IoT N211 RAI                packet loss                       0.5 % / 5 % (default 1 %)       4.57       1.78      4.57      1.78       4.53       1.81
+NB-IoT N211 default    sensing time per sample                        1 s / 30 s (default 5 s)       2.75       3.16      3.86      4.03       0.98       1.77
+NB-IoT N211 default               battery size                        5 Wh / 6600 mAh at 3.7 V       2.75       3.16      0.56      3.16       2.75       3.16
+NB-IoT N211 default          host active power                                   -30 % / +30 %       2.75       3.16      3.37      3.25       2.32       3.09
+NB-IoT N211 default              report energy                x0.5 / x2 of the measured median       2.75       3.16      3.15      2.85       2.18       3.58
+NB-IoT N211 default host during modem activity                  asleep / awake (default awake)       2.75       3.16      3.68      2.45       2.75       3.16
+NB-IoT N211 default    usable battery capacity  70 % (self-discharge, cold, regulator) / ideal       2.75       3.16      1.92      3.16       2.75       3.16
+NB-IoT N211 default           host sleep power hibernate 7 uA / 3 x deep sleep (default 33 uA)       2.75       3.16      3.03      3.38       2.21       2.74
+NB-IoT N211 default                packet loss                       0.5 % / 5 % (default 1 %)       2.75       3.16      2.75      3.15       2.69       3.20
+
+                                        payload  bytes  sf  airtime_ms  E_report_J  E_report_ack_J  E_ack_vs_20B
+  int16 values (4 params) + seq + time + flags     15   7      66.816       0.242           0.162         0.991
+  int16 values (4 params) + seq + time + flags     15  12    1646.592       0.684           0.813         0.948
+float32 values (4 params) + seq + time + flags     23   7      77.056       0.245           0.165         1.009
+float32 values (4 params) + seq + time + flags     23  12    1974.272       0.774           0.903         1.052
+                              draft assumption     20   7      71.936       0.244           0.164         1.000
+                              draft assumption     20  12    1810.432       0.729           0.858         1.000
+             LoRaWAN SF12 maximum (EU868, DR0)     51   7     118.016       0.256           0.176         1.077
+             LoRaWAN SF12 maximum (EU868, DR0)     51  12    2793.472       0.998           1.127         1.314
+SF12, 15-byte payload: RLS-D L2 gain 2.13x (20-byte: 2.16x)
+SF12, 23-byte payload: RLS-D L2 gain 2.19x (20-byte: 2.16x)
+
+  sf      scheme  loss  uplinks_per_day  airtime_s_per_day  share_of_1pct_limit  min_spacing_needed_s  mean_spacing_s
+  7 every cycle  0.01           92.752              6.672                0.008                 7.194         931.519
+  7 every cycle  0.05           96.645              6.952                0.008                 7.194         893.992
+  7    RLS-D L1  0.01           35.344              2.543                0.003                 7.194        2444.519
+  7    RLS-D L1  0.05           36.828              2.649                0.003                 7.194        2346.041
+  7    RLS-D L2  0.01           17.747              1.277                0.001                 7.194        4868.547
+  7    RLS-D L2  0.05           18.491              1.330                0.002                 7.194        4672.417
+  7    RLS-D L3  0.01            7.887              0.567                0.001                 7.194       10954.231
+  7    RLS-D L3  0.05            8.218              0.591                0.001                 7.194       10512.939
+  7    RLS-D L4  0.01            2.429              0.175                0.000                 7.194       35569.110
+  7    RLS-D L4  0.05            2.531              0.182                0.000                 7.194       34136.207
+ 12 every cycle  0.01           92.752            167.921                0.194               181.043         931.519
+ 12 every cycle  0.05           96.645            174.969                0.203               181.043         893.992
+ 12    RLS-D L1  0.01           35.344             63.989                0.074               181.043        2444.519
+ 12    RLS-D L1  0.05           36.828             66.675                0.077               181.043        2346.041
+ 12    RLS-D L2  0.01           17.747             32.129                0.037               181.043        4868.547
+ 12    RLS-D L2  0.05           18.491             33.478                0.039               181.043        4672.417
+ 12    RLS-D L3  0.01            7.887             14.280                0.017               181.043       10954.231
+ 12    RLS-D L3  0.05            8.218             14.879                0.017               181.043       10512.939
+ 12    RLS-D L4  0.01            2.429              4.398                0.005               181.043       35569.110
+ 12    RLS-D L4  0.05            2.531              4.582                0.005               181.043       34136.207
+== revision_diel
+InWaterSense n1 0.017
+USGS 01458500 0.343
+USGS 01438500 0.409
+USGS 05420400 0.233
+USGS 05586300 0.153
+USGS 01473500 0.12
+USGS 01400500 0.403
+USGS 01402000 0.195
+USGS 01388000 0.135
+USGS 01467087 0.196
+USGS 01475530 0.557
+USGS 01465798 0.481
+USGS 01473900 0.482
+USGS 11510700 0.225
+
+(a) |k-week estimate - full-year value| (site mean over parameters)
+        n_windows  median_absdev  p90_absdev
+weeks                                      
+1            566          0.229       0.455
+2            282          0.148       0.370
+4            141          0.115       0.291
+8             65          0.085       0.201
+13            40          0.065       0.159
+
+(b) Spearman rho(k-week diel share, RLS-T saving at L2), 14 datasets
+     weeks  n_sites                             draw  rho_median  rho_p05  rho_p95
+full year       14                                -        0.84      NaN      NaN
+        1       14           random window per site        0.40     0.09     0.67
+        1       14 first valid k weeks (deployment)        0.40      NaN      NaN
+        2       14           random window per site        0.46     0.18     0.70
+        2       14 first valid k weeks (deployment)        0.34      NaN      NaN
+        4       14           random window per site        0.52     0.34     0.74
+        4       14 first valid k weeks (deployment)        0.60      NaN      NaN
+        8       14           random window per site        0.65     0.48     0.80
+        8       14 first valid k weeks (deployment)        0.52      NaN      NaN
+       13       12           random window per site        0.56     0.43     0.79
+       13       12 first valid k weeks (deployment)        0.46      NaN      NaN
+== revision_smoothness
+        dataset  diel_share_mean  diel_share_T  R_norm_T  saving_L2     S  rank_R_norm_T
+InWaterSense n1            0.017         0.038     5.773     -3.250 0.003              1
+          Weija            0.427         0.736     2.406    -15.940 0.177              2
+  USGS 11510700            0.225         0.239     1.638     12.973 0.138              3
+  USGS 01467087            0.196         0.269     1.371     14.775 0.143              4
+  USGS 01473500            0.120         0.317     1.289     11.089 0.093              5
+  USGS 01465798            0.481         0.661     1.269     26.436 0.379              6
+  USGS 01473900            0.482         0.538     1.232     39.935 0.391              7
+  USGS 01388000            0.135         0.157     1.219      6.122 0.111              8
+  USGS 01458500            0.343         0.430     1.219     28.996 0.282              9
+  USGS 01475530            0.557         0.701     1.200     42.523 0.464             10
+  USGS 01400500            0.403         0.511     1.166     39.096 0.345             11
+  USGS 01438500            0.409         0.517     1.139     26.105 0.359             12
+  USGS 05586300            0.153         0.306     1.113     13.035 0.137             13
+  USGS 05420400            0.233         0.367     1.096     21.144 0.212             14
+  USGS 01402000            0.195         0.396     1.074     30.457 0.182             15
+
+P1 (Weija has the largest T roughness): False
+P2 (exploratory): rho(diel, saving) = 0.625 ; rho(S, saving) = 0.846 (15 datasets)
+== revision_ablation
+median gap to the per-site best fixed predictor (%), report mode
+ variant              SOD  RLS-T  ...  RLS-D(phi=0.9)  RLS-D(phi=0.8)
+set          level               ...                                
+InWaterSense 1       0.7    0.0  ...             0.3             0.6
+             2       0.0    3.2  ...             2.2             1.7
+             3       0.0   11.0  ...             7.8             7.0
+             4       0.0   19.1  ...            13.7            12.7
+test         1      21.6    0.0  ...            -0.2             0.0
+             2      35.6    0.0  ...            -0.0             0.1
+             3      34.7    0.0  ...             0.8             1.8
+             4      21.2    0.0  ...             4.0             5.6
+tune         1      23.2    0.0  ...            -2.4            -2.0
+             2      26.8    0.0  ...            -3.1            -0.1
+             3       1.7    0.0  ...            -2.6            -1.9
+             4       0.0   12.4  ...            10.2             8.0
+
+[12 rows x 9 columns]
+
+phi rule on tuning sites (choose the minimum):
+  phi  median_gap_tuning_L1-L4   rho
+ 0.8                -0.773355 10.00
+ 0.9                -0.922372 10.00
+0.97                -1.042002 10.00
+ 1.0                -0.683817 10.00
+ 1.0                -0.418723  0.01
+0.97                -1.428130  0.01
+ 0.9                -1.198310  0.01
+ 0.8                -0.009813  0.01
+== revision_dataflow
+        dataset params_simulated  n_params  sim_cycles  sim_segments  train_cycles  test_cycles  test_span_days  train_share_of_cycles  train_data_days  raw_values  approved_values  timestamps  complete_cycles                                 excluded_params range_fail_T_EC_DO spike_flagged_kept_T_EC_DO
+InWaterSense n1          T,EC,DO         3       18982           336          1756        17226             199                  0.093             12.4      105453              NaN       19090            14129 pH (plausibility failures 4815 of 19090 cycles)            1/101/0                465/620/472
+  USGS 01458500       T,EC,DO,pH         4       33083            16          5768        27315             292                  0.174             60.1      171020         171020.0       34910            33083                                               -                NaN                        NaN
+  USGS 01438500       T,EC,DO,pH         4       17411            44          3490        13921             292                  0.200             72.7       87150          87150.0       17447            17411                                               -                NaN                        NaN
+  USGS 05420400       T,EC,DO,pH         4       34014            16          6526        27488             287                  0.192             68.0      147156         137762.0       34586            34014                                               -                NaN                        NaN
+  USGS 05586300       T,EC,DO,pH         4       28639            11          6012        22627             251                  0.210             62.6      132452         132452.0       34629            28639                                               -                NaN                        NaN
+  USGS 01473500       T,EC,DO,pH         4       27008             6          5400        21608             226                  0.200             56.2      114242         108148.0       27048            27008                                               -                NaN                        NaN
+  USGS 01400500       T,EC,DO,pH         4       32906            46          6799        26107             292                  0.207             70.8      217373         197230.0       97309            32906                                               -                NaN                        NaN
+  USGS 01402000       T,EC,DO,pH         4       22006            10          4413        17593             184                  0.201             46.0      198081         198077.0       66044            22006                                               -                NaN                        NaN
+  USGS 01388000       T,EC,DO,pH         4       33627            11          6996        26631             292                  0.208             72.9      168580         168580.0       33777            33627                                               -                NaN                        NaN
+  USGS 01467087       T,EC,DO,pH         4       22930            32          5434        17496             292                  0.237             56.6      107074          98748.0       25307            22930                                               -                NaN                        NaN
+  USGS 01475530       T,EC,DO,pH         4       24631            16          4881        19750             210                  0.198             50.8      104964          99058.0       24812            24631                                               -                NaN                        NaN
+  USGS 01465798       T,EC,DO,pH         4       25825            26          5330        20495             223                  0.206             55.5      114359         105831.0       26673            25825                                               -                NaN                        NaN
+  USGS 01473900       T,EC,DO,pH         4        3445             5           690         2755              58                  0.200             14.4       13780          13780.0        3445             3445                                               -                NaN                        NaN
+  USGS 11510700       T,EC,DO,pH         4       34802             3          7008        27794             292                  0.201             73.0      148838         139915.0       35038            34802                                               -                NaN                        NaN
+
+simulated site-parameter series: 55 (14 datasets); Phase-1 predictability series: 56 (InWaterSense pH included there, excluded from simulation)
+== revision_supplement
+wrote papers\paper1\draft\supp_tables.tex 208 lines
+== revision_figures
+saved v2_decomposition
+saved v2_link
+saved v2_ratematched
+saved v2_events
+saved v2_sensing
+saved v2_equal_accuracy

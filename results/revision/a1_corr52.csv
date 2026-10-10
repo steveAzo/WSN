@@ -1,0 +1,8 @@
+analysis,rho,ci_lo,ci_hi,p,note
+pooled 52 site-parameters (draft),0.66042,,,9.98288e-08,naive: treats 52 observations as independent
+"pooled 52, site-clustered bootstrap",0.66042,0.220502,0.842299,,20000 resamples of the 13 sites
+stratified: T only (13 sites),0.598901,0.0420168,0.921788,0.0344748,permutation p
+stratified: DO only (13 sites),0.675824,0.157303,0.894737,0.0133299,permutation p
+stratified: pH only (13 sites),0.587912,-0.0197183,0.826816,0.0380298,permutation p
+stratified: EC only (13 sites),-0.258954,-0.803409,0.490133,0.391703,permutation p
+"site means (13 sites, one obs per site)",0.71978,,,0.00703496,permutation p
