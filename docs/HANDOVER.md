@@ -171,3 +171,9 @@
   ```
   Check that `git ls-files | grep -E "\.pdf$|^cleaned/"` prints nothing, then commit.
 - **No funding:** IoT-J charges mandatory fees beyond 8 pages, so either the paper fits 8 pages or the venue changes. Decision pending (user + Prof).
+- **Zenodo (2026-10-11):**
+  - Record https://zenodo.org/records/23292945, release v1.0.0.
+  - The paper cites the **version DOI 10.5281/zenodo.23292945**; README and CITATION.cff use the **concept DOI 10.5281/zenodo.23292944**.
+  - The archive was audited: no publisher PDFs, no Weija raw data, no drafts.
+  - Licence on the record: CC BY 4.0 (Zenodo's default, because the repository had no LICENSE file). Can be changed in the Zenodo metadata.
+  - If the code changes before submission, make a new release and update the version DOI in refs.bib (adumanu2026code).

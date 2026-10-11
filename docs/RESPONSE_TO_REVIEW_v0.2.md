@@ -79,7 +79,7 @@ All addressed in the text:
 | # | Item |
 |---|---|
 | D2 | ~~Title~~: decided 2026-10-10 (the review's recommended title). |
-| D4 | Zenodo DOI for the code release. |
+| D4 | ~~Zenodo DOI~~: done 2026-10-11. Version DOI 10.5281/zenodo.23292945 (v1.0.0, cited in the paper); concept DOI 10.5281/zenodo.23292944 (README, CITATION.cff). |
 | D6 | Conflict-of-interest / funding statements; remove the DRAFT header at submission. |
 | D7 | **Venue vs length (no funding):** IoT-J charges mandatory fees beyond 8 pages, and there is no funding. Either cut to 8 pages or choose a venue with no author charges. |
 | — | Describe the literature search method actually used in Phase 0 (TODO in sec_related.tex). |

@@ -10,8 +10,18 @@ authors:
     given-names: Stephen Kwaku
     affiliation: University of Ghana
     # orcid: https://orcid.org/XXXX-XXXX-XXXX-XXXX
-version: "0.2.0"
+version: "v1.0.0"
+date-released: "2026-10-11"
+doi: "10.5281/zenodo.23292944"
+license: CC-BY-4.0
 repository-code: "https://github.com/steveAzo/WSN"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23292944"
+    description: "Concept DOI: all versions (resolves to the latest)"
+  - type: doi
+    value: "10.5281/zenodo.23292945"
+    description: "Version DOI: v1.0.0, the version behind the manuscript"
 keywords:
   - dual prediction
   - send-on-delta
@@ -20,5 +30,3 @@ keywords:
   - NB-IoT
   - LoRaWAN
   - energy efficiency
-# license: set this once a LICENSE file is added (see docs/ZENODO_STEPS.md)
-# doi: add the Zenodo concept DOI here after the first release

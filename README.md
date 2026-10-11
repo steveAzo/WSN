@@ -1,5 +1,7 @@
 # When Does Prediction Pay in LPWAN Water-Quality Monitoring? Code and results
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23292944.svg)](https://doi.org/10.5281/zenodo.23292944)
+
 Code, configuration and result files for the paper *"When Does Prediction Pay in LPWAN Water-Quality Monitoring? Multi-Site Error-Bounded Report Suppression"* by K. S. Adu-Manu and S. K. Azongo, University of Ghana.
 
 The repository contains:
@@ -78,7 +80,14 @@ Every runner is resumable and writes its results to `results/`. Random seeds are
 
 ## Citing
 
-See `CITATION.cff`. Please cite the archived release DOI shown on the Zenodo record.
+The code and results are archived at Zenodo:
+
+- **All versions** (always resolves to the latest): [doi:10.5281/zenodo.23292944](https://doi.org/10.5281/zenodo.23292944)
+- **v1.0.0**, the version behind the manuscript's numbers: [doi:10.5281/zenodo.23292945](https://doi.org/10.5281/zenodo.23292945)
+
+> Adu-Manu, K. S., & Azongo, S. K. (2026). *When Does Prediction Pay in LPWAN Water-Quality Monitoring? Code and results* (v1.0.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23292945
+
+See also `CITATION.cff`. The archived release is licensed under CC BY 4.0.
 
 ## Data sources
 
