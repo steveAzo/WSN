@@ -1,7 +1,7 @@
 # Response to the editorial review: draft v0.1 → v0.2 (2026-10-10)
 
 **Files:**
-- `papers/paper1/draft/Paper1_draft_v0.2.pdf` (14 pp.), `Paper1_draft_v0.2_supplement.pdf` (Tables S1–S7, Figs. S1–S2), and `Paper1_draft_v0.2.docx` (for comments).
+- `papers/paper1/draft/Paper1_draft_v0.2.pdf` (14 pp.), `Paper1_draft_v0.2_supplement.pdf` (Tables S1–S10, Figs. S1–S3; this line said S1–S7 / S1–S2 when sent, which was wrong), and `Paper1_draft_v0.2.docx` (for comments).
 - The v0.1 sources are kept in `papers/paper1/draft/v0.1_sources/`.
 
 **Analyses:** scripts are `src/analysis/revision_*.py`, `src/sim/run_ablation.py` and `src/sim/run_loss_ack.py`; outputs are in `results/revision/`.
@@ -53,7 +53,7 @@
 | Item | Response |
 |---|---|
 | Figures | All figures redrawn: validated colour-blind-safe palette, distinct markers and line styles (grayscale-safe), no embedded titles, n stated, CIs. Old Fig. 1 (diel vs skill) moved to the supplement (S1); Fig. 2 marks the InWaterSense and Weija boundary cases; the energy assumptions are in the captions. |
-| Tables | n and CIs added, and labels made explicit. Lower-priority tables moved to the supplement (S1–S7). |
+| Tables | n and CIs added, and labels made explicit. Lower-priority tables moved to the supplement (S1–S10; renumbered in citation order in v0.3). |
 
 ## Minor comments
 

@@ -146,9 +146,15 @@
 - **The point-by-point response** is `docs/RESPONSE_TO_REVIEW_v0.2.md`. Its open items (title, DOI, page budget, search method, AI disclosure, Weija permission) are for the user and the Prof.
 
 **Build:**
-- Paper: pdflatex main; bibtex main; pdflatex ×2.
-- Supplement: pdflatex supplement ×2.
-- Word: copy the sources and figures/v2_*.png into a temporary folder, change .pdf to .png in the includegraphics lines, and run pandoc there. On Windows, --resource-path with drive letters fails.
+- Paper and supplement cross-reference each other through `xr` (the main text cites `\ref{tab:s-...}`; never type "Table S8" by hand). Order: `pdflatex supplement; pdflatex main; bibtex main; pdflatex main; pdflatex main; pdflatex supplement`.
+- One PDF with everything (for the Prof / reading): `python build_full.py Paper1_draft_vX_full.pdf` (paper, references, then the supplement, continuous page numbers). The separate main/supplement PDFs are only for a venue that wants them apart; venue not decided yet.
+- Word: `python build_docx.py Paper1_draft_vX.docx` (in `papers/paper1/draft`, after the PDF build). It takes every number from the .aux files, numbers headings/captions/equations as in the PDF, renders Algorithm 1 as an image and appends the supplement after the references. A plain `pandoc main.tex` run loses all of that (v0.2's docx had unnumbered captions, `[alg:rlsd]`, no supplement).
+
+**Done (2026-10-14): draft v0.3** (fixes after the Prof's read-through of v0.2)
+- Files: `Paper1_draft_v0.3.pdf`, `Paper1_draft_v0.3_supplement.pdf`, `Paper1_draft_v0.3.docx` (supplement included). The v0.2 files are kept unchanged as sent.
+- Prof's points: "thesis" removed (intro); no bold in running text or tables (accounting modes, baselines, RQ labels and contribution leads now plain or italic); supplement tables re-ordered by first citation (S1–S10) and cited with `\ref`, so "Table S8" now resolves; every table, figure, equation and the algorithm is numbered and cited in the PDF and the docx; grammar pass over all sections.
+- Also removed internal wording a reviewer cannot follow: "our earlier draft", "Phase-2 diagnostics", "at revision time", "the paper's default", "(draft)"/"round-1 sweep"/"smoke tests" in the supplement. Conclusion is now its own section (VIII).
+- Not done: the literature-search method (`% TODO(user)` in sec_related.tex) still needs the user's real databases/queries.
 
 ## Next steps (suggested order)
 
